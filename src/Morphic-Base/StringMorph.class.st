@@ -332,11 +332,13 @@ StringMorph >> fontName: fontName size: fontSize [
 
 { #category : #accessing }
 StringMorph >> fontToUse [
+
 	| fontToUse |
-	fontToUse := font isNil ifTrue: [TextStyle defaultFont] ifFalse: [font].
-	(emphasis isNil or: [emphasis = 0]) 
-		ifTrue: [^fontToUse]
-		ifFalse: [^fontToUse emphasized: emphasis]
+
+	fontToUse := font ifNil: [ TextStyle defaultFont ] ifNotNil: [ font ].
+	( emphasis isNil or: [ emphasis = 0 ] )
+		ifTrue: [ ^ fontToUse ]
+		ifFalse: [ ^ fontToUse emphasized: emphasis ]
 ]
 
 { #category : #layout }
@@ -392,9 +394,8 @@ StringMorph >> initWithContents: aString font: aFont emphasis: emphasisCode [
 { #category : #initialization }
 StringMorph >> initialize [
 	"initialize the state of the receiver"
-	super initialize.
 
-	font := nil.
+	super initialize.
 	emphasis := 0.
 	hasFocus := false.
 	backgroundColor := Color transparent

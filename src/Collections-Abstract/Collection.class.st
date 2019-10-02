@@ -466,6 +466,15 @@ Collection >> copyWithoutAll: aCollection [
 	^ self reject: [:each | aCollection includes: each]
 ]
 
+{ #category : #copying }
+Collection >> copyWithoutDuplicates [
+	"Answer a copy of the receiver without any duplicated elements"
+	"(#(2 3 4 4  5 6) copyWithoutDuplicates)  >>> #(2 3 4 5 6)"
+	"(#('do' 'la' 'si' 'do' 'la') copyWithoutDuplicates) >>> #('la' 'do' 'si')"
+	"(#(#do #la #si #do #la) copyWithoutDuplicates) >>> #(#la #do #si)"
+	^ self asSet asArray
+]
+
 { #category : #enumerating }
 Collection >> count: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
@@ -580,12 +589,15 @@ Collection >> detectSum: aBlock [
 { #category : #enumerating }
 Collection >> difference: aCollection [
 	"Answer the set theoretic difference of two collections. Pay attention that the difference is not commutative, hence the order is important."
+
 	"(#(a b c d e f) difference:  #(a b z k))>>> #(#f #d #e #c)"
+
 	"(#(a b z k) difference: #(a b c d e f)) >>> #(#k #z)"
 
 	| set |
-	set := self asSet.
-	aCollection do: [ :each | set remove: each ifAbsent: [  ] ].
+	set := self asSet
+		removeAllFoundIn: aCollection;
+		yourself.
 	^ self species withAll: set asArray
 ]
 
@@ -692,11 +704,11 @@ Collection >> flatCollect: aBlock as: aCollectionClass [
 	"Evaluate aBlock for each of the receiver's elements and answer the
 	list of all resulting values flatten one level. Assumes that aBlock returns some kind
 	of collection for each element. Equivalent to the lisp's mapcan"
+
 	| col |
-	col := aCollectionClass new: self size. 	
-	self do: [ :each |
-		col addAll: (aBlock value: each) ].
-	^col
+	col := OrderedCollection new: self size.
+	self do: [ :each | col addAll: (aBlock value: each) ].
+	^ aCollectionClass withAll: col 
 ]
 
 { #category : #enumerating }
@@ -899,17 +911,12 @@ Collection >> intersection: aCollection [
 	"Answer the set theoretic intersection of two collections."
 
 	"(#(1 2 3 4) intersection: #(3 4 5)) >>> #(3 4)"
+
 	"(#(1 2 3 4) intersection: #()) >>> #()"
+
 	"(#() intersection: #(1 2 3 4)) >>> #()"
 
-	| set outputSet |
-	set := self asSet.
-	outputSet := Set new.
-	aCollection 
-		do: [ :each | 
-			((set includes: each) and: [ (outputSet includes: each) not ])
-				ifTrue: [ outputSet add: each ] ].
-	^ self species withAll: outputSet asArray
+	^ self species withAll: (self asSet intersection: aCollection) asArray
 ]
 
 { #category : #testing }

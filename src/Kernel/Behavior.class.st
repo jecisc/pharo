@@ -130,11 +130,9 @@ Behavior >> allInstVarNames [
 	Array ordering is the order in which the variables are stored and 
 	accessed by the interpreter."
 
-	| vars |
-	self superclass == nil
-		ifTrue: [vars := self slots collect: #name]	"Guarantee a copy is answered."
-		ifFalse: [vars := self superclass allInstVarNames , (self slots collect: #name)].
-	^vars
+	^ self superclass
+		ifNil: [ self instVarNames ]
+		ifNotNil: [ :sup | sup allInstVarNames , self instVarNames ]
 ]
 
 { #category : #'accessing instances and variables' }
@@ -181,14 +179,6 @@ Behavior >> allInstancesOrNil [
 	^nil
 ]
 
-{ #category : #'obsolete subclasses' }
-Behavior >> allLocalCallsOn: aSymbol [
-	"Answer a SortedCollection of all the methods that call on aSymbol, anywhere in my class hierarchy."
-
-	^(SystemNavigation new allLocalCallsOn: aSymbol ofClass: (self instanceSide)).
-
-]
-
 { #category : #'accessing method dictionary' }
 Behavior >> allMethods [
 	"Return the collection of compiled method I and my superclasses are defining"
@@ -200,9 +190,19 @@ Behavior >> allMethods [
 { #category : #queries }
 Behavior >> allMethodsAccessingSlot: aSlot [
 	"return all methods that access aSlot in this class and subclasses"
-	^self withAllSubclasses flatCollect: [ :class |
-		class methodsAccessingSlot: aSlot.
-	]
+	^self withAllSubclasses flatCollect: [ :class | class methodsAccessingSlot: aSlot ]
+]
+
+{ #category : #queries }
+Behavior >> allMethodsReadingSlot: aSlot [
+	"return all methods that access aSlot in this class and subclasses"
+	^self withAllSubclasses flatCollect: [ :class | class methodsReadingSlot: aSlot]
+]
+
+{ #category : #queries }
+Behavior >> allMethodsWritingSlot: aSlot [
+	"return all methods that access aSlot in this class and subclasses"
+	^self withAllSubclasses flatCollect: [ :class | class methodsWritingSlot: aSlot ]
 ]
 
 { #category : #'accessing method dictionary' }
@@ -396,11 +396,6 @@ Behavior >> basicIdentityHash [
 	self primitiveFailed
 ]
 
-{ #category : #accessing }
-Behavior >> basicLocalSelectors [
-	^nil
-]
-
 { #category : #'instance creation' }
 Behavior >> basicNew [
 	"Primitive. Answer an instance of the receiver (which is a class) with no 
@@ -454,7 +449,7 @@ Behavior >> becomeUncompact [
 
 { #category : #accessing }
 Behavior >> binding [
-	^ nil -> self
+	^ LiteralVariable key: nil value: self
 ]
 
 { #category : #'accessing instances and variables' }
@@ -586,10 +581,24 @@ Behavior >> compiledMethodAt: selector ifAbsent: aBlock [
 ]
 
 { #category : #'accessing method dictionary' }
-Behavior >> compiledMethodAt: selector ifPresent: anotherBlock ifAbsent: aBlock [
-	"Answer the compiled method associated with the argument, selector (a Symbol), a message selector in the receiver's method dictionary. If the selector is not in the dictionary, return the value of aBlock"
+Behavior >> compiledMethodAt: selector ifPresent: aBlock [
+	"Answer the compiled method associated with the argument, selector (a Symbol),
+	 a message selector in the receiver's method dictionary.
+	 If the selector is in the dictionary, return the value of aBlock.
+	"
 
-	^ self methodDict at: selector ifPresent: anotherBlock ifAbsent: aBlock
+	^ self methodDict at: selector ifPresent: aBlock
+]
+
+{ #category : #'accessing method dictionary' }
+Behavior >> compiledMethodAt: selector ifPresent: aBlock ifAbsent: anotherBlock [
+	"Answer the compiled method associated with the argument, selector (a Symbol),
+	 a message selector in the receiver's method dictionary.
+	 If the selector is in the dictionary, return the value of aBlock.
+	 If the selector is not in the dictionary, return the value of anotherBlock.
+	"
+
+	^ self methodDict at: selector ifPresent: aBlock ifAbsent: anotherBlock
 ]
 
 { #category : #queries }
@@ -1082,15 +1091,6 @@ Behavior >> isCompiledMethodClass [
 	^self instSpec >= 24
 ]
 
-{ #category : #accessing }
-Behavior >> isComposedBy: aTrait [
-	"Answers if this object includes trait aTrait into its composition"
-	aTrait isTrait ifFalse: [ ^false].
-	^self hasTraitComposition 
-		ifTrue: [ self traitComposition includesTrait: aTrait ]
-		ifFalse: [ false ]
-]
-
 { #category : #'testing method dictionary' }
 Behavior >> isDisabledSelector: selector [
 	^ self classAndMethodFor: selector do: [:c :m | m isDisabled] ifAbsent: [false]
@@ -1153,8 +1153,15 @@ Behavior >> isPointers [
 ]
 
 { #category : #testing }
+Behavior >> isPool [
+	^false
+]
+
+{ #category : #testing }
 Behavior >> isReferenced [
-	"returns true if the class is referenced from a method"
+	"Returns true if the class is referenced from a method."
+	"This method should just forward to the binding, this can be done when we do not use
+ 	Association for the binding on the class side"
 
 	^ self environment allBehaviors
 		anySatisfy: [ :behavior | behavior hasSelectorReferringTo: self binding ]
@@ -1265,8 +1272,7 @@ Behavior >> methodDict [
        "The method dictionary of a class can be nil when we want to use the #cannotInterpret: hook. Indeed when a class dictionary is nil, the VM sends the message cannotInterpret: to the receiver but starting the look up in the superclass of the class whose method dictionary was nil.
 	 Now the system relies that when the message methodDict is sent to a class a method dictionary is returned. In order to prevent the complaints of tools and IDE unaware of this feature, we fool them by providing an empty MethodDictionary. This will hopefully work in most cases, but the tools will loose the ability to modify the behaviour of this behavior. The user of #cannotInterpret: should be aware of this."
 
-       methodDict ifNil: [^ MethodDictionary new ].
-       ^ methodDict
+       ^ methodDict ifNil: [ MethodDictionary new ]
 ]
 
 { #category : #'accessing method dictionary' }
@@ -1712,18 +1718,8 @@ Behavior >> subclassDefinerClass [
 
 { #category : #'accessing instances and variables' }
 Behavior >> subclassInstVarNames [
-	"Answer a Set of the names of the receiver's subclasses' instance 
-	variables."
-	| vars |
-	vars := Set new.
-	self allSubclasses do: [:aSubclass | vars addAll: aSubclass instVarNames].
-	^vars
-]
-
-{ #category : #enumerating }
-Behavior >> subclassesDo: aBlock [
-	"Evaluate the argument, aBlock, for each of the receiver's immediate subclasses."
-	self subclasses do: aBlock
+	"Answer a Set of the names of the receiver's subclasses' instance variables."
+	^self allSubclasses flatCollectAsSet: [:aSubclass | aSubclass instVarNames]
 ]
 
 { #category : #'accessing class hierarchy' }
@@ -1734,18 +1730,25 @@ Behavior >> superclass [
 ]
 
 { #category : #'accessing class hierarchy' }
-Behavior >> superclass: aClass [ 
+Behavior >> superclass: aClass [
+
 	"Change the receiver's superclass to be aClass."
+
 	"Note: Do not use 'aClass isKindOf: Behavior' here
 		in case we recompile from Behavior itself."
-	aClass isNil
-		ifTrue: [self basicSuperclass: aClass. Object flushCache. ^ self].
 
-	"If the class is not nil it should update the class hierarchy correctly, using the classs builder"
-	^ self classInstaller update: self to: [ :builder |
-		builder
-			fillFor: self;
-			superclass: aClass].
+	aClass
+		ifNil: [ self basicSuperclass: aClass.
+			Object flushCache.
+			^ self
+			].	"If the class is not nil it should update the class hierarchy correctly, using the classs builder"
+	^ self classInstaller
+		update: self
+		to: [ :builder | 
+			builder
+				fillFor: self;
+				superclass: aClass
+			]
 ]
 
 { #category : #initialization }
@@ -1785,6 +1788,18 @@ Behavior >> thoroughHasSelectorReferringTo: literal [
 	^self methods anySatisfy: [ :method | 
 		method hasSelector: literal specialSelectorIndex: specialIndex]
 		
+]
+
+{ #category : #'testing method dictionary' }
+Behavior >> thoroughWhichMethodsReferTo: literal [
+	"Answer methods whose methods referes to the argument as a literal. 
+	 Dives into the compact literal notation and embedded literal arrays, 
+    making it slow but thorough "
+
+	| specialIndex |
+	"for speed we check the special selectors here once per class"
+	specialIndex := Smalltalk specialSelectorIndexOrNil: literal.
+	^ self methods select: [ :method | method hasSelector: literal specialSelectorIndex: specialIndex ]
 ]
 
 { #category : #'testing method dictionary' }
@@ -1834,9 +1849,14 @@ Behavior >> ultimateSourceCodeAt: selector ifAbsent: aBlock [
 Behavior >> unreferencedInstanceVariables [
 	"Return a list of the instance variables defined in the receiver which are not referenced in the receiver or any of its subclasses."
 
-	^ self instVarNames reject: [:ivn | 
-		self withAllSubclasses anySatisfy: [:class | 
-			(class whichSelectorsAccess: ivn) notEmpty]]
+	^ self slots reject: [:slot | slot isReferenced]
+]
+
+{ #category : #queries }
+Behavior >> usingMethods [
+	"all methods that reference me"
+	self isAnonymous ifTrue: [ ^#() ].
+	^self binding usingMethods
 ]
 
 { #category : #queries }
@@ -1896,9 +1916,16 @@ Behavior >> withAllSubclasses [
 
 { #category : #'accessing class hierarchy' }
 Behavior >> withAllSubclassesDo: aBlock [
-	"Evaluate the argument, aBlock, for the receiver and each of its 
-	subclasses."
-	self withAllSubclasses do: [ :subclass | aBlock value: subclass ].
+	"Evaluate the argument, aBlock, for the receiver and each of its subclasses."
+	
+	self withAllSubclasses do: aBlock
+]
+
+{ #category : #'accessing class hierarchy' }
+Behavior >> withAllSuperAndSubclasses [
+	"Answer the receiver's class hierarchy"
+
+	^self allSuperclasses, self withAllSubclasses
 ]
 
 { #category : #enumerating }
@@ -1910,14 +1937,14 @@ Behavior >> withAllSuperAndSubclassesDo: aBlock [
 
 { #category : #'accessing class hierarchy' }
 Behavior >> withAllSuperclasses [
-	"Answer an OrderedCollection of the receiver and the receiver's 
-	superclasses. The first element is the receiver, 
-	followed by its superclass; the last element is Object."
+	"Answer an OrderedCollection of the receiver and the receiver's superclasses. 
+	The first element is the receiver, followed by its superclass; 
+	the last element is Object."
 
-	| temp |
-	temp := self allSuperclasses.
-	temp addFirst: self.
-	^ temp
+	^self allSuperclasses 
+		addFirst: self; 
+		yourself
+
 ]
 
 { #category : #enumerating }
@@ -1926,12 +1953,4 @@ Behavior >> withAllSuperclassesDo: aBlock [
 	aBlock value: self.
 	self superclass == nil
 		ifFalse: [self superclass withAllSuperclassesDo: aBlock]
-]
-
-{ #category : #'accessing method dictionary' }
-Behavior >> zapAllMethods [
-	"Remove all methods in this class which is assumed to be obsolete"
-
-	self methodDict: self emptyMethodDictionary.
-	self class isMeta ifTrue: [self class zapAllMethods]
 ]

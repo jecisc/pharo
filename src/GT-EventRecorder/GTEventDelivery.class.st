@@ -112,8 +112,7 @@ GTEventDelivery >> initialize [
 	super initialize.
 	mutex := Mutex new.
 	queue := WaitfreeQueue new.
-	permission := true.
-	preSuspendingAction := nil.
+	permission := true
 ]
 
 { #category : #initialization }
@@ -155,7 +154,7 @@ GTEventDelivery >> offerPermission [
 ]
 
 { #category : #delivery }
-GTEventDelivery >> packAndDeliver: aBoolean. [
+GTEventDelivery >> packAndDeliver: aBoolean [
 	recorder pack.
 	self deliver: aBoolean.
 	

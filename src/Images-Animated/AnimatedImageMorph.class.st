@@ -131,7 +131,7 @@ AnimatedImageMorph >> restoreBackground [
 	activeForm := canvas form.
 ]
 
-{ #category : #'stepping and presenter' }
+{ #category : #stepping }
 AnimatedImageMorph >> step [
 	frameStream ifNil: [ ^ self ].
 	frameStream atEnd ifTrue: [ 
@@ -154,7 +154,7 @@ AnimatedImageMorph >> step [
 	self changed.
 ]
 
-{ #category : #'model - stepping' }
+{ #category : #stepping }
 AnimatedImageMorph >> stepTime [
 	frameStream ifNil: [ ^ self defaultDelay ].
 	^ currentFrame delay.
@@ -162,19 +162,19 @@ AnimatedImageMorph >> stepTime [
 
 { #category : #drawing }
 AnimatedImageMorph >> updateActiveForm [
+
 	"Update the activeForm of the receiver based upon the
 	disposal rules of the current and previous frames."
-	| canvas |
-	prevFrame isNil ifTrue: [ 
-		canvas := FormCanvas extent: self bounds extent.
-		canvas
-			translucentImage: currentFrame form
-			at: currentFrame offset.
-		activeForm := canvas form.
-		^ self ].
-	prevFrame disposal = #leaveCurrent
-		ifTrue: [ ^ self leaveCurrent ].
-	"Otherwise we assume a restore background"
-	^ self restoreBackground
 
+	| canvas |
+
+	prevFrame
+		ifNil: [ canvas := FormCanvas extent: self bounds extent.
+			canvas translucentImage: currentFrame form at: currentFrame offset.
+			activeForm := canvas form.
+			^ self
+			].
+	prevFrame disposal = #leaveCurrent
+		ifTrue: [ ^ self leaveCurrent ].	"Otherwise we assume a restore background"
+	^ self restoreBackground
 ]

@@ -52,6 +52,9 @@ SourceFile >> cr [
 { #category : #accessing }
 SourceFile >> flush [
 
+	(stream isNil or: [ stream isReadOnly ])
+		ifTrue: [ ^ self ].
+	
 	stream flush
 ]
 
@@ -241,14 +244,16 @@ SourceFile >> tryOpenReadOnly: readOnly [
 	readOnly ifFalse: [
 		potentialLocations
 			do: [ :each | 
-				[ stream := ZnCharacterReadWriteStream
-					on: (each asFileReference / basename) binaryReadWriteStream
+				[ stream := SourceFileCharacterReadWriteStream
+					on: (SourceFileBufferedReadWriteStream on:(each asFileReference / basename) unbufferedBinaryWriteStream)
 					encoding: 'utf8'.
 				^ self ] on: Error do: [  ] ] ].
 
 	potentialLocations do: [ :each | 
-			[ stream := (each asFileReference / basename) readStream.
-			^ self ] on: Error do: [  ] ]
+			[ stream := ZnCharacterReadStream
+					on: (each asFileReference / basename) binaryReadStream
+					encoding: 'utf8'.
+				^ self ] on: Error do: [  ] ]
 ]
 
 { #category : #accessing }

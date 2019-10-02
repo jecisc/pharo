@@ -228,6 +228,41 @@ RBMethodNode >> compilationContext: aCompilationContext [
 	compilationContext := aCompilationContext.
 ]
 
+{ #category : #completion }
+RBMethodNode >> completionToken [
+	^ self selector
+]
+
+{ #category : #'accessing - conceptual' }
+RBMethodNode >> conceptualArgumentSize [
+	"Return the cumulted length of the parameters (yes parameters are called arguments in Pharo - not good!). It does not count spaces and the selectors.
+	Note that this length is based on the tree structure and not the source code. It does not reflect the selection interval but the space the selector would take if displayed on a single line without any space."
+
+	^ self arguments
+		inject: 0
+		into: [ :sum :each | sum + each name size ]
+]
+
+{ #category : #'accessing - conceptual' }
+RBMethodNode >> conceptualSelectorSize [
+	"Return the length of the selector. It does not take into length of parameters nor the spaces.
+	Note that this length is based on the tree structure and not the source code. It does not reflect the selection interval but the space the selector would take if displayed on a single line without any space."
+
+	^ selector size
+]
+
+{ #category : #'accessing - conceptual' }
+RBMethodNode >> conceptualSignatureSize [
+	"Return the full length of the method signature (called with a strange name in Pharo: the patterned selector. Note that this length is based on the tree structure and not the source code. It does not reflect the selection interval but the space the signature would take if displayed on a single line."
+
+	"When we count foo: a b: b, we add three extras spaces so args size * 2 - 1"
+
+	^ self conceptualSelectorSize + self conceptualArgumentSize
+		+ (self arguments
+		ifNotEmpty: [ self arguments size * 2 - 1 ]
+		ifEmpty: [ 0 ])
+]
+
 { #category : #matching }
 RBMethodNode >> copyInContext: aDictionary [
 	^ self class new
@@ -274,23 +309,20 @@ RBMethodNode >> equalTo: anObject withMapping: aDictionary [
 
 { #category : #'tree accessing' }
 RBMethodNode >> extractSubtreeWith: aSourceCode [
-
 	| extractedTree |
-	extractedTree := RBParser parseExpression: aSourceCode onError: [ :string :pos | ^ nil ].
+	extractedTree := self parserClass
+		parseExpression: aSourceCode
+		onError: [ :string :pos | ^ nil ].
 	extractedTree ifNil: [ ^ nil ].
-	
-	(extractedTree isSequence 
-	and: [extractedTree statements isEmpty]) ifTrue: [ ^ nil ].
-	
-	extractedTree := (extractedTree isSequence "or: [aTree isReturn]")
-		ifTrue: [ RBParseTreeSearcher 
-					 treeMatchingStatements: aSourceCode
-					 in: self ]
-		ifFalse: [ RBParseTreeSearcher
-					  treeMatching: aSourceCode
-					  in: self ].
-			
-	^ extractedTree ifNotNil: [ extractedTree parent: (self parentOfSubtree: extractedTree) ]
+	(extractedTree isSequence and: [ extractedTree statements isEmpty ])
+		ifTrue: [ ^ nil ].
+	extractedTree := extractedTree isSequence
+		ifTrue:
+			[ RBParseTreeSearcher treeMatchingStatements: aSourceCode in: self ]
+		ifFalse:
+			[ RBParseTreeSearcher treeMatching: aSourceCode in: self ].	"or: [aTree isReturn]"
+	^ extractedTree
+		ifNotNil: [ extractedTree parent: (self parentOfSubtree: extractedTree) ]
 ]
 
 { #category : #accessing }
@@ -446,6 +478,12 @@ RBMethodNode >> methodOrBlockNode [
 	"^ self"
 ]
 
+{ #category : #completion }
+RBMethodNode >> narrowWith: aString [
+
+	self selector: aString asSymbol
+]
+
 { #category : #accessing }
 RBMethodNode >> newSource [
 	replacements ifNil: [^self formattedCode].
@@ -534,19 +572,21 @@ RBMethodNode >> reformatSource [
 	| stream newSource newTree |
 	stream := (String new: source size + 100) writeStream.
 	stream
-		nextPutAll: (source
-			copyFrom: (replacements
-				inject: 1
-				into: [ :sum :each | 
-					stream
-						nextPutAll: (source copyFrom: sum to: each startPosition - 1);
-						nextPutAll: (each string).
-					each stopPosition + 1 ])
-			to: source size).
+		nextPutAll:
+			(source
+				copyFrom:
+					(replacements
+						inject: 1
+						into: [ :sum :each | 
+							stream
+								nextPutAll: (source copyFrom: sum to: each startPosition - 1);
+								nextPutAll: each string.
+							each stopPosition + 1 ])
+				to: source size).
 	newSource := stream contents.
-	newTree :=  RBParser parseFaultyMethod: newSource.
+	newTree := self parserClass parseFaultyMethod: newSource.
 	self = newTree
-		ifFalse: [ ^ self formattedCode].
+		ifFalse: [ ^ self formattedCode ].
 	^ newSource
 ]
 

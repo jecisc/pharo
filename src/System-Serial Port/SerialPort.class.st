@@ -63,16 +63,14 @@ SerialPort >> initialize [
 	"Default port settings."
 
 	super initialize.
-	port := nil.						"set when opened"
-	baudRate := 9600.				"9600 baud"
-	stopBitsType := 1.				"one stop bit"
-	parityType := 0.				"no parity"
-	dataBits := 8.					"8 bits"
+	baudRate := 9600.	"9600 baud"
+	stopBitsType := 1.	"one stop bit"
+	parityType := 0.	"no parity"
+	dataBits := 8.	"8 bits"
 	outputFlowControlType := 0.	"none"
 	inputFlowControlType := 0.	"none"
-	xOnByte := 19.					"ctrl-S"
-	xOffByte := 24.					"ctrl-X"
-
+	xOnByte := 19.	"ctrl-S"
+	xOffByte := 24	"ctrl-X"
 ]
 
 { #category : #accessing }
@@ -111,17 +109,16 @@ SerialPort >> nextPutAll: aStringOrByteArray [
 ]
 
 { #category : #'open/close' }
-SerialPort >> openPort: portId [ 
+SerialPort >> openPort: portId [
+
 	"Open the given serial port, using the settings specified by my
 	instance variables."
 
-	| result |	
+	| result |
 
-	self close.
-	
-	"8-10 - wks - this has to tell us if it fails: step 1, save the primitive result"
+	self close.	"8-10 - wks - this has to tell us if it fails: step 1, save the primitive result"
 	result := portId isString
-		ifTrue: [self
+		ifTrue: [ self
 				primOpenPortByName: portId
 				baudRate: baudRate
 				stopBitsType: stopBitsType
@@ -130,8 +127,9 @@ SerialPort >> openPort: portId [
 				inFlowControlType: inputFlowControlType
 				outFlowControlType: outputFlowControlType
 				xOnByte: xOnByte
-				xOffByte: xOffByte]
-		ifFalse: [self
+				xOffByte: xOffByte
+			]
+		ifFalse: [ self
 				primOpenPort: portId
 				baudRate: baudRate
 				stopBitsType: stopBitsType
@@ -140,13 +138,11 @@ SerialPort >> openPort: portId [
 				inFlowControlType: inputFlowControlType
 				outFlowControlType: outputFlowControlType
 				xOnByte: xOnByte
-				xOffByte: xOffByte].
-
-	"wks - raise an error if there was a failure."
-	result isNil ifTrue:[ self error: 'Cannot open ', portId printString ].
+				xOffByte: xOffByte
+			].	"wks - raise an error if there was a failure."
+	result ifNil: [ self error: 'Cannot open ' , portId printString ].
 
 	port := portId
-
 ]
 
 { #category : #accessing }

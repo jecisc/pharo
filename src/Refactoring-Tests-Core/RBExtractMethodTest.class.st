@@ -50,11 +50,11 @@ RBExtractMethodTest >> testExtractMethodAtEndOfMethodThatNeedsReturn [
 	self executeRefactoring: refactoring.
 	class := refactoring model classNamed: #RBLintRuleTestData.
 
-	self assert: (class parseTreeFor: #openEditor) = (self parseMethod: 'openEditor
+	self assert: (class parseTreeFor: #openEditor) equals: (self parseMethod: 'openEditor
 	| rules |
 	rules := self failedRules.
 	^self foo: rules').
-	self assert: (class parseTreeFor: #foo:) = (self parseMethod: 'foo: rules
+	self assert: (class parseTreeFor: #foo:) equals: (self parseMethod: 'foo: rules
 	rules isEmpty ifTrue: [^self].
 	rules size == 1 ifTrue: [^rules first viewResults]')
 ]
@@ -70,11 +70,11 @@ RBExtractMethodTest >> testExtractMethodThatMovesTemporaryVariable [
 	self executeRefactoring: refactoring.
 	class := refactoring model classNamed: #RBTransformationRuleTestData.
 
-	self assert: (class parseTreeFor: #superSends) = (self parseMethod: 'superSends
+	self assert: (class parseTreeFor: #superSends) equals: (self parseMethod: 'superSends
 	| rule |
 	rule := self foo1.
 	self rewriteUsing: rule').
-	self assert: (class parseTreeFor: #foo1) = (self parseMethod: 'foo1 | rule | 	rule := RBParseTreeRewriter new.
+	self assert: (class parseTreeFor: #foo1) equals: (self parseMethod: 'foo1 | rule | 	rule := RBParseTreeRewriter new.
 	rule addSearch: ''super `@message: ``@args''
 				-> (
 					[:aNode | 
@@ -96,11 +96,11 @@ RBExtractMethodTest >> testExtractMethodThatNeedsArgument [
 	self executeRefactoring: refactoring.
 	class := refactoring model classNamed: #RBTransformationRuleTestData.
 
-	self assert: (class parseTreeFor: #checkMethod:) = (self parseMethod: 'checkMethod: aSmalllintContext 
+	self assert: (class parseTreeFor: #checkMethod:) equals: (self parseMethod: 'checkMethod: aSmalllintContext 
 	class := aSmalllintContext selectedClass.
 	(rewriteRule executeTree: aSmalllintContext parseTree) ifTrue: 
 			[self foo: aSmalllintContext]').
-	self assert: (class parseTreeFor: #foo:) = (self parseMethod: 'foo: aSmalllintContext (RecursiveSelfRule executeTree: rewriteRule tree initialAnswer: false)
+	self assert: (class parseTreeFor: #foo:) equals: (self parseMethod: 'foo: aSmalllintContext (RecursiveSelfRule executeTree: rewriteRule tree initialAnswer: false)
 				ifFalse: 
 					[builder compile: rewriteRule tree printString
 						in: class
@@ -118,16 +118,40 @@ RBExtractMethodTest >> testExtractMethodThatNeedsTemporaryVariable [
 	self executeRefactoring: refactoring.
 	class := refactoring model classNamed: #RBLintRuleTestData.
 
-	self assert: (class parseTreeFor: #displayName) = (self parseMethod: 'displayName
+	self assert: (class parseTreeFor: #displayName) equals: (self parseMethod: 'displayName
 	| nameStream |
 	nameStream := WriteStream on: (String new: 64).
 	self foo: nameStream.
 	^nameStream contents').
 
-	self assert: (class parseTreeFor: #foo:) = (self parseMethod: 'foo: nameStream 	nameStream nextPutAll: self name;
+	self assert: (class parseTreeFor: #foo:) equals: (self parseMethod: 'foo: nameStream 	nameStream nextPutAll: self name;
 		nextPutAll: '' (''.
 	self problemCount printOn: nameStream.
 	nameStream nextPut: $).')
+]
+
+{ #category : #tests }
+RBExtractMethodTest >> testExtractWithRenamingOfParameters [
+	| refactoring class|
+	refactoring := RBExtractMethodRefactoring
+		extract: (78 to: 197)
+		from: #displayName
+		in: RBLintRuleTestData.
+	self setupMethodNameFor: refactoring toReturn: #foo:.
+	refactoring parameterMap: (Dictionary new at: #nameStream put: #newParameter; yourself ).
+	self executeRefactoring: refactoring.
+	class := refactoring model classNamed: #RBLintRuleTestData.
+
+ 	self assert: (class parseTreeFor: #displayName) = (self parseMethod: 'displayName
+	| nameStream |
+	nameStream := WriteStream on: (String new: 64).
+	self foo: nameStream.
+	^nameStream contents').
+	"Extracted method with renamed parameters"
+	self assert: (class parseTreeFor: #foo:) = (self parseMethod: 'foo: newParameter 	newParameter nextPutAll: self name;
+		nextPutAll: '' (''.
+	self problemCount printOn: newParameter.
+	newParameter nextPut: $).')
 ]
 
 { #category : #tests }
@@ -145,9 +169,9 @@ RBExtractMethodTest >> testModelExtractMethodWithTemporariesSelected [
 	self setupMethodNameFor: refactoring toReturn: #foobar.
 	self executeRefactoring: refactoring.
 	self assert: (class parseTreeFor: #foo) 
-				= (self parseMethod: 'foo [self foobar] value').
+			equals: (self parseMethod: 'foo [self foobar] value').
 	self assert: (class parseTreeFor: #foobar) 
-				= (self parseMethod: 'foobar |temp | temp := 5. ^temp * temp')
+			equals: (self parseMethod: 'foobar |temp | temp := 5. ^temp * temp')
 ]
 
 { #category : #tests }
@@ -166,7 +190,7 @@ RBExtractMethodTest >> testModelExtractMethodWithTemporaryAssigned [
 	self setupMethodNameFor: refactoring toReturn: #foobar.
 	self executeRefactoring: refactoring.
 	self assert: (class parseTreeFor: #foo) 
-				= (self parseMethod: 'foo | temp | temp := self foobar. ^temp * temp').
+			equals: (self parseMethod: 'foo | temp | temp := self foobar. ^temp * temp').
 	self 
 		assert: ((class parseTreeFor: #foobar) = (self 
 						parseMethod: 'foobar | bar temp | bar := 5. temp := bar * bar. Transcript show: temp printString; cr. ^temp.')) |
@@ -180,4 +204,21 @@ RBExtractMethodTest >> testNonExistantSelector [
 			extract: (10 to: 20)
 			from: #checkClass1:
 			in: RBBasicLintRuleTestData)
+]
+
+{ #category : #tests }
+RBExtractMethodTest >> testValidateRenameParameters [
+	| refactoring |
+	refactoring := RBExtractMethodRefactoring
+		extract: (78 to: 197)
+		from: #displayName
+		in: RBLintRuleTestData.
+	self setupMethodNameFor: refactoring toReturn: #foo:.
+	refactoring parameterMap: (Dictionary new at: #nameStream put: #nameStream; yourself ).
+	"Fail when use instance variables as new parameters"
+	self should: [ refactoring validateRenameOf: #nameStream to: #name ] raise: RBRefactoringError.	
+	self should: [refactoring validateRenameOf: #nameStream to: #foo1] raise: RBRefactoringError.
+	"Fail when use class variables as new parameters"
+	self should: [refactoring validateRenameOf: #nameStream to: #Foo1] raise: RBRefactoringError.
+	"Fail when use temporary variables as new parameters"
 ]

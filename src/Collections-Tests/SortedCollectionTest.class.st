@@ -515,6 +515,17 @@ SortedCollectionTest >> testCollect [
 	
 ]
 
+{ #category : #tests }
+SortedCollectionTest >> testComma [
+	| sortBlock collOne collTwo combined |
+	sortBlock := [ :a :b | a > b ].
+	collOne := (1 to: 5) asSortedCollection: sortBlock.
+	collTwo := (6 to: 10) asSortedCollection: sortBlock.
+	combined := collOne , collTwo.
+	self assert: combined sortBlock equals: sortBlock.
+	self assert: combined asArray equals: (1 to: 10) asArray reverse
+]
+
 { #category : #'tests - basic' }
 SortedCollectionTest >> testCopy [
 		
@@ -827,6 +838,15 @@ SortedCollectionTest >> testSortBlock [
 	
 	
 	
+]
+
+{ #category : #'tests - basic' }
+SortedCollectionTest >> testSortUsing [
+	| aSortedCollection |
+	aSortedCollection := (SortedCollection sortUsing: #yourself ascending)
+		addAll: #(2 6 3 8 4 3 7 6);
+		yourself.
+	self assert: aSortedCollection asArray equals: #(2 3 3 4 6 6 7 8)
 ]
 
 { #category : #'tests - basic' }

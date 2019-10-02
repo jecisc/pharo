@@ -19,7 +19,7 @@ Class {
 	#category : #'Athens-Text'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> addCommand: aCommand [
 
 	commands 
@@ -29,7 +29,7 @@ AthensTextLine >> addCommand: aCommand [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> addWidth: aNumber [
 	width := width + aNumber.
 ]
@@ -82,8 +82,7 @@ AthensTextLine >> heightAndDescent [
 
 { #category : #initialization }
 AthensTextLine >> initialize [
-	commands := tail := nil.
-	width := height := maxAscent := maxDescent := 0.
+	width := height := maxAscent := maxDescent := 0
 ]
 
 { #category : #accessing }
@@ -107,7 +106,7 @@ AthensTextLine >> maxDescent: mascent [
 	maxDescent := mascent max: maxDescent
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> maxHeight: aHeight [
 	height := height max: aHeight
 ]
@@ -122,9 +121,9 @@ AthensTextLine >> renderOn: aTextRenderer [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 AthensTextLine >> renderOn: anAthensTextRenderer x: aSmallInteger y: aSmallInteger3 [ 
-	self shouldBeImplemented.
+	self shouldBeImplemented
 ]
 
 { #category : #accessing }
@@ -133,7 +132,7 @@ AthensTextLine >> startIndex [
 	^ startIndex
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> startIndex: index [
 	startIndex := index
 ]
@@ -144,7 +143,7 @@ AthensTextLine >> text [
 	^ text
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> text: aText [ 
 	text := aText
 ]
@@ -154,12 +153,12 @@ AthensTextLine >> top [
 	^ top
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> top: aTop [
 	top := aTop
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 AthensTextLine >> width [
 	^ width
 ]

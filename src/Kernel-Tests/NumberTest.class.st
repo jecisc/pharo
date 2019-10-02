@@ -7,6 +7,14 @@ Class {
 	#category : #'Kernel-Tests-Numbers'
 }
 
+{ #category : #test }
+NumberTest >> testAsInteger [
+	"ensure we keep using truncated in asInteger"
+	self assert: 0.5 asInteger equals: 0.
+	self assert: (1/2) asInteger equals: 0
+	
+]
+
 { #category : #tests }
 NumberTest >> testFractionPart [
 
@@ -31,6 +39,12 @@ NumberTest >> testIntegerPart [
 		assert: 0.5 integerPart = 0.0;
 		assert: 2.5 integerPart = 2.0
 
+]
+
+{ #category : #tests }
+NumberTest >> testNew [
+
+	self should: [Number new] raise: self defaultTestError. 
 ]
 
 { #category : #tests }
@@ -142,8 +156,10 @@ NumberTest >> testRaisedToIntegerWithFloats [
 { #category : #tests }
 NumberTest >> testReadFrom [
 	
-	self assert: 1.0e-14	= (Number readFrom: '1.0e-14').
-	self assert: 2r1e26	= (Number readFrom: '2r1e26').
+	self assert: 1.0e-14    = (Number readFrom: '1.0e-14').
+	"Use a literal number format that compiles in GemStone.
+	 Note that the test still checks the same value."
+	self assert: 16r4000000 = (Number readFrom: '2r1e26').
 	self should: [Number readFrom: 'foo'] raise: Error
 ]
 
@@ -157,4 +173,13 @@ NumberTest >> testReciprocal [
 		assert: -3 reciprocal = (-1/3).
 		
 	self should: [ 0 reciprocal ] raise: ZeroDivide
+]
+
+{ #category : #test }
+NumberTest >> testRounded [
+
+	self assert: 0 rounded equals: 0.
+	self assert: 1 rounded equals: 1.
+	self assert: (1/2) rounded equals: 1.
+	self assert: ((1/2) - Float epsilon) rounded equals: 0.
 ]

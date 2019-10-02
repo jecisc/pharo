@@ -147,8 +147,7 @@ Cursor class >> currentCursor: aCursor [
 		^ self
 	].
 
-	CurrentCursor := aCursor.
-	"aCursor beCursor"
+	CurrentCursor := aCursor	
 ]
 
 { #category : #constants }
@@ -980,11 +979,6 @@ Cursor class >> square [
 	^SquareCursor
 ]
 
-{ #category : #'system startup' }
-Cursor class >> startUp [
-	self currentCursor: self currentCursor
-]
-
 { #category : #constants }
 Cursor class >> target [
 	"Answer the instance of me that is the shape of a gunsight."
@@ -1041,7 +1035,7 @@ Cursor class >> write [
 
 { #category : #primitives }
 Cursor >> activateInCursorOwner: aCursorOwner [
-	^ aCursorOwner activateCursor: self
+	^ self beCursor
 ]
 
 { #category : #converting }

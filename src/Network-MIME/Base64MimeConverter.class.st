@@ -38,10 +38,13 @@ Class {
 }
 
 { #category : #encoding }
-Base64MimeConverter class >> decodeInteger: mimeString [ 
+Base64MimeConverter class >> decodeInteger: mimeString [
+
 	"Decode the MIME string into an integer of any length"
+
 	| bytes sum |
-	bytes := (self class mimeDecodeToBytes: mimeString readStream) contents.
+
+	bytes := mimeString base64Decoded.
 	sum := 0.
 	bytes reverseDo: [ :by | sum := sum * 256 + by ].
 	^ sum
@@ -52,8 +55,8 @@ Base64MimeConverter class >> encodeInteger: int [
 	| strm |
 	"Encode an integer of any length and return the MIME string"
 
-	strm := ReadWriteStream on: (ByteArray new: int digitLength).
-	1 to: int digitLength do: [:ii | strm nextPut: (int digitAt: ii)].
+	strm := ReadWriteStream on: (ByteArray new: int bytesCount).
+	1 to: int bytesCount do: [:ii | strm nextPut: (int byteAt: ii)].
 	strm reset.
 	^ ((self mimeEncode: strm) contents) copyUpTo: $=	"remove padding"
 ]
@@ -77,14 +80,6 @@ Base64MimeConverter class >> initialize [
 	FromCharTable at: $/ asciiValue + 1 put: 63.
 	ToCharTable at: 64 put: $/.
 	
-]
-
-{ #category : #encoding }
-Base64MimeConverter class >> mimeDecodeToBytes: aStream [ 
-
-	self deprecated: 'Please use #base64Decoded now. See issue #21937'.
-	
-	^aStream contents base64Decoded readStream 
 ]
 
 { #category : #encoding }

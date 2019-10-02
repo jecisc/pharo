@@ -403,8 +403,7 @@ NECContext >> initialize [
 	selectors := true.
 	ranges := OrderedCollection new.
 	completionIndex := 0.
-	completionToken := nil.
-	globals := self class environment.
+	globals := self class environment
 ]
 
 { #category : #'private-compute-index' }
@@ -457,8 +456,8 @@ NECContext >> isVariablesOnly [
 
 { #category : #accessing }
 NECContext >> model [
-	model isNil ifTrue: [ model := self createModel ].
-	^ model
+
+	^model ifNil: [ model := self createModel ]
 ]
 
 { #category : #action }

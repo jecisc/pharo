@@ -58,7 +58,7 @@ FTFunction class >> table: aFastTableMorph [
 ]
 
 { #category : #accessing }
-FTFunction >> beExplicite [
+FTFunction >> beExplicit [
 	"This method is call by the FastTable if the user want the widget to be explicit. Describe what to do to be explicit."
 
 	self subclassResponsibility
@@ -78,7 +78,7 @@ FTFunction >> initializeTable: aTable [
 ]
 
 { #category : #testing }
-FTFunction >> isExplicite [
+FTFunction >> isExplicit [
 	"See FTFunctionWithField to get an example."
 
 	self subclassResponsibility
@@ -91,7 +91,7 @@ FTFunction >> keyStroke: anEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 FTFunction >> reset [
 	self subclassResponsibility 
 ]

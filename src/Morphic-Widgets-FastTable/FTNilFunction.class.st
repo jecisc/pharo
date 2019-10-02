@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : #accessing }
-FTNilFunction >> beExplicite [
+FTNilFunction >> beExplicit [
 	"Do nothing"
 ]
 
@@ -26,7 +26,7 @@ FTNilFunction >> disable [
 ]
 
 { #category : #testing }
-FTNilFunction >> isExplicite [
+FTNilFunction >> isExplicit [
 	^ false
 ]
 
@@ -36,7 +36,7 @@ FTNilFunction >> keyStroke: anEvent [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 FTNilFunction >> reset [
 ]
 

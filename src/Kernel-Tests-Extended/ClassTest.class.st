@@ -5,7 +5,8 @@ Class {
 	#name : #ClassTest,
 	#superclass : #ClassTestCase,
 	#instVars : [
-		'className'
+		'className',
+		'testEnvironment'
 	],
 	#category : #'Kernel-Tests-Extended-Classes'
 }
@@ -20,7 +21,7 @@ ClassTest >> categoryNameForTemporaryClasses [
 { #category : #setup }
 ClassTest >> deleteClass [
 	| cl |
-	cl := Smalltalk globals at: className ifAbsent: [ ^ self ].
+	cl := testEnvironment at: className ifAbsent: [ ^ self ].
 	
 	Smalltalk globals at: #ChangeSet ifPresent: [ 
 		cl removeFromChanges ].
@@ -51,6 +52,7 @@ ClassTest >> referencingMethod3 [
 ClassTest >> setUp [
 	super setUp.
 	className := #TUTU.
+	testEnvironment:= Smalltalk globals.
 	self deleteClass.
 	Object subclass: className
 		instanceVariableNames: ''
@@ -70,7 +72,7 @@ ClassTest >> tearDown [
 { #category : #tests }
 ClassTest >> testAddClassSlot [
 	| tutu slot1 slot2 |
-	tutu := Smalltalk globals at: #TUTU.
+	tutu := testEnvironment at: #TUTU.
 	slot1 := #X => InstanceVariableSlot.
 	slot2 := #Y => InstanceVariableSlot.
 	tutu addClassSlot: slot1.
@@ -83,7 +85,7 @@ ClassTest >> testAddClassSlot [
 ClassTest >> testAddInstVarName [
 
 	| tutu |
-	tutu := Smalltalk globals at: #TUTU.
+	tutu := testEnvironment at: #TUTU.
 	tutu addInstVarNamed: 'x'.
 	self assert: tutu instVarNames equals: #('x').
 	tutu addInstVarNamed: 'y'.
@@ -94,7 +96,7 @@ ClassTest >> testAddInstVarName [
 ClassTest >> testAddSlot [
 
 	| tutu |
-	tutu := Smalltalk globals at: #TUTU.
+	tutu := testEnvironment at: #TUTU.
 	tutu addSlot: #x => InstanceVariableSlot.
 	self assert: tutu instVarNames equals: #('x').
 	self assert: tutu name equals: #TUTU.
@@ -127,11 +129,11 @@ ClassTest >> testAllSharedPools [
 	self assertEmpty: SubclassPoolUser sharedPools
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 ClassTest >> testChangingShapeDoesNotPutNilInMethodsLastLiteralKey [
 	"Test that when the shape of a class changes, the key of the last literal of the methods is not nil"
 	| tutu |
-	tutu := Smalltalk globals at: #TUTU.
+	tutu := testEnvironment at: #TUTU.
 	tutu compile: 'foo'.
 	self deny: (tutu >> #foo) allLiterals last key isNil.
 	tutu addInstVarNamed: 'x'.
@@ -145,16 +147,7 @@ ClassTest >> testClassSide [
 	self assert: Point class classSide equals: Point class. 
 ]
 
-{ #category : #'tests - class variables' }
-ClassTest >> testClassVarNames [
-
-	self assert: (Object classVarNames includes: #DependentsFields).
-	
-	"A class and it's meta-class share the class variables"
-	self assert: (Object classVarNames = Object class classVarNames).
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 ClassTest >> testCompileAll [
 	ClassTest compileAll
 ]
@@ -163,6 +156,16 @@ ClassTest >> testCompileAll [
 ClassTest >> testDependencies [
 	self assert: (ClassTest dependentClasses includes: ClassTest superclass).
 	self assert: (ClassTest dependentClasses includes: Date)
+]
+
+{ #category : #accessing }
+ClassTest >> testEnvironment [
+	^ testEnvironment
+]
+
+{ #category : #accessing }
+ClassTest >> testEnvironment: anObject [
+	testEnvironment := anObject
 ]
 
 { #category : #'tests - access' }
@@ -287,7 +290,7 @@ ClassTest >> testOrdersMetaClassAfterItsClassInstance [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - pools' }
 ClassTest >> testPoolVariableAccessibleInClassUser [
 	"This test shows that a Pool Variable is accessible from the class that declare the Pool usage: here the superclass"
  
@@ -298,7 +301,7 @@ ClassTest >> testPoolVariableAccessibleInClassUser [
 	self assert: RootClassPoolUser author = 'Ducasse'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - pools' }
 ClassTest >> testPoolVariableAccessibleInSubclassOfClassUser [
 	"This test shows that a Pool Variable is not accessible from a subclass that declare the Pool usage: here SubFlop subclass of Flop and this is a bug. "
  
@@ -323,7 +326,7 @@ ClassTest >> testReferencedClasses [
 { #category : #tests }
 ClassTest >> testRemoveClassSlot [
 	| tutu slot1 slot2 |
-	tutu := Smalltalk globals at: #TUTU.
+	tutu := testEnvironment at: #TUTU.
 	slot1 := #X => InstanceVariableSlot.
 	slot2 := #Y => InstanceVariableSlot.
 	tutu addClassSlot: slot1.
@@ -339,17 +342,17 @@ ClassTest >> testRemoveClassSlot [
 { #category : #'tests - access' }
 ClassTest >> testSharedPoolOfVarNamed [	
 
-	self assert: (Date sharedPoolOfVarNamed: 'DayNames') = ChronologyConstants.
+	self assert: (Date sharedPoolOfVarNamed: 'DayNames') equals: ChronologyConstants.
 	"a metaclass does not have shared pools since only classes have shared pools"
 	self assert: (Date class sharedPoolOfVarNamed: 'DayNames') isNil.
 	
-	self assert: (RootClassPoolUser sharedPoolOfVarNamed: 'Author') = PoolDefiner.
-	self assert: (RootClassPoolUser sharedPoolOfVarNamed: 'Gloups') = PoolDefiner.
-	self assert: (SubclassPoolUser sharedPoolOfVarNamed: 'Author') = PoolDefiner.
+	self assert: (RootClassPoolUser sharedPoolOfVarNamed: 'Author') equals: PoolDefiner.
+	self assert: (RootClassPoolUser sharedPoolOfVarNamed: 'Gloups') equals: PoolDefiner.
+	self assert: (SubclassPoolUser sharedPoolOfVarNamed: 'Author') equals: PoolDefiner.
 	
-	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'Author') = PoolDefiner.
-	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'VariableInPoolDefiner2') = PoolDefiner2.
-	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'Gloups') = PoolDefiner.
+	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'Author') equals: PoolDefiner.
+	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'VariableInPoolDefiner2') equals: PoolDefiner2.
+	self assert: (ClassMultiplePoolUser sharedPoolOfVarNamed: 'Gloups') equals: PoolDefiner
 ]
 
 { #category : #'tests - access' }
@@ -366,16 +369,16 @@ ClassTest >> testSharedPools [
 { #category : #'tests - class creation' }
 ClassTest >> testSubclass [
 	| cls |
-	(Smalltalk globals includesKey: #SubclassExample)
-		ifTrue: [ (Smalltalk globals at: #SubclassExample) removeFromSystem ].
+	(testEnvironment includesKey: #SubclassExample)
+		ifTrue: [ (testEnvironment at: #SubclassExample) removeFromSystem ].
 	
-	self deny: (Smalltalk globals includesKey: #SubclassExample).
+	self deny: (testEnvironment includesKey: #SubclassExample).
 	cls := Object subclass: #SubclassExample.
-	self assert: (Smalltalk globals includesKey: #SubclassExample).
+	self assert: (testEnvironment includesKey: #SubclassExample).
 
-	self assert: (Smalltalk globals at: #SubclassExample) == cls.
-	self assert: cls category = #Unclassified.
-	self assert: cls instVarNames = #().
+	self assert: (testEnvironment at: #SubclassExample) == cls.
+	self assert: cls category equals: self unclassifiedCategory.
+	self assert: cls instVarNames equals: #().
 	
 	cls removeFromSystem
 ]
@@ -383,16 +386,16 @@ ClassTest >> testSubclass [
 { #category : #'tests - class creation' }
 ClassTest >> testSubclassInstanceVariableNames [
 	| cls |
-	(Smalltalk globals includesKey: #SubclassExample)
-		ifTrue: [ (Smalltalk at: #SubclassExample) removeFromSystem ].
+	(testEnvironment includesKey: #SubclassExample)
+		ifTrue: [ (testEnvironment at: #SubclassExample) removeFromSystem ].
 	
-	self deny: (Smalltalk globals includesKey: #SubclassExample).
+	self deny: (testEnvironment includesKey: #SubclassExample).
 	cls := Object subclass: #SubclassExample instanceVariableNames: 'x y'.
-	self assert: (Smalltalk globals includesKey: #SubclassExample).
+	self assert: (testEnvironment includesKey: #SubclassExample).
 
-	self assert: (Smalltalk at: #SubclassExample) == cls.
-	self assert: cls category = #Unclassified.
-	self assert: cls instVarNames = #('x' 'y').
+	self assert: (testEnvironment at: #SubclassExample) == cls.
+	self assert: cls category equals: self unclassifiedCategory.
+	self assert: cls instVarNames equals: #('x' 'y').
 	
 	cls removeFromSystem
 ]
@@ -408,7 +411,7 @@ ClassTest >> testSuperclassOrder [
 	ordered := Class superclassOrder: shuffledSuperclasses.
 	
 	"should not affect the order as there is no dependencies"
-	self assert: ordered = orderedSuperclasses asOrderedCollection.
+	self assert: ordered equals: orderedSuperclasses asOrderedCollection
 ]
 
 { #category : #'tests - file in/out' }
@@ -420,7 +423,7 @@ ClassTest >> testSuperclassOrderPreservingOrder [
 	ordered := Class superclassOrder: noHierarchicalRelationship.
 	
 	"should not affect the order as there is no dependencies"
-	self assert: ordered = noHierarchicalRelationship asOrderedCollection.
+	self assert: ordered equals: noHierarchicalRelationship asOrderedCollection
 	
 	
 ]
@@ -434,7 +437,31 @@ ClassTest >> testUsesPoolVarNamed [
 	
 	self assert: (RootClassPoolUser usesPoolVarNamed: 'Author').
 	"a subclass  has  the one of its superclass"
-	self assert: (SubclassPoolUser usesPoolVarNamed: 'Author').
+	self assert: (SubclassPoolUser usesPoolVarNamed: 'Author')
+]
+
+{ #category : #'tests - class variables' }
+ClassTest >> testallClassVariables [
+
+	self assert: SmalltalkImage allClassVariables last name equals: #DependentsFields
+]
+
+{ #category : #'tests - class variables' }
+ClassTest >> testclassVarNames [
+
+	self assert: (Object classVarNames includes: #DependentsFields).
+	
+	"A class and it's meta-class share the class variables"
+	self assert: Object classVarNames equals: Object class classVarNames
+]
+
+{ #category : #'tests - class variables' }
+ClassTest >> testclassVariables [
+
+	self assert: Object classVariables first name equals: #DependentsFields.
+	
+	"A class and it's meta-class share the class variables"
+	self assert: Object classVariables equals: Object class classVariables
 ]
 
 { #category : #'tests - class creation' }

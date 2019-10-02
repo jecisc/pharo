@@ -10,7 +10,7 @@ SystemNavigation >> browseAllAccessesTo: instVarName from: aClass [
 	| methods slot |
 	slot := aClass slotNamed: instVarName.
 	methods := (aClass allMethodsAccessingSlot: slot) 
-		collect: [:meth | self createMethodNamed: meth selector realParent: meth methodClass].
+		collect: [:meth | meth methodReference].
 	
 	^ self
 		browseMessageList: methods
@@ -20,21 +20,12 @@ SystemNavigation >> browseAllAccessesTo: instVarName from: aClass [
 ]
 
 { #category : #'*Tool-Base' }
-SystemNavigation >> browseAllCallsOn: aLiteral localTo: aClass [
-	"Create and schedule a message browser on each method in or below the given class that refers to
-	aLiteral. For example, SystemNavigation new browseAllCallsOn: #open:label: localTo: CodeHolder."
-
-
-	^ self browseAllSendersOf: aLiteral localTo: aClass
-]
-
-{ #category : #'*Tool-Base' }
 SystemNavigation >> browseAllCallsOnClass: aClass [
 	"Create and schedule a message browser on each method that refers to 
 	aClass. For example, SystemNavigation new browseAllCallsOnClass: Object."
 
 	^ self
-		browseMessageList: ((aClass allCallsOnIn: self) asSortedCollection)
+		browseMessageList: (aClass allCallsOnIn: self)
 		name: 'Users of class ' , aClass instanceSide name
 		autoSelect: aClass instanceSide name
 ]
@@ -96,21 +87,6 @@ SystemNavigation >> browseAllSendersOf: aLiteral [
 ]
 
 { #category : #'*Tool-Base' }
-SystemNavigation >> browseAllSendersOf: aLiteral localTo: aClass [
-	"Create and schedule a message browser on each method in or below the given class that refers to
-	aLiteral.
-	Example: 
-		SystemNavigation new browseAllSendersOf: #open:label: localTo: CodeHolder."
-
-	aClass ifNil: [ ^self inform: 'no selected class' ].
-	^ self headingAndAutoselectForLiteral: aLiteral do:
-		[:label :autoSelect|
-		self browseMessageList: (aClass allLocalCallsOn: aLiteral) asSortedCollection
-			name: label, ' local to ', aClass name
-			autoSelect: autoSelect]
-]
-
-{ #category : #'*Tool-Base' }
 SystemNavigation >> browseAllSendersOrUsersOf: aLiteralOrClass [ 
 	"Create and schedule a message browser on each method that refers to 
 	a literal or class name"
@@ -125,11 +101,18 @@ SystemNavigation >> browseAllStoresInto: instVarName from: aClass [
     "Create and schedule a Message Set browser for all the receiver's methods 
     or any methods of a subclass/superclass that refer to the instance variable name."
 
-    "self new browseAllStoresInto: 'youpi' from: BalloonEdgeData class."
+    "self new browseAllStoresInto: 'x' from: Point."
 
-    ^ self browseMessageList: (self allStoresInto: instVarName of: aClass)
-                name: 'Stores into ' , instVarName 
-                autoSelect: instVarName
+	| methods slot |
+	slot := aClass slotNamed: instVarName.
+	methods := (aClass allMethodsWritingSlot: slot) 
+		collect: [:meth | meth methodReference].
+	
+	^ self
+		browseMessageList: methods
+		name: 'Stores into ' , instVarName
+		autoSelect: instVarName
+		refreshingBlock: [ :method | slot isWrittenIn: method ]
 
 ]
 
@@ -137,7 +120,7 @@ SystemNavigation >> browseAllStoresInto: instVarName from: aClass [
 SystemNavigation >> browseAllUsersOfTrait: aTrait [
 	"Launch a class-list list browser on all classes or traits which import aTrait"
 	
-	^Smalltalk tools browser messageList browseClasses: aTrait traitUsers
+	^Smalltalk tools messageList browseClasses: aTrait traitUsers
 ]
 
 { #category : #'*Tool-Base' }
@@ -216,10 +199,10 @@ SystemNavigation >> browseHierarchy: aBehavior [
 
 { #category : #'*Tool-Base' }
 SystemNavigation >> browseHierarchy: aClass selector: aSelector [
+
 	"Open a browser"
 
-	aClass isNil
-		ifTrue: [ ^ self ].
+	aClass ifNil: [ ^ self ].
 	^ Smalltalk tools browser new
 		spawnHierarchyForClass: aClass selector: aSelector;
 		yourself
@@ -503,50 +486,6 @@ SystemNavigation >> confirmRemovalOf: aSelector on: aClass [
 ]
 
 { #category : #'*Tool-Base' }
-SystemNavigation >> confirmRemovalOfSelectors: aCollection on: aClass [
-	"Determine if it is okay to remove the given selector. Answer 1 if it  
-	should be removed, 2 if it should be removed followed by a senders  
-	browse, and 3 if it should not be removed."
-	
-	"Smalltalk systemNavigation confirmRemovalOfSelectors: {#tearDown} on: TestCase >>> 3"
-	"Smalltalk systemNavigation confirmRemovalOfSelectors: {#tearDown. #setUp} on: TestCase >>> 3"
-
-	| collection count answer caption allCalls selectors oneCalls |
-	collection := aCollection asOrderedCollection copy.
-	oneCalls := OrderedCollection new.
-	aCollection
-		do:
-			[ :sel | 
-			allCalls := self allCallsOn: sel.
-			(count := allCalls size) = 0
-				ifTrue: [ collection remove: sel ].	"no senders -- let the removal happen without warning"
-			count = 1
-				ifTrue:
-					[ (allCalls first actualClass == aClass and: [ allCalls first selector == sel ])
-						ifTrue: [ oneCalls add: sel.
-							collection remove: sel ] ]	"only sender is itself" ].
-
-	"collection removeAll: (self buildSelfContainedCallsFrom: aCollection in: aClass)."
-	collection ifEmpty: [ ^ 1 ].
-	count := collection sum: [ :sel | (self allCallsOn: sel) size ].
-	selectors := collection joinUsing: ', #' last: ' and #'.
-	
-	caption := 'The <1?message:messages> #<2s> <1?has:have> <3p> <4?sender:senders' expandMacrosWithArguments: {collection size = 1. selectors. count. count = 1}.
-	
-	answer := UIManager default
-		chooseFrom:
-			#('Remove them' 'Remove, then browse senders (if still existing)' 'Don''t remove, but show me those senders' 'Forget it -- do nothing -- sorry I asked')
-		title: caption.
-	answer = 3
-		ifTrue: [ collection do: [ :aSelector | self browseAllSendersOf: aSelector ] ].
-	answer = 0
-		ifTrue: [ answer := 3 ].
-		
-	"If user didn't answer, treat it as cancel"
-	^ answer min: 3
-]
-
-{ #category : #'*Tool-Base' }
 SystemNavigation >> methodHierarchyBrowserForClass: aClass selector: sel [
 	"Create and schedule a message set browser on all implementors of the 
 	currently selected message selector. Do nothing if no message is selected."
@@ -559,12 +498,12 @@ SystemNavigation >> methodHierarchyBrowserForClass: aClass selector: sel [
 
 	aClass allSuperclasses reverseDo: [:cl |
 		(cl includesSelector: sel) ifTrue: [
-			list addLast: (self createMethodNamed: sel realParent: cl)]].
+			list addLast: (cl>>sel) methodReference]].
 	aClass allSubclassesDo: [:cl | 
 		(cl includesSelector: sel) ifTrue: [
-			list addLast: ( self createMethodNamed: sel realParent: cl)]].
+			list addLast: (cl>>sel) methodReference ]].
 
-	list addLast: (self createMethodNamed: sel realParent: aClass).
+	list addLast: (aClass>>sel) methodReference.
 	^ self browseMessageList: list name: 'Inheritance of ' , sel
 
 

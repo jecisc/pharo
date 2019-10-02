@@ -120,20 +120,22 @@ DigitalSignatureAlgorithm class >> sign: aStringOrStream privateKey: privateKey 
 { #category : #examples }
 DigitalSignatureAlgorithm class >> testExamplesFromDisk [
 	"verify messages from file on disk"
+
 	"Note: Secure random numbers are needed for key generation and message signing, but not for signature verification. There is no need to call initRandomFromUser if you are merely checking a signature."
+
 	"DigitalSignatureAlgorithm testExamplesFromDisk"
 
-	FileStream 
-		readOnlyFileNamed: 'dsa.test.out' 
-		do: [ :file |
+	FileStream
+		readOnlyFileNamed: 'dsa.test.out'
+		do: [ :file | 
 			| msg sig publicKey |
-			[file atEnd] whileFalse: [
-				sig := file nextChunk.
-				msg := file nextChunk.
-				publicKey := self class compiler evaluate: file nextChunk.
-				(self verify: sig isSignatureOf: msg publicKey: publicKey) 
-					ifTrue: [Transcript show: 'SUCCESS: ',msg; cr.]
-					ifFalse: [self error: 'ERROR! Signature verification failed']]]
+			[ file atEnd ]
+				whileFalse: [ sig := file nextChunk.
+					msg := file nextChunk.
+					publicKey := self class compiler evaluate: file nextChunk.
+					self
+						assert: (self verify: sig isSignatureOf: msg publicKey: publicKey)
+						description: 'ERROR! Signature verification failed' ] ]
 ]
 
 { #category : #examples }
@@ -183,11 +185,18 @@ DigitalSignatureAlgorithm class >> timeDecode: count [
 
 { #category : #testing }
 DigitalSignatureAlgorithm class >> timeDirect: aBlock as: aString count: anInteger [
-
-	Transcript show: anInteger asStringWithCommas,'  ',
-		aString ,' took ',
-		(Time millisecondsToRun: aBlock) asStringWithCommas,' ms'; cr
-
+	self
+		trace:
+			(String
+				streamContents: [ :stream | 
+					stream
+						nextPutAll: anInteger asStringWithCommas;
+						nextPutAll: '  ';
+						nextPutAll: aString;
+						nextPutAll: ' took ';
+						nextPutAll: (Time millisecondsToRun: aBlock) asStringWithCommas;
+						nextPutAll: ' ms';
+						cr ])
 ]
 
 { #category : #public }
@@ -370,8 +379,8 @@ DigitalSignatureAlgorithm >> initRandomFromString: aString [
 	s := aString.
 	k := LargePositiveInteger new: (s size min: 64).
 	srcIndex := 0.
-	k digitLength to: 1 by: -1 do: [:i |
-		k digitAt: i put: (s at: (srcIndex := srcIndex + 1)) asciiValue].
+	k bytesCount to: 1 by: -1 do: [:i |
+		k byteAt: i put: (s at: (srcIndex := srcIndex + 1)) asciiValue].
 	k := k normalize + (Random new next * 16r7FFFFFFF) asInteger.  "a few additional bits randomness"
 	k highBit > 512 ifTrue: [k := k bitShift: k highBit - 512].
 	self initRandom: k.

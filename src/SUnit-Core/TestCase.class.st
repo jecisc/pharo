@@ -26,7 +26,7 @@ Class {
 { #category : #'building suites' }
 TestCase class >> addTestsFor: classNameString toSuite: suite [
 	| cls |
-	cls := Smalltalk globals at: classNameString ifAbsent: [ ^ suite ].
+	cls := self environment at: classNameString ifAbsent: [ ^ suite ].
 	^ cls isAbstract
 		ifTrue: [ 
 			cls allSubclasses
@@ -136,7 +136,7 @@ TestCase class >> coverage [
 	(self name endsWith: 'Test')
 		ifFalse: [ self error: 'Please, use #coverageForClass: instead' ].
 	className := self name copyFrom: 1 to: self name size - 'Test' size.
-	cls := Smalltalk globals at: className asSymbol ifAbsent: [ self error: 'Please, use #coverageForClass: instead' ].	"May happen with Transcript"
+	cls := self environment at: className asSymbol ifAbsent: [ self error: 'Please, use #coverageForClass: instead' ].	"May happen with Transcript"
 	cls isBehavior
 		ifFalse: [ cls := cls class ].
 	^ self coverageForClass: cls
@@ -360,7 +360,7 @@ TestCase class >> localCoverage [
 	(self name endsWith: 'Test')
 		ifFalse: [ self error: 'Please, use #localCoverageForClass: instead' ].
 	className := self name copyFrom: 1 to: self name size - 'Test' size.
-	cls := Smalltalk globals at: className asSymbol ifAbsent: [ self error: 'Please, use #localCoverageForClass: instead' ].
+	cls := self environment at: className asSymbol ifAbsent: [ self error: 'Please, use #localCoverageForClass: instead' ].
 	cls isBehavior
 		ifFalse: [ cls := cls class ].
 	^ self localCoverageForClass: cls
@@ -489,7 +489,7 @@ TestCase class >> runAllAndLogResult [
 
 	"runs all tests in the image"
 
-	TestCase suite run logCr
+	TestCase suite run traceCr
 ]
 
 { #category : #'instance creation' }
@@ -584,7 +584,7 @@ TestCase >> announcer [
 { #category : #private }
 TestCase >> cleanUpInstanceVariables [
 	self class allInstVarNames do: [ :name |
-		name = 'testSelector' ifFalse: [
+		(self instanceVariablesToKeep includes: name) ifFalse: [
 			self instVarNamed: name put: nil ] ]
 ]
 
@@ -637,6 +637,11 @@ TestCase >> failureLog [
 	^Transcript
 
 			
+]
+
+{ #category : #private }
+TestCase >> instanceVariablesToKeep [
+	^ #('testSelector')
 ]
 
 { #category : #testing }

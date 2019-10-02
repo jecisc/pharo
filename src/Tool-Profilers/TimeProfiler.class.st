@@ -42,7 +42,7 @@ TimeProfiler class >> example [
 { #category : #examples }
 TimeProfiler class >> exampleOnBlock [
 
-	TimeProfiler onBlock: [ 20 timesRepeat: [Transcript show: 100 factorial printString]]
+	TimeProfiler onBlock: [ 20 timesRepeat: [self trace: 100 factorial printString]]
 ]
 
 { #category : #opening }
@@ -538,6 +538,7 @@ TimeProfiler >> selectedMethodCode [
 
 { #category : #compiling }
 TimeProfiler >> selectedMethodCode: aString notifying: aController [
+
 	"Compile the code in aString. Notify aController of any syntax errors. 
 	Answer false if the compilation fails. Otherwise answer true."
 
@@ -545,15 +546,16 @@ TimeProfiler >> selectedMethodCode: aString notifying: aController [
 		ifNil: [ ^ false ]
 		ifNotNil: [ :currNode | 
 			| class oldSelector category newSelector |
+
 			class := currNode methodClass.
 			oldSelector := currNode selector.
 			class ifNil: [ ^ false ].	"Normal method accept"
 			category := class organization categoryOfElement: oldSelector.
 			newSelector := class compile: aString classified: category notifying: aController.
-			newSelector isNil
-				ifTrue: [ ^ false ].
+			newSelector ifNil: [ ^ false ].
 			self changed: #selectedMethodCode.
-			^ true ]
+			^ true
+			]
 ]
 
 { #category : #accessing }
@@ -684,7 +686,7 @@ TimeProfiler >> time [
 { #category : #'UI specific' }
 TimeProfiler >> toolBarOn: aWindow [
 	| uiTheme toolBar |
-	uiTheme := Smalltalk ui theme.
+	uiTheme :=self theme.
 	toolBar := toolBar := aWindow
 		newToolbar:
 			{((uiTheme
@@ -767,7 +769,7 @@ TimeProfiler >> treeMorph [
 		treeLineDashes: {5. 1};
 		lineColorBlock: [:node | {Color gray. Color orange. Color brown. Color magenta. Color blue} at: ((node level \\ 5) + 1)];
 		doubleClickSelector: #browseItem;
-		rowColorForEven: Smalltalk ui theme lightBackgroundColor;
+		rowColorForEven: self theme lightBackgroundColor;
 		yourself
 
 ]

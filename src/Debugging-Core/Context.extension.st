@@ -21,15 +21,14 @@ Context >> callPrimitive: primNumber [
 
 { #category : #'*Debugging-Core' }
 Context >> lookupSymbol: aSymbol [
-	| scope var |
-	scope := self sourceNodeExecuted scope.
-	var := scope lookupVar: aSymbol asString.
+	| var |
+	var := (self sourceNodeExecuted scope) lookupVar: aSymbol.
 	"Local variables"
-	(var isKindOf: OCTempVariable) ifTrue: [^ var searchFromContext: self scope: scope].
+	var isTemp ifTrue: [^ self tempNamed: aSymbol].
 	"Instance variables"
-	(var isKindOf: OCSlotVariable) ifTrue: [^ self receiver instVarNamed: aSymbol].
+	var isInstance ifTrue: [^ self receiver instVarNamed: aSymbol].
 	"Class variables and globals"
-	(var isKindOf: OCLiteralVariable) ifTrue: [ ^ var assoc value ].
+	var isGlobal ifTrue: [ ^ var assoc value ].
 	^ nil.
 	
 ]
@@ -54,6 +53,29 @@ Context >> namedTempAt: index put: aValue [
 	 (Note that if the value is a copied value it is also set out along the lexical chain,
 	  but alas not in along the lexical chain.)."
 	^self debuggerMap namedTempAt: index put: aValue in: self
+]
+
+{ #category : #'*Debugging-Core' }
+Context >> pcRange [
+	"return the debug highlight for aPC"
+	^self sourceNodeExecuted debugHighlightRange 
+]
+
+{ #category : #'*Debugging-Core' }
+Context >> pcRangeContextIsActive: contextIsActive [
+ 	"return the debug highlight for aPC"		 
+	| thePC |
+
+  	"make sure we have some usable value (can happen for contexts in the ProcessBrowser"		
+ 	thePC := pc ifNil: [self method endPC].		
+
+  	"When on the top of the stack the pc is pointing to right instruction, but deeper in the stack		
+ 	the pc was already advanced one bytecode, so we need to go back this one bytecode, which		
+ 	can consist of multiple bytes. But on IR, we record the *last* bytecode offset as the offset of		
+ 	the IR instruction, which means we can just go back one"		
+ 	thePC := contextIsActive ifTrue: [thePC] ifFalse: [thePC - 1].		
+
+  	^self method rangeForPC: thePC
 ]
 
 { #category : #'*Debugging-Core' }
@@ -295,7 +317,7 @@ Context >> stepToHome: aContext [
 	[ctxt := ctxt step.
 	error ifNotNil: [
 		"Error was raised, remove inserted above contexts then return signaler context"
-			"aContext terminateTo: context sender."  "remove above ensure and handler contexts"
+			aContext terminateTo: context sender.  "remove above ensure and handler contexts"
 			^ {ctxt. error}].
 	
 	home == ctxt home] whileFalse: [
@@ -371,14 +393,12 @@ Context >> tempNamed: aName [
 
 	And when we check self asContext pc we get 17, which is *before* the nil is pushed. Therefore we should pay attention when querying a temporary if the temporary allocation was executed."
 
-	| index |
-	index := self tempNames indexOf: aName.
-	^ self namedTempAt: index
+	^self debuggerMap tempNamed: aName in: self
 ]
 
 { #category : #'*Debugging-Core' }
 Context >> tempNamed: aName put: anObject [
-	^self namedTempAt: (self tempNames indexOf: aName) put: anObject
+	^self debuggerMap tempNamed: aName in: self put: anObject 
 ]
 
 { #category : #'*Debugging-Core' }

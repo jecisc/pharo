@@ -1,5 +1,5 @@
 "
-My instances are 31-bit numbers, stored in twos complement form. The allowable range is approximately +- 1 billion (see SmallInteger minVal, maxVal).
+My instances are 31-bit numbers or 63-bit numbers depending on the image architecture, stored in twos complement form. The allowable range is approximately +- 1 billion (31 bits), 1 quintillion (63 bits)  (see SmallInteger minVal, maxVal).
 "
 Class {
 	#name : #SmallInteger,
@@ -280,6 +280,50 @@ SmallInteger >> bitXor: arg [
 		ifFalse: [(self bitInvert bitXor: arg) bitInvert].
 ]
 
+{ #category : #'system primitives' }
+SmallInteger >> byteAt: n [
+	"Answer the value of an apparent byte-indexable field in the receiver,
+	 analogous to the large integers, which are organized as bytes."
+
+	n = 1
+		ifTrue: [ 
+			"Negate carefully in case the receiver is SmallInteger minVal"
+			^ self < 0
+				ifTrue: [ -256 - self bitAnd: 255 ]
+				ifFalse: [ self bitAnd: 255 ] ].
+	^ self < 0
+		ifTrue: [ (-256 - self bitShift: -8) + 1 byteAt: n - 1 ]
+		ifFalse: [ (self bitShift: 8 - (n bitShift: 3)) bitAnd: 255 ]
+]
+
+{ #category : #'system primitives' }
+SmallInteger >> byteAt: n put: value [ 
+	"Fails. The digits of a small integer can not be modified."
+
+	self error: 'You can''t store in a SmallInteger'
+]
+
+{ #category : #'system primitives' }
+SmallInteger >> bytesCount [
+	"Answer the number of indexable fields in the receiver. This value is the 
+	 same as the largest legal subscript. Included so that a SmallInteger can 
+	 behave like a LargePositiveInteger or LargeNegativeInteger."
+
+	| value length |
+	length := 1.
+	value := self.
+	value >= 0
+		ifTrue:
+			[[value > 255] whileTrue:
+				[value := value bitShift: -8.
+				 length := length + 1]]
+		ifFalse:
+			[[value < -255] whileTrue:
+				[value := value bitShift: -8.
+				 length := length + 1]].
+	^length
+]
+
 { #category : #printing }
 SmallInteger >> decimalDigitLength [
 	"Answer the number of digits printed out in base 10.
@@ -318,50 +362,6 @@ SmallInteger >> decimalDigitLength [
 
 { #category : #copying }
 SmallInteger >> deepCopy [
-]
-
-{ #category : #'system primitives' }
-SmallInteger >> digitAt: n [
-	"Answer the value of an apparent byte-indexable field in the receiver,
-	 analogous to the large integers, which are organized as bytes."
-
-	n = 1
-		ifTrue: [ 
-			"Negate carefully in case the receiver is SmallInteger minVal"
-			^ self < 0
-				ifTrue: [ -256 - self bitAnd: 255 ]
-				ifFalse: [ self bitAnd: 255 ] ].
-	^ self < 0
-		ifTrue: [ (-256 - self bitShift: -8) + 1 digitAt: n - 1 ]
-		ifFalse: [ (self bitShift: 8 - (n bitShift: 3)) bitAnd: 255 ]
-]
-
-{ #category : #'system primitives' }
-SmallInteger >> digitAt: n put: value [ 
-	"Fails. The digits of a small integer can not be modified."
-
-	self error: 'You can''t store in a SmallInteger'
-]
-
-{ #category : #'system primitives' }
-SmallInteger >> digitLength [
-	"Answer the number of indexable fields in the receiver. This value is the 
-	 same as the largest legal subscript. Included so that a SmallInteger can 
-	 behave like a LargePositiveInteger or LargeNegativeInteger."
-
-	| value length |
-	length := 1.
-	value := self.
-	value >= 0
-		ifTrue:
-			[[value > 255] whileTrue:
-				[value := value bitShift: -8.
-				 length := length + 1]]
-		ifFalse:
-			[[value < -255] whileTrue:
-				[value := value bitShift: -8.
-				 length := length + 1]].
-	^length
 ]
 
 { #category : #testing }

@@ -28,7 +28,7 @@ Class {
 		'moreButton',
 		'moreMorph'
 	],
-	#category : #'Polymorph-Widgets'
+	#category : #'Polymorph-Widgets-Base'
 }
 
 { #category : #accessing }
@@ -275,7 +275,7 @@ OverflowRowMorph >> showMore [
 	self world addMorphInLayer: self moreMorph
 ]
 
-{ #category : #'stepping and presenter' }
+{ #category : #stepping }
 OverflowRowMorph >> step [
 	"Move the more column if it is showing."
 

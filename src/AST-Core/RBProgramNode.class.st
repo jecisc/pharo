@@ -119,6 +119,13 @@ RBProgramNode >> allTemporaryVariables [
 ]
 
 { #category : #accessing }
+RBProgramNode >> allVariables [
+	"Return all the variables in subnodes"
+
+	^ self allChildren select: [ :each | each isVariable ]
+]
+
+{ #category : #accessing }
 RBProgramNode >> asReturn [
 	"Change the current node to a return node."
 
@@ -337,6 +344,14 @@ RBProgramNode >> formatterClass [
 ]
 
 { #category : #testing }
+RBProgramNode >> hasComments [
+	"Answer whether the receiver as comments"
+	
+	^ self comments isNotEmpty
+	
+]
+
+{ #category : #testing }
 RBProgramNode >> hasMultipleReturns [
 	| count |
 	count := 0.
@@ -420,7 +435,8 @@ RBProgramNode >> isEvaluatedFirst [
 
 { #category : #testing }
 RBProgramNode >> isFaulty [
-	self subclassResponsibility
+	"return true if the AST contains a RBParseErrorNode"
+	^false
 ]
 
 { #category : #deprecated }
@@ -623,6 +639,17 @@ RBProgramNode >> methodOrBlockNode [
 { #category : #accessing }
 RBProgramNode >> newSource [
 	^self formattedCode
+]
+
+{ #category : #'node access' }
+RBProgramNode >> nodeForOffset: anInteger [
+	| children |
+	"choosing the best node on the specific offset"
+	children := self children.
+	"when we are on a leaf, we take the leaf node"
+	(children isEmpty) ifTrue: [ (self sourceInterval includes: anInteger) ifTrue: [^self]].
+	"if the node has children then we check the children"
+	children do: [:each | (each sourceInterval includes: anInteger) ifTrue: [^each nodeForOffset: anInteger] ].
 ]
 
 { #category : #iterating }

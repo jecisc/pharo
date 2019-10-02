@@ -90,11 +90,6 @@ CommandLineUIManager >> alert: aStringOrText title: aString configure: aBlock [
 	self alert: aStringOrText title: aString.
 ]
 
-{ #category : #display }
-CommandLineUIManager >> checkForNewDisplaySize [
-	"do nothing"
-]
-
 { #category : #'ui requests' }
 CommandLineUIManager >> choose: questionsAnswerDict title: queryString [
 
@@ -220,7 +215,7 @@ CommandLineUIManager >> inform: aString [
 			nextPutAll: (String new: 79 withAll: $= ); cr].
 
 	Smalltalk logDuring: logBlock.		
-	aString logCr.
+	aString traceCr.
 ]
 
 { #category : #'ui requests' }

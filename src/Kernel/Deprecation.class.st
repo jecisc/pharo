@@ -153,16 +153,22 @@ Deprecation >> hash [
 
 { #category : #handling }
 Deprecation >> logTranscript [
-	self showWarning 
-		ifTrue: [Transcript nextPutAll: self messageText; cr; flush].
+	self showWarning
+		ifTrue: [ self traceCr: self messageText ]
 ]
 
 { #category : #accessing }
 Deprecation >> messageText [
-	"Return an exception's message text."
-
-	^ 'The method ', self deprecatedMethodName, ' called from ', self sendingMethodName ,' has been deprecated.
-', explanationString
+	^String streamContents: [ :str |
+		self shouldTransform ifTrue: [ 
+			str nextPutAll:  'Automatic deprecation code rewrite: '].
+		str 
+			nextPutAll: 'The method ';
+			nextPutAll: self deprecatedMethodName;
+			nextPutAll: ' called from ';
+			nextPutAll: self sendingMethodName;
+			nextPutAll: ' has been deprecated. ';
+		 	nextPutAll: explanationString]
 ]
 
 { #category : #settings }
@@ -197,9 +203,19 @@ Deprecation >> showWarning [
 ]
 
 { #category : #handling }
+Deprecation >> signal [
+	| pragma |
+	(context method hasPragmaNamed: #transform:to:) ifFalse: [ ^super signal ].
+
+	pragma := context method pragmaAt: #transform:to:.
+	self rule: pragma arguments first -> pragma arguments second.
+	self transform
+]
+
+{ #category : #handling }
 Deprecation >> transform [
 	| node rewriteRule aMethod |
-	self shouldTransform ifFalse: [ ^ self ].
+	self shouldTransform ifFalse: [ ^ self signal].
 	self rewriterClass ifNil:[ ^ self signal ].
 	aMethod := self contextOfSender method.
 	aMethod isDoIt ifTrue:[^ self]. "no need to transform doits"
@@ -207,7 +223,7 @@ Deprecation >> transform [
 	rewriteRule := self rewriterClass new 
 		replace: rule key with: rule value.
 	(rewriteRule executeTree: node)
-		ifFalse: [ ^ self ].
+		ifFalse: [ ^ self signal ].
 	node replaceWith: rewriteRule tree. 
 	Author 
 		useAuthor: 'AutoDeprecationRefactoring'

@@ -28,7 +28,11 @@ Class {
 		'keyText'
 	],
 	#classVars : [
-		'SubMenuMarker'
+		'BottomArrow',
+		'LeftArrow',
+		'SubMenuBottomArrow',
+		'SubMenuMarker',
+		'UpArrow'
 	],
 	#category : #'Morphic-Base-Menus'
 }
@@ -42,7 +46,11 @@ MenuItemMorph class >> initialize [
 		extent: 5@9
 		fromArray: #(2147483648 3221225472 3758096384 4026531840 4160749568 4026531840 3758096384 3221225472 2147483648)
 		offset: 0@0.
-	SubMenuMarker := ColorForm mappingWhiteToTransparentFrom: f.
+
+	SubMenuMarker := (ColorForm mappingWhiteToTransparentFrom: f) asFormOfDepth: 32.
+	BottomArrow := SubMenuMarker rotateBy: 90.
+	LeftArrow := SubMenuMarker rotateBy: 180.
+	UpArrow := SubMenuMarker rotateBy: 270.
 
 ]
 
@@ -131,8 +139,8 @@ MenuItemMorph >> arguments: aCollection [
 
 { #category : #private }
 MenuItemMorph >> bottomArrow [
-	^ ColorForm
-		mappingWhiteToTransparentFrom: ((SubMenuMarker rotateBy: 90) asFormOfDepth:8)
+
+	^ BottomArrow
 ]
 
 { #category : #accessing }
@@ -385,20 +393,18 @@ MenuItemMorph >> iconForm [
 { #category : #initialization }
 MenuItemMorph >> initialize [
 	"initialize the state of the receiver"
+
 	super initialize.
 	""
-	
+
 	contents := ''.
 	hasFocus := false.
 	isEnabled := true.
-	subMenu := nil.
 	isSelected := false.
-	target := nil.
-	selector := nil.
-	arguments := nil.
 	font := StandardFonts menuFont.
-	self hResizing: #spaceFill;
-		 vResizing: #shrinkWrap
+	self
+		hResizing: #spaceFill;
+		vResizing: #shrinkWrap
 ]
 
 { #category : #events }
@@ -482,8 +488,8 @@ MenuItemMorph >> keyText: anObject [
 
 { #category : #private }
 MenuItemMorph >> leftArrow [
-	^ ColorForm
-		mappingWhiteToTransparentFrom: ((SubMenuMarker rotateBy: 180)asFormOfDepth: 8)
+
+	^ LeftArrow
 ]
 
 { #category : #drawing }
@@ -554,19 +560,16 @@ MenuItemMorph >> mouseLeave: evt [
 ]
 
 { #category : #events }
-MenuItemMorph >> mouseLeaveDragging: evt [ 
+MenuItemMorph >> mouseLeaveDragging: evt [
+
 	"The mouse left the receiver. Do nothing if we're not in a 'valid menu transition', meaning that the current hand focus must be aimed at the owning menu."
 
-	owner ifNil: [^self].
-	evt hand mouseFocus == owner ifFalse: [^self].
-	"If we have a submenu, make sure we've got some time to enter it before actually leaving the menu item"
-	subMenu isNil 
-		ifTrue: [owner selectItem: nil event: evt]
-		ifFalse: 
-			[self 
-				addAlarm: #deselectTimeOut:
-				with: evt
-				after: 500]
+	owner ifNil: [ ^ self ].
+	evt hand mouseFocus == owner
+		ifFalse: [ ^ self ].	"If we have a submenu, make sure we've got some time to enter it before actually leaving the menu item"
+	subMenu
+		ifNil: [ owner selectItem: nil event: evt ]
+		ifNotNil: [ self addAlarm: #deselectTimeOut: with: evt after: 500 ]
 ]
 
 { #category : #events }
@@ -628,9 +631,9 @@ MenuItemMorph >> select: evt [
 MenuItemMorph >> selectionFillStyle [
 	"answer the fill style to use with the receiver is the selected  
 	element"
-	Display depth <= 2 ifTrue: [^ Color gray].
-	^ self theme settings menuSelectionColor.
 
+	Display depth <= 2 ifTrue: [ ^ Color gray ].
+	^ self theme menuSelectionColor
 ]
 
 { #category : #private }
@@ -710,8 +713,8 @@ MenuItemMorph >> themeChanged [
 
 { #category : #private }
 MenuItemMorph >> upArrow [
-	^ ColorForm
-		mappingWhiteToTransparentFrom: ((SubMenuMarker rotateBy: 270)asFormOfDepth: 8)
+
+	^ UpArrow
 ]
 
 { #category : #copying }
