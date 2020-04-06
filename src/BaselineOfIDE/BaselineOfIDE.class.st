@@ -54,8 +54,6 @@ BaselineOfIDE >> additionalInitialization [
 	FreeTypeSettings current monitorType: #LCD.
 	FreeTypeSettings current glyphContrast: 55.
 	
-	CatalogSettings displayCatalogProjectsInSpotter: false.
-
 	RealEstateAgent usedStrategy: #cascadeFor:initialExtent:world:.
 	GrowlMorph position: #bottomLeft.
 	ShortcutReminder enabled: true.
@@ -187,9 +185,9 @@ BaselineOfIDE >> baseline: spec [
 				repository: repository;
 				loads: #( 'FullEnvironment' 'SystemBrowser' 'Tests' ) ].
 		spec baseline: 'Ring' with: [ spec repository: repository ].
+		spec baseline: 'Catalog' with: [ spec repository: repository ].
 		spec baseline: 'PharoGlamour' with: [ spec repository: repository ].
 		spec baseline: 'PharoGT' with: [ spec repository: repository ].
-		spec baseline: 'Catalog' with: [ spec repository: repository ].
 		spec baseline: 'HeuristicCompletion' with: [ spec repository: repository ].
 		spec package: 'Pharo-WelcomeHelp' ]
 ]
@@ -198,7 +196,7 @@ BaselineOfIDE >> baseline: spec [
 BaselineOfIDE >> loadIceberg [
 	Metacello new
 		baseline: 'Iceberg';
-		repository: 'github://pharo-vcs/iceberg:v1.6.8';
+		repository: 'github://pharo-vcs/iceberg:v1.6.9';
 		onConflictUseLoaded;
 		load.
 	(Smalltalk classNamed: #Iceberg) enableMetacelloIntegration: true.
