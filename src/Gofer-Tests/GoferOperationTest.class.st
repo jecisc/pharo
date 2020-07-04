@@ -146,12 +146,11 @@ GoferOperationTest >> testMerge [
 
 { #category : #tests }
 GoferOperationTest >> testPush [
-	| repository |
-	gofer := Gofer new.
-	gofer disablePackageCache.
-	gofer repository: (repository := MCDictionaryRepository new).
-	gofer package: 'GoferFoo'.
-	gofer push
+	Gofer new
+		disablePackageCache;
+		repository: MCDictionaryRepository new;
+		package: 'GoferFoo';
+		push
 ]
 
 { #category : #tests }

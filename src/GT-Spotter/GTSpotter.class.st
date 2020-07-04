@@ -233,10 +233,7 @@ GTSpotter >> defaultStep [
 
 { #category : #'actions api' }
 GTSpotter >> doIt [
-	| result |
-	Smalltalk compiler
-		silentlyDo: [ result := Smalltalk compiler evaluate: text string trimBoth ]
-		exceptionDo: [:ex | ^ex ]. 
+	Smalltalk compiler silentlyDo: [ Smalltalk compiler evaluate: text string trimBoth ] exceptionDo: [ :ex | ^ ex ]
 	"self exitDueTo: #doIt"
 ]
 

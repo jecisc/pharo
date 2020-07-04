@@ -447,17 +447,17 @@ GLMScriptingTest >> testStartWithOnlyJumpStart [
 
 { #category : #tests }
 GLMScriptingTest >> testThreePanesTransmissions [
-	| browser two |
+	| browser |
 	browser := GLMTabulator new.
 	browser
 		column: #one;
 		column: #two;
 		column: #three.
-	(browser transmit)
+	browser transmit
 		to: #three;
 		from: #one;
 		passivelyFrom: #two;
-		andShow: [ :a | a text display: [ :x :y | two := y ] ].
+		andShow: [ :a | a text display: [ :x :y | y ] ].
 	self assert: browser transmissions size equals: 1.
 	self assert: browser transmissions first passiveOrigins size equals: 1.
 	self assert: browser transmissions first activeOrigins size equals: 1.

@@ -134,17 +134,17 @@ GTSpotterPreviewBrick >> updatePreviewWith: anObject [
 
 { #category : #updating }
 GTSpotterPreviewBrick >> updatePreviewWithEmpty [
-
 	self removeAllBricks.
 	self asyncTask
-		execute: [ | emptyBrick |
-			emptyBrick := GLMLabelBrick new
+		execute: [ 
+			GLMLabelBrick new
 				text: self defaultNotAvailableText;
 				textPosition: #center;
 				textColor: Color lightGray;
-					with: [ :b | b label
-					customFont;
-					fontSize: 14 ] ]
+				with: [ :b | 
+					b label
+						customFont;
+						fontSize: 14 ] ]
 		withArguments: {  }
 		callback: [ :brick | self compositeBrick: brick ]
 		priority: Processor userBackgroundPriority

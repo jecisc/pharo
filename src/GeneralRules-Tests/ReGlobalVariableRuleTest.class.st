@@ -17,14 +17,14 @@ ReGlobalVariableRuleTest >> methodNotUsesGlobal [
 
 { #category : #tests }
 ReGlobalVariableRuleTest >> methodNotUsesGlobal2 [
-	| x y z a b c |
+	| x |
 	x := '...'.
-	y := 1.9 .
-	z := #(a b c).
-	a := { 1 . 2 . 3 }.
-	b := #a.
-	c := $a.
-	
+	1.9.
+	#( a b c ).
+	{ 1. 2. 3 }.
+	#a.
+	$a.
+
 	^ x
 ]
 

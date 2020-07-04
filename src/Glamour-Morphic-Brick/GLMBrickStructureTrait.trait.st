@@ -326,23 +326,18 @@ GLMBrickStructureTrait >> privateAddBrickBack: aBrick [
 
 { #category : #'private-structure' }
 GLMBrickStructureTrait >> privateAddBrickFirst: aBrick [
-	| link head tail brick|
-	
+	| link head brick |
 	brick := aBrick asBrick.
-	head := nil.
-	tail := nil.
-	self hasSubbricks ifTrue: [
-		head := self firstSubbrick brickDoubleLink.
-		tail := self lastSubbrick brickDoubleLink ].
-	
+	self hasSubbricks ifTrue: [ head := self firstSubbrick brickDoubleLink ].
+
 	link := brick asDoubleLink.
 	brick brickDoubleLink: link.
 	link nextLink: head.
 	head ifNotNil: [ head previousLink: link ].
-	
+
 	self privateSubbricks: (self subbricks copyWithFirst: brick).
 	brick owner: self.
-	
+
 	^ aBrick
 ]
 
@@ -403,29 +398,24 @@ GLMBrickStructureTrait >> privateRemoveAllBricks [
 
 { #category : #'private-structure' }
 GLMBrickStructureTrait >> privateRemoveBrick: aBrick [
-	| predecessor successor link head tail index|
+	| predecessor successor link index |
 	aBrick ifNil: [ ^ aBrick ].
 	(self hasSubbrick: aBrick) ifFalse: [ ^ aBrick ].
-	
+
 	link := aBrick brickDoubleLink.
-	
-	head := self firstSubbrick brickDoubleLink.
-	tail := self lastSubbrick brickDoubleLink.
-	
+
 	predecessor := link previousLink.
 	successor := link nextLink.
-	predecessor
-		ifNotNil: [ predecessor nextLink: successor ].
-	successor
-		ifNotNil: [ successor previousLink: predecessor ].
+	predecessor ifNotNil: [ predecessor nextLink: successor ].
+	successor ifNotNil: [ successor previousLink: predecessor ].
 	link clearLinks.
-	
+
 	aBrick brickDoubleLink: nil.
-	
+
 	index := self subbricks find: aBrick.
 	self privateSubbricks: (self subbricks copyWithoutIndex: index).
 	aBrick owner: nil.
-	
+
 	^ aBrick
 ]
 

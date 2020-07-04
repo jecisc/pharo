@@ -28,12 +28,13 @@ GeneratorBlockIteratorTest >> testIteratorWithEmptyBlockIsAtEnd [
 
 { #category : #tests }
 GeneratorBlockIteratorTest >> testIteratorWithInfiniteBlockNotCallIfNotUsed [
-
-	| it count |
+	| count |
 	count := 0.
-	 
-	it := SptGeneratorBlockIterator on: [ :aBlock | [aBlock value: count. count := count + 1] repeat ].	
-	self assert: count equals: 0.
+	SptGeneratorBlockIterator on: [ :aBlock | 
+		[ 
+		aBlock value: count.
+		count := count + 1 ] repeat ].
+	self assert: count equals: 0
 ]
 
 { #category : #tests }

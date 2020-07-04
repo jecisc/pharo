@@ -44,16 +44,13 @@ GLMMorphicFTTest >> testNoDuplicateRegistrationsInFastTableRenderer [
 
 { #category : #tests }
 GLMMorphicFTTest >> testTypeOfMultipleSelection [
-	| composer firstTreeMorph treeNodeMorph |
+	| composer firstTreeMorph |
 	composer := GLMCompositePresentation new.
 	composer fastList beMultiple.
-	window := composer
-		openOn:
-			{{1} asSet.
-			{1} asOrderedCollection}.
+	window := composer openOn: { 
+			          { 1 } asSet.
+			          { 1 } asOrderedCollection }.
 	firstTreeMorph := self find: FTTableMorph in: window.
-	treeNodeMorph := firstTreeMorph selectionStrategy toggleIndex: 1.
-	self
-		assert: composer selection asOrderedCollection
-		equals: {{1} asSet} asOrderedCollection
+	firstTreeMorph selectionStrategy toggleIndex: 1.
+	self assert: composer selection asOrderedCollection equals: { { 1 } asSet } asOrderedCollection
 ]

@@ -416,16 +416,15 @@ GTSpotterCandidatesListTest >> testCategoryLinkByCandidateLinkThreeA1A2A3 [
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testNextA1A2Category [
-	| link11 link12 link13 link21 link22 link23 category1 category2 |
+	| category1 category2 |
 	category1 := candidates addProcessor: GTSpotterA1.
 	category2 := candidates addProcessor: GTSpotterA2.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
-	link21 := candidates addCandidate: 21 in: GTSpotterA2.
-	link22 := candidates addCandidate: 22 in: GTSpotterA2.
-	link23 := candidates addCandidate: 23 in: GTSpotterA2.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 21 in: GTSpotterA2.
+	candidates addCandidate: 22 in: GTSpotterA2.
+	candidates addCandidate: 23 in: GTSpotterA2.
 
 	self assert: category1 equals: (candidates nextProcessorLinkOf: category2).
 	self assert: category2 equals: (candidates nextProcessorLinkOf: category1)
@@ -433,13 +432,12 @@ GTSpotterCandidatesListTest >> testNextA1A2Category [
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testNextA1A2EmptyCategory [
-	| link11 link12 link13 category1 category2 |
+	| category1 category2 |
 	category1 := candidates addProcessor: GTSpotterA1.
 	category2 := candidates addProcessor: GTSpotterA2.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
 
 	self assert: category1 equals: (candidates nextProcessorLinkOf: category1).
 	self assert: category1 equals: (candidates nextProcessorLinkOf: category2)
@@ -447,28 +445,26 @@ GTSpotterCandidatesListTest >> testNextA1A2EmptyCategory [
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testNextA1Category [
-	| link11 link12 link13 category1 |
+	| category1 |
 	category1 := candidates addProcessor: GTSpotterA1.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
 
 	self assert: category1 equals: (candidates nextProcessorLinkOf: category1)
 ]
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testPreviousA1A2Category [
-	| link11 link12 link13 link21 link22 link23 category1 category2 |
+	| category1 category2 |
 	category1 := candidates addProcessor: GTSpotterA1.
 	category2 := candidates addProcessor: GTSpotterA2.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
-	link21 := candidates addCandidate: 21 in: GTSpotterA2.
-	link22 := candidates addCandidate: 22 in: GTSpotterA2.
-	link23 := candidates addCandidate: 23 in: GTSpotterA2.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 21 in: GTSpotterA2.
+	candidates addCandidate: 22 in: GTSpotterA2.
+	candidates addCandidate: 23 in: GTSpotterA2.
 
 	self assert: category1 equals: (candidates previousProcessorLinkOf: category2).
 	self assert: category2 equals: (candidates previousProcessorLinkOf: category1)
@@ -476,13 +472,12 @@ GTSpotterCandidatesListTest >> testPreviousA1A2Category [
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testPreviousA1A2EmptyCategory [
-	| link11 link12 link13 category1 category2 |
+	| category1 category2 |
 	category1 := candidates addProcessor: GTSpotterA1.
 	category2 := candidates addProcessor: GTSpotterA2.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
 
 	self assert: category1 equals: (candidates previousProcessorLinkOf: category1).
 	self assert: category1 equals: (candidates previousProcessorLinkOf: category2)
@@ -490,12 +485,11 @@ GTSpotterCandidatesListTest >> testPreviousA1A2EmptyCategory [
 
 { #category : #'as yet unclassified' }
 GTSpotterCandidatesListTest >> testPreviousA1Category [
-	| link11 link12 link13 category1 |
+	| category1 |
 	category1 := candidates addProcessor: GTSpotterA1.
-
-	link11 := candidates addCandidate: 11 in: GTSpotterA1.
-	link12 := candidates addCandidate: 12 in: GTSpotterA1.
-	link13 := candidates addCandidate: 13 in: GTSpotterA1.
+	candidates addCandidate: 11 in: GTSpotterA1.
+	candidates addCandidate: 12 in: GTSpotterA1.
+	candidates addCandidate: 13 in: GTSpotterA1.
 
 	self assert: category1 equals: (candidates previousProcessorLinkOf: category1)
 ]
