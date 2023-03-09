@@ -661,17 +661,24 @@ SHRBTextStyler >> attributesFor: aSymbol [
 	^ self class attributesFor: aSymbol
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 SHRBTextStyler >> braceStyleName [
 
-	braceLevel isZero ifTrue: [ ^ #brace ].
-	^ (#brace asString , braceLevel asString) asSymbol
+	| level |
+	level := braceLevel \\ self maximumImbricationStyleSupported.
+	^ (#brace , (level isZero
+		    ifTrue: [ '' ]
+		    ifFalse: [ level asString ])) asSymbol
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 SHRBTextStyler >> bracketStyleName [
-	bracketLevel isZero ifTrue: [ ^ #block ].
-	^ (#block asString , bracketLevel asString) asSymbol
+
+	| level |
+	level := bracketLevel \\ self maximumImbricationStyleSupported.
+	^ (#block , (level isZero
+		    ifTrue: [ '' ]
+		    ifFalse: [ level asString ])) asSymbol
 ]
 
 { #category : #accessing }
@@ -725,10 +732,21 @@ SHRBTextStyler >> literalStyleSymbol: aValue [
 	^ #default
 ]
 
-{ #category : #private }
+{ #category : #accessing }
+SHRBTextStyler >> maximumImbricationStyleSupported [
+	"We style up to 8 level of imbricated parenthesis/brackets/braces."
+
+	^ 8
+]
+
+{ #category : #accessing }
 SHRBTextStyler >> parenthesisStyleName [
-	parentheseLevel isZero ifTrue: [ ^ #parenthesis ].
-	^ (#parenthesis asString , parentheseLevel asString) asSymbol
+
+	| level |
+	level := parentheseLevel \\ self maximumImbricationStyleSupported.
+	^ (#parenthesis , (level isZero
+		    ifTrue: [ '' ]
+		    ifFalse: [ level asString ])) asSymbol
 ]
 
 { #category : #private }
