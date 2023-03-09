@@ -64,10 +64,17 @@ SHStyleElement class >> withTokens: aCollection [
 { #category : #comparing }
 SHStyleElement >> = otherObject [
 
-	^ self species = otherObject species
-		and: [ tokens = otherObject tokens
-				and:
-					[ self color = otherObject color and: [ self emphasis = otherObject emphasis ] ] ]
+	^ self species = otherObject species and: [ tokens = otherObject tokens and: [ self color = otherObject color and: [ self emphasis = otherObject emphasis ] ] ]
+]
+
+{ #category : #adding }
+SHStyleElement >> addStyleTo: aCustomStyle [
+
+	self tokens do: [ :token |
+		| style |
+		style := OrderedCollection with: (TextColor color: self color).
+		self emphasis ifNotNil: [ style addAll: (self emphasisAsArray collect: [ :e | TextEmphasis perform: e ]) ].
+		aCustomStyle at: token put: style asArray ]
 ]
 
 { #category : #accessing }
@@ -113,9 +120,10 @@ SHStyleElement >> emphasis: anObject [
 
 { #category : #styling }
 SHStyleElement >> emphasisAsArray [
+
 	^ self emphasis = 'bold italic'
-		ifTrue: [#(#bold #italic )]
-		ifFalse: [self emphasis]
+		  ifTrue: [ #( #bold #italic ) ]
+		  ifFalse: [ { self emphasis } ]
 ]
 
 { #category : #comparing }
@@ -143,18 +151,6 @@ SHStyleElement >> printOn: aStream [
 				nextPutAll: ' tokens: ';
 				print: tokens
 			]
-]
-
-{ #category : #styling }
-SHStyleElement >> styleForTable [
-	^ self tokens
-		collect: [:token |
-			| style |
-			style := OrderedCollection with: token.
-			style add: self color.
-			self emphasis
-				ifNotNil: [style add: self emphasisAsArray].
-			style asArray]
 ]
 
 { #category : #accessing }

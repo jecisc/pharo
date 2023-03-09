@@ -16,9 +16,11 @@ Class {
 
 { #category : #private }
 SHPreferences class >> applyStyle [
-	| table |
-	table := Groups values flatCollect: [:group | group styleForTable].
-	SHRBTextStyler styleTable: table
+
+	| style |
+	style := SHCustomStyle new.
+	Groups values do: [ :group | group addStyleTo: style ].
+	SHRBTextStyler styleTable: style
 ]
 
 { #category : #'accessing - styles' }
@@ -161,11 +163,6 @@ SHPreferences class >> selectorPatternsStyle: aGroupStyle [
 SHPreferences class >> setStyle: aStyle [
 
 	SHRBTextStyler styleTable: aStyle new
-]
-
-{ #category : #settings }
-SHPreferences class >> setStyleTable: anArray [
-	SHRBTextStyler styleTable: anArray
 ]
 
 { #category : #settings }
