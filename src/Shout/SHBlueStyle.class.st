@@ -1,3 +1,6 @@
+"
+I am the default style of Pharo Light Theme.
+"
 Class {
 	#name : #SHBlueStyle,
 	#superclass : #SHStyle,

@@ -1,5 +1,5 @@
 "
-A Shout style element
+I am an helper of `SHPreferences` to generate a `SHCustomStyle`.
 "
 Class {
 	#name : #SHStyleElement,

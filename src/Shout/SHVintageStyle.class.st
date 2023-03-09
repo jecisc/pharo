@@ -1,3 +1,6 @@
+"
+I am a style from an old theme.
+"
 Class {
 	#name : #SHVintageStyle,
 	#superclass : #SHStyle,

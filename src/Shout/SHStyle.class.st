@@ -1,5 +1,13 @@
 "
+## Description 
+
 I am an abstract class to define a syntax highlight style.
+
+I should return a dictionary of the style symbols and associated text attributes to apply with #textAttributes.
+
+By default I'll use the pragma #shoutStyle: to collect the styles.
+
+## Migration
 
 To migrate the styles of previous style table:
 

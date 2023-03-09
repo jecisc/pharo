@@ -1,3 +1,6 @@
+"
+This style is based on old theme and other old environments.
+"
 Class {
 	#name : #SHSolarizedStyle,
 	#superclass : #SHBlueStyle,

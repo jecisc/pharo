@@ -1,3 +1,7 @@
+"
+This is a syntax coloring scheme based on the tango desktop icon scheme:
+	http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
+"
 Class {
 	#name : #SHTangoStyle,
 	#superclass : #SHBlueStyle,

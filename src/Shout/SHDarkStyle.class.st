@@ -1,3 +1,6 @@
+"
+I am the default style of Pharo Dark Theme.
+"
 Class {
 	#name : #SHDarkStyle,
 	#superclass : #SHStyle,

@@ -1,7 +1,6 @@
 "
 I am an Abstract class.
 Subclasses of me can create formatted, coloured, and styled copies of Text that is given to them.
-They may perform their styling asynchronously, in a background process which I create and manage.
 
 My public interface is...
 
