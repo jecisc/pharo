@@ -122,7 +122,7 @@ PharoDarkTheme >> scrollbarPressedThumbFillStyleFor: aScrollbar [
 ]
 
 { #category : #accessing }
-PharoDarkTheme >> shStyleTableName [
+PharoDarkTheme >> shStyleName [
 
 	^ #darkStyleTable
 ]

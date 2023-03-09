@@ -227,14 +227,8 @@ SHRBTextStyler class >> darkStyleTable [
 
 { #category : #styles }
 SHRBTextStyler class >> defaultStyleTable [
-	"color can be a valid argument to Color class>>colorFrom: , or nil to
-	use the editor text color.
-	Multiple emphases can be specified using an array e.g. #(bold italic).
-	If emphasis is not specified, #normal will be used.
-	if pixel height is not specified , then the editor font size will be used.
-	"
 
- 	^ self blueStyleTable
+	^ SHBlueStyle new
 ]
 
 { #category : #styles }
@@ -258,18 +252,23 @@ SHRBTextStyler class >> initialTextAttributes [
 { #category : #attributes }
 SHRBTextStyler class >> initialTextAttributesForStyleTable: aStyleTable [
 
-	| d |
-	d := IdentityDictionary new.
-	aStyleTable do: [ :each |
-		| element emphasis color |
-		element := each first.
-		color := each at: 2 ifAbsent: [  ].
-		color := color ifNotNil: [ Color colorFrom: color ].
-		emphasis := each at: 3 ifAbsent: [  ].
+	self flag: #todo. "This is transition code. The array style should be removed."
+	^ aStyleTable isArray
+		  ifTrue: [
+			  | d |
+			'old' traceCr.
+			  d := IdentityDictionary new.
+			  aStyleTable do: [ :each |
+				  | element emphasis color |
+				  element := each first.
+				  color := each at: 2 ifAbsent: [  ].
+				  color := color ifNotNil: [ Color colorFrom: color ].
+				  emphasis := each at: 3 ifAbsent: [  ].
 
-		(self attributeArrayForColor: color emphasis: emphasis) ifNotEmpty: [ :attrArray | d at: element put: attrArray ] ].
+				  (self attributeArrayForColor: color emphasis: emphasis) ifNotEmpty: [ :attrArray | d at: element put: attrArray ] ].
 
-	^ d
+			  d ]
+		  ifFalse: [ aStyleTable textAttributes ]
 ]
 
 { #category : #initialization }

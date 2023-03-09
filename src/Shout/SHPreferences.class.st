@@ -157,18 +157,15 @@ SHPreferences class >> selectorPatternsStyle: aGroupStyle [
 	^ Groups at: #selectorPatterns put: aGroupStyle
 ]
 
-{ #category : #settings }
-SHPreferences class >> setStyleTable: anArray [
-	SHRBTextStyler styleTable: anArray
+{ #category : #initialization }
+SHPreferences class >> setStyle: aStyle [
+
+	SHRBTextStyler styleTable: aStyle new
 ]
 
 { #category : #settings }
-SHPreferences class >> setStyleTableNamed: aString [
-	self setStyleTable: (((Pragma allNamed: #styleTable: in: SHRBTextStyler class)
-		detect: [ :each | (each argumentAt: 1) = aString ])
-		method
-			valueWithReceiver: SHRBTextStyler class
-			arguments: #())
+SHPreferences class >> setStyleTable: anArray [
+	SHRBTextStyler styleTable: anArray
 ]
 
 { #category : #settings }
@@ -235,25 +232,19 @@ SHPreferences class >> settingsOn: aBuilder [
 
 { #category : #settings }
 SHPreferences class >> styleTableRow [
-	| allStyles |
 
-	allStyles := Pragma  allNamed: #styleTable: in: SHRBTextStyler class.
-	^Smalltalk ui theme
-		newRowIn: self
-		for: (
-			{ Smalltalk ui theme buttonLabelForText: 'Predefined styles: ' translated },
-			(allStyles collect: [ :eachPragma |
-				(Smalltalk ui theme
-					newButtonIn: self
-					for:  self
-					getState: nil
-					action: #setStyleTableNamed:
-					arguments:  { eachPragma argumentAt: 1 }
-					getEnabled: nil
-					getLabel: nil
-					help: ('Change style table to ', (eachPragma argumentAt: 1)) translated)
-						label: (eachPragma argumentAt: 1);
-						yourself ] ))
+	^ Smalltalk ui theme newRowIn: self for: { (Smalltalk ui theme buttonLabelForText: 'Predefined styles: ' translated) } , (SHStyle stylers collect: [ :style |
+			   (Smalltalk ui theme
+				    newButtonIn: self
+				    for: self
+				    getState: nil
+				    action: #setStyle:
+				    arguments: { style }
+				    getEnabled: nil
+				    getLabel: nil
+				    help: 'Change style table to ' , style styleName)
+				   label: style styleName;
+				   yourself ])
 ]
 
 { #category : #'accessing - styles' }
