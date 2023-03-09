@@ -21,7 +21,6 @@ SHStyle class >> styleNamed: aString [
 
 	^ self stylers
 		  detect: [ :class | class stylerName = aString ]
-		  ifFound: #new
 		  ifNone: [ self error: 'No style named ' , aString ]
 ]
 
