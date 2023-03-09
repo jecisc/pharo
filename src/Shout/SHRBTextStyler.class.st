@@ -17,9 +17,9 @@ Class {
 		'braceLevel'
 	],
 	#classInstVars : [
-		'styleTable',
 		'formatIncompleteIdentifiers',
-		'textAttributes'
+		'textAttributes',
+		'style'
 	],
 	#category : #'Shout-Styling'
 }
@@ -246,7 +246,7 @@ SHRBTextStyler class >> formatIncompleteIdentifiers: aValue [
 { #category : #attributes }
 SHRBTextStyler class >> initialTextAttributes [
 
-	^ self initialTextAttributesForStyleTable: self styleTable
+	^ self initialTextAttributesForStyleTable: self style
 ]
 
 { #category : #attributes }
@@ -383,16 +383,28 @@ SHRBTextStyler class >> solarizedStyleTable [
 ]
 
 { #category : #accessing }
+SHRBTextStyler class >> style [
+
+	^ style ifNil: [ style := self defaultStyleTable ]
+]
+
+{ #category : #accessing }
+SHRBTextStyler class >> style: aStyle [
+
+	style := aStyle.
+	self resetTextAttributesCaches
+]
+
+{ #category : #accessing }
 SHRBTextStyler class >> styleTable [
-	^ styleTable
-		ifNil: [styleTable := self defaultStyleTable]
+
+	^ style
 ]
 
 { #category : #accessing }
 SHRBTextStyler class >> styleTable: anArray [
 
-	styleTable := anArray.
-	self resetTextAttributesCaches
+	self style: anArray
 ]
 
 { #category : #styles }

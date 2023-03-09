@@ -1,389 +1,388 @@
 Class {
-	#name : #SHBlueStyle,
+	#name : #SHVintageStyle,
 	#superclass : #SHStyle,
 	#category : #'Shout-Styling'
 }
 
 { #category : #accessing }
-SHBlueStyle class >> stylerName [
-
-	^ #blueStyleTable
+SHVintageStyle class >> stylerName [
+	^ #vintageStyleTable
 ]
 
 { #category : #style }
-SHBlueStyle >> argument [
+SHVintageStyle >> argument [
 	<shoutStyle: #argument>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block [
+SHVintageStyle >> block [
 	<shoutStyle: #block>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block1 [
+SHVintageStyle >> block1 [
 	<shoutStyle: #block1>
 	^ { (TextColor color: Color green muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block2 [
+SHVintageStyle >> block2 [
 	<shoutStyle: #block2>
 	^ { (TextColor color: Color magenta muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block3 [
+SHVintageStyle >> block3 [
 	<shoutStyle: #block3>
 	^ { (TextColor color: Color red muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block4 [
+SHVintageStyle >> block4 [
 	<shoutStyle: #block4>
 	^ { (TextColor color: Color green darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block5 [
+SHVintageStyle >> block5 [
 	<shoutStyle: #block5>
 	^ { (TextColor color: Color orange darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block6 [
+SHVintageStyle >> block6 [
 	<shoutStyle: #block6>
 	^ { (TextColor color: Color magenta darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> block7 [
+SHVintageStyle >> block7 [
 	<shoutStyle: #block7>
 	^ { (TextColor color: Color blue) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockArg [
+SHVintageStyle >> blockArg [
 	<shoutStyle: #blockArg>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockArgColon [
+SHVintageStyle >> blockArgColon [
 	<shoutStyle: #blockArgColon>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockArgsBar [
+SHVintageStyle >> blockArgsBar [
 	<shoutStyle: #blockArgsBar>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockPatternArg [
+SHVintageStyle >> blockPatternArg [
 	<shoutStyle: #blockPatternArg>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockPatternTempVar [
+SHVintageStyle >> blockPatternTempVar [
 	<shoutStyle: #blockPatternTempVar>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockTempBar [
+SHVintageStyle >> blockTempBar [
 	<shoutStyle: #blockTempBar>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> blockTempVar [
+SHVintageStyle >> blockTempVar [
 	<shoutStyle: #blockTempVar>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace [
+SHVintageStyle >> brace [
 	<shoutStyle: #brace>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace1 [
+SHVintageStyle >> brace1 [
 	<shoutStyle: #brace1>
 	^ { (TextColor color: Color green muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace2 [
+SHVintageStyle >> brace2 [
 	<shoutStyle: #brace2>
 	^ { (TextColor color: Color magenta muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace3 [
+SHVintageStyle >> brace3 [
 	<shoutStyle: #brace3>
 	^ { (TextColor color: Color red muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace4 [
+SHVintageStyle >> brace4 [
 	<shoutStyle: #brace4>
 	^ { (TextColor color: Color green darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace5 [
+SHVintageStyle >> brace5 [
 	<shoutStyle: #brace5>
 	^ { (TextColor color: Color orange darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace6 [
+SHVintageStyle >> brace6 [
 	<shoutStyle: #brace6>
 	^ { (TextColor color: Color magenta darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> brace7 [
+SHVintageStyle >> brace7 [
 	<shoutStyle: #brace7>
 	^ { (TextColor color: Color blue) }
 ]
 
 { #category : #style }
-SHBlueStyle >> cascadeSeparator [
+SHVintageStyle >> cascadeSeparator [
 	<shoutStyle: #cascadeSeparator>
-	^ { (TextColor color: Color black) }
+	^ { (TextColor color: Color black)  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> character [
+SHVintageStyle >> character [
 	<shoutStyle: #character>
-	^ { (TextColor color: Color red muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('801f91' #lighter))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> classVar [
+SHVintageStyle >> classVar [
 	<shoutStyle: #classVar>
-	^ { (TextColor color: Color blue muchDarker) }
+	^ { (TextColor color: Color blue muchDarker)  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> comment [
+SHVintageStyle >> comment [
 	<shoutStyle: #comment>
-	^ { (TextColor color: Color gray darker) }
+	^ { (TextColor color: (Color colorFrom: '006400')) }
 ]
 
 { #category : #style }
-SHBlueStyle >> default [
+SHVintageStyle >> default [
 	<shoutStyle: #default>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> false [
+SHVintageStyle >> false [
 	<shoutStyle: #false>
-	^ { (TextColor color: Color red muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('A31515' #darker))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> globalVar [
+SHVintageStyle >> globalVar [
 	<shoutStyle: #globalVar>
-	^ { (TextColor color: Color blue muchDarker) }
+	^ { (TextColor color: Color black)  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> incompleteIdentifier [
+SHVintageStyle >> incompleteIdentifier [
 	<shoutStyle: #incompleteIdentifier>
 	^ { (TextColor color: Color blue)  . TextEmphasis italic }
 ]
 
 { #category : #style }
-SHBlueStyle >> incompleteSelector [
+SHVintageStyle >> incompleteSelector [
 	<shoutStyle: #incompleteSelector>
-	^ { TextEmphasis italic }
+	^ { (TextColor color: Color blue)  . TextEmphasis italic }
 ]
 
 { #category : #style }
-SHBlueStyle >> instVar [
+SHVintageStyle >> instVar [
 	<shoutStyle: #instVar>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> invalid [
+SHVintageStyle >> invalid [
 	<shoutStyle: #invalid>
 	^ { (TextColor color: Color red) }
 ]
 
 { #category : #style }
-SHBlueStyle >> methodTempBar [
+SHVintageStyle >> methodTempBar [
 	<shoutStyle: #methodTempBar>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> nil [
+SHVintageStyle >> nil [
 	<shoutStyle: #nil>
-	^ { (TextColor color: Color red muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('A31515' #darker))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> number [
+SHVintageStyle >> number [
 	<shoutStyle: #number>
-	^ { (TextColor color: Color red muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('801f91'))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis [
+SHVintageStyle >> parenthesis [
 	<shoutStyle: #parenthesis>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis1 [
+SHVintageStyle >> parenthesis1 [
 	<shoutStyle: #parenthesis1>
 	^ { (TextColor color: Color green muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis2 [
+SHVintageStyle >> parenthesis2 [
 	<shoutStyle: #parenthesis2>
 	^ { (TextColor color: Color magenta muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis3 [
+SHVintageStyle >> parenthesis3 [
 	<shoutStyle: #parenthesis3>
 	^ { (TextColor color: Color red muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis4 [
+SHVintageStyle >> parenthesis4 [
 	<shoutStyle: #parenthesis4>
 	^ { (TextColor color: Color green darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis5 [
+SHVintageStyle >> parenthesis5 [
 	<shoutStyle: #parenthesis5>
 	^ { (TextColor color: Color orange darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis6 [
+SHVintageStyle >> parenthesis6 [
 	<shoutStyle: #parenthesis6>
 	^ { (TextColor color: Color magenta darker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> parenthesis7 [
+SHVintageStyle >> parenthesis7 [
 	<shoutStyle: #parenthesis7>
 	^ { (TextColor color: Color blue) }
 ]
 
 { #category : #style }
-SHBlueStyle >> patternArg [
+SHVintageStyle >> patternArg [
 	<shoutStyle: #patternArg>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> patternSelector [
+SHVintageStyle >> patternSelector [
 	<shoutStyle: #patternSelector>
-	^ { TextEmphasis bold }
+	^ {  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> patternTempVar [
+SHVintageStyle >> patternTempVar [
 	<shoutStyle: #patternTempVar>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> poolConstant [
+SHVintageStyle >> poolConstant [
 	<shoutStyle: #poolConstant>
-	^ { (TextColor color: Color blue muchDarker) }
+	^ { (TextColor color: Color blue muchDarker)  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> pragma [
+SHVintageStyle >> pragma [
 	<shoutStyle: #pragma>
-	^ { (TextColor color: Color green muchDarker) }
+	^ { (TextColor color: Color cyan muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> return [
+SHVintageStyle >> return [
 	<shoutStyle: #return>
-	^ { (TextColor color: Color cyan muchDarker)  . TextEmphasis bold }
+	^ { (TextColor color: (Color colorFrom: 'A31515'))  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> selector [
+SHVintageStyle >> selector [
 	<shoutStyle: #selector>
 	^ { (TextColor color: Color black) }
 ]
 
 { #category : #style }
-SHBlueStyle >> self [
+SHVintageStyle >> self [
 	<shoutStyle: #self>
-	^ { (TextColor color: Color cyan muchDarker) }
+	^ { (TextColor color: (Color colorFrom: 'A31515')) }
 ]
 
 { #category : #style }
-SHBlueStyle >> statementSeparator [
+SHVintageStyle >> statementSeparator [
 	<shoutStyle: #statementSeparator>
-	^ { (TextColor color: Color black) }
+	^ { (TextColor color: Color black)  . TextEmphasis bold }
 ]
 
 { #category : #style }
-SHBlueStyle >> string [
+SHVintageStyle >> string [
 	<shoutStyle: #string>
-	^ { (TextColor color: Color magenta muchDarker)  . TextEmphasis normal }
+	^ { (TextColor color: (Color colorFrom: #('801f91'))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> super [
+SHVintageStyle >> super [
 	<shoutStyle: #super>
-	^ { (TextColor color: Color cyan muchDarker) }
+	^ { (TextColor color: (Color colorFrom: 'A31515')) }
 ]
 
 { #category : #style }
-SHBlueStyle >> symbol [
+SHVintageStyle >> symbol [
 	<shoutStyle: #symbol>
-	^ { (TextColor color: Color magenta muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('801f91'))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> tempVar [
+SHVintageStyle >> tempVar [
 	<shoutStyle: #tempVar>
 	^ { (TextColor color: Color blue muchDarker) }
 ]
 
 { #category : #style }
-SHBlueStyle >> thisContext [
+SHVintageStyle >> thisContext [
 	<shoutStyle: #thisContext>
-	^ { (TextColor color: Color cyan muchDarker) }
+	^ { (TextColor color: (Color colorFrom: 'A31515')) }
 ]
 
 { #category : #style }
-SHBlueStyle >> true [
+SHVintageStyle >> true [
 	<shoutStyle: #true>
-	^ { (TextColor color: Color red muchDarker) }
+	^ { (TextColor color: (Color colorFrom: #('A31515' #darker))) }
 ]
 
 { #category : #style }
-SHBlueStyle >> undefinedIdentifier [
+SHVintageStyle >> undefinedIdentifier [
 	<shoutStyle: #undefinedIdentifier>
 	^ { (TextColor color: Color red) }
 ]
 
 { #category : #style }
-SHBlueStyle >> undefinedSelector [
+SHVintageStyle >> undefinedSelector [
 	<shoutStyle: #undefinedSelector>
 	^ { (TextColor color: Color red) }
 ]

@@ -295,7 +295,7 @@ SHDarkStyle >> patternArg [
 { #category : #style }
 SHDarkStyle >> patternSelector [
 	<shoutStyle: #patternSelector>
-	^ {  . TextEmphasis bold }
+	^ {  TextEmphasis bold }
 ]
 
 { #category : #style }

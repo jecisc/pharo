@@ -1,3 +1,59 @@
+"
+I am an abstract class to define a syntax highlight style.
+
+To migrate the styles of previous style table:
+
+```st
+new := #SHVintageStyle.
+styleName := #vintageStyleTable.
+
+new := (SHStyle << new
+	slots: {};
+	tag: 'Styling';
+	package: 'Shout') install.
+
+new class compile: ('stylerName
+	^ #' , styleName) classified: #accessing.
+
+(SHRBTextStyler perform: styleName ) do: [ :array | 
+	new compile: ('{1}
+	<shoutStyle: #{1}>
+	^ {2}' format: { array first . 
+	
+String streamContents: [ :s | 		
+		s nextPutAll: '{ '.
+		
+		(array at: 2) ifNotNil: [ :c | s nextPutAll: '(TextColor color: '.
+			
+			c isArray ifTrue: [ 
+				(Color respondsTo: c first asSymbol) 
+					ifTrue: [ 
+						s nextPutAll: 'Color '; nextPutAll: c first. (c at: 2 ifAbsent: [ nil ]) ifNotNil: [ :c2 | s space; nextPutAll: c2 ]. s nextPutAll: ') '
+						 ] ifFalse: [ 
+							s nextPutAll: '(Color colorFrom: '; print: c; nextPutAll: ')) '
+						 ]
+				 ] ifFalse: [ 
+				(Color respondsTo: c asSymbol) 
+					ifTrue: [ 
+						s nextPutAll: 'Color '; nextPutAll: c; nextPutAll: ') '
+						 ] ifFalse: [ 
+							s nextPutAll: '(Color colorFrom: '; print: c; nextPutAll: ')) '
+						 ]
+					
+				].
+			
+			 ].
+		
+		(array at: 3 ifAbsent: [ nil ]) ifNotNil: [ :e |  s nextPutAll: ' . TextEmphasis '; nextPutAll: e; nextPutAll: ' ' ].
+		
+		s nextPutAll: '}'
+		
+		
+		 ].}) classified: #style
+	
+	 ]
+```
+"
 Class {
 	#name : #SHStyle,
 	#superclass : #Object,
@@ -39,5 +95,6 @@ SHStyle class >> stylers [
 { #category : #accessing }
 SHStyle >> textAttributes [
 
-	^ ((Pragma allNamed: #shoutStyle: from: self class to: SHStyle) collect: [ :p | (p argumentAt: 1) -> (self perform: p methodSelector) ]) as: IdentityDictionary
+	^ ((self class allMethods select: [ :m | m hasPragmaNamed: #shoutStyle: ]) collect: [ :method |
+		   ((method pragmaAt: #shoutStyle:) argumentAt: 1) -> (self perform: method selector) ]) as: IdentityDictionary
 ]

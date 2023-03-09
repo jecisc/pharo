@@ -20,7 +20,7 @@ SHPreferences class >> applyStyle [
 	| style |
 	style := SHCustomStyle new.
 	Groups values do: [ :group | group addStyleTo: style ].
-	SHRBTextStyler styleTable: style
+	SHRBTextStyler style: style
 ]
 
 { #category : #'accessing - styles' }
@@ -162,7 +162,7 @@ SHPreferences class >> selectorPatternsStyle: aGroupStyle [
 { #category : #initialization }
 SHPreferences class >> setStyle: aStyle [
 
-	SHRBTextStyler styleTable: aStyle new
+	SHRBTextStyler style: aStyle new
 ]
 
 { #category : #settings }
@@ -170,7 +170,7 @@ SHPreferences class >> settingsOn: aBuilder [
 	<systemsettings>
 	(aBuilder setting: #'Syntax Highlighting')
 		target: self;
-		dialog: [ self styleTableRow ];
+		dialog: [ self styleRow ];
 		parentName: #codeBrowsing;
 		description: 'Syntax Highlighting As You Type: Enable syntax highlighting in browsers, debuggers and workspaces and set patterns style.';
 		selector: #enabled;
@@ -228,7 +228,7 @@ SHPreferences class >> settingsOn: aBuilder [
 ]
 
 { #category : #settings }
-SHPreferences class >> styleTableRow [
+SHPreferences class >> styleRow [
 
 	^ Smalltalk ui theme newRowIn: self for: { (Smalltalk ui theme buttonLabelForText: 'Predefined styles: ' translated) } , (SHStyle stylers collect: [ :style |
 			   (Smalltalk ui theme
