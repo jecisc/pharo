@@ -34,14 +34,11 @@ if [ ! -e "${BOOTSTRAP_VMTARGET}" ]; then
 	#Odd PR builds use the the latest VM, else use the stable VM
 	set_version_variables
 	TEST_VM_KIND="vmLatest"
-	${BOOTSTRAP_REPOSITORY}/bootstrap/scripts/getPharoVM.sh ${PHARO_SHORT_VERSION} ${TEST_VM_KIND} $BOOTSTRAP_ARCH
+	${BOOTSTRAP_REPOSITORY}/bootstrap/scripts/getPharoWithVM.sh 110 ${TEST_VM_KIND} $BOOTSTRAP_ARCH
+	#${VM} Pharo.image ${IMAGE_FLAGS} --interactive
 	cd -
 	echo "Target VM: $(${VM} --version)"
 fi
-
-if [ ! -e "${BOOTSTRAP_DOWNLOADS}/bootstrapImage.zip" ]; then
-	download_to https://github.com/guillep/PharoBootstrap/releases/download/v1.7.8/bootstrapImage.zip ${BOOTSTRAP_DOWNLOADS}/bootstrapImage.zip
-fi 
 
 # checking for PharoV60.sources
 if [ ! -e "${BOOTSTRAP_DOWNLOADS}/PharoV60.sources.zip" ]; then
