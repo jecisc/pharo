@@ -52,6 +52,7 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 	self currentSession
 		ifNil: [
 			isImageStarting ifTrue: [ "In case we don't have the SessionManager in the image we still want to be able to execute basic command lines."
+				File reset.
 				BasicCommandLineHandler new activate ] ]
 		ifNotNil: [ :session | session start: isImageStarting ].
 	snapshotResult

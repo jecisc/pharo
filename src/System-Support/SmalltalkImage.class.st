@@ -1666,6 +1666,11 @@ SmalltalkImage >> saveSession [
 	^ self snapshot: true andQuit: false
 ]
 
+{ #category : 'accessing' }
+SmalltalkImage >> session [
+	^ (self globals at: #SessionManager ifAbsent: [ BasicSessionManager ]) default currentSession
+]
+
 { #category : 'image, changes name' }
 SmalltalkImage >> shortImageName [
 	"Answer the current image name but only that name and not the full path as with imageName."
