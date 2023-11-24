@@ -38,7 +38,9 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 	| isImageStarting snapshotResult |
 	ChangesLog default logSnapshot: save andQuit: quit.
 
-	self currentSession ifNotNil: [ :session | session stop: quit ]. "Image not usable from here until the session is restarted!"
+	self currentSession
+		ifNil: [ { Delay. NonInteractiveTranscript } do: [:class | class shutDown: quit ] ]
+		ifNotNil: [ :session | session stop: quit ]. "Image not usable from here until the session is restarted!"
 	save
 		ifTrue: [
 			snapshotResult := Smalltalk snapshotPrimitive. "<-- PC frozen here on image file"
@@ -52,7 +54,7 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 	self currentSession
 		ifNil: [
 			isImageStarting ifTrue: [ "In case we don't have the SessionManager in the image we still want to be able to execute basic command lines."
-				File reset.
+				{ SmallInteger. Delay. ProcessorScheduler . OSPlatform . ExternalObject . FFIBackend . File . NonInteractiveTranscript . FinalizationProcess . Stdio . SharedRandom . EndianDetector . Symbol } do: [:class | class startUp: isImageStarting ].
 				BasicCommandLineHandler new activate ] ]
 		ifNotNil: [ :session | session start: isImageStarting ].
 	snapshotResult
