@@ -32,6 +32,7 @@ SaveCommandLineHandler class >> description [
 
 { #category : 'activation' }
 SaveCommandLineHandler >> activate [
+	'Activating save command line' traceCr.
 	self activateHelp
 		ifTrue: [  ^ self ].
 
