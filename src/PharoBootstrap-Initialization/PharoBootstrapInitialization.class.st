@@ -27,6 +27,7 @@ Class {
 { #category : 'initialization' }
 PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandling [
 	"This method is run before the new bootstrapped image is saved!"
+	
 	ProcessorScheduler initialize.
 
 	Object initialize.
@@ -35,15 +36,17 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 	DateAndTime initialize.
 
 	Delay initialize.
-	SmallInteger initialize.
 
 	ProcessorScheduler startUp.
 
 	OSPlatform startUp: true.
 
+	SmallInteger initialize.
 	String initialize.
-	ByteString initialize. "needed by TextConverter to install LineEnd convention (called by Smalltalk openLog)"
-	ZnUTF8Encoder initialize.
+	ByteString initialize. 
+	Float initialize.
+	
+	ZnUTF8Encoder initialize. "needed by TextConverter to install LineEnd convention (called by Smalltalk openLog)"
 
 	"Weak array class initialization 2 lines"
 	Smalltalk specialObjectsArray at: 42 put: Semaphore new."to put in EPObjectSpace>>#createSpecialObjectsArray?"
@@ -52,32 +55,35 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 	Smalltalk globals
 		at: #Transcript
 		put: (NonInteractiveTranscript stdout install).
-	Float initialize.
 
+
+	UIManager default: NonInteractiveUIManager new.
+	
+	Color initialize.
+	InstructionStream initialize.
+
+	'Initializing Collections' traceCr.
 	CollectionElement initialize.
 	ExternalSemaphoreTable initialize.
 	Collection initialize.
+	
+	'Initializing code model' traceCr.
 	CompiledMethod initialize.
 	Slot initialize.
 	Behavior initialize.
 	Class initialize.
 	Package initialize.
-	
 	"Next three lines are for the deprecated aliases. This should be removed in Pharo 13"
 	PackageTag initialize.
 	PackageOrganizer initialize.
 	PackageConflictError initialize.
 
-	UIManager default: NonInteractiveUIManager new.
-
+	'Initializing sources' traceCr.
 	Smalltalk sourceFileVersionString: 'PharoV60'.
 	(Smalltalk class classVariableNamed: 'LastImagePath') value: Smalltalk imagePath. "set the default value"
 	SourceFiles := SourceFileArray new.
 
-	Color initialize.
-	InstructionStream initialize.
-	SmallInteger initialize.
-
+	'InitializingFFI' traceCr.
 	"FFI"
 	ExternalObject initialize.
 	ExternalType initialize.
@@ -90,32 +96,35 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 
 { #category : 'public api' }
 PharoBootstrapInitialization class >> initializeFileSystem [
+
 	| env |
+	
+	'Initializing File System' traceCr.
 	env := self environment.
 	(env at: #FileLocator) initialize.
 	(env at: #DiskStore) initialize.
 	(env at: #FileHandle) initialize.
-	(env at: #File) initialize
+	(env at: #File) initialize.
+
+	"Now that the file system is setup, we can register SourceFileArray to the session manager."
+	SessionManager default registerSystemClassNamed: #SourceFileArray
 ]
 
 { #category : 'public api' }
 PharoBootstrapInitialization class >> initializeImageOfType: typeName major: major minor: minor patch: patch suffix: suffix build: buildNumber commitHash: hash [
-
 	"The image main entry point called by an image builder. The arguments specify the image
 	version description.
 	This method is run before the new bootstrapped image is saved!"
 
-	SystemVersion
-		writeClassVariableNamed: #Current
-		value: (SystemVersion new
-					type: typeName;
-					major: major;
-					minor: minor;
-					patch: patch;
-					suffix: suffix;
-					build: buildNumber;
-					commitHash: hash;
-					yourself).
+	SystemVersion writeClassVariableNamed: #Current value: (SystemVersion new
+			 type: typeName;
+			 major: major;
+			 minor: minor;
+			 patch: patch;
+			 suffix: suffix;
+			 build: buildNumber;
+			 commitHash: hash;
+			 yourself).
 
 	self initializeCommandLineHandlerAndErrorHandling
 ]
@@ -123,6 +132,7 @@ PharoBootstrapInitialization class >> initializeImageOfType: typeName major: maj
 { #category : 'initialization' }
 PharoBootstrapInitialization class >> initializeSessionManager [
 
+	'Initializing Session Manager' traceCr.
 	SessionManager default installNewSession.
 	SessionManager initialize.
 	SessionManager initializeKernelRegistrations
