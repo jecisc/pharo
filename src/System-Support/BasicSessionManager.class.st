@@ -39,7 +39,7 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 	ChangesLog default logSnapshot: save andQuit: quit.
 
 	self currentSession
-		ifNil: [ { Delay. NonInteractiveTranscript } do: [:class | class shutDown: quit ] ]
+		ifNil: [ Object flushDependents. { Delay. NonInteractiveTranscript } do: [:class | class shutDown: quit ] ]
 		ifNotNil: [ :session | session stop: quit ]. "Image not usable from here until the session is restarted!"
 	save
 		ifTrue: [
@@ -53,9 +53,11 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 
 	self currentSession
 		ifNil: [
-			isImageStarting ifTrue: [ "In case we don't have the SessionManager in the image we still want to be able to execute basic command lines."
+			isImageStarting ifTrue: [
+				Smalltalk vm setGCParameters.
+				isImageStarting ifTrue: [ Smalltalk clearExternalObjects ].
 				{ SmallInteger. Delay. ProcessorScheduler . OSPlatform . ExternalObject . FFIBackend . File . NonInteractiveTranscript . FinalizationProcess . Stdio . SharedRandom . EndianDetector . Symbol } do: [:class | class startUp: isImageStarting ].
-				BasicCommandLineHandler new activate ] ]
+				 ] ]
 		ifNotNil: [ :session | session start: isImageStarting ].
 	snapshotResult
 		ifNil: [ self error: 'Failed to write image file (disk full?)' ]
@@ -82,7 +84,7 @@ BasicSessionManager >> snapshot: save andQuit: quit [
 	wait wait.
 
 	"The execution of the deferred startup actions are executed in the caller thread."
-	self currentSession ifNotNil: [ :session | session executeDeferredStartupActions: isImageStarting ].
+	self currentSession ifNil: [ BasicCommandLineHandler new activate ] ifNotNil: [ :session | session executeDeferredStartupActions: isImageStarting ].
 
 	^ isImageStarting
 ]
