@@ -163,7 +163,6 @@ BaselineOfPharoBootstrap >> baseline: spec [
 			'Hermes'.
 			'Kernel'.
 			'Kernel-BytecodeEncoders'.
-			'Network-UUID'.
 			'Transcript-NonInteractive'.
 			'PharoBootstrap-Initialization'.
 			'Random-Core'.
@@ -178,7 +177,6 @@ BaselineOfPharoBootstrap >> baseline: spec [
 			'System-Finalization'.
 			'System-Hashing'.
 			'System-Platforms'.
-			'System-SessionManager'.
 			'System-Sources'.
 			'System-Support'.
 			'NumberParser'.
@@ -212,6 +210,10 @@ BaselineOfPharoBootstrap >> baseline: spec [
 		spec group: 'FileSystemGroup' with: {
 			'FileSystem-Core'.
 			'FileSystem-Disk'}.
+		
+		spec group: 'SessionManagerGroup' with: {
+			'System-SessionManager'.
+			'Network-UUID'}.
 
 		spec group: 'ToLoadByHermes' with: {
 			'AdditionalPackages'.
@@ -220,6 +222,7 @@ BaselineOfPharoBootstrap >> baseline: spec [
 			'FileSystemGroup'.
 			'Hermes-Extensions'.
 			'SUnitGroup'.
+			'SessionManagerGroup'
 		}.
 
 		spec group: 'SUnitGroup' with: {

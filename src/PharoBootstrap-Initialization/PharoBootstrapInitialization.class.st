@@ -33,7 +33,6 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 
 	ChronologyConstants initialize.
 	DateAndTime initialize.
-	SessionManager default installNewSession.
 
 	Delay initialize.
 	SmallInteger initialize.
@@ -83,12 +82,8 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 	ExternalObject initialize.
 	ExternalType initialize.
 
-	"Initialize basic command line behaviour"
 	NonInteractiveTranscript initialize.
-	BasicCommandLineHandler initialize.
 
-	SessionManager initialize.
-	SessionManager initializeKernelRegistrations.
 	Smalltalk snapshot: true andQuit: true.
 	Processor terminateActive
 ]
@@ -123,4 +118,12 @@ PharoBootstrapInitialization class >> initializeImageOfType: typeName major: maj
 					yourself).
 
 	self initializeCommandLineHandlerAndErrorHandling
+]
+
+{ #category : 'initialization' }
+PharoBootstrapInitialization class >> initializeSessionManager [
+
+	SessionManager default installNewSession.
+	SessionManager initialize.
+	SessionManager initializeKernelRegistrations
 ]

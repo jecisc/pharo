@@ -1688,8 +1688,8 @@ SmalltalkImage >> signalLowSpace [
 
 { #category : 'snapshot and quit' }
 SmalltalkImage >> snapshot: save andQuit: quit [
-	DefaultExecutionEnvironment beActiveDuring:
-		 [^SessionManager default snapshot: save andQuit: quit]
+
+	DefaultExecutionEnvironment beActiveDuring: [ ^ (self globals at: #SessionManager ifAbsent: [ BasicSessionManager ]) default snapshot: save andQuit: quit ]
 ]
 
 { #category : 'snapshot and quit' }
