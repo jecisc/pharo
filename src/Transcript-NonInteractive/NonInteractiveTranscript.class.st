@@ -43,12 +43,6 @@ NonInteractiveTranscript class >> file [
 	^ self onFileNamed: self defaultLogFileName
 ]
 
-{ #category : 'class initialization' }
-NonInteractiveTranscript class >> initialize [
-	"Make sure to cleanup on shutdown"
-	SessionManager default registerSystemClassNamed: self name
-]
-
 { #category : 'testing' }
 NonInteractiveTranscript class >> isInstalled [
 	^ Transcript class = self

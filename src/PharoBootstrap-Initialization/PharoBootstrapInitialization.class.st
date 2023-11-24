@@ -88,8 +88,6 @@ PharoBootstrapInitialization class >> initializeCommandLineHandlerAndErrorHandli
 	ExternalObject initialize.
 	ExternalType initialize.
 
-	NonInteractiveTranscript initialize.
-
 	Smalltalk snapshot: true andQuit: true.
 	Processor terminateActive
 ]
