@@ -1420,11 +1420,12 @@ File >> checkDoesNotExist [
 
 { #category : 'private' }
 File >> checkWritableFilesystem [
-
 	"We need to check if the image is in the read-only mode"
 
-	SessionManager default currentSession isReadOnlyAccessMode ifTrue: [
-		ReadOnlyFileException signal: 'Attempt to open file ', name, ' as writable on a read-only file system']
+	"During the first step of the bootstrap the session manager is not present so we assume we have the rights to write because we should be able to write files on a bootstrap environment."
+	self class environment at: #SessionManager ifPresent: [ :class |
+		class default currentSession isReadOnlyAccessMode ifTrue: [
+			ReadOnlyFileException signal: 'Attempt to open file ' , name , ' as writable on a read-only file system' ] ]
 ]
 
 { #category : 'open/close' }
