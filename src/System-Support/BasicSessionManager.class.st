@@ -12,6 +12,13 @@ Class {
 }
 
 { #category : 'accessing' }
+BasicSessionManager class >> default [
+	"No need for a singleton here"
+
+	^ self new
+]
+
+{ #category : 'accessing' }
 BasicSessionManager >> currentSession [
 	"I am too basic to manage a session."
 
