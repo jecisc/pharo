@@ -46,8 +46,10 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 			snapshotResult := Smalltalk snapshotPrimitive. "<-- PC frozen here on image file"
 			isImageStarting := snapshotResult == true ]
 		ifFalse: [ isImageStarting := false ].
-	(quit and: [ isImageStarting not ]) ifTrue: [ Smalltalk quitPrimitive ].
+	(quit and: [ isImageStarting not ]) ifTrue: [ 
+	'Quitting' traceCr. Smalltalk quitPrimitive ].
 
+	('Restarting?') traceCr.
 	"create a new session object if we're booting"
 	isImageStarting ifTrue: [ self installNewSession ].
 
@@ -81,7 +83,10 @@ BasicSessionManager >> snapshot: save andQuit: quit [
 	(save or: [ quit ]) ifFalse: [ ^ false ].
 	wait := Semaphore new.
 	[
+
+	('Before launch') traceCr.
 	isImageStarting := self launchSnapshot: save andQuit: quit.
+	('After launch') traceCr.
 	wait signal ] forkAt: Processor timingPriority - 1.
 	wait wait.
 
