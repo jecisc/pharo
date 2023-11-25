@@ -1693,7 +1693,7 @@ SmalltalkImage >> signalLowSpace [
 
 { #category : 'snapshot and quit' }
 SmalltalkImage >> snapshot: save andQuit: quit [
-
+	'Snapshot and quit' traceCr.
 	DefaultExecutionEnvironment beActiveDuring: [ ^ (self globals at: #SessionManager ifAbsent: [ BasicSessionManager ]) default snapshot: save andQuit: quit ]
 ]
 

@@ -72,6 +72,8 @@ BasicSessionManager >> launchSnapshot: save andQuit: quit [
 BasicSessionManager >> snapshot: save andQuit: quit [
 
 	| isImageStarting wait |
+
+	('Snapshot and quit from ' , self class name) traceCr.
 	"We do the snapshot in a separate process in maximum priority to have always a clean startup.
 	This process will be interrupted by the fork, and will be resumed as soon as the snapshot finishes.
 	We synchronize these processes in case both are in the same priority.
