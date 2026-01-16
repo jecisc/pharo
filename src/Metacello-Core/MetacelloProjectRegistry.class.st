@@ -9,6 +9,15 @@ Class {
 	#tag : 'Registry'
 }
 
+{ #category : 'baselines' }
+MetacelloProjectRegistry >> baselineNameFrom: baseName [
+	"Return the fully-qualified configuration class name."
+
+	^ (baseName indexOfSubCollection: 'BaselineOf') > 0
+		  ifTrue: [ baseName ]
+		  ifFalse: [ 'BaselineOf' , baseName ]
+]
+
 { #category : 'accessing' }
 MetacelloProjectRegistry >> isEmpty [
 
@@ -56,23 +65,22 @@ MetacelloProjectRegistry >> registerProjectRegistration: aMetacelloProjectRegist
 { #category : 'registration' }
 MetacelloProjectRegistry >> registrationFor: aMetacelloProjectSpec ifPresent: presentBlock ifAbsent: absentBlock [
 
-	self projectSpecsRegistry at: aMetacelloProjectSpec className ifPresent: [ :existing | ^ presentBlock value: existing ].
-	^ absentBlock value
+	^ self registrationForClassNamed: aMetacelloProjectSpec className ifPresent: presentBlock ifAbsent: absentBlock
 ]
 
 { #category : 'registration' }
 MetacelloProjectRegistry >> registrationForClassNamed: aClassName ifAbsent: absentBlock [
 
-	^ self registrationForExactClassNamed: aClassName ifAbsent: [
-			  self projectSpecsRegistry at: (MetacelloScriptExecutor baselineNameFrom: aClassName) ifPresent: [ :registration | ^ registration ].
-			  absentBlock value ]
+	^ self registrationForClassNamed: aClassName ifPresent: [ :registration | ^ registration ] ifAbsent: absentBlock
 ]
 
-{ #category : 'querying' }
-MetacelloProjectRegistry >> registrationForExactClassNamed: aClassName ifAbsent: absentBlock [
+{ #category : 'registration' }
+MetacelloProjectRegistry >> registrationForClassNamed: aClassName ifPresent: aBlock ifAbsent: absentBlock [
 
-	self projectSpecsRegistry at: aClassName ifPresent: [ :registration | ^ registration ].
-	^ absentBlock value
+	^ self projectSpecsRegistry
+		  at: (self baselineNameFrom: aClassName)
+		  ifPresent: aBlock
+		  ifAbsent: absentBlock value
 ]
 
 { #category : 'accessing' }
