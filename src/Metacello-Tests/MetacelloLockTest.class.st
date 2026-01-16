@@ -9,7 +9,7 @@ Class {
 { #category : 'private' }
 MetacelloLockTest >> performTest [
 
-	MetacelloProjectRegistration useRegistry: MetacelloProjectRegistry new during: [ super performTest ]
+	MetacelloProjectRegistry useRegistry: MetacelloProjectRegistry new during: [ super performTest ]
 ]
 
 { #category : 'accessing' }
@@ -41,5 +41,5 @@ MetacelloLockTest >> testRegisterProject [
 		repository: 'http://repo.com';
 		register.
 
-	self assertCollection: (MetacelloProjectRegistration registry projectSpecs collect: #name) includesAny: #( 'TestToLock2' )
+	self assertCollection: (MetacelloProjectRegistry registry projectSpecs collect: #name) includesAny: #( 'TestToLock2' )
 ]

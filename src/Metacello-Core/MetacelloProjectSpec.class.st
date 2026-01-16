@@ -101,7 +101,7 @@ MetacelloProjectSpec >> constructClassName [
 { #category : 'accessing' }
 MetacelloProjectSpec >> currentlyLoadedClassesInVersion [
 
-	self version ifNotNil: [ :vrsn | ^ vrsn spec currentlyLoadedClassesInVersion ].
+	self version ifNotNil: [ :vrsn | ^ vrsn currentlyLoadedClassesInVersion ].
 	^ #(  )
 ]
 
@@ -160,7 +160,7 @@ MetacelloProjectSpec >> label [
 MetacelloProjectSpec >> loadListForVersion: vrsn [
 
 	^ (self loads isNil or: [ self loads isEmpty ])
-		  ifTrue: [ vrsn spec defaultPackageNames ]
+		  ifTrue: [ vrsn defaultPackageNames ]
 		  ifFalse: [ self loads ]
 ]
 

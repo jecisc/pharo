@@ -83,7 +83,7 @@ ImageCleaner >> cleanUpForRelease [
 	<script: 'self new cleanUpForRelease'>
 	self cleanUpMethods.
 	self class environment
-		at: #MetacelloProjectRegistration
+		at: #MetacelloProjectRegistry
 		ifPresent: [ :class | class resetRegistry ].
 	SystemNavigation new allObjectsDo: [ :each |
 		((each respondsTo: #releaseCachedState) and: [

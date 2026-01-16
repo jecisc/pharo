@@ -7,42 +7,10 @@ Class {
 		'versionString',
 		'projectSpec'
 	],
-	#classVars : [
-		'Registry'
-	],
 	#category : 'Metacello-Core-Registry',
 	#package : 'Metacello-Core',
 	#tag : 'Registry'
 }
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> baselineClasses [
-    "Return a set of the Metacello baseline classes that have been loaded into the image."
-
-    "self baselineClasses"
-
-    ^ BaselineOf allSubclasses
-]
-
-{ #category : 'mutability' }
-MetacelloProjectRegistration class >> copyRegistryDuring: aBlock commitIfSuccess: aBoolean [
-	"install copy of registry for duration of <aBlock> execution."
-
-	"registrations will be copied on write during <aBlock> execution."
-
-	"if <aBlock> does not return control to this context, revert to the original
-	version of the registry. Otherwise leave the new copy installed."
-
-	| oldRegistry newRegistry |
-	oldRegistry := self registry.
-	newRegistry := self registry copy.
-	self registry: newRegistry.
-	aBlock ensure: [ "install old version of registry"
-		newRegistry := self registry. "see https://github.com/dalehenrich/metacello-work/issues/210"
-		self registry: oldRegistry ].
-
-	aBoolean ifTrue: [ self registry: newRegistry ]
-]
 
 { #category : 'instance creation' }
 MetacelloProjectRegistration class >> projectSpec: aProjectSpec [
@@ -54,19 +22,20 @@ MetacelloProjectRegistration class >> projectSpec: aProjectSpec [
 
 { #category : 'querying' }
 MetacelloProjectRegistration class >> projectSpecForClassNamed: aClassName ifAbsent: absentBlock [
-    ^ self registry projectSpecForClassNamed: aClassName ifAbsent: absentBlock
+
+	^ MetacelloProjectRegistry registry projectSpecForClassNamed: aClassName ifAbsent: absentBlock
 ]
 
 { #category : 'accessing' }
 MetacelloProjectRegistration class >> projectSpecs [
 
-	^ self registry baselineProjectSpecs
+	^ MetacelloProjectRegistry registry projectSpecs
 ]
 
 { #category : 'registration' }
 MetacelloProjectRegistration class >> registrationForClassNamed: aClassName ifAbsent: absentBlock [
 
-	^ self registry registrationForClassNamed: aClassName ifAbsent: absentBlock
+	^ MetacelloProjectRegistry registry registrationForClassNamed: aClassName ifAbsent: absentBlock
 ]
 
 { #category : 'querying' }
@@ -78,34 +47,7 @@ MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec i
 { #category : 'querying' }
 MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock [
 
-	^ self registry registrationFor: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> registry [
-
-	^ Registry ifNil: [ Registry := MetacelloProjectRegistry new ]
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> registry: aMetacelloProjectRegistry [
-    Registry := aMetacelloProjectRegistry
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> resetRegistry [
-
-	<script>
-	Registry := nil
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> useRegistry: aRegistry during: aBlock [
-
-	| oldRegistry |
-	oldRegistry := Registry.
-	Registry := MetacelloProjectRegistry new.
-	[ aBlock value ] ensure: [ Registry := oldRegistry ]
+	^ MetacelloProjectRegistry registry registrationFor: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock
 ]
 
 { #category : 'comparing' }
@@ -238,9 +180,9 @@ MetacelloProjectRegistration >> projectVersion [
 
 { #category : 'registration' }
 MetacelloProjectRegistration >> registerProject [
-    "unconditionally register <newRegistration> ... use with care"
+	"unconditionally register <newRegistration> ... use with care"
 
-    self class registry registerProjectRegistration: self
+	MetacelloProjectRegistry registry registerProjectRegistration: self
 ]
 
 { #category : 'accessing' }
@@ -251,7 +193,8 @@ MetacelloProjectRegistration >> repositoryDescriptions [
 
 { #category : 'registration' }
 MetacelloProjectRegistration >> unregisterProject [
-    self class registry unregisterProjectRegistration: self
+
+	MetacelloProjectRegistry registry unregisterProjectRegistration: self
 ]
 
 { #category : 'accessing' }

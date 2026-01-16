@@ -57,7 +57,7 @@ MetacelloGroupSpec >> name: aString [
 { #category : 'loading' }
 MetacelloGroupSpec >> packageSpecsInLoadOrder [
 
-	^ (self project version spec packageSpecsInLoadOrder select: [ :each | self includes includes: each name ]) flatCollect: [ :e | e packageSpecsInLoadOrder ]
+	^ (self project version packageSpecsInLoadOrder select: [ :each | self includes includes: each name ]) flatCollect: [ :e | e packageSpecsInLoadOrder ]
 ]
 
 { #category : 'accessing' }

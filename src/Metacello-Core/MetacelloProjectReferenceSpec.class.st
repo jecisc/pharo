@@ -58,9 +58,8 @@ MetacelloProjectReferenceSpec >> name [
 MetacelloProjectReferenceSpec >> packageSpecsInLoadOrder [
 
 	| specs loadedSpecs loads |
-	specs := self projectReference version spec packageSpecsInLoadOrder.
-	loads := self projectReference loadListForVersion:
-		         self projectReference version.
+	specs := self projectReference version packageSpecsInLoadOrder.
+	loads := self projectReference loadListForVersion: self projectReference version.
 	loadedSpecs := specs select: [ :each | loads includes: each name ].
 	^ loadedSpecs flatCollect: [ :e | e packageSpecsInLoadOrder ]
 ]

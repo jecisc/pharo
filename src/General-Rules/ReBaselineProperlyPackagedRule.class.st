@@ -44,5 +44,5 @@ ReBaselineProperlyPackagedRule >> basicCheck: aClass [
 
 	aClass isClassSide ifTrue: [ ^ false ].
 
-	^ (MetacelloProjectRegistration baselineClasses includes: aClass) and: [ aClass package name ~= aClass name ]
+	^ (MetacelloProjectRegistry baselineClasses includes: aClass) and: [ aClass package name ~= aClass name ]
 ]

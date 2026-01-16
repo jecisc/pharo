@@ -24,7 +24,7 @@ MetacelloScriptEngine class >> baseNameOf: className [
 { #category : 'actions api' }
 MetacelloScriptEngine >> do: aBlock required: required commitIfSuccess: aBoolean [
 
-	MetacelloProjectRegistration
+	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				self handleNotificationsForAction: [
 						| versionSpec projectSpec2 requiredArray |
@@ -61,7 +61,7 @@ MetacelloScriptEngine >> fetch: required [
 MetacelloScriptEngine >> get [
 	" load a fresh copy from repo"
 
-	MetacelloProjectRegistration
+	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				self handleNotificationsForAction: [
 						| spec projectPackage |
@@ -199,7 +199,7 @@ MetacelloScriptEngine >> loader [
 MetacelloScriptEngine >> lock [
 
 	| spec |
-	MetacelloProjectRegistration
+	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				spec := self projectSpec.
 				MetacelloProjectRegistration
@@ -317,7 +317,7 @@ MetacelloScriptEngine >> strict [
 MetacelloScriptEngine >> unlock [
 
 	| spec |
-	MetacelloProjectRegistration
+	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				spec := self projectSpec.
 				MetacelloProjectRegistration registrationForProjectSpec: spec ifPresent: [ :existing | existing locked: false ].

@@ -191,7 +191,8 @@ Metacello class >> image [
 
 { #category : 'instance creation' }
 Metacello class >> registrations [
-  ^ MetacelloProjectRegistration registry registrations
+
+	^ MetacelloProjectRegistry registry registrations
 ]
 
 { #category : 'instance creation' }
