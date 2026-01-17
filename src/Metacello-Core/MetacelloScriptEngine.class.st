@@ -15,12 +15,6 @@ Class {
 	#tag : 'Scripts'
 }
 
-{ #category : 'utilities' }
-MetacelloScriptEngine class >> baseNameOf: className [
-
-	^ className withoutPrefix: 'BaselineOf'
-]
-
 { #category : 'actions api' }
 MetacelloScriptEngine >> do: aBlock required: required commitIfSuccess: aBoolean [
 

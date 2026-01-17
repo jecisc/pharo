@@ -56,7 +56,8 @@ MetacelloProjectSpec >> asProjectRegistration [
 
 { #category : 'accessing' }
 MetacelloProjectSpec >> baseName [
-	^ MetacelloScriptEngine baseNameOf: self className
+
+	^ self className withoutPrefix: 'BaselineOf'
 ]
 
 { #category : 'scripting' }

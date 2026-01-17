@@ -388,11 +388,11 @@ Metacello >> onDowngradeUseIncoming [
 
 { #category : 'api options' }
 Metacello >> onDowngradeUseIncoming: projectNames [
-  self
-    onDowngrade: [ :ex :loaded :incoming | 
-      (projectNames includes: loaded baseName)
-        ifTrue: [ ex useIncoming ]
-        ifFalse: [ ex useLoaded ] ]
+
+	self onDowngrade: [ :ex :loaded :incoming |
+			(projectNames includes: loaded baseName)
+				ifTrue: [ ex useIncoming ]
+				ifFalse: [ ex useLoaded ] ]
 ]
 
 { #category : 'api options' }
