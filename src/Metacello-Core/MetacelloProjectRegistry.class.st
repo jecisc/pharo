@@ -39,6 +39,12 @@ MetacelloProjectRegistry class >> copyRegistryDuring: aBlock commitIfSuccess: aB
 	aBoolean ifTrue: [ self registry: newRegistry ]
 ]
 
+{ #category : 'accessing' }
+MetacelloProjectRegistry class >> projects [
+
+	^ self registry projects
+]
+
 { #category : 'registration' }
 MetacelloProjectRegistry class >> registrationNamed: aString ifPresent: presentBlock [
 
@@ -115,7 +121,7 @@ MetacelloProjectRegistry >> projectSpecForClassNamed: aClassName ifAbsent: absen
 ]
 
 { #category : 'accessing' }
-MetacelloProjectRegistry >> projectSpecs [
+MetacelloProjectRegistry >> projects [
 
 	^ self registrations collect: [ :registration | registration projectSpec ]
 ]

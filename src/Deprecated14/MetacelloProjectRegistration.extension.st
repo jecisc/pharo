@@ -10,8 +10,15 @@ MetacelloProjectRegistration >> baselineProjectSpec [
 { #category : '*Deprecated14' }
 MetacelloProjectRegistration class >> baselineProjectSpecs [
 
-	self deprecated: 'Use #projectSpecs instead.' transformWith: '`@rcv baselineProjectSpecs' -> '`@rcv projectSpecs'.
-	^ self projectSpecs
+	self deprecated: 'Use #projects on the Registry instead.' transformWith: '`@rcv baselineProjectSpecs' -> 'MetacelloProjectRegistry projects'.
+	^ MetacelloProjectRegistry projects
+]
+
+{ #category : '*Deprecated14' }
+MetacelloProjectRegistration class >> projectSpecs [
+
+	self deprecated: 'Use #projects on the Registry instead.' transformWith: '`@rcv projectSpecs' -> 'MetacelloProjectRegistry projects'.
+	^ MetacelloProjectRegistry projects
 ]
 
 { #category : '*Deprecated14' }

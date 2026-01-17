@@ -25,12 +25,6 @@ MetacelloProjectRegistration class >> projectSpecForClassNamed: aClassName ifAbs
 	^ MetacelloProjectRegistry registry projectSpecForClassNamed: aClassName ifAbsent: absentBlock
 ]
 
-{ #category : 'accessing' }
-MetacelloProjectRegistration class >> projectSpecs [
-
-	^ MetacelloProjectRegistry registry projectSpecs
-]
-
 { #category : 'registration' }
 MetacelloProjectRegistration class >> registrationForClassNamed: aClassName ifAbsent: absentBlock [
 	"This method should not be used but is kept for SmalltalkCI compatibility. Use the same one on MetacelloProjectRegistry."
