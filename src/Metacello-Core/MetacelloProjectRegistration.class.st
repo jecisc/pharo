@@ -34,20 +34,9 @@ MetacelloProjectRegistration class >> projectSpecs [
 
 { #category : 'registration' }
 MetacelloProjectRegistration class >> registrationForClassNamed: aClassName ifAbsent: absentBlock [
+	"This method should not be used but is kept for SmalltalkCI compatibility. Use the same one on MetacelloProjectRegistry."
 
-	^ MetacelloProjectRegistry registry registrationForClassNamed: aClassName ifAbsent: absentBlock
-]
-
-{ #category : 'querying' }
-MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec ifPresent: presentBlock [
-
-	^ self registrationForProjectSpec: aProjectSpec ifPresent: presentBlock ifAbsent: [ ]
-]
-
-{ #category : 'querying' }
-MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock [
-
-	^ MetacelloProjectRegistry registry registrationFor: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock
+	^ MetacelloProjectRegistry registry registrationNamed: aClassName ifPresent: [ :registration | registration ] ifAbsent: absentBlock
 ]
 
 { #category : 'comparing' }

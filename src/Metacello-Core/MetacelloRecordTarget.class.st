@@ -160,8 +160,8 @@ MetacelloRecordTarget >> visitProjectReference: aMetacelloProjectReferenceSpec [
 			MetacelloNotification signal: 'Project is locked, skipping.'.
 			^ projectReferenceToLoad ].
 
-	registration := MetacelloProjectRegistration
-		                registrationForProjectSpec: projectReferenceToLoad
+	registration := MetacelloProjectRegistry
+		                registrationNamed: projectReferenceToLoad className
 		                ifPresent: [ :existing | engine resolvePresentProject: existing new: projectReferenceToLoad asProjectRegistration ]
 		                ifAbsent: [ projectReferenceToLoad asProjectRegistration ].
 	registered := registration projectSpec.

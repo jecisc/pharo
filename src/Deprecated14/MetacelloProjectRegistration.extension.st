@@ -15,6 +15,28 @@ MetacelloProjectRegistration class >> baselineProjectSpecs [
 ]
 
 { #category : '*Deprecated14' }
+MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec ifPresent: presentBlock [
+
+	self
+		deprecated:
+		'The registry should be accessed via MetacelloProjectRegistry and not MetacelloProjectRegistration. Also, to retrieve the registration you should now gite the name of the project instead of a project spec'
+		transformWith:
+		'`@rcv registrationForProjectSpec: `@arg1 ifPresent: `@arg2' -> 'MetacelloProjectRegistry registrationNamed: `@arg1 className ifPresent: `@arg2'.
+	^ MetacelloProjectRegistry registrationNamed: aProjectSpec className ifPresent: presentBlock
+]
+
+{ #category : '*Deprecated14' }
+MetacelloProjectRegistration class >> registrationForProjectSpec: aProjectSpec ifPresent: presentBlock ifAbsent: absentBlock [
+
+	self
+		deprecated:
+		'The registry should be accessed via MetacelloProjectRegistry and not MetacelloProjectRegistration. Also, to retrieve the registration you should now gite the name of the project instead of a project spec'
+		transformWith: '`@rcv registrationForProjectSpec: `@arg1 ifPresent: `@arg2 ifAbsent: `@arg3'
+			-> 'MetacelloProjectRegistry registrationNamed: `@arg1 className ifPresent: `@arg2 ifAbsent: `@arg3'.
+	^ MetacelloProjectRegistry registrationNamed: aProjectSpec className ifPresent: presentBlock ifAbsent: absentBlock
+]
+
+{ #category : '*Deprecated14' }
 MetacelloProjectRegistration class >> registry [
 
 	self

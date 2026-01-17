@@ -70,8 +70,8 @@ MetacelloScriptEngine >> get [
 						projectPackage repositorySpecs do: [ :repoSpec | repoSpec createRepository flushForScriptGet ].
 						self doLoadProjectSpecFrom: projectPackage.
 						self root: (Smalltalk at: spec className asSymbol) project.
-						MetacelloProjectRegistration
-							registrationForProjectSpec: spec
+						MetacelloProjectRegistry
+							registrationNamed: spec className
 							ifPresent: [ :existing | existing projectSpec repositories: spec repositories ]
 							ifAbsent: [ spec asProjectRegistration registerProject ] ] ]
 		commitIfSuccess: true
@@ -117,21 +117,6 @@ MetacelloScriptEngine >> handleNotificationsForAction: actionBlock [
 ]
 
 { #category : 'handlers' }
-MetacelloScriptEngine >> handleProjectSpecLoaded: aProjectSpec [
-
-	MetacelloProjectRegistration
-		registrationForProjectSpec: aProjectSpec
-		ifPresent: [ :existing | "unconditionally merge new with existing (updates registration)"
-				existing
-					loadedInImage: true;
-					merge: aProjectSpec asProjectRegistration ]
-		ifAbsent: [
-				aProjectSpec asProjectRegistration
-					loadedInImage: true;
-					registerProject ]
-]
-
-{ #category : 'handlers' }
 MetacelloScriptEngine >> handleUpgrade: exception [
     ^ (self options at: #'onUpgrade' ifAbsent: [ ^ exception pass ])
         cull: exception
@@ -171,8 +156,8 @@ MetacelloScriptEngine >> load: required [
 				| result |
 				result := versionSpec doLoadRequiredFromArray: requiredArray withEngine: self.
 				self root: result.
-				MetacelloProjectRegistration
-					registrationForProjectSpec: projectSpec2
+				MetacelloProjectRegistry
+					registrationNamed: projectSpec2 className
 					ifPresent: [ :existing |
 							existing
 								loadedInImage: true;
@@ -202,8 +187,8 @@ MetacelloScriptEngine >> lock [
 	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				spec := self projectSpec.
-				MetacelloProjectRegistration
-					registrationForProjectSpec: spec
+				MetacelloProjectRegistry
+					registrationNamed: spec className
 					ifPresent: [ :existing |
 							existing locked: true. "We need to merge the repositories"
 							existing projectSpec repositories: spec repositories.
@@ -226,8 +211,8 @@ MetacelloScriptEngine >> lookupProjectClassNamed: aString [
 MetacelloScriptEngine >> lookupProjectSpecFor: aProjectSpec [
 	"if there is no conflict, choose new spec"
 
-	^ MetacelloProjectRegistration
-		  registrationForProjectSpec: aProjectSpec
+	^ MetacelloProjectRegistry
+		  registrationNamed: aProjectSpec className
 		  ifPresent: [ :existing | (self resolvePresentProject: existing new: aProjectSpec asProjectRegistration) projectSpec ]
 		  ifAbsent: [ aProjectSpec ]
 ]
@@ -269,8 +254,8 @@ MetacelloScriptEngine >> register [
 
 	| spec |
 	spec := self projectSpec.
-	MetacelloProjectRegistration
-		registrationForProjectSpec: spec
+	MetacelloProjectRegistry
+		registrationNamed: spec className
 		ifPresent: [ :existing | existing merge: spec asProjectRegistration ]
 		ifAbsent: [ spec asProjectRegistration registerProject ].
 	self root: spec
@@ -320,7 +305,7 @@ MetacelloScriptEngine >> unlock [
 	MetacelloProjectRegistry
 		copyRegistryDuring: [
 				spec := self projectSpec.
-				MetacelloProjectRegistration registrationForProjectSpec: spec ifPresent: [ :existing | existing locked: false ].
+				MetacelloProjectRegistry registrationNamed: spec className ifPresent: [ :existing | existing locked: false ].
 				self root: spec ]
 		commitIfSuccess: true
 ]
@@ -330,6 +315,6 @@ MetacelloScriptEngine >> unregister [
 
 	| spec |
 	spec := self projectSpec.
-	MetacelloProjectRegistration registrationForProjectSpec: spec ifPresent: [ :existing | existing unregisterProject ].
+	MetacelloProjectRegistry registrationNamed: spec className ifPresent: [ :existing | existing unregisterProject ].
 	self root: spec
 ]

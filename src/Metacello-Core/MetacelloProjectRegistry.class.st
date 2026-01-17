@@ -39,6 +39,18 @@ MetacelloProjectRegistry class >> copyRegistryDuring: aBlock commitIfSuccess: aB
 	aBoolean ifTrue: [ self registry: newRegistry ]
 ]
 
+{ #category : 'registration' }
+MetacelloProjectRegistry class >> registrationNamed: aString ifPresent: presentBlock [
+
+	^ self registry registrationNamed: aString ifPresent: presentBlock ifAbsent: [ ]
+]
+
+{ #category : 'registration' }
+MetacelloProjectRegistry class >> registrationNamed: aString ifPresent: presentBlock ifAbsent: absentBlock [
+
+	^ self registry registrationNamed: aString ifPresent: presentBlock ifAbsent: absentBlock
+]
+
 { #category : 'registry' }
 MetacelloProjectRegistry class >> registry [
 
@@ -121,19 +133,7 @@ MetacelloProjectRegistry >> registerProjectRegistration: aMetacelloProjectRegist
 ]
 
 { #category : 'registration' }
-MetacelloProjectRegistry >> registrationFor: aMetacelloProjectSpec ifPresent: presentBlock ifAbsent: absentBlock [
-
-	^ self registrationForClassNamed: aMetacelloProjectSpec className ifPresent: presentBlock ifAbsent: absentBlock
-]
-
-{ #category : 'registration' }
-MetacelloProjectRegistry >> registrationForClassNamed: aClassName ifAbsent: absentBlock [
-
-	^ self registrationForClassNamed: aClassName ifPresent: [ :registration | ^ registration ] ifAbsent: absentBlock
-]
-
-{ #category : 'registration' }
-MetacelloProjectRegistry >> registrationForClassNamed: aClassName ifPresent: aBlock ifAbsent: absentBlock [
+MetacelloProjectRegistry >> registrationNamed: aClassName ifPresent: aBlock ifAbsent: absentBlock [
 
 	^ self projectSpecsRegistry
 		  at: (self baselineNameFrom: aClassName)

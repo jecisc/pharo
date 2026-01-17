@@ -145,9 +145,7 @@ MetacelloProjectSpec >> hasVersion [
 { #category : 'scripting' }
 MetacelloProjectSpec >> isLocked [
 
-  ^ self registration 
-	ifNotNil: [ :aRegistration | aRegistration locked ]
-	ifNil: [ false ]
+	^ MetacelloProjectRegistry registrationNamed: self className ifPresent: [ :existing | existing locked ] ifAbsent: [ false ]
 ]
 
 { #category : 'printing' }
@@ -329,12 +327,6 @@ MetacelloProjectSpec >> projectReference [
 	^ self
 ]
 
-{ #category : 'scripting' }
-MetacelloProjectSpec >> registration [
-
-	^ MetacelloProjectRegistration registrationForProjectSpec: self ifPresent: [ :existing | existing ]
-]
-
 { #category : 'accessing' }
 MetacelloProjectSpec >> repositories [
 
@@ -413,7 +405,7 @@ MetacelloProjectSpec >> strict: aBoolean [
 { #category : 'scripting' }
 MetacelloProjectSpec >> unregisterProject [
 
-	^ MetacelloProjectRegistration registrationForProjectSpec: self ifPresent: [ :existing | existing unregisterProject ]
+	^ MetacelloProjectRegistry registrationNamed: self className ifPresent: [ :existing | existing unregisterProject ]
 ]
 
 { #category : 'querying' }
