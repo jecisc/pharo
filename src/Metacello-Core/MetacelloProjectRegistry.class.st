@@ -2,7 +2,7 @@ Class {
 	#name : 'MetacelloProjectRegistry',
 	#superclass : 'Object',
 	#instVars : [
-		'projectSpecsRegistry'
+		'registrations'
 	],
 	#classVars : [
 		'Registry'
@@ -88,66 +88,71 @@ MetacelloProjectRegistry >> baselineNameFrom: baseName [
 		  ifFalse: [ 'BaselineOf' , baseName ]
 ]
 
+{ #category : 'initialization' }
+MetacelloProjectRegistry >> initialize [
+
+	super initialize.
+	registrations := OrderedCollection new
+]
+
 { #category : 'accessing' }
 MetacelloProjectRegistry >> isEmpty [
 
-	^ self projectSpecs isEmpty
+	^ self registrations isEmpty
 ]
 
 { #category : 'copying' }
 MetacelloProjectRegistry >> postCopy [
 
 	super postCopy.
-	projectSpecsRegistry := self projectSpecsRegistry copy
+	registrations := registrations copy
 ]
 
 { #category : 'querying' }
 MetacelloProjectRegistry >> projectSpecForClassNamed: aClassName ifAbsent: absentBlock [
 
-	^ (self projectSpecsRegistry at: aClassName ifAbsent: [ ^ absentBlock value ]) projectSpec
+	^ self registrationNamed: aClassName ifPresent: [ :existing | existing projectSpec ] ifAbsent: absentBlock
 ]
 
 { #category : 'accessing' }
 MetacelloProjectRegistry >> projectSpecs [
 
-	^ self projectSpecsRegistry values collect: [ :registration | registration projectSpec ]
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistry >> projectSpecsRegistry [
-
-	^ projectSpecsRegistry ifNil: [ projectSpecsRegistry := Dictionary new ]
+	^ self registrations collect: [ :registration | registration projectSpec ]
 ]
 
 { #category : 'registration' }
 MetacelloProjectRegistry >> registerProjectRegistration: aMetacelloProjectRegistration [
 	"unconditionally register <newRegistration> ... use with care"
 
-	| spec |
-	spec := aMetacelloProjectRegistration projectSpec.
-	self projectSpecsRegistry at: spec className ifPresent: [ :existing |
-			existing projectSpec className = spec className ifFalse: [
-				MetacelloNotification signal: 'REGISTRATION OF INCOMPATABLE PROJECTS: ' , existing printString , ' REPLACED BY ' , aMetacelloProjectRegistration printString ] ].
-	self projectSpecsRegistry at: spec className put: aMetacelloProjectRegistration
+	self
+		registrationNamed: aMetacelloProjectRegistration className
+		ifPresent: [ :existing | MetacelloNotification signal: 'REGISTRATION OF INCOMPATABLE PROJECTS: ' , existing printString , ' REPLACED BY ' , aMetacelloProjectRegistration printString ]
+		ifAbsent: [ self registrations add: aMetacelloProjectRegistration ]
 ]
 
 { #category : 'registration' }
 MetacelloProjectRegistry >> registrationNamed: aClassName ifPresent: aBlock ifAbsent: absentBlock [
 
-	^ self projectSpecsRegistry
-		  at: (self baselineNameFrom: aClassName)
-		  ifPresent: aBlock
-		  ifAbsent: absentBlock value
+	| className |
+	className := self baselineNameFrom: aClassName.
+
+	^ self registrations
+		  detect: [ :registration | registration className = className ]
+		  ifFound: aBlock
+		  ifNone: absentBlock
 ]
 
 { #category : 'accessing' }
 MetacelloProjectRegistry >> registrations [
 
-	^ self projectSpecsRegistry values
+	^ registrations
 ]
 
 { #category : 'registration' }
 MetacelloProjectRegistry >> unregisterProjectRegistration: aMetacelloProjectRegistration [
 
-	self projectSpecsRegistry removeKey: aMetacelloProjectRegistration projectSpec className ifAbsent: [ self error: 'unexpectedly missing project registration' ]
+	self
+		registrationNamed: aMetacelloProjectRegistration className
+		ifPresent: [ :existing | self registrations remove: existing ]
+		ifAbsent: [ self error: 'unexpectedly missing project registration' ]
 ]

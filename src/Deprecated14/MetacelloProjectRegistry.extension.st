@@ -11,5 +11,5 @@ MetacelloProjectRegistry >> baselineProjectSpecs [
 MetacelloProjectRegistry >> baselineRegistry [
 
 	self deprecated: 'Use #projectSpecs instead.' transformWith: '`@rcv baselineProjectSpecs' -> '`@rcv projectSpecs'.
-	^ self projectSpecsRegistry
+	^ self projectSpecs
 ]

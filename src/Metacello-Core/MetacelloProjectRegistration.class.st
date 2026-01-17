@@ -56,6 +56,12 @@ MetacelloProjectRegistration >> canUpgradeTo: aProjectRegistration [
 	^ projectSpec canUpgradeTo: aProjectRegistration projectSpec
 ]
 
+{ #category : 'introspection' }
+MetacelloProjectRegistration >> className [
+
+	^ self projectSpec className
+]
+
 { #category : 'accessing' }
 MetacelloProjectRegistration >> currentVersionString [
 
