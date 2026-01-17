@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'loadedInImage',
 		'locked',
-		'versionString',
 		'projectSpec'
 	],
 	#category : 'Metacello-Core-Registry',
@@ -60,7 +59,7 @@ MetacelloProjectRegistration >> canUpgradeTo: aProjectRegistration [
 { #category : 'accessing' }
 MetacelloProjectRegistration >> currentVersionString [
 
-	^ projectSpec repositoryVersionString
+	^ self versionString
 ]
 
 { #category : 'accessing' }
@@ -68,13 +67,6 @@ MetacelloProjectRegistration >> currentlyLoadedClassesInProject [
 	"Used by SmalltalkCI."
 
 	^ self projectSpec currentlyLoadedClassesInVersion asSet
-]
-
-{ #category : 'initialization' }
-MetacelloProjectRegistration >> ensureVersionString: anObject [
-	"set versionString, only if it does not already have avalue"
-
-	versionString ifNil: [ self versionString: anObject ]
 ]
 
 { #category : 'testing' }
@@ -86,11 +78,7 @@ MetacelloProjectRegistration >> hasLoadConflicts: aProjectRegistration [
 { #category : 'comparing' }
 MetacelloProjectRegistration >> hash [
 
-	^ String
-		  stringHash: (projectSpec
-				   ifNil: [ nil hash ]
-				   ifNotNil: [ :project | project metacelloRegistrationHash ])
-		  initialHash: 0
+	^ String stringHash: projectSpec metacelloRegistrationHash initialHash: 0
 ]
 
 { #category : 'accessing' }
@@ -115,14 +103,6 @@ MetacelloProjectRegistration >> locked [
 MetacelloProjectRegistration >> locked: anObject [
 
 	locked := anObject
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration >> merge: aProjectRegistration [
-	" ... merge is done when a spec has been loaded into the image"
-
-	projectSpec := aProjectRegistration projectSpec.
-	versionString := projectSpec repositoryVersionString
 ]
 
 { #category : 'printing' }
@@ -195,11 +175,5 @@ MetacelloProjectRegistration >> versionInfo [
 { #category : 'accessing' }
 MetacelloProjectRegistration >> versionString [
 
-	^ versionString
-]
-
-{ #category : 'accessing' }
-MetacelloProjectRegistration >> versionString: anObject [
-
-	versionString := anObject
+	^ projectSpec repositoryVersionString
 ]

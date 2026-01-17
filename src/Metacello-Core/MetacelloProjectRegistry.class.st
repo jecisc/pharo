@@ -128,7 +128,6 @@ MetacelloProjectRegistry >> registerProjectRegistration: aMetacelloProjectRegist
 	self projectSpecsRegistry at: spec className ifPresent: [ :existing |
 			existing projectSpec className = spec className ifFalse: [
 				MetacelloNotification signal: 'REGISTRATION OF INCOMPATABLE PROJECTS: ' , existing printString , ' REPLACED BY ' , aMetacelloProjectRegistration printString ] ].
-	aMetacelloProjectRegistration ensureVersionString: spec repositoryVersionString.
 	self projectSpecsRegistry at: spec className put: aMetacelloProjectRegistration
 ]
 

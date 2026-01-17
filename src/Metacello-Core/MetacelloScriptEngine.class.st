@@ -155,7 +155,7 @@ MetacelloScriptEngine >> load: required [
 					ifPresent: [ :existing |
 							existing
 								loadedInImage: true;
-								merge: projectSpec2 asProjectRegistration ]
+								projectSpec: projectSpec2 ]
 					ifAbsent: [
 							projectSpec2 asProjectRegistration
 								loadedInImage: true;
@@ -250,7 +250,7 @@ MetacelloScriptEngine >> register [
 	spec := self projectSpec.
 	MetacelloProjectRegistry
 		registrationNamed: spec className
-		ifPresent: [ :existing | existing merge: spec asProjectRegistration ]
+		ifPresent: [ :existing | existing projectSpec: spec ]
 		ifAbsent: [ spec asProjectRegistration registerProject ].
 	self root: spec
 ]
