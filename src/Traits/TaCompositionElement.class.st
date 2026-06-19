@@ -58,7 +58,7 @@ TaCompositionElement >> classComposition [
 ]
 
 { #category : 'accessing' }
-TaCompositionElement >> compilationInfoForSelectors [
+TaCompositionElement >> compilationInfoToBuild [
 
 	| infos |
 	infos := (innerClass localMethods collect: [ :method |
@@ -66,9 +66,14 @@ TaCompositionElement >> compilationInfoForSelectors [
 				          selector: method selector;
 				          definingTrait: self;
 				          compiledMethod: method;
-				          yourself ]) , innerClass traitComposition compilationInfoForSelectors.
+				          sourceCode: method sourceCode yourself ]) , innerClass traitComposition compilationInfoToBuild.
 
-	infos do: [ :info | info selector: (self aliasSelector: info selector) ].
+	infos do: [ :info | "Manage aliasing of talents"
+			info selector = #initializeTalent ifTrue: [
+					info
+						selector: self initializeSelectorForMe;
+						sourceCode: (info compiledMethod getSourceReplacingSelectorWith: self initializeSelectorForMe) ] ].
+
 	^ infos
 ]
 

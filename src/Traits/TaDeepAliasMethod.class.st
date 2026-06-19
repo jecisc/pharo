@@ -18,6 +18,29 @@ TaDeepAliasMethod >> changesSourceCode: aSelector [
 	^ true
 ]
 
+{ #category : 'accessing' }
+TaDeepAliasMethod >> compilationInfoToBuild [
+
+	^ super compilationInfoToBuild
+		  do: [ :info | info sourceCode: (self rewriteSourceCode: info sourceCode) ];
+		  yourself
+]
+
+{ #category : 'accessing' }
+TaDeepAliasMethod >> rewriteSourceCode: originalSourceCode [
+	| parseTree rewriter |
+	parseTree := OCParser parseMethod: originalSourceCode.
+	rewriter := OCParseTreeRewriter new.
+
+	self aliases
+		associationsDo:
+			[ :assoc | rewriter replace: (self rewriteText: assoc value) with: (self rewriteText: assoc key) ].
+
+	^ (rewriter
+			executeTree: parseTree;
+			tree) formattedCode
+]
+
 { #category : 'rewriting' }
 TaDeepAliasMethod >> rewriteText: aSelector [
 	| stream |
@@ -41,16 +64,6 @@ TaDeepAliasMethod >> rewriteText: aSelector [
 
 { #category : 'accessing' }
 TaDeepAliasMethod >> sourceCodeAt: aSelector [
-	| originalSourceCode parseTree rewriter |
-	originalSourceCode := super sourceCodeAt: aSelector.
-	parseTree := OCParser parseMethod: originalSourceCode.
-	rewriter := OCParseTreeRewriter new.
 
-	self aliases
-		associationsDo:
-			[ :assoc | rewriter replace: (self rewriteText: assoc value) with: (self rewriteText: assoc key) ].
-
-	^ (rewriter
-			executeTree: parseTree;
-			tree) formattedCode
+	^ self rewriteSourceCode: (super sourceCodeAt: aSelector)
 ]

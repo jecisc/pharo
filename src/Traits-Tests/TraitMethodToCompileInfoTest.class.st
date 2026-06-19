@@ -8,11 +8,21 @@ Class {
 { #category : 'tests' }
 TraitMethodToCompileInfoTest >> check: info selector: selector protocol: protocol definingTrait: aTraitComposition sourceCode: code [
 
+	self
+		check: info
+		selector: selector
+		protocol: protocol
+		sourceCode: code.
+	self assert: info definingTrait equals: aTraitComposition
+]
+
+{ #category : 'tests' }
+TraitMethodToCompileInfoTest >> check: info selector: selector protocol: protocol sourceCode: code [
+
 	self assert: info selector equals: selector.
 	self assert: info protocol equals: protocol.
-	self assert: info compiledMethod equals: aTraitComposition >> selector.
-	self assert: info definingTrait equals: aTraitComposition.
-	self flag: #todo "Add source code"
+	self assert: info compiledMethod equals: info definingTrait >> selector.
+	self assert: info sourceCode equals: code
 ]
 
 { #category : 'tests' }
@@ -21,13 +31,12 @@ TraitMethodToCompileInfoTest >> testDiamond [
 	| c1 t1 t2 t3 infos |
 	t1 := self newTrait: #T1.
 	t1 compile: 'm1 ^1' classified: #proto.
-	
+
 	t2 := self newTrait: #T2 traits: t1.
 	t3 := self newTrait: #T3 traits: t1.
 	c1 := self newClass: #C1 traits: t2 + t3.
 
-
-	infos := c1 traitComposition compilationInfoForSelectors sorted: #selector ascending.
+	infos := c1 traitComposition compilationInfoToBuild.
 
 	self assert: infos size equals: 1.
 	self
@@ -49,7 +58,7 @@ TraitMethodToCompileInfoTest >> testSequence [
 	t1 compile: 'm1 ^1' classified: #proto.
 	t2 compile: 'm2 ^2' classified: #proto.
 
-	infos := c1 traitComposition compilationInfoForSelectors sorted: #selector ascending.
+	infos := c1 traitComposition compilationInfoToBuild sorted: #selector ascending.
 
 	self assert: infos size equals: 2.
 	self
@@ -67,6 +76,28 @@ TraitMethodToCompileInfoTest >> testSequence [
 ]
 
 { #category : 'tests' }
+TraitMethodToCompileInfoTest >> testSequenceDoesNotConflictOnRequirement [
+
+	| c1 t1 t2 infos |
+	t1 := self newTrait: #T1.
+	t2 := self newTrait: #T2.
+	c1 := self newClass: #C1 traits: t1 + t2.
+
+	t1 compile: 'm1 self explicitRequirement' classified: #proto2.
+	t2 compile: 'm1 ^2' classified: #proto.
+
+	infos := c1 traitComposition compilationInfoToBuild.
+
+	self assert: infos size equals: 1.
+	self
+		check: infos first
+		selector: #m1
+		protocol: #proto
+		definingTrait: c1 traitComposition members second
+		sourceCode: 'm1 ^2'
+]
+
+{ #category : 'tests' }
 TraitMethodToCompileInfoTest >> testSequenceWithConflict [
 
 	| c1 t1 t2 infos |
@@ -75,17 +106,59 @@ TraitMethodToCompileInfoTest >> testSequenceWithConflict [
 	c1 := self newClass: #C1 traits: t1 + t2.
 
 	t1 compile: 'm1 ^1' classified: #proto.
-	t2 compile: 'm1 ^1' classified: #proto.
+	t2 compile: 'm1 ^2' classified: #proto2.
 
-	infos := c1 traitComposition compilationInfoForSelectors sorted: #selector ascending.
+	infos := c1 traitComposition compilationInfoToBuild.
 
 	self assert: infos size equals: 1.
 	self
 		check: infos first
 		selector: #m1
 		protocol: Protocol traitConflictName
-		definingTrait: c1 traitComposition members first
-		sourceCode: 'm1 ^ self traitConflict'
+		sourceCode: 'm1
+	self traitConflict'
+]
+
+{ #category : 'tests' }
+TraitMethodToCompileInfoTest >> testSequenceWithTwoRequirements [
+
+	| c1 t1 t2 infos |
+	t1 := self newTrait: #T1.
+	t2 := self newTrait: #T2.
+	c1 := self newClass: #C1 traits: t1 + t2.
+
+	t1 compile: 'm1 self explicitRequirement' classified: #proto2.
+	t2 compile: 'm1 self explicitRequirement' classified: #proto.
+
+	infos := c1 traitComposition compilationInfoToBuild.
+
+	self assert: infos size equals: 1.
+	self
+		check: infos first
+		selector: #m1
+		protocol: Protocol traitConflictName
+		sourceCode: 'm1 self explicitRequirement'
+]
+
+{ #category : 'tests' }
+TraitMethodToCompileInfoTest >> testSequenceWithTwoRequirements2 [
+
+	| c1 t1 t2 infos |
+	t1 := self newTrait: #T1.
+	t2 := self newTrait: #T2.
+	c1 := self newClass: #C1 traits: t1 + t2.
+
+	t1 compile: 'm1 self explicitRequirement' classified: #proto.
+	t2 compile: 'm1 self explicitRequirement' classified: #proto.
+
+	infos := c1 traitComposition compilationInfoToBuild.
+
+	self assert: infos size equals: 1.
+	self
+		check: infos first
+		selector: #m1
+		protocol: #proto
+		sourceCode: 'm1 self explicitRequirement'
 ]
 
 { #category : 'tests' }
@@ -97,7 +170,7 @@ TraitMethodToCompileInfoTest >> testUniqueTrait [
 
 	t1 compile: 'm1 ^1' classified: #proto.
 
-	infos := c1 traitComposition compilationInfoForSelectors.
+	infos := c1 traitComposition compilationInfoToBuild.
 
 	self assert: infos size equals: 1.
 	self

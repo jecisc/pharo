@@ -63,11 +63,11 @@ TaAliasMethod >> checkAssociations [
 ]
 
 { #category : 'accessing' }
-TaAliasMethod >> compilationInfoForSelectors [
+TaAliasMethod >> compilationInfoToBuild [
 
 	| innerInfos aliassed |
 	"I calculate the new aliases selectors"
-	innerInfos := inner compilationInfoForSelectors.
+	innerInfos := inner compilationInfoToBuild.
 	aliassed := OrderedCollection new: self aliases size.
 
 	self aliases associations do: [ :association |
@@ -78,6 +78,7 @@ TaAliasMethod >> compilationInfoForSelectors [
 								 selector: association key;
 								 definingTrait: info definingTrait;
 								 compiledMethod: info compiledMethod;
+								 sourceCode: (info compiledMethod getSourceReplacingSelectorWith: association key);
 								 yourself) ] ].
 
 	^ innerInfos , aliassed

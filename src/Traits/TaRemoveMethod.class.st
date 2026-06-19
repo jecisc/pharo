@@ -22,9 +22,9 @@ TaRemoveMethod class >> remove: anArrayOfSelectors to: aTrait [
 ]
 
 { #category : 'accessing' }
-TaRemoveMethod >> compilationInfoForSelectors [
+TaRemoveMethod >> compilationInfoToBuild [
 
-	^ inner compilationInfoForSelectors reject: [ :info | removedSelectors includes: info selector ]
+	^ inner compilationInfoToBuild reject: [ :info | removedSelectors includes: info selector ]
 ]
 
 { #category : 'accessing' }

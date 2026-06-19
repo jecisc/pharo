@@ -45,9 +45,9 @@ TaSingleComposition >> classComposition [
 ]
 
 { #category : 'accessing' }
-TaSingleComposition >> compilationInfoForSelectors [
+TaSingleComposition >> compilationInfoToBuild [
 
-	^ inner compilationInfoForSelectors
+	^ inner compilationInfoToBuild
 ]
 
 { #category : 'accessing' }

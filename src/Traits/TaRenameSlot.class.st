@@ -31,6 +31,14 @@ TaRenameSlot class >> rename: anArrayOfAssociations on: aTrait [
 		yourself
 ]
 
+{ #category : 'accessing' }
+TaRenameSlot >> compilationInfoToBuild [
+
+	^ super compilationInfoToBuild
+		  do: [ :info | info sourceCode: (self rewriteSourceCode: info sourceCode) ];
+		  yourself
+]
+
 { #category : 'copying' }
 TaRenameSlot >> copyTraitExpression [
 	^ self class rename: renames on: inner
@@ -48,6 +56,20 @@ TaRenameSlot >> renames: anObject [
 	renames := anObject
 ]
 
+{ #category : 'private' }
+TaRenameSlot >> rewriteSourceCode: originalSourceCode [
+
+	| parseTree rewriter |
+	parseTree := OCParser parseMethod: originalSourceCode.
+	rewriter := OCParseTreeRewriter new.
+
+	renames do: [ :rename | rewriter replace: rename key asString with: rename value asString ].
+
+	^ (rewriter
+		   executeTree: parseTree;
+		   tree) formattedCode
+]
+
 { #category : 'accessing' }
 TaRenameSlot >> slots [
 
@@ -60,18 +82,8 @@ TaRenameSlot >> slots [
 
 { #category : 'accessing' }
 TaRenameSlot >> sourceCodeAt: aSelector [
-	| originalSourceCode parseTree rewriter |
-	originalSourceCode := super sourceCodeAt: aSelector.
 
-	parseTree := OCParser parseMethod: originalSourceCode.
-	rewriter := OCParseTreeRewriter new.
-
-	renames do: [:rename |
-		rewriter replace: rename key asString with: rename value asString ].
-
-	^(rewriter
-		executeTree: parseTree;
-		tree) formattedCode
+	^ self rewriteSourceCode: (super sourceCodeAt: aSelector)
 ]
 
 { #category : 'printing' }

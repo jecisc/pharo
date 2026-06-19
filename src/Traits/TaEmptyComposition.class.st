@@ -69,7 +69,7 @@ TaEmptyComposition >> classComposition [
 ]
 
 { #category : 'accessing' }
-TaEmptyComposition >> compilationInfoForSelectors [
+TaEmptyComposition >> compilationInfoToBuild [
 
 	^ Array empty
 ]

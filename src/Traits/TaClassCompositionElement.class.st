@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : 'accessing' }
-TaClassCompositionElement >> compilationInfoForSelectors [
+TaClassCompositionElement >> compilationInfoToBuild [
 	"As I am representing a ClassTrait I have to filter the methods that are in all the class traits"
 
 	| innerClassLocalMethods traitedClassSelectors |
 	innerClassLocalMethods := innerClass localMethods collect: [ :each | each selector ].
 	traitedClassSelectors := TraitedClass selectors.
-	^ super compilationInfoForSelectors reject: [ :info |
+	^ super compilationInfoToBuild reject: [ :info |
 			  | methodSelector |
 			  methodSelector := info selector.
 			  (innerClassLocalMethods includes: methodSelector) not and: [ traitedClassSelectors anySatisfy: [ :x | x = methodSelector ] ] ]
