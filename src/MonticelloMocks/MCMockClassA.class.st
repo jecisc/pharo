@@ -79,7 +79,7 @@ MCMockClassA >> one [
 	^ 1
 ]
 
-{ #category : 'drag\'n\'drop' }
+{ #category : 'drag and drop' }
 MCMockClassA >> q [
 ]
 

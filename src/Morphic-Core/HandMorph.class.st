@@ -164,7 +164,7 @@ HandMorph >> anyModifierKeyPressed [
 	^recentModifiers anyMask: 16r0E	"cmd | opt | ctrl"
 ]
 
-{ #category : 'grabbing/dropping' }
+{ #category : 'dropping/grabbing' }
 HandMorph >> attachMorph: m [
 	"Position the center of the given morph under this hand, then grab it.
 	This method is used to grab far away or newly created morphs."
@@ -293,7 +293,7 @@ HandMorph >> drawOn: aCanvas [
 		ifNotNil: [aCanvas paintImage: temporaryCursor at: bounds topLeft]
 ]
 
-{ #category : 'grabbing/dropping' }
+{ #category : 'dropping/grabbing' }
 HandMorph >> dropMorph: aMorph event: anEvent [
 	"Drop the given morph which was carried by the hand"
 	| event dropped |
@@ -313,13 +313,13 @@ HandMorph >> dropMorph: aMorph event: anEvent [
 	self mouseOverHandler processMouseOver: anEvent
 ]
 
-{ #category : 'grabbing/dropping' }
+{ #category : 'dropping/grabbing' }
 HandMorph >> dropMorphs [
 	"Drop the morphs at the hands position"
 	self dropMorphs: lastMouseEvent
 ]
 
-{ #category : 'grabbing/dropping' }
+{ #category : 'dropping/grabbing' }
 HandMorph >> dropMorphs: anEvent [
 	"Drop the morphs at the hands position"
 	self submorphsReverseDo:[:m|
@@ -442,7 +442,7 @@ HandMorph >> grabMorph: aMorph [
 	^self grabMorph: grabbed from: grabbed owner
 ]
 
-{ #category : 'grabbing/dropping' }
+{ #category : 'dropping/grabbing' }
 HandMorph >> grabMorph: aMorph from: formerOwner [
 	"Grab the given morph (i.e., add it to this hand and remove it from its
 	current owner) without changing its position. This is used to pick up a

@@ -339,7 +339,7 @@ Socket class >> wildcardPort [
 	^0
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> accept [
 	"Accept a connection from the receiver socket.
 	Return a new socket that is connected to the client"
@@ -423,21 +423,21 @@ Socket >> broadcastMisconfiguredForSendingTo: hostAddress [
 		and: [ ((self getOption: 'SO_BROADCAST') last = 0) ]
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> close [
 	"Close this connection gracefully. For TCP, this sends a close request, but the stream remains open until the other side also closes it."
 
 	self primSocketCloseConnection: socketHandle.  "close this end"
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> closeAndDestroy [
 	"First, try to close this connection gracefully. If the close attempt fails or times out, abort the connection. In either case, destroy the socket. Do nothing if the socket has already been destroyed (i.e., if its socketHandle is nil)."
 
 	self closeAndDestroy: 20
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> closeAndDestroy: timeoutSeconds [
 	"First, try to close this connection gracefully. If the close attempt fails or times out, abort the connection. In either case, destroy the socket. Do nothing if the socket has already been destroyed (i.e., if its socketHandle is nil)."
 
@@ -463,7 +463,7 @@ Socket >> connectNonBlockingTo: aSocketAddress [
 
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> connectNonBlockingTo: hostAddress port: port [
 	"Initiate a connection to the given port at the given host address. This operation will return immediately; follow it with waitForConnectionUntil: to wait until the connection is established."
 
@@ -482,7 +482,7 @@ Socket >> connectTo: aSocketAddress [
 	self connectTo: aSocketAddress waitForConnectionFor: Socket standardTimeout
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> connectTo: hostAddress port: port [
 	"Initiate a connection to the given port at the given host address.
 	Waits until the connection is established or time outs."
@@ -490,7 +490,7 @@ Socket >> connectTo: hostAddress port: port [
 	self connectTo: hostAddress port: port waitForConnectionFor: Socket standardTimeout
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> connectTo: hostAddress port: port waitForConnectionFor: timeout [
 	"Initiate a connection to the given port at the given host
 	address. Waits until the connection is established or time outs."
@@ -518,7 +518,7 @@ Socket >> connectTo: aSocketAddress waitForConnectionFor: timeout [
 		ifRefused: [ConnectionRefused signal: ('Cannot connect to {1}' translated format: {aSocketAddress printString})]
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> connectToHostNamed: hostName port: portNumber [
 	| serverIP |
 	serverIP := NetNameResolver addressForName: hostName timeout: 20.
@@ -574,7 +574,7 @@ Socket >> discardReceivedData [
 	^ totalBytesDiscarded
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> disconnect [
 	"Break this connection, no matter what state it is in. Data that has been sent but not received will be lost."
 
@@ -742,7 +742,7 @@ Socket >> isWaitingForConnection [
 	^ (self primSocketConnectionStatus: socketHandle) == WaitingForConnection
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> listen [
 	"Listen for a connection (after binding to a port using #bindTo:port:).
 	If this method succeeds, you must wait for a connection attempt with #waitForConnectionFor:,
@@ -751,7 +751,7 @@ Socket >> listen [
 	self listenWithBacklog: 1
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> listenOn: port [
 
 	self
@@ -759,7 +759,7 @@ Socket >> listenOn: port [
 		listen
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> listenOn: portNumber backlogSize: backlog [
 
 	self
@@ -767,7 +767,7 @@ Socket >> listenOn: portNumber backlogSize: backlog [
 		listenWithBacklog: backlog
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> listenOn: portNumber backlogSize: backlog interface: ifAddr [
 
 	self
@@ -775,7 +775,7 @@ Socket >> listenOn: portNumber backlogSize: backlog interface: ifAddr [
 		listenWithBacklog: backlog
 ]
 
-{ #category : 'connection open/close' }
+{ #category : 'open/close' }
 Socket >> listenWithBacklog: anIntegerBacklog [
 	"Listen for a connection, allowing <anIntegerBacklog> connections to be queued by the OS.
 	Must already be bound to a port using #bindTo:port:.

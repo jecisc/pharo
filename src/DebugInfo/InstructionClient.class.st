@@ -12,7 +12,7 @@ Class {
 	#package : 'DebugInfo'
 }
 
-{ #category : 'extended instruction decoding' }
+{ #category : 'instruction decoding' }
 InstructionClient >> addMappedInlinePrimitiveHandler: handler at: bytecodeNumber [
 
 	mappedInlinePrimitiveHandlers at: bytecodeNumber put: handler

@@ -40,7 +40,7 @@ Class {
 	#tag : 'Base'
 }
 
-{ #category : 'instruction decoding forward' }
+{ #category : 'instruction decoding' }
 FBDDecompiler >> blockReturnConstant: value [
 	self pushConstant: value.
 	self blockReturnTop
@@ -390,13 +390,13 @@ FBDDecompiler >> maybeSkipCallPrimitiveBytecode: aCompiledMethod [
 		put: (builder codeTemp: (self errorCodeNameFor: aCompiledMethod))
 ]
 
-{ #category : 'instruction decoding forward' }
+{ #category : 'instruction decoding' }
 FBDDecompiler >> methodReturnConstant: value [
 	self pushConstant: value.
 	self methodReturnTop
 ]
 
-{ #category : 'instruction decoding forward' }
+{ #category : 'instruction decoding' }
 FBDDecompiler >> methodReturnReceiver [
 	self pushReceiver.
 	self methodReturnTop

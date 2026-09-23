@@ -15,7 +15,7 @@ Class {
 	#tag : 'Events'
 }
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> handleAsMouseEnter: anEvent [
 
 	| asMouseEnterEvent |
@@ -26,26 +26,26 @@ MouseOverHandler >> handleAsMouseEnter: anEvent [
 		self inform: asMouseEnterEvent to: anEnteredMorph originatedFrom: anEvent ifNotFocusedDo: [] ]
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> handleAsMouseLeave: anEvent [
 
 	self keepLeftMorphsOrder.
 	self informMouseLeaveToLeftMorphsUsing: anEvent
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> handleAsMouseOver: anEvent [
 
 	anEvent hand handleEvent: anEvent asMouseOver
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> hasLeftMorphsChanged [
 
 	^(leftMorphs isEmpty and: [ enteredMorphs position = 0 ]) not
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> inform: evt to: aLeftMorph originatedFrom: anEvent ifNotFocusedDo: aBlock [
 
 	^ (self is: anEvent withFocusOver: aLeftMorph)
@@ -53,7 +53,7 @@ MouseOverHandler >> inform: evt to: aLeftMorph originatedFrom: anEvent ifNotFocu
 		ifFalse: [ aBlock value ]
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> informMouseLeaveToLeftMorphsUsing: anEvent [
 
 	| asMouseLeaveEvent |
@@ -71,7 +71,7 @@ MouseOverHandler >> initialize [
 	self initializeTrackedMorphs
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> initializeProcessMouseOver [
 
 	leftMorphs := mouseOverMorphs asIdentitySet.
@@ -87,7 +87,7 @@ MouseOverHandler >> initializeTrackedMorphs [
 	enteredMorphs := WriteStream on: #()
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> is: anEvent withFocusOver: aMorph [
 
 	| focusedMorph |
@@ -96,7 +96,7 @@ MouseOverHandler >> is: anEvent withFocusOver: aMorph [
 	^ aMorph = focusedMorph or: [ aMorph hasOwner: focusedMorph ]
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> keepLeftMorphsOrder [
 
 	leftMorphs size > 1 ifTrue: [ leftMorphs := mouseOverMorphs intersection: leftMorphs ]
@@ -123,13 +123,13 @@ MouseOverHandler >> processMouseOver: anEvent [
 	self initializeTrackedMorphs
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> rememberOverList [
 
 	mouseOverMorphs := overMorphs contents
 ]
 
-{ #category : 'event handling - private' }
+{ #category : 'event handling' }
 MouseOverHandler >> transform: anEvent from: originalEvent andSendTo: aMorph [
 
 	| transformedEvent |

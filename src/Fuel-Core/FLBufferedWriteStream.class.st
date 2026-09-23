@@ -56,7 +56,7 @@ FLBufferedWriteStream >> bufferFreeSize [
 	^ buffer size - position
 ]
 
-{ #category : 'file open/close' }
+{ #category : 'open/close' }
 FLBufferedWriteStream >> close [
 	self flushBuffer.
 	stream close
