@@ -18,6 +18,18 @@ SycOpenScopesInClassMenuCommand >> activationStrategy [
 	^ SycScopesMenuActivation
 ]
 
+{ #category : 'execution' }
+SycOpenScopesInClassMenuCommand >> addClyCommandsToMenu: aMenuMorph [
+
+	| group |
+	group := ClyCommandGroupBuilder
+		         buildFor: self cmCommandClass
+		         context: self context.
+	^ ClyCommandGroupMenuRenderer
+		  render: group
+		  on: aMenuMorph
+]
+
 { #category : 'context menu' }
 SycOpenScopesInClassMenuCommand >> cmCommandClass [
 	^ SycScopesCmCommand
