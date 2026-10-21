@@ -12,6 +12,16 @@ Class {
 	#tag : 'TestData'
 }
 
+{ #category : 'testing' }
+SycMockMethodContext >> isMethodSelected [
+	^ selectedMethods isNotEmpty
+]
+
+{ #category : 'accessing' }
+SycMockMethodContext >> lastSelectedClass [
+	^ selectedMethods last methodClass
+]
+
 { #category : 'accessing' }
 SycMockMethodContext >> selectedMethods [
 	^ selectedMethods ifNil: [ #() ]
