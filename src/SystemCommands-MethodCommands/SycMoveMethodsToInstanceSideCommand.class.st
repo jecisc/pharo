@@ -3,18 +3,21 @@ I am a command to move method to the instance side of defining class
 "
 Class {
 	#name : 'SycMoveMethodsToInstanceSideCommand',
-	#superclass : 'SycMethodCommand',
-	#instVars : [
-		'refactoringScopes'
-	],
+	#superclass : 'SycMethodCmCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }
 
 { #category : 'testing' }
 SycMoveMethodsToInstanceSideCommand class >> canBeExecutedInContext: aToolContext [
-	^(super canBeExecutedInContext: aToolContext)
-		and: [ aToolContext isClassSideMethodSelected ]
+
+	^ aToolContext isMethodSelected and: [ aToolContext isClassSideMethodSelected ]
+]
+
+{ #category : 'testing' }
+SycMoveMethodsToInstanceSideCommand >> canBeExecuted [
+
+	^ self hasContext and: [ self class canBeExecutedInContext: self context ]
 ]
 
 { #category : 'accessing' }
@@ -34,20 +37,27 @@ SycMoveMethodsToInstanceSideCommand >> description [
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToInstanceSideCommand >> execute [
+SycMoveMethodsToInstanceSideCommand >> executeRefactorings [
 
-	methods
-		collect: [ :each |
-				(ReMoveMethodToClassDriver newApplication: self application)
-					scopes: refactoringScopes
-					method: each
-					class: each origin instanceSide ]
+	self methods
+		collect: [ :each | (ReMoveMethodToClassDriver newApplication: self application) scopes: self refactoringScopes method: each class: each origin instanceSide ]
 		thenDo: [ :each | each runRefactoring ]
 ]
 
-{ #category : 'execution' }
-SycMoveMethodsToInstanceSideCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'accessing' }
+SycMoveMethodsToInstanceSideCommand >> icon [
 
-	super prepareFullExecutionInContext: aToolContext.
-	refactoringScopes := aToolContext refactoringScopes
+	^ self iconNamed: self defaultMenuIconName
+]
+
+{ #category : 'accessing' }
+SycMoveMethodsToInstanceSideCommand >> name [
+
+	^ self defaultMenuItemName
+]
+
+{ #category : 'accessing' }
+SycMoveMethodsToInstanceSideCommand >> order [
+
+	^ 50
 ]

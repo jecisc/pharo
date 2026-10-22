@@ -13,13 +13,38 @@ Class {
 }
 
 { #category : 'testing' }
+SycMockMethodContext >> isClassSideMethodSelected [
+
+	^ self lastSelectedMessage notNil and: [ self lastSelectedMessage methodClass isMeta ]
+]
+
+{ #category : 'testing' }
+SycMockMethodContext >> isInstanceSideMethodSelected [
+
+	^ self lastSelectedMessage notNil and: [ self lastSelectedMessage methodClass isMeta not ]
+]
+
+{ #category : 'testing' }
+SycMockMethodContext >> isMessageSelected [
+
+	^ false
+]
+
+{ #category : 'testing' }
 SycMockMethodContext >> isMethodSelected [
-	^ selectedMethods isNotEmpty
+
+	^ self selectedMethods isNotEmpty
 ]
 
 { #category : 'accessing' }
 SycMockMethodContext >> lastSelectedClass [
 	^ selectedMethods last methodClass
+]
+
+{ #category : 'accessing' }
+SycMockMethodContext >> lastSelectedMessage [
+
+	^ self selectedMethods ifNotNil: [ :methods | methods ifEmpty: [ nil ] ifNotEmpty: [ methods first ] ]
 ]
 
 { #category : 'accessing' }
