@@ -3,7 +3,7 @@ I am a command to launch the Inline All Senders Refactoring: the call to this me
 "
 Class {
 	#name : 'SycInlineIntoLocalSendersMessageCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycMessageCmCommand',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
@@ -24,12 +24,17 @@ SycInlineIntoLocalSendersMessageCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycInlineIntoLocalSendersMessageCommand >> execute [ 
+SycInlineIntoLocalSendersMessageCommand >> executeRefactorings [
 
 	| methodOrigin |
 	methodOrigin := originalMessage contextUser compiledMethod origin.
-	((ReInlineIntoLocalSendersDriver newApplication: self application) scopes: refactoringScopes message: originalMessage selector class: methodOrigin)
-		runRefactoring  
+	((ReInlineIntoLocalSendersDriver newApplication: self application) scopes: refactoringScopes message: originalMessage selector class: methodOrigin) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycInlineIntoLocalSendersMessageCommand >> order [
+
+	^ 35
 ]
 
 { #category : 'execution' }

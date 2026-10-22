@@ -12,7 +12,7 @@ Class {
 ClyCommandGroupBuilderTest >> testBuildSortedForOrdersCommands [
 
 	| group |
-	group := ClyCommandGroupBuilder buildSortedFor: ClyMockBaseCommand context: nil.
+	group := ClyCommandGroupBuilder buildSortedForAll: { ClyMockBaseCommand } context: nil.
 	self assert: (group commands collect: [ :each | each class ]) asArray equals: {
 			ClyMockSecondCommand.
 			ClyMockFirstCommand }

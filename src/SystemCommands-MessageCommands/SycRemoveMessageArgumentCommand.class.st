@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycRemoveMessageArgumentCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycMessageCmCommand',
 	#instVars : [
 		'argumentName',
 		'methodName'
@@ -68,13 +68,13 @@ SycRemoveMessageArgumentCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRemoveMessageArgumentCommand >> execute [
-	
+SycRemoveMessageArgumentCommand >> executeRefactorings [
+
 	ReRemoveParameterDriver new
 		scopes: refactoringScopes
-			model: model
-			removeParameterFromMethodSignature: originalMessage
-			in: originalMessage methodClass;
+		model: model
+		removeParameterFromMethodSignature: originalMessage
+		in: originalMessage methodClass;
 		runRefactoring
 ]
 
@@ -92,6 +92,12 @@ SycRemoveMessageArgumentCommand >> methodName [
 		  methodName := RBMethodName
 			                selector: originalMessage selector
 			                arguments: originalMessage argumentNames ]
+]
+
+{ #category : 'accessing' }
+SycRemoveMessageArgumentCommand >> order [
+
+	^ 40
 ]
 
 { #category : 'execution' }

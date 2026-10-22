@@ -9,7 +9,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycAddMessageArgumentCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycMessageCmCommand',
 	#instVars : [
 		'newSelector'
 	],
@@ -62,13 +62,13 @@ SycAddMessageArgumentCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddMessageArgumentCommand >> execute [
+SycAddMessageArgumentCommand >> executeRefactorings [
 
 	ReAddParameterDriver new
 		scopes: refactoringScopes
-			model: model
-			addParameterToMethodSignature: originalMessage
-			in: originalMessage methodClass;
+		model: model
+		addParameterToMethodSignature: originalMessage
+		in: originalMessage methodClass;
 		runRefactoring
 ]
 
@@ -80,6 +80,12 @@ SycAddMessageArgumentCommand >> newSelector [
 { #category : 'accessing' }
 SycAddMessageArgumentCommand >> newSelector: anObject [
 	newSelector := anObject
+]
+
+{ #category : 'accessing' }
+SycAddMessageArgumentCommand >> order [
+
+	^ 30
 ]
 
 { #category : 'execution' }

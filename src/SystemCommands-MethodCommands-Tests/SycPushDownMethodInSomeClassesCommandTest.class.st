@@ -20,7 +20,7 @@ SycPushDownMethodInSomeClassesCommandTest >> contextOn: aClass selector: aSelect
 SycPushDownMethodInSomeClassesCommandTest >> testGroupContainsCommand [
 
 	| group |
-	group := ClyCommandGroupBuilder buildSortedFor: SycMethodCmCommand context: (self contextOn: Fraction selector: #numerator).
+	group := ClyCommandGroupBuilder buildSortedForAll: { SycMethodCmCommand } context: (self contextOn: Fraction selector: #numerator).
 	self assert: (group commands anySatisfy: [ :each | each class = SycPushDownMethodInSomeClassesCommand ])
 ]
 

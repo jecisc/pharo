@@ -18,7 +18,6 @@ Class {
 	#name : 'SycChangeMessageSignatureCommand',
 	#superclass : 'CmdCommand',
 	#traits : 'TRefactoringCommandSupport',
-	#classTraits : 'TRefactoringCommandSupport classTrait',
 	#instVars : [
 		'originalMessage',
 		'refactoringScopes',
@@ -136,4 +135,14 @@ SycChangeMessageSignatureCommand >> requestNewMessageIn: aToolContext [
 { #category : 'execution' }
 SycChangeMessageSignatureCommand >> resultMessageSelector [
 	self subclassResponsibility
+]
+
+{ #category : 'preparation' }
+SycChangeMessageSignatureCommand >> setUpModelFromContext: aContext [
+
+	| browser scope |
+	browser := aContext browser.
+	scope := browser defaultNavigationScope.
+	scope isCurrentImage ifTrue: [ scope := ScopesManager defaultScope ].
+	model := RBNamespace onEnvironment: scope asRBEnvironment
 ]

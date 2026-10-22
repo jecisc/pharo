@@ -3,7 +3,7 @@ I am a command to launch the Remove All Senders Refactoring: removes all possibl
 "
 Class {
 	#name : 'SycRemoveAllSendersCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycMessageCmCommand',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
@@ -33,4 +33,10 @@ SycRemoveAllSendersCommand >> defaultMenuIconName [
 { #category : 'accessing' }
 SycRemoveAllSendersCommand >> defaultMenuItemName [
 	^'Remove all senders'
+]
+
+{ #category : 'accessing' }
+SycRemoveAllSendersCommand >> order [
+
+	^ 35
 ]

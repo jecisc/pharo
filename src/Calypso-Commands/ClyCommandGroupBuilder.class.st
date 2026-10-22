@@ -24,19 +24,13 @@ ClyCommandGroupBuilder class >> buildFor: aCommandClass context: aContext [
 ]
 
 { #category : 'instance creation' }
-ClyCommandGroupBuilder class >> buildSortedFor: aCommandClass context: aContext [
+ClyCommandGroupBuilder class >> buildSortedForAll: commandClasses context: aContext [
 
-	^ self new buildFor: aCommandClass context: aContext sorted: true
+	^ self new buildForAll: commandClasses context: aContext
 ]
 
 { #category : 'building' }
 ClyCommandGroupBuilder >> buildFor: aCommandClass context: aContext [
-
-	^ self buildFor: aCommandClass context: aContext sorted: false
-]
-
-{ #category : 'building' }
-ClyCommandGroupBuilder >> buildFor: aCommandClass context: aContext sorted: aBoolean [
 
 	| commands group |
 	commands := OrderedCollection new.
@@ -47,9 +41,33 @@ ClyCommandGroupBuilder >> buildFor: aCommandClass context: aContext sorted: aBoo
 						           context: aContext;
 						           yourself.
 					command canBeExecuted ifTrue: [ commands add: command ] ] ].
-	aBoolean ifTrue: [ commands := self sortedByOrder: commands ].
 	group := CmCommandGroup named: aCommandClass name asString.
 	commands do: [ :comm | group register: comm ].
+	^ group
+]
+
+{ #category : 'building' }
+ClyCommandGroupBuilder >> buildForAll: commandClasses context: aContext [
+
+	| classes seen commands group |
+	classes := OrderedCollection new.
+	seen := Set new.
+	commandClasses do: [ :root |
+			root allSubclasses do: [ :aClass |
+					(seen includes: aClass) ifFalse: [
+							seen add: aClass.
+							classes add: aClass ] ] ].
+	commands := OrderedCollection new.
+	classes do: [ :aClass |
+			(aClass hasAbstractMethods or: [ (aClass includesSelector: #order) not ]) ifFalse: [
+					| command |
+					command := aClass new
+						           context: aContext;
+						           yourself.
+					command canBeExecuted ifTrue: [ commands add: command ] ] ].
+	commands := self sortedByOrder: commands.
+	group := CmCommandGroup named: 'Method'.
+	commands do: [ :command | group register: command ].
 	^ group
 ]
 
