@@ -14,13 +14,12 @@ SycOpenMethodMenuCommand >> activationStrategy [
 	^ SycMethodMenuActivation
 ]
 
-{ #category : 'execution' }
+{ #category : 'menu' }
 SycOpenMethodMenuCommand >> addClyCommandsToMenu: aMenuMorph [
+
 	| group groupMenu |
 	self activationStrategy = SycMethodMenuActivation ifFalse: [ ^ aMenuMorph ].
-	group := ClyCommandGroupBuilder
-		         buildFor: self cmCommandClass
-		         context: self context.
+	group := ClyCommandGroupBuilder buildSortedFor: self cmCommandClass context: self context.
 	groupMenu := MenuMorph new.
 	ClyCommandGroupMenuRenderer render: group on: groupMenu.
 	groupMenu items reverseDo: [ :each | aMenuMorph addMorphFront: each ].

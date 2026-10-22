@@ -9,6 +9,16 @@ Class {
 }
 
 { #category : 'tests' }
+ClyCommandGroupBuilderTest >> testBuildSortedForOrdersCommands [
+
+	| group |
+	group := ClyCommandGroupBuilder buildSortedFor: ClyMockBaseCommand context: nil.
+	self assert: (group commands collect: [ :each | each class ]) asArray equals: {
+			ClyMockSecondCommand.
+			ClyMockFirstCommand }
+]
+
+{ #category : 'tests' }
 ClyCommandGroupBuilderTest >> testBuildsOnlyConcreteSubclasses [
 
 	| group |
@@ -40,4 +50,18 @@ ClyCommandGroupBuilderTest >> testSetsContextOnCommands [
 		         buildFor: ClyMockBaseCommand
 		         context: context.
 	self assert: (group commands allSatisfy: [ :each | each context == context ])
+]
+
+{ #category : 'tests' }
+ClyCommandGroupBuilderTest >> testSortedByOrderPreservesInputOrderForEqualOrders [
+
+	| first second sorted |
+	first := ClyMockFirstCommand new.
+	second := ClyMockFirstCommand new.
+	sorted := ClyCommandGroupBuilder new sortedByOrder: {
+			          first.
+			          second }.
+	self assert: sorted asArray equals: {
+			first.
+			second }
 ]
