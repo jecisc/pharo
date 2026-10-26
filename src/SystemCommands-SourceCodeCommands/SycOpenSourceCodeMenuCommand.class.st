@@ -33,7 +33,8 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 		  SycSourceCodeCmCommand.
 		  SycSourceCodeRefactoringCmCommand.
 		  SycVariableCmCommand.
-		  SycMessageCmCommand }
+		  SycMessageCmCommand.
+		  ClyMethodEditorCmCommand }
 ]
 
 { #category : 'context menu' }

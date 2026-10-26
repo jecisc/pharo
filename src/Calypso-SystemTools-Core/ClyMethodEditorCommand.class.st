@@ -48,13 +48,6 @@ ClyMethodEditorCommand class >> isAbstract [
 	^self = ClyMethodEditorCommand
 ]
 
-{ #category : 'activation' }
-ClyMethodEditorCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation for: ClyTextEditorContext
-]
-
 { #category : 'accessing' }
 ClyMethodEditorCommand >> methodEditor [
 	^ methodEditor

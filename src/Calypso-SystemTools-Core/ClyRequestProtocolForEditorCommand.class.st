@@ -3,7 +3,7 @@ I am a command to request a protocol from the user which should be used to recla
 "
 Class {
 	#name : 'ClyRequestProtocolForEditorCommand',
-	#superclass : 'ClyMethodEditorCommand',
+	#superclass : 'ClyMethodEditorCmCommand',
 	#instVars : [
 		'menuItemName'
 	],
@@ -32,10 +32,24 @@ ClyRequestProtocolForEditorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRequestProtocolForEditorCommand >> execute [
+ClyRequestProtocolForEditorCommand >> executeRefactorings [
 	| protocolEditor |
 	protocolEditor := methodEditor protocolAndPackageEditor.
 	protocolEditor requestChangeBy: [ protocolEditor requestProtocol]
+]
+
+{ #category : 'accessing' }
+ClyRequestProtocolForEditorCommand >> name [
+
+	^ self context tool hasUnacceptedEdits
+		ifTrue: [ 'Classify currently editing method' ]
+		ifFalse: [ 'Classify method' ]
+]
+
+{ #category : 'accessing' }
+ClyRequestProtocolForEditorCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
