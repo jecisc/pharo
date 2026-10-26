@@ -105,6 +105,12 @@ SycCmCommand >> isEnabled [
 ]
 
 { #category : 'accessing' }
+SycCmCommand >> menuGroup [
+
+	^ CmdRootMenuGroup
+]
+
+{ #category : 'accessing' }
 SycCmCommand >> order [
 
 	^ 10100

@@ -83,6 +83,12 @@ SycMessageCmCommand >> isGroup [
 ]
 
 { #category : 'accessing' }
+SycMessageCmCommand >> menuGroup [
+
+	^ CmdRootMenuGroup
+]
+
+{ #category : 'accessing' }
 SycMessageCmCommand >> orderInContext: aToolContext [
 
 	^ aToolContext class = ClyMethodSourceCodeContext

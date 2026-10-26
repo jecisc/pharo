@@ -27,7 +27,9 @@ ClyFullBrowserVariableContext class >> selectionStrategy2 [
 { #category : 'testing' }
 ClyFullBrowserVariableContext >> commanderCommandClasses [
 
-	^ { SycVariableCmCommand }
+	^ {
+		  SycVariableCmCommand.
+		  SycVariableNavigationCmCommand }
 ]
 
 { #category : 'selection-variables' }

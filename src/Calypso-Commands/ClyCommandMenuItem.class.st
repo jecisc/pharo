@@ -1,3 +1,6 @@
+"
+I wrap a Commander2 command so that it can sit in a Commander v1 menu group (root group or Query group). I answer the menu group protocol (order, name, isActive, isCommandItem, parentGroup) by delegating to my command and my context, and I render or register myself through ClyCommandGroupMenuRenderer and the shortcut lookup of the v1 items. I am a temporary adapter and go away with the v1 menus.
+"
 Class {
 	#name : 'ClyCommandMenuItem',
 	#superclass : 'Object',
@@ -28,7 +31,12 @@ ClyCommandMenuItem class >> on: aCommand inContext: aToolContext [
 { #category : 'building' }
 ClyCommandMenuItem >> buildContextMenu: aMenu [
 
-	^ ClyCommandGroupMenuRenderer new renderCommand: command on: aMenu
+	| item |
+	item := ClyCommandGroupMenuRenderer new
+		renderCommand: command
+		on: aMenu.
+	self setUpShortcutTipForMenuItem: item.
+	^ item
 ]
 
 { #category : 'accessing' }
@@ -94,14 +102,25 @@ ClyCommandMenuItem >> parentGroup: aGroup [
 { #category : 'building' }
 ClyCommandMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
 
-	| itemOrder |
+	| itemOrder builderItem |
 	itemOrder := self order.
 	(parentGroup isRoot not and: [ parentGroup isInlined ])
 		ifTrue: [ itemOrder := parentGroup order + (itemOrder / 10000000.0) ].
-	(aBuilder item: command name)
+	builderItem := (aBuilder item: command name)
 		parent: parentGroup name;
 		order: itemOrder;
 		help: command description;
 		action: [ command execute ];
-		icon: command icon
+		icon: command icon.
+	self setUpShortcutTipForMenuItem: builderItem
+]
+
+{ #category : 'building' }
+ClyCommandMenuItem >> setUpShortcutTipForMenuItem: aMenuItem [
+
+	CmdShortcutActivation
+		activeInstancesFor: command class
+		inContext: context
+		do: [ :shortcut |
+			aMenuItem keyText: (shortcut keyCombination acceptVisitor: OSPlatform current shortcutPrinter) ]
 ]

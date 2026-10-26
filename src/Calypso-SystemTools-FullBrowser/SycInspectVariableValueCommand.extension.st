@@ -9,13 +9,6 @@ SycInspectVariableValueCommand class >> fullBrowserDoubleClickActivation [
 ]
 
 { #category : '*Calypso-SystemTools-FullBrowser' }
-SycInspectVariableValueCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyFullBrowserVariableContext
-]
-
-{ #category : '*Calypso-SystemTools-FullBrowser' }
 SycInspectVariableValueCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 

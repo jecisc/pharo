@@ -1,3 +1,6 @@
+"
+I am a Commander2 hybrid for the method editor commands (classify method, select method package, unclassify method). I sit under the v1 ClyMethodEditorCommand and take the editor tool from the context in prepareFullExecution. I am removed together with Commander v1.
+"
 Class {
 	#name : 'ClyMethodEditorCmCommand',
 	#superclass : 'ClyMethodEditorCommand',
@@ -83,6 +86,12 @@ ClyMethodEditorCmCommand >> isCommand [
 ClyMethodEditorCmCommand >> isGroup [
 
 	^ false
+]
+
+{ #category : 'accessing' }
+ClyMethodEditorCmCommand >> menuGroup [
+
+	^ CmdRootMenuGroup
 ]
 
 { #category : 'accessing' }

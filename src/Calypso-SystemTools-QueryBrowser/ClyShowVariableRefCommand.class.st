@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowVariableRefCommand',
-	#superclass : 'SycVariableCommand',
+	#superclass : 'SycVariableNavigationCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -20,24 +20,10 @@ Class {
 }
 
 { #category : 'activation' }
-ClyShowVariableRefCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup order: 2000 for: ClyFullBrowserVariableContext
-]
-
-{ #category : 'activation' }
 ClyShowVariableRefCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
 	^CmdShortcutActivation by: $n meta for: ClyFullBrowserVariableContext
-]
-
-{ #category : 'activation' }
-ClyShowVariableRefCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byItemOf: ClyQueryMenuGroup for: ClySourceCodeContext
 ]
 
 { #category : 'accessing' }
@@ -52,9 +38,21 @@ ClyShowVariableRefCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowVariableRefCommand >> execute [
+ClyShowVariableRefCommand >> executeRefactorings [
 
 	(Smalltalk tools toolNamed: #messageList) browseReferencesToVariables: variables 
+]
+
+{ #category : 'accessing' }
+ClyShowVariableRefCommand >> fullBrowserOrder [
+
+	^ 2000
+]
+
+{ #category : 'accessing' }
+ClyShowVariableRefCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }

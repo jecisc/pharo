@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowVariableWriterCommand',
-	#superclass : 'SycVariableCommand',
+	#superclass : 'SycVariableNavigationCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -20,24 +20,10 @@ Class {
 }
 
 { #category : 'activation' }
-ClyShowVariableWriterCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup order: 2001 for: ClyFullBrowserVariableContext
-]
-
-{ #category : 'activation' }
 ClyShowVariableWriterCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
 	^CmdShortcutActivation by: $m meta for: ClyFullBrowserVariableContext
-]
-
-{ #category : 'activation' }
-ClyShowVariableWriterCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byItemOf: ClyQueryMenuGroup for: ClySourceCodeContext
 ]
 
 { #category : 'accessing' }
@@ -52,9 +38,21 @@ ClyShowVariableWriterCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowVariableWriterCommand >> execute [
+ClyShowVariableWriterCommand >> executeRefactorings [
 
 	(Smalltalk tools toolNamed: #messageList) browseWritersOfVariables: variables 
+]
+
+{ #category : 'accessing' }
+ClyShowVariableWriterCommand >> fullBrowserOrder [
+
+	^ 2001
+]
+
+{ #category : 'accessing' }
+ClyShowVariableWriterCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
