@@ -23,6 +23,13 @@ SycDeprecateMessageCommand class >> canBeExecutedInContext: aToolContext [
 	^ aToolContext isMethodSelected
 ]
 
+{ #category : 'menu' }
+SycDeprecateMessageCommand class >> sourceCodeMenuActivation [
+	<classAnnotation>
+
+	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.3 for: ClyMethodSourceCodeContext
+]
+
 { #category : 'execution' }
 SycDeprecateMessageCommand >> applyResultInContext: aContext [
 ]

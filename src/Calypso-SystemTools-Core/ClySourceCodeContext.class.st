@@ -105,7 +105,8 @@ ClySourceCodeContext >> isGlobalVariableSelected [
 { #category : 'testing' }
 ClySourceCodeContext >> isMessageSelected [
 
-	^self selectedSourceNode isMessage
+	self selectedSourceNode ifNil: [ ^ false ].
+	^ self selectedSourceNode isMessage
 ]
 
 { #category : 'testing' }

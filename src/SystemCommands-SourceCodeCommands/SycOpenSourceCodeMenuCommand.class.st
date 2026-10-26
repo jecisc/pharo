@@ -31,7 +31,8 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 
 	^ {
 		  SycSourceCodeCmCommand.
-		  SycVariableCmCommand }
+		  SycVariableCmCommand.
+		  SycMessageCmCommand }
 ]
 
 { #category : 'context menu' }
