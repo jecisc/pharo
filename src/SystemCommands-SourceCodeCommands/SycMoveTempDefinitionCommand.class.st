@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycMoveTempDefinitionCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#instVars : [
 		'newName',
 		'toolContext'
@@ -50,18 +50,17 @@ SycMoveTempDefinitionCommand >> description [
 ]
 
 { #category : 'execution' }
-SycMoveTempDefinitionCommand >> execute [
+SycMoveTempDefinitionCommand >> executeRefactorings [
 
 	^ (ReMoveTemporaryDefinitionDriver new
 		   sourceNode: sourceNode;
 		   method: method;
-		   scopes: toolContext refactoringScopes;
+		   scopes: refactoringScopes;
 		   yourself) runRefactoring
 ]
 
-{ #category : 'execution' }
-SycMoveTempDefinitionCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'accessing' }
+SycMoveTempDefinitionCommand >> order [
 
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext
+	^ 1.2
 ]

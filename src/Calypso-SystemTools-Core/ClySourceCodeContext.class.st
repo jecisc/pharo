@@ -67,7 +67,7 @@ ClySourceCodeContext >> hasUnacceptedEdits [
 ClySourceCodeContext >> isArgOrTempVariableSelected [
 
 	| sourceNode |
-	sourceNode := self selectedSourceNode.
+	sourceNode := self selectedSourceNode ifNil: [ ^ false ].
 	^ sourceNode isTempVariable or: [ sourceNode isArgumentVariable ]
 ]
 

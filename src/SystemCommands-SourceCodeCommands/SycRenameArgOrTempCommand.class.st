@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycRenameArgOrTempCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#instVars : [
 		'newName',
 		'toolContext'
@@ -48,19 +48,17 @@ SycRenameArgOrTempCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenameArgOrTempCommand >> execute [
+SycRenameArgOrTempCommand >> executeRefactorings [
 
 	^ (ReRenameArgumentOrTemporaryDriver new
 		   sourceNode: sourceNode;
 		   method: method;
-		   scopes: toolContext refactoringScopes;
+		   scopes: refactoringScopes;
 		   yourself) runRefactoring
 ]
 
-{ #category : 'execution' }
-SycRenameArgOrTempCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'accessing' }
+SycRenameArgOrTempCommand >> order [
 
-	super prepareFullExecutionInContext: aToolContext.
-
-	toolContext := aToolContext
+	^ 1.2
 ]

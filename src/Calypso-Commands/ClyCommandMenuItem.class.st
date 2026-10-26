@@ -56,6 +56,12 @@ ClyCommandMenuItem >> context: aToolContext [
 ]
 
 { #category : 'testing' }
+ClyCommandMenuItem >> isActive [
+
+	^ command canBeExecuted
+]
+
+{ #category : 'testing' }
 ClyCommandMenuItem >> isCommandItem [
 
 	^ true
