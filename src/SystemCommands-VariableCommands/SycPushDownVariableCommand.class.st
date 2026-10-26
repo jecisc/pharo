@@ -3,17 +3,10 @@ I am a command to push down given variables
 "
 Class {
 	#name : 'SycPushDownVariableCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
-
-{ #category : 'activation' }
-SycPushDownVariableCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClySourceCodeContext
-]
 
 { #category : 'accessing' }
 SycPushDownVariableCommand >> defaultMenuIconName [
@@ -26,19 +19,31 @@ SycPushDownVariableCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycPushDownVariableCommand >> execute [
+SycPushDownVariableCommand >> executeRefactorings [
 
 	^ ((RePushDownInstanceVariableDriver newApplication: self application)
-		   scopes: toolContext refactoringScopes;
-		   variables: variables) runRefactoring
+		scopes: refactoringScopes;
+		variables: variables) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycPushDownVariableCommand >> order [
+
+	^ 1.4
+]
+
+{ #category : 'execution' }
+SycPushDownVariableCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	(variables allSatisfy: [ :selectedVar | selectedVar definingClass hasSubclasses ]) ifTrue: [ ^ self ].
+	self inform: 'One of the selected variables belongs to a class that has no subclasses to push down the selection(s)'.
+	CmdCommandAborted signal
 ]
 
 { #category : 'execution' }
 SycPushDownVariableCommand >> prepareFullExecutionInContext: aToolContext [
 
 	super prepareFullExecutionInContext: aToolContext.
-
-	(aToolContext selectedVariables allSatisfy: [ :selectedVar | selectedVar definingClass hasSubclasses ]) ifTrue: [ ^ self ].
-	self inform: 'One of the selected variables belongs to a class that has no subclasses to push down the selection(s)'.
-	CmdCommandAborted signal
+	self prepareFullExecution
 ]

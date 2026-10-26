@@ -3,20 +3,13 @@ I am a command to protect given variables
 "
 Class {
 	#name : 'SycProtectVariableCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#instVars : [
 		'selectedClass'
 	],
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
-
-{ #category : 'activation' }
-SycProtectVariableCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byRootGroupItemOrder: 1.2 for: ClySourceCodeContext
-]
 
 { #category : 'accessing' }
 SycProtectVariableCommand >> defaultMenuIconName [
@@ -29,12 +22,25 @@ SycProtectVariableCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycProtectVariableCommand >> execute [ 
+SycProtectVariableCommand >> executeRefactorings [
 
 	^ ((ReProtectInstanceVariableDriver newApplication: self application)
-		   scopes: refactoringScopes 
-		   variable: variables first
-		   class: selectedClass) runRefactoring
+		scopes: refactoringScopes
+		variable: variables first
+		class: selectedClass) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycProtectVariableCommand >> order [
+
+	^ 1.2
+]
+
+{ #category : 'execution' }
+SycProtectVariableCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	selectedClass := variables first definingClass
 ]
 
 { #category : 'execution' }

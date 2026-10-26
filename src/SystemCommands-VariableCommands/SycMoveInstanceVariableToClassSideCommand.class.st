@@ -3,7 +3,7 @@ I am a command to move given instance variable to its class side
 "
 Class {
 	#name : 'SycMoveInstanceVariableToClassSideCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
@@ -13,13 +13,6 @@ SycMoveInstanceVariableToClassSideCommand class >> fullBrowserMenuActivation [
 
 	<classAnnotation>
 	^ CmdContextMenuActivation byRootGroupItemFor: ClyFullBrowserVariableContext
-]
-
-{ #category : 'activation' }
-SycMoveInstanceVariableToClassSideCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byRootGroupItemOrder: 1.6 for: ClySourceCodeContext
 ]
 
 { #category : 'accessing' }
@@ -34,16 +27,14 @@ SycMoveInstanceVariableToClassSideCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycMoveInstanceVariableToClassSideCommand >> execute [
+SycMoveInstanceVariableToClassSideCommand >> executeRefactorings [
 
 	^ ((ReMoveVariablesToClassSideDriver newApplication: self application) scopes: refactoringScopes variables: variables)
-		  runRefactoring
+		runRefactoring
 ]
 
-{ #category : 'execution' }
-SycMoveInstanceVariableToClassSideCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'accessing' }
+SycMoveInstanceVariableToClassSideCommand >> order [
 
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext.
-
+	^ 1.6
 ]

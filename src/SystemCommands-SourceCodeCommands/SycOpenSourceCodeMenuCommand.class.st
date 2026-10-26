@@ -15,9 +15,33 @@ SycOpenSourceCodeMenuCommand >> activationStrategy [
 ]
 
 { #category : 'context menu' }
+SycOpenSourceCodeMenuCommand >> addCommandsTo: aCmdMenu [
+
+	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: context) commands do: [ :command | aCmdMenu rootGroup addItem: (ClyCommandMenuItem on: command) ]
+]
+
+{ #category : 'context menu' }
 SycOpenSourceCodeMenuCommand >> cmCommandClass [
 
 	^ SycSourceCodeCmCommand
+]
+
+{ #category : 'context menu' }
+SycOpenSourceCodeMenuCommand >> cmCommandClasses [
+
+	^ {
+		  SycSourceCodeCmCommand.
+		  SycVariableCmCommand }
+]
+
+{ #category : 'context menu' }
+SycOpenSourceCodeMenuCommand >> createContextMenu [
+
+	| menu |
+	menu := CmdMenu activatedBy: self activationStrategy.
+	self activationStrategy visibleInstancesInContext: context do: [ :activationStrategy | menu buildCommandItemInContext: context activatingBy: activationStrategy ].
+	self addCommandsTo: menu.
+	^ menu buildContextMenuFor: context tool
 ]
 
 { #category : 'accessing' }
@@ -43,4 +67,17 @@ SycOpenSourceCodeMenuCommand >> execute [
 		context showSourceNode].
 
 	super execute
+]
+
+{ #category : 'context menu' }
+SycOpenSourceCodeMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
+
+	| submenu |
+	RecursionStopper during: [
+		submenu := self activationStrategy buildMenuInContext: context.
+		submenu isActive ifTrue: [
+			self doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder.
+			self addCommandsTo: submenu.
+			submenu rootGroup name: aCommandItem name.
+			submenu registerContextMenuItemsWithBuilder: aBuilder ] ]
 ]
