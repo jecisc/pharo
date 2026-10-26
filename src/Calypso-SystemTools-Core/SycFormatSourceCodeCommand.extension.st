@@ -8,10 +8,3 @@ SycFormatSourceCodeCommand class >> methodEditorShorcutActivation [
 		by: $f meta shift
 		for: ClyTextEditorContext
 ]
-
-{ #category : '*Calypso-SystemTools-Core' }
-SycFormatSourceCodeCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byRootGroupItemOrder: 100000 for: ClyMethodSourceCodeContext
-]
