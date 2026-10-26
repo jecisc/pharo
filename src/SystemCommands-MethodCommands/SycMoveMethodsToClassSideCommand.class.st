@@ -21,16 +21,6 @@ SycMoveMethodsToClassSideCommand >> canBeExecuted [
 ]
 
 { #category : 'accessing' }
-SycMoveMethodsToClassSideCommand >> defaultMenuIconName [
-	^ #smallRedo
-]
-
-{ #category : 'accessing' }
-SycMoveMethodsToClassSideCommand >> defaultMenuItemName [
-	^'Move to class side'
-]
-
-{ #category : 'accessing' }
 SycMoveMethodsToClassSideCommand >> description [
 
 	^ 'Move method to the class side.'
@@ -45,13 +35,13 @@ SycMoveMethodsToClassSideCommand >> executeRefactorings [
 { #category : 'accessing' }
 SycMoveMethodsToClassSideCommand >> icon [
 
-	^ self iconNamed: self defaultMenuIconName
+	^ self iconNamed: #smallRedo
 ]
 
 { #category : 'accessing' }
 SycMoveMethodsToClassSideCommand >> name [
 
-	^ self defaultMenuItemName
+	^ 'Move to class side'
 ]
 
 { #category : 'accessing' }

@@ -21,16 +21,6 @@ SycMoveMethodsToInstanceSideCommand >> canBeExecuted [
 ]
 
 { #category : 'accessing' }
-SycMoveMethodsToInstanceSideCommand >> defaultMenuIconName [
-	^ #smallRedo
-]
-
-{ #category : 'accessing' }
-SycMoveMethodsToInstanceSideCommand >> defaultMenuItemName [
-	^'Move to instance side'
-]
-
-{ #category : 'accessing' }
 SycMoveMethodsToInstanceSideCommand >> description [
 
 	^ 'Move method to the instance side.'
@@ -47,13 +37,13 @@ SycMoveMethodsToInstanceSideCommand >> executeRefactorings [
 { #category : 'accessing' }
 SycMoveMethodsToInstanceSideCommand >> icon [
 
-	^ self iconNamed: self defaultMenuIconName
+	^ self iconNamed: #smallRedo
 ]
 
 { #category : 'accessing' }
 SycMoveMethodsToInstanceSideCommand >> name [
 
-	^ self defaultMenuItemName
+	^ 'Move to instance side'
 ]
 
 { #category : 'accessing' }

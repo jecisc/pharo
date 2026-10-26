@@ -19,6 +19,12 @@ SycMockMethodContext >> isClassSideMethodSelected [
 ]
 
 { #category : 'testing' }
+SycMockMethodContext >> isExtensionMethodSelected [
+
+	^ self isMethodSelected and: [ self selectedMethods anySatisfy: [ :method | method isExtension ] ]
+]
+
+{ #category : 'testing' }
 SycMockMethodContext >> isInstanceSideMethodSelected [
 
 	^ self lastSelectedMessage notNil and: [ self lastSelectedMessage methodClass isMeta not ]

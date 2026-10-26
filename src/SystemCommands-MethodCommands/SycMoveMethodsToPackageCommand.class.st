@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycMoveMethodsToPackageCommand',
-	#superclass : 'SycMethodRepackagingCommand',
+	#superclass : 'SycMethodRepackagingCmCommand',
 	#instVars : [
 		'package'
 	],
@@ -24,22 +24,18 @@ SycMoveMethodsToPackageCommand class >> for: methods to: aPackage [
 		package: aPackage
 ]
 
-{ #category : 'accessing' }
-SycMoveMethodsToPackageCommand >> defaultMenuIconName [
-	^ #smallRedo
-]
-
-{ #category : 'accessing' }
-SycMoveMethodsToPackageCommand >> defaultMenuItemName [
-	^'Move to package'
-]
-
 { #category : 'execution' }
-SycMoveMethodsToPackageCommand >> execute [
+SycMoveMethodsToPackageCommand >> executeRefactorings [
 
-	methods do: [ :each |
-		self moveMethod: each toPackage: package.
-		each origin removeEmptyProtocols ]
+	self methods do: [ :method |
+			self moveMethod: method toPackage: package.
+			method origin removeEmptyProtocols ]
+]
+
+{ #category : 'accessing' }
+SycMoveMethodsToPackageCommand >> icon [
+
+	^ self iconNamed: #smallRedo
 ]
 
 { #category : 'execution' }
@@ -54,6 +50,18 @@ SycMoveMethodsToPackageCommand >> moveMethod: aMethod toPackage: aPackage [
 ]
 
 { #category : 'accessing' }
+SycMoveMethodsToPackageCommand >> name [
+
+	^ 'Move to package'
+]
+
+{ #category : 'accessing' }
+SycMoveMethodsToPackageCommand >> order [
+
+	^ 70
+]
+
+{ #category : 'accessing' }
 SycMoveMethodsToPackageCommand >> package [
 	^ package
 ]
@@ -63,15 +71,17 @@ SycMoveMethodsToPackageCommand >> package: anObject [
 	package := anObject
 ]
 
-{ #category : 'execution' }
+{ #category : 'drag and drop support' }
 SycMoveMethodsToPackageCommand >> prepareExecutionInDropContext: aToolContext [
-	super prepareExecutionInDropContext: aToolContext.
-	package := aToolContext lastSelectedPackage
+
+	self context: aToolContext.
+	package := aToolContext lastSelectedPackage.
+	self prepared: true
 ]
 
-{ #category : 'execution' }
-SycMoveMethodsToPackageCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+{ #category : 'preparation' }
+SycMoveMethodsToPackageCommand >> prepareFullExecution [
 
-	package := aToolContext requestSinglePackage: 'Choose package'
+	super prepareFullExecution.
+	package := self context requestSinglePackage: 'Choose package'
 ]

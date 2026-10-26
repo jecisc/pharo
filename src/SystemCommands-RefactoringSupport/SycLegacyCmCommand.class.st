@@ -83,6 +83,17 @@ SycLegacyCmCommand >> prepareFullExecutionInContext: aToolContext [
 	prepared := true
 ]
 
+{ #category : 'accessing' }
+SycLegacyCmCommand >> prepared [
+	^ prepared
+]
+
+{ #category : 'accessing' }
+SycLegacyCmCommand >> prepared: aBoolean [
+
+	prepared := aBoolean
+]
+
 { #category : 'execution' }
 SycLegacyCmCommand >> readParametersFromContext: aToolContext [
 
