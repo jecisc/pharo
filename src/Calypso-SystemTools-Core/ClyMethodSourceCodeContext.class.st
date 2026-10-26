@@ -13,6 +13,14 @@ ClyMethodSourceCodeContext >> isMethodSelected [
 	^ self selectedSourceNode isMethod
 ]
 
+{ #category : 'testing' }
+ClyMethodSourceCodeContext >> isTestMethodSelected [
+
+	| method |
+	method := self selectedMethod.
+	^ method notNil and: [ method selector isTestSelector ]
+]
+
 { #category : 'tool controlling' }
 ClyMethodSourceCodeContext >> lastSelectedClass [ 
 	^ self selectedMethod methodClass

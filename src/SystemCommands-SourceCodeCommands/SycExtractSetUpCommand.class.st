@@ -3,13 +3,19 @@ I am a command to extract setUp method and then replaces its occurrences
 "
 Class {
 	#name : 'SycExtractSetUpCommand',
-	#superclass : 'SycTestCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#instVars : [
 		'selectedTextInterval'
 	],
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
+
+{ #category : 'testing' }
+SycExtractSetUpCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ aToolContext isMethodSelected not and: [ aToolContext isTestMethodSelected ]
+]
 
 { #category : 'executing' }
 SycExtractSetUpCommand >> asRefactorings [
@@ -25,18 +31,26 @@ SycExtractSetUpCommand >> asRefactorings [
 ]
 
 { #category : 'accessing' }
-SycExtractSetUpCommand >> defaultMenuIconName [
-	^ #restart
+SycExtractSetUpCommand >> icon [
+
+	^ self iconNamed: #restart
 ]
 
 { #category : 'accessing' }
-SycExtractSetUpCommand >> defaultMenuItemName [
+SycExtractSetUpCommand >> name [
+
 	^ 'Extract setUp'
 ]
 
-{ #category : 'preparation' }
-SycExtractSetUpCommand >> readParametersFromContext: aSourceCodeContext [
-	super readParametersFromContext: aSourceCodeContext.
+{ #category : 'accessing' }
+SycExtractSetUpCommand >> order [
 
-	selectedTextInterval := aSourceCodeContext selectedTextInterval
+	^ 1.4
+]
+
+{ #category : 'execution' }
+SycExtractSetUpCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	selectedTextInterval := self context selectedTextInterval
 ]

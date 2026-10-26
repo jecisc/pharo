@@ -25,6 +25,13 @@ SycExtractMethodAndOccurrencesCommand class >> methodEditorShortcutActivation [
 	^CmdShortcutActivation by: $e meta, $m meta for: ClySourceCodeContext
 ]
 
+{ #category : 'menu' }
+SycExtractMethodAndOccurrencesCommand class >> sourceCodeMenuActivation [
+	<classAnnotation>
+
+	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
+]
+
 { #category : 'converting' }
 SycExtractMethodAndOccurrencesCommand >> asRefactorings [
 

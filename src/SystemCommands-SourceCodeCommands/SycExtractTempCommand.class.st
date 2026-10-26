@@ -9,7 +9,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycExtractTempCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
@@ -19,22 +19,30 @@ SycExtractTempCommand class >> canBeExecutedInContext: aSourceCodeContext [
 		^ (super canBeExecutedInContext: aSourceCodeContext) and: [ aSourceCodeContext isMethodSelected not ]
 ]
 
-{ #category : 'accessing' }
-SycExtractTempCommand >> defaultMenuIconName [
-	^ ##smallUpdate
-]
-
-{ #category : 'accessing' }
-SycExtractTempCommand >> defaultMenuItemName [
-	^ 'Extract temp'
-]
-
 { #category : 'execution' }
-SycExtractTempCommand >> execute [ 
+SycExtractTempCommand >> executeRefactorings [ 
 
 	(ReExtractTempDriver new
 		  extract: sourceNode sourceInterval
 		  from: method selector
 		  in: method origin;
 		  scopes: refactoringScopes) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycExtractTempCommand >> icon [
+
+	^ self iconNamed: #smallUpdate
+]
+
+{ #category : 'accessing' }
+SycExtractTempCommand >> name [
+
+	^ 'Extract temp'
+]
+
+{ #category : 'accessing' }
+SycExtractTempCommand >> order [
+
+	^ 1.4
 ]

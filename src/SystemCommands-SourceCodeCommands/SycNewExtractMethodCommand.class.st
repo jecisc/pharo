@@ -25,6 +25,13 @@ SycNewExtractMethodCommand class >> methodEditorShortcutActivation [
 	^CmdShortcutActivation by: $e meta, $m meta, $t meta for: ClySourceCodeContext
 ]
 
+{ #category : 'menu' }
+SycNewExtractMethodCommand class >> sourceCodeMenuActivation [
+	<classAnnotation>
+
+	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
+]
+
 { #category : 'accessing' }
 SycNewExtractMethodCommand >> defaultMenuIconName [
 	^ #restart

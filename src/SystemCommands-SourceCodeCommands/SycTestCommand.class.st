@@ -10,7 +10,7 @@ SycTestCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (super canBeExecutedInContext: aToolContext) and: [
 		  aToolContext isMethodSelected not and: [
-			  aToolContext lastSelectedMethod selector isTestSelector ] ]
+			  aToolContext isTestMethodSelected ] ]
 ]
 
 { #category : 'testing' }

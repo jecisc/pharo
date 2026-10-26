@@ -3,7 +3,7 @@ I am a command to inline selected temp variable (represented by source node)
 "
 Class {
 	#name : 'SycInlineTempCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
@@ -26,18 +26,8 @@ SycInlineTempCommand >> asRefactorings [
 
 ]
 
-{ #category : 'accessing' }
-SycInlineTempCommand >> defaultMenuIconName [
-	^ ##smallRightFlush
-]
-
-{ #category : 'accessing' }
-SycInlineTempCommand >> defaultMenuItemName [
-	^'Inline temp'
-]
-
 { #category : 'execution' }
-SycInlineTempCommand >> execute [
+SycInlineTempCommand >> executeRefactorings [
 
 	| assignment |
 	assignment := sourceNode methodNode assignmentNodes detect: [ :each | each variable = sourceNode ].
@@ -49,9 +39,20 @@ SycInlineTempCommand >> execute [
 		   class: method origin) runRefactoring }
 ]
 
-{ #category : 'execution' }
-SycInlineTempCommand >> prepareFullExecutionInContext: aSourceCodeContext [
+{ #category : 'accessing' }
+SycInlineTempCommand >> icon [
 
-	super prepareFullExecutionInContext: aSourceCodeContext.
-	refactoringScopes := aSourceCodeContext refactoringScopes
+	^ self iconNamed: #smallRightFlush
+]
+
+{ #category : 'accessing' }
+SycInlineTempCommand >> name [
+
+	^ 'Inline temp'
+]
+
+{ #category : 'accessing' }
+SycInlineTempCommand >> order [
+
+	^ 1.4
 ]

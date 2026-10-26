@@ -14,6 +14,13 @@ SycRunTestCommand class >> methodEditorShorcutActivation [
 		  for: ClyTextEditorContext
 ]
 
+{ #category : 'menu' }
+SycRunTestCommand class >> sourceCodeMenuActivation [
+	<classAnnotation>
+
+	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
+]
+
 { #category : 'converting' }
 SycRunTestCommand >> asRefactorings [
 

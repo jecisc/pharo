@@ -3,7 +3,7 @@ I am a command to inline ""self send"" method directly into sender method
 "
 Class {
 	#name : 'SycInlineMethodCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
@@ -25,22 +25,30 @@ SycInlineMethodCommand >> asRefactorings [
 		   yourself) }
 ]
 
-{ #category : 'accessing' }
-SycInlineMethodCommand >> defaultMenuIconName [
-	^ #smallRightFlush
-]
-
-{ #category : 'accessing' }
-SycInlineMethodCommand >> defaultMenuItemName [
-	^ 'Inline method'
-]
-
 { #category : 'execution' }
-SycInlineMethodCommand >> execute [
+SycInlineMethodCommand >> executeRefactorings [
 
 	^ ((ReInlineMethodDriver newApplication: self application)
 		   scopes: refactoringScopes
 		   interval: sourceNode sourceInterval
 		   selector: method selector
 		   class: method origin) runRefactoring 
+]
+
+{ #category : 'accessing' }
+SycInlineMethodCommand >> icon [
+
+	^ self iconNamed: #smallRightFlush
+]
+
+{ #category : 'accessing' }
+SycInlineMethodCommand >> name [
+
+	^ 'Inline method'
+]
+
+{ #category : 'accessing' }
+SycInlineMethodCommand >> order [
+
+	^ 1.4
 ]

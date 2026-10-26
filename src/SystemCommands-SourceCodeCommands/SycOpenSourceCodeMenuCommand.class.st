@@ -31,6 +31,7 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 
 	^ {
 		  SycSourceCodeCmCommand.
+		  SycSourceCodeRefactoringCmCommand.
 		  SycVariableCmCommand.
 		  SycMessageCmCommand }
 ]
