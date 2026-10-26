@@ -26,13 +26,15 @@ SycRemoveAllSendersCommand >> createRefactoring [
 ]
 
 { #category : 'accessing' }
-SycRemoveAllSendersCommand >> defaultMenuIconName [
-	^#remove
+SycRemoveAllSendersCommand >> icon [
+
+	^ self iconNamed: #remove
 ]
 
 { #category : 'accessing' }
-SycRemoveAllSendersCommand >> defaultMenuItemName [
-	^'Remove all senders'
+SycRemoveAllSendersCommand >> name [
+
+	^ 'Remove all senders'
 ]
 
 { #category : 'accessing' }

@@ -13,11 +13,6 @@ SycFindAndReplaceMethodCommand class >> canBeExecutedInContext: aToolContext [
 	^ aToolContext isMethodSelected
 ]
 
-{ #category : 'accessing' }
-SycFindAndReplaceMethodCommand class >> defaultMenuIconName [
-	^#smallFind
-]
-
 { #category : 'execution' }
 SycFindAndReplaceMethodCommand >> applyResultInContext: aToolContext [
 ]
@@ -33,7 +28,13 @@ SycFindAndReplaceMethodCommand >> createRefactoring [
 ]
 
 { #category : 'accessing' }
-SycFindAndReplaceMethodCommand >> defaultMenuItemName [
+SycFindAndReplaceMethodCommand >> icon [
+
+	^ self iconNamed: #smallFind
+]
+
+{ #category : 'accessing' }
+SycFindAndReplaceMethodCommand >> name [
 
 	^ self refactoringClass menuItemString
 ]

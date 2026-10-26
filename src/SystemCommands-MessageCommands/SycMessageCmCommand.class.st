@@ -63,12 +63,6 @@ SycMessageCmCommand >> executeRefactoring [
 	^ self executeRefactorings
 ]
 
-{ #category : 'accessing' }
-SycMessageCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 SycMessageCmCommand >> initialize [
 
@@ -86,12 +80,6 @@ SycMessageCmCommand >> isCommand [
 SycMessageCmCommand >> isGroup [
 
 	^ false
-]
-
-{ #category : 'accessing' }
-SycMessageCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'preparation' }

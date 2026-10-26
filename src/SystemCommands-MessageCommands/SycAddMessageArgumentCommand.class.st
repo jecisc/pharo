@@ -51,16 +51,6 @@ SycAddMessageArgumentCommand >> createRefactoring [
 
 ]
 
-{ #category : 'accessing' }
-SycAddMessageArgumentCommand >> defaultMenuIconName [
-	^#smallAdd
-]
-
-{ #category : 'accessing' }
-SycAddMessageArgumentCommand >> defaultMenuItemName [
-	^'Add argument'
-]
-
 { #category : 'execution' }
 SycAddMessageArgumentCommand >> executeRefactorings [
 
@@ -70,6 +60,18 @@ SycAddMessageArgumentCommand >> executeRefactorings [
 		addParameterToMethodSignature: originalMessage
 		in: originalMessage methodClass;
 		runRefactoring
+]
+
+{ #category : 'accessing' }
+SycAddMessageArgumentCommand >> icon [
+
+	^ self iconNamed: #smallAdd
+]
+
+{ #category : 'accessing' }
+SycAddMessageArgumentCommand >> name [
+
+	^ 'Add argument'
 ]
 
 { #category : 'accessing' }
