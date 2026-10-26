@@ -24,7 +24,6 @@ SycVariableCmCommand >> applyCommandResult [
 { #category : 'testing' }
 SycVariableCmCommand >> canBeExecuted [
 
-	self context selectedSourceNode ifNil: [ ^ false ].
 	^ self class canBeExecutedInContext: self context
 ]
 
@@ -62,9 +61,9 @@ SycVariableCmCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
-SycVariableCmCommand >> icon [
+SycVariableCmCommand >> fullBrowserOrder [
 
-	^ self defaultMenuIcon
+	^ self order
 ]
 
 { #category : 'initialization' }
@@ -87,9 +86,11 @@ SycVariableCmCommand >> isGroup [
 ]
 
 { #category : 'accessing' }
-SycVariableCmCommand >> name [
+SycVariableCmCommand >> orderInContext: aToolContext [
 
-	^ self defaultMenuItemName
+	^ aToolContext class = ClyFullBrowserVariableContext
+		  ifTrue: [ self fullBrowserOrder ]
+		  ifFalse: [ self order ]
 ]
 
 { #category : 'execution' }

@@ -612,15 +612,17 @@ ClyQueryViewMorph >> mainColumn [
 	^ table columns detect: #isMainColumn
 ]
 
-{ #category : 'menu building' }
+{ #category : 'menu' }
 ClyQueryViewMorph >> menuColumn: column row: rowIndex [
 
-	| menuSelection context |
+	| menuSelection context menu |
 	menuSelection := self grabSelectionAt: rowIndex.
-
 	context := self createSelectionContextOf: menuSelection.
-
-	^CmdContextMenuActivation buildContextMenuFor: self inContext: context
+	menu := CmdContextMenuActivation buildMenuInContext: context.
+	"This next code is more complex than needed but it is here to support Commande1 and 2 compatibility"
+	context commanderCommandClasses ifNotEmpty: [ :classes |
+		(ClyCommandGroupBuilder buildSortedForAll: classes context: context) commands do: [ :each | menu rootGroup addItem: (ClyCommandMenuItem on: each inContext: context) ] ].
+	^ menu buildContextMenuFor: self
 ]
 
 { #category : 'accessing' }

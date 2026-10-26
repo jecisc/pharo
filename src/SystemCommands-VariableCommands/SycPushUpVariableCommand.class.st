@@ -8,16 +8,6 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'execution' }
-SycPushUpVariableCommand >> defaultMenuIconName [
-	^ #up
-]
-
-{ #category : 'accessing' }
-SycPushUpVariableCommand >> defaultMenuItemName [
-	^'(R) Push up'
-]
-
 { #category : 'accessing' }
 SycPushUpVariableCommand >> executeRefactorings [
 
@@ -25,6 +15,24 @@ SycPushUpVariableCommand >> executeRefactorings [
 		   scopes: refactoringScopes
 		   variables: (variables collect: [ :v | v actualVariable ])
 		   to: variables first definingClass superclass) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycPushUpVariableCommand >> fullBrowserOrder [
+
+	^ 2000
+]
+
+{ #category : 'accessing' }
+SycPushUpVariableCommand >> icon [
+
+	^ self iconNamed: #up
+]
+
+{ #category : 'accessing' }
+SycPushUpVariableCommand >> name [
+
+	^ '(R) Push up'
 ]
 
 { #category : 'accessing' }

@@ -85,22 +85,21 @@ ClySourceCodeContext >> isAssignmentSelected [
 ClySourceCodeContext >> isClassSelected [
 
 	| node |
-	node := self selectedSourceNode.
-	node isVariable ifFalse: [ ^false ].
+	node := self selectedSourceNode ifNil: [ ^ false ].
+	node isVariable ifFalse: [ ^ false ].
 
-	^node binding isLiteralVariable
+	^ node binding isLiteralVariable
 		and: [ node binding isGlobalClassNameBinding ]
 ]
 
 { #category : 'testing' }
 ClySourceCodeContext >> isGlobalVariableSelected [
-	| node binding |
-	node := self selectedSourceNode.
-	node isVariable ifFalse: [ ^false ].
 
-	binding := node binding.
+	| node |
+	node := self selectedSourceNode ifNil: [ ^ false ].
+	node isVariable ifFalse: [ ^ false ].
 
-	^binding isGlobalVariable
+	^ node binding isGlobalVariable
 ]
 
 { #category : 'testing' }
@@ -121,12 +120,11 @@ ClySourceCodeContext >> isTempVariableSelected [
 
 { #category : 'testing' }
 ClySourceCodeContext >> isVariableSelected [
-	| node |
-	self isClassSelected ifTrue: [ ^ false ].
-	node := self selectedSourceNode.
-	node isVariable ifFalse: [ ^ false ].
 
-	^ node isLiteralVariable | node isInstanceVariable
+	self selectedSourceNode ifNil: [ ^ false ].
+	self isClassSelected ifTrue: [ ^ false ].
+	^ self selectedSourceNode isVariable
+		and: [ self selectedSourceNode isLiteralVariable | self selectedSourceNode isInstanceVariable ]
 ]
 
 { #category : 'selection' }

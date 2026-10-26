@@ -111,6 +111,14 @@ SycCmCommand >> order [
 ]
 
 { #category : 'accessing' }
+SycCmCommand >> orderInContext: aToolContext [
+	"For some commands it allow to have an order different depending on the menu.
+	Fallback to #order."
+
+	^ self order
+]
+
+{ #category : 'accessing' }
 SycCmCommand >> parentGroup [
 
 	^ parentGroup

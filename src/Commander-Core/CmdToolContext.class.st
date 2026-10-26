@@ -57,6 +57,12 @@ CmdToolContext >> applyResultOf: aCommand [
 	aCommand applyResultInContext: self
 ]
 
+{ #category : 'testing' }
+CmdToolContext >> commanderCommandClasses [
+
+	^ #()
+]
+
 { #category : 'command execution' }
 CmdToolContext >> executeCommand: aCommand by: aCommandActivator [
 	aCommand execute

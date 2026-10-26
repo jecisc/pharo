@@ -11,16 +11,6 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'accessing' }
-SycProtectVariableCommand >> defaultMenuIconName [
-	^ #group
-]
-
-{ #category : 'accessing' }
-SycProtectVariableCommand >> defaultMenuItemName [
-	^'Protect'
-]
-
 { #category : 'execution' }
 SycProtectVariableCommand >> executeRefactorings [
 
@@ -28,6 +18,24 @@ SycProtectVariableCommand >> executeRefactorings [
 		scopes: refactoringScopes
 		variable: variables first
 		class: selectedClass) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycProtectVariableCommand >> fullBrowserOrder [
+
+	^ 2000
+]
+
+{ #category : 'accessing' }
+SycProtectVariableCommand >> icon [
+
+	^ self iconNamed: #group
+]
+
+{ #category : 'accessing' }
+SycProtectVariableCommand >> name [
+
+	^ 'Protect'
 ]
 
 { #category : 'accessing' }

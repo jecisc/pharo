@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'command',
-		'parentGroup'
+		'parentGroup',
+		'context'
 	],
 	#category : 'Calypso-Commands',
 	#package : 'Calypso-Commands'
@@ -12,8 +13,15 @@ Class {
 { #category : 'instance creation' }
 ClyCommandMenuItem class >> on: aCommand [
 
+	^ self on: aCommand inContext: nil
+]
+
+{ #category : 'instance creation' }
+ClyCommandMenuItem class >> on: aCommand inContext: aToolContext [
+
 	^ self new
 		command: aCommand;
+		context: aToolContext;
 		yourself
 ]
 
@@ -35,6 +43,18 @@ ClyCommandMenuItem >> command: aCommand [
 	command := aCommand
 ]
 
+{ #category : 'accessing' }
+ClyCommandMenuItem >> context [
+
+	^ context
+]
+
+{ #category : 'accessing' }
+ClyCommandMenuItem >> context: aToolContext [
+
+	context := aToolContext
+]
+
 { #category : 'testing' }
 ClyCommandMenuItem >> isCommandItem [
 
@@ -50,7 +70,7 @@ ClyCommandMenuItem >> name [
 { #category : 'accessing' }
 ClyCommandMenuItem >> order [
 
-	^ command order
+	^ command orderInContext: context
 ]
 
 { #category : 'accessing' }
@@ -69,8 +89,9 @@ ClyCommandMenuItem >> parentGroup: aGroup [
 ClyCommandMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
 
 	| itemOrder |
-	itemOrder := command order.
-	(parentGroup isRoot not and: [ parentGroup isInlined ]) ifTrue: [ itemOrder := parentGroup order + (itemOrder / 10000000.0) ].
+	itemOrder := self order.
+	(parentGroup isRoot not and: [ parentGroup isInlined ])
+		ifTrue: [ itemOrder := parentGroup order + (itemOrder / 10000000.0) ].
 	(aBuilder item: command name)
 		parent: parentGroup name;
 		order: itemOrder;

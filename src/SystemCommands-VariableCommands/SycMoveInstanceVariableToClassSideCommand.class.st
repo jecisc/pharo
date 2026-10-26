@@ -8,29 +8,29 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'activation' }
-SycMoveInstanceVariableToClassSideCommand class >> fullBrowserMenuActivation [
-
-	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemFor: ClyFullBrowserVariableContext
-]
-
-{ #category : 'accessing' }
-SycMoveInstanceVariableToClassSideCommand >> defaultMenuIconName [
-	^ #smallRedo
-]
-
-{ #category : 'accessing' }
-SycMoveInstanceVariableToClassSideCommand >> defaultMenuItemName [
-
-	^ '(T) Move to class side'
-]
-
 { #category : 'execution' }
 SycMoveInstanceVariableToClassSideCommand >> executeRefactorings [
 
 	^ ((ReMoveVariablesToClassSideDriver newApplication: self application) scopes: refactoringScopes variables: variables)
 		runRefactoring
+]
+
+{ #category : 'accessing' }
+SycMoveInstanceVariableToClassSideCommand >> fullBrowserOrder [
+
+	^ 1000
+]
+
+{ #category : 'accessing' }
+SycMoveInstanceVariableToClassSideCommand >> icon [
+
+	^ self iconNamed: #smallRedo
+]
+
+{ #category : 'accessing' }
+SycMoveInstanceVariableToClassSideCommand >> name [
+
+	^ '(T) Move to class side'
 ]
 
 { #category : 'accessing' }

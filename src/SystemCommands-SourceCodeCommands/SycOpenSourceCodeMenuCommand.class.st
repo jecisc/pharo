@@ -17,7 +17,7 @@ SycOpenSourceCodeMenuCommand >> activationStrategy [
 { #category : 'context menu' }
 SycOpenSourceCodeMenuCommand >> addCommandsTo: aCmdMenu [
 
-	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: context) commands do: [ :command | aCmdMenu rootGroup addItem: (ClyCommandMenuItem on: command) ]
+	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: context) commands do: [ :command | aCmdMenu rootGroup addItem: (ClyCommandMenuItem on: command inContext: context) ]
 ]
 
 { #category : 'context menu' }

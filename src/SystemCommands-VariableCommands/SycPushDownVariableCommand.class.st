@@ -8,22 +8,30 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'accessing' }
-SycPushDownVariableCommand >> defaultMenuIconName [
-	^ #down
-]
-
-{ #category : 'accessing' }
-SycPushDownVariableCommand >> defaultMenuItemName [
-	^'Push down'
-]
-
 { #category : 'execution' }
 SycPushDownVariableCommand >> executeRefactorings [
 
 	^ ((RePushDownInstanceVariableDriver newApplication: self application)
 		scopes: refactoringScopes;
 		variables: variables) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycPushDownVariableCommand >> fullBrowserOrder [
+
+	^ 2001
+]
+
+{ #category : 'accessing' }
+SycPushDownVariableCommand >> icon [
+
+	^ self iconNamed: #down
+]
+
+{ #category : 'accessing' }
+SycPushDownVariableCommand >> name [
+
+	^ 'Push down'
 ]
 
 { #category : 'accessing' }
