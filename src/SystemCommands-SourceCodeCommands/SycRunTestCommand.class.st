@@ -1,9 +1,15 @@
 Class {
 	#name : 'SycRunTestCommand',
-	#superclass : 'SycTestCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
+
+{ #category : 'testing' }
+SycRunTestCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ aToolContext isMethodSelected not and: [ aToolContext isTestMethodSelected ]
+]
 
 { #category : 'activation' }
 SycRunTestCommand class >> methodEditorShorcutActivation [
@@ -12,13 +18,6 @@ SycRunTestCommand class >> methodEditorShorcutActivation [
 	^ CmdShortcutActivation
 		  by: $e meta , $t meta
 		  for: ClyTextEditorContext
-]
-
-{ #category : 'menu' }
-SycRunTestCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
 ]
 
 { #category : 'converting' }
@@ -38,18 +37,24 @@ SycRunTestCommand >> description [
 	^ 'Runs test.'
 ]
 
-{ #category : 'converting' }
-SycRunTestCommand >> execute [
+{ #category : 'execution' }
+SycRunTestCommand >> executeRefactorings [
 
 	| selector testClasses |
 	selector := method selector.
 	testClasses := method methodClass isAbstract
-		               ifTrue: [ method methodClass allSubclasses ]
-		               ifFalse: [ { method methodClass } ].
+					   ifTrue: [ method methodClass allSubclasses ]
+					   ifFalse: [ { method methodClass } ].
 
 	testClasses do: [ :concreteClass |
 		| testResult |
 		testResult := concreteClass debug: selector.
 		testResult updateResultsInHistory.
 		GrowlMorph showTestResult: testResult with: selector ]
+]
+
+{ #category : 'accessing' }
+SycRunTestCommand >> order [
+
+	^ 1.4
 ]

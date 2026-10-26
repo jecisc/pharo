@@ -66,6 +66,12 @@ SycSourceCodeRefactoringCmCommand >> executeRefactorings [
 	^ self executeRefactoring: self asRefactorings
 ]
 
+{ #category : 'accessing' }
+SycSourceCodeRefactoringCmCommand >> icon [
+
+	^ self defaultMenuIcon
+]
+
 { #category : 'initialization' }
 SycSourceCodeRefactoringCmCommand >> initialize [
 
@@ -83,6 +89,12 @@ SycSourceCodeRefactoringCmCommand >> isCommand [
 SycSourceCodeRefactoringCmCommand >> isGroup [
 
 	^ false
+]
+
+{ #category : 'accessing' }
+SycSourceCodeRefactoringCmCommand >> name [
+
+	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }

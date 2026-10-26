@@ -3,7 +3,7 @@ I am a command to extract selected ast node into separate method
 "
 Class {
 	#name : 'SycExtractMethodCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#instVars : [
 		'selectedTextInterval'
 	],
@@ -23,13 +23,6 @@ SycExtractMethodCommand class >> methodEditorShortcutActivation [
 	<classAnnotation>
 
 	^CmdShortcutActivation by: $e meta, $m meta for: ClySourceCodeContext
-]
-
-{ #category : 'menu' }
-SycExtractMethodCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
 ]
 
 { #category : 'converting' }
@@ -60,6 +53,20 @@ SycExtractMethodCommand >> defaultMenuItemName [
 SycExtractMethodCommand >> description [
 
 	^ 'Extracts selected ast node into separate method.'
+]
+
+{ #category : 'accessing' }
+SycExtractMethodCommand >> order [
+
+	^ 1.4
+]
+
+{ #category : 'execution' }
+SycExtractMethodCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	self setUpModelFromContext: self context.
+	selectedTextInterval := self context selectedTextInterval
 ]
 
 { #category : 'execution' }

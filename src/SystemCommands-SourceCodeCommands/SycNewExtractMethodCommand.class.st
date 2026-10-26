@@ -3,7 +3,7 @@ I am a command to extract selected ast node into separate method
 "
 Class {
 	#name : 'SycNewExtractMethodCommand',
-	#superclass : 'SycSourceCodeRefactoringCommand',
+	#superclass : 'SycSourceCodeRefactoringCmCommand',
 	#instVars : [
 		'selectedTextInterval'
 	],
@@ -25,13 +25,6 @@ SycNewExtractMethodCommand class >> methodEditorShortcutActivation [
 	^CmdShortcutActivation by: $e meta, $m meta, $t meta for: ClySourceCodeContext
 ]
 
-{ #category : 'menu' }
-SycNewExtractMethodCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.4 for: ClyMethodSourceCodeContext
-]
-
 { #category : 'accessing' }
 SycNewExtractMethodCommand >> defaultMenuIconName [
 	^ #restart
@@ -49,22 +42,35 @@ SycNewExtractMethodCommand >> description [
 	^ 'Extract selected ast node into separate method.'
 ]
 
-{ #category : 'converting' }
-SycNewExtractMethodCommand >> execute [
+{ #category : 'execution' }
+SycNewExtractMethodCommand >> executeRefactorings [
 
 	| selectedInterval driver |
 	selectedInterval := selectedTextInterval ifEmpty: [
-		                    sourceNode sourceInterval ].
-	driver := ReExtractMethodDriver new 
+					sourceNode sourceInterval ].
+	driver := ReExtractMethodDriver new
 							scopes: refactoringScopes;
 							model: model;
-		               extract: (method sourceCode
-				                		copyFrom: selectedInterval first
-				               			to: selectedInterval last)
-		               from: method
-		               in: method origin.
-	driver runRefactoring.
-	
+							extract: (method sourceCode
+										copyFrom: selectedInterval first
+										to: selectedInterval last)
+							   from: method
+							   in: method origin.
+	driver runRefactoring
+]
+
+{ #category : 'accessing' }
+SycNewExtractMethodCommand >> order [
+
+	^ 1.4
+]
+
+{ #category : 'execution' }
+SycNewExtractMethodCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	self setUpModelFromContext: self context.
+	selectedTextInterval := self context selectedTextInterval
 ]
 
 { #category : 'execution' }
