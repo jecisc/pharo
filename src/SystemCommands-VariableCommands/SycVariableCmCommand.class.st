@@ -66,6 +66,12 @@ SycVariableCmCommand >> fullBrowserOrder [
 	^ self order
 ]
 
+{ #category : 'accessing' }
+SycVariableCmCommand >> icon [
+
+	^ self defaultMenuIcon
+]
+
 { #category : 'initialization' }
 SycVariableCmCommand >> initialize [
 
@@ -83,6 +89,12 @@ SycVariableCmCommand >> isCommand [
 SycVariableCmCommand >> isGroup [
 
 	^ false
+]
+
+{ #category : 'accessing' }
+SycVariableCmCommand >> name [
+
+	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }

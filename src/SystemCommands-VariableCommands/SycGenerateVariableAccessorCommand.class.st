@@ -3,7 +3,7 @@ I am a command to generate accessors for given variables
 "
 Class {
 	#name : 'SycGenerateVariableAccessorCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
@@ -21,7 +21,7 @@ SycGenerateVariableAccessorCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycGenerateVariableAccessorCommand >> execute [
+SycGenerateVariableAccessorCommand >> executeRefactorings [
 
 	(ReGenerateAccessorsDriver new
 		 targetClass: variables first definingClass;
@@ -30,10 +30,16 @@ SycGenerateVariableAccessorCommand >> execute [
 		 selectedVariables: (variables collect: [ :each | each name ])) runRefactoring
 ]
 
-{ #category : 'execution' }
-SycGenerateVariableAccessorCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext.
+{ #category : 'accessing' }
+SycGenerateVariableAccessorCommand >> fullBrowserOrder [
+
+	^ 1000
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'factory method' }

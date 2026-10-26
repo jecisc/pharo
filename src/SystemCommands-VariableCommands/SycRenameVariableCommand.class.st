@@ -3,10 +3,7 @@ I am a command to rename a variable.
 "
 Class {
 	#name : 'SycRenameVariableCommand',
-	#superclass : 'CmdCommand',
-	#instVars : [
-		'toolContext'
-	],
+	#superclass : 'SycVariableCmCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
@@ -34,14 +31,14 @@ SycRenameVariableCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenameVariableCommand >> execute [
+SycRenameVariableCommand >> executeRefactorings [
 
 	| variable driver |
 	variable := toolContext lastSelectedVariable.
 	
 	driver := variable isClassVariable
-		          ifFalse: [ ReRenameInstanceVariableDriver new ]
-		          ifTrue: [ ReRenameSharedVariableDriver new ].
+				  ifFalse: [ ReRenameInstanceVariableDriver new ]
+				  ifTrue: [ ReRenameSharedVariableDriver new ].
 
 	(driver
 		 scopes: toolContext refactoringScopes
@@ -49,9 +46,14 @@ SycRenameVariableCommand >> execute [
 		 for: variable definingClass) runRefactoring
 ]
 
-{ #category : 'execution' }
-SycRenameVariableCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'accessing' }
+SycRenameVariableCommand >> fullBrowserOrder [
 
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext
+	^ 1
+]
+
+{ #category : 'accessing' }
+SycRenameVariableCommand >> order [
+
+	^ 1.1
 ]

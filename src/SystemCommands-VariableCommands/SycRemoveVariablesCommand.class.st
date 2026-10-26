@@ -5,17 +5,10 @@ My responsibility is to delegate removal execution to the remove variable driver
 "
 Class {
 	#name : 'SycRemoveVariablesCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
-
-{ #category : 'activation' }
-SycRemoveVariablesCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byRootGroupItemOrder: 1.5 for: ClySourceCodeContext
-]
 
 { #category : 'accessing' }
 SycRemoveVariablesCommand >> defaultMenuIconName [
@@ -40,7 +33,7 @@ SycRemoveVariablesCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRemoveVariablesCommand >> execute [
+SycRemoveVariablesCommand >> executeRefactorings [
 	"Clearly from the UI we do not accept variables mixed from different classes and kinds"
 	
 	variables first isClassVariable
@@ -54,4 +47,16 @@ SycRemoveVariablesCommand >> execute [
 				 scopes: toolContext refactoringScopes
 				 variables: (variables collect: [:each | each name])
 				 for: variables first definingClass) runRefactoring ]
+]
+
+{ #category : 'accessing' }
+SycRemoveVariablesCommand >> fullBrowserOrder [
+
+	^ 10000
+]
+
+{ #category : 'accessing' }
+SycRemoveVariablesCommand >> order [
+
+	^ 1.5
 ]
