@@ -12,7 +12,7 @@ Class {
 SycBrowseClassCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (super canBeExecutedInContext: aToolContext)
-		and: [ aToolContext isKindOf: ClySourceCodeContext ]
+		and: [ aToolContext isSourceCodeContext ]
 ]
 
 { #category : 'accessing' }

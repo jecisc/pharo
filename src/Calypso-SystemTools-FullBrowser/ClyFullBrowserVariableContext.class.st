@@ -32,6 +32,12 @@ ClyFullBrowserVariableContext >> commanderCommandClasses [
 		  SycVariableNavigationCmCommand }
 ]
 
+{ #category : 'testing' }
+ClyFullBrowserVariableContext >> isFullBrowserVariableContext [
+
+	^ true
+]
+
 { #category : 'selection-variables' }
 ClyFullBrowserVariableContext >> isGlobalVariableSelected [
 	^false

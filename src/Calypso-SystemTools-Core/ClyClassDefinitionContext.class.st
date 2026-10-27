@@ -5,3 +5,9 @@ Class {
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Editors-Classes'
 }
+
+{ #category : 'testing' }
+ClyClassDefinitionContext >> isClassDefinitionContext [
+
+	^ true
+]

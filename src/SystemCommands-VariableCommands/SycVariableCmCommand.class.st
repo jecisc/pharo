@@ -44,9 +44,9 @@ SycVariableCmCommand >> name [
 { #category : 'accessing' }
 SycVariableCmCommand >> orderInContext: aToolContext [
 
-	^ aToolContext class = ClyFullBrowserVariableContext
-		  ifTrue: [ self fullBrowserOrder ]
-		  ifFalse: [ self order ]
+	^ aToolContext isFullBrowserVariableContext
+		ifTrue: [ self fullBrowserOrder ]
+		ifFalse: [ self order ]
 ]
 
 { #category : 'execution' }

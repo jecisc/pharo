@@ -74,8 +74,38 @@ CmdToolContext >> hasUnacceptedEdits [
 ]
 
 { #category : 'testing' }
+CmdToolContext >> isClassDefinitionContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
+CmdToolContext >> isFullBrowserClassContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
+CmdToolContext >> isFullBrowserVariableContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
+CmdToolContext >> isMethodSourceContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
 CmdToolContext >> isSimilarTo: anotherToolContext [
 	^self = anotherToolContext
+]
+
+{ #category : 'testing' }
+CmdToolContext >> isSourceCodeContext [
+
+	^ false
 ]
 
 { #category : 'ui requests' }

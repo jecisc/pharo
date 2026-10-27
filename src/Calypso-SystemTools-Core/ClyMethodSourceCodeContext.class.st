@@ -14,6 +14,12 @@ ClyMethodSourceCodeContext >> isMethodSelected [
 ]
 
 { #category : 'testing' }
+ClyMethodSourceCodeContext >> isMethodSourceContext [
+
+	^ true
+]
+
+{ #category : 'testing' }
 ClyMethodSourceCodeContext >> isTestMethodSelected [
 
 	| method |

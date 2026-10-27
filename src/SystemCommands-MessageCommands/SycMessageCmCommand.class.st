@@ -26,9 +26,9 @@ SycMessageCmCommand >> menuGroup [
 { #category : 'accessing' }
 SycMessageCmCommand >> orderInContext: aToolContext [
 
-	^ aToolContext class = ClyMethodSourceCodeContext
-		  ifTrue: [ 1.3 ]
-		  ifFalse: [ self order ]
+	^ aToolContext isMethodSourceContext
+		ifTrue: [ 1.3 ]
+		ifFalse: [ self order ]
 ]
 
 { #category : 'preparation' }

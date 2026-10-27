@@ -25,22 +25,21 @@ SycRenameClassCommand >> defaultMenuItemName [
 { #category : 'execution' }
 SycRenameClassCommand >> executeRefactorings [
 
-	toolContext class = ClyFullBrowserClassContext
+	toolContext isFullBrowserClassContext
 		ifTrue: [
 			(ReRenameClassDriver rename: targetClass name)
 				model: RBBrowserEnvironment new;
 				scopes: toolContext refactoringScopes;
 				runRefactoring ]
 		ifFalse: [
-			toolContext class = ClyClassDefinitionContext
+			toolContext isClassDefinitionContext
 				ifTrue: [
 					(ReRenameClassDriver rename: toolContext selectedSourceNode value)
 						model: RBBrowserEnvironment new;
 						scopes: toolContext refactoringScopes;
 						runRefactoring ]
 				ifFalse: [ "we are in selection in a method "
-					(ReRenameClassDriver rename:
-							 toolContext selectedSourceNode value name)
+					(ReRenameClassDriver rename: toolContext selectedSourceNode value name)
 						model: RBBrowserEnvironment new;
 						scopes: toolContext refactoringScopes;
 						runRefactoring ] ]

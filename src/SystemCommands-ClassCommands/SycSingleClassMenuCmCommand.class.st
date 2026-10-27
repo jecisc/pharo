@@ -41,7 +41,7 @@ SycSingleClassMenuCmCommand >> name [
 { #category : 'accessing' }
 SycSingleClassMenuCmCommand >> orderInContext: aToolContext [
 
-	^ (aToolContext isKindOf: ClyFullBrowserClassContext)
+	^ aToolContext isFullBrowserClassContext
 		ifTrue: [ self fullBrowserOrder ]
 		ifFalse: [ self order ]
 ]

@@ -44,7 +44,7 @@ SycVariableNavigationCmCommand >> name [
 { #category : 'accessing' }
 SycVariableNavigationCmCommand >> orderInContext: aToolContext [
 
-	^ (aToolContext isKindOf: ClyFullBrowserVariableContext)
+	^ aToolContext isFullBrowserVariableContext
 		ifTrue: [ self fullBrowserOrder ]
 		ifFalse: [ self order ]
 ]

@@ -12,9 +12,10 @@ Class {
 
 { #category : 'testing' }
 SycBrowseVariableCommand class >> canBeExecutedInContext: aToolContext [
-	"The full browser variables menu already has its own Browse entry."
 
-	^ (aToolContext class = ClyFullBrowserVariableContext) not and: [ super canBeExecutedInContext: aToolContext ]
+	"The full browser variables menu already has its own Browse entry."
+	^ aToolContext isFullBrowserVariableContext not
+		and: [ super canBeExecutedInContext: aToolContext ]
 ]
 
 { #category : 'accessing' }
