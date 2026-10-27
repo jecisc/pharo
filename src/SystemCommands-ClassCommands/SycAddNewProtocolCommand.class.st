@@ -9,7 +9,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycAddNewProtocolCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'targetClass',
 		'protocol'
@@ -37,20 +37,30 @@ SycAddNewProtocolCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddNewProtocolCommand >> execute [
+SycAddNewProtocolCommand >> executeRefactorings [
 
 	targetClass addProtocol: protocol
 ]
 
+{ #category : 'testing' }
+SycAddNewProtocolCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycAddNewProtocolCommand >> order [
+
+	^ 2
+]
+
 { #category : 'execution' }
-SycAddNewProtocolCommand >> prepareFullExecutionInContext: aToolContext [
+SycAddNewProtocolCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-
-	protocol := StProtocolNameChooserPresenter requestProtocolNameConfiguring: [ :presenter | presenter concernedClass: aToolContext lastSelectedClass ].
-
-	targetClass := self requestClassInContext: aToolContext.
-	targetClass := aToolContext currentMetaLevelOf: targetClass
+	super prepareFullExecution.
+	protocol := StProtocolNameChooserPresenter requestProtocolNameConfiguring: [ :presenter | presenter concernedClass: self context lastSelectedClass ].
+	targetClass := self requestClassInContext: self context.
+	targetClass := self context currentMetaLevelOf: targetClass
 ]
 
 { #category : 'accessing' }

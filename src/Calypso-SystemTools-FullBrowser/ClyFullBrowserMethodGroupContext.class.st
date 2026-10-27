@@ -16,6 +16,18 @@ ClyFullBrowserMethodGroupContext class >> selectionStrategy [
 	^ClyContextSelectionStrategyAnnotation for: ClyFullBrowserMorph selectionType: ClyMethodGroup
 ]
 
+{ #category : 'accessing' }
+ClyFullBrowserMethodGroupContext >> commanderCommandClasses [
+
+	^ super commanderCommandClasses , { SycClassMenuCmCommand }
+]
+
+{ #category : 'testing' }
+ClyFullBrowserMethodGroupContext >> isFullBrowserMethodGroupContext [
+
+	^ true
+]
+
 { #category : 'selection-method groups' }
 ClyFullBrowserMethodGroupContext >> selectedMethodGroupItems [
 	^selectedItems

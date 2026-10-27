@@ -3,7 +3,7 @@ I am a command to clean all unused method tags (empty protocols) of given classe
 "
 Class {
 	#name : 'SycRemoveEmptyMethodTagsCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
@@ -19,14 +19,26 @@ SycRemoveEmptyMethodTagsCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRemoveEmptyMethodTagsCommand >> execute [
+SycRemoveEmptyMethodTagsCommand >> executeRefactorings [
 
 	classes do: [ :class | class removeEmptyProtocols ]
 ]
 
-{ #category : 'execution' }
-SycRemoveEmptyMethodTagsCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'testing' }
+SycRemoveEmptyMethodTagsCommand >> isAvailableInMenuOf: aToolContext [
 
-	super prepareFullExecutionInContext: aToolContext.
-	classes := classes collect: [:each | aToolContext currentMetaLevelOf: each]
+	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycRemoveEmptyMethodTagsCommand >> order [
+
+	^ 10001
+]
+
+{ #category : 'execution' }
+SycRemoveEmptyMethodTagsCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	classes := classes collect: [ :each | self context currentMetaLevelOf: each ]
 ]

@@ -3,7 +3,7 @@ I am a command to categorize all unclassified methods of given classes
 "
 Class {
 	#name : 'SycCategorizeAllUnclassifiedMethodsCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
@@ -19,17 +19,27 @@ SycCategorizeAllUnclassifiedMethodsCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycCategorizeAllUnclassifiedMethodsCommand >> execute [
+SycCategorizeAllUnclassifiedMethodsCommand >> executeRefactorings [
 	"MethodClassifier should not be hardcoded and should be based on Smalltalk tools"
 
-	classes do: [ :each |
-		each uncategorizedSelectors do: [ :selector |
-			MethodClassifier classify: each >> selector ] ]
+	classes do: [ :each | each uncategorizedSelectors do: [ :selector | MethodClassifier classify: each >> selector ] ]
+]
+
+{ #category : 'testing' }
+SycCategorizeAllUnclassifiedMethodsCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycCategorizeAllUnclassifiedMethodsCommand >> order [
+
+	^ 10000
 ]
 
 { #category : 'execution' }
-SycCategorizeAllUnclassifiedMethodsCommand >> prepareFullExecutionInContext: aToolContext [
+SycCategorizeAllUnclassifiedMethodsCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-	classes := classes collect: [:each | aToolContext currentMetaLevelOf: each]
+	super prepareFullExecution.
+	classes := classes collect: [ :each | self context currentMetaLevelOf: each ]
 ]
