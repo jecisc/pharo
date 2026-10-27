@@ -36,7 +36,8 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 		  SycVariableCmCommand.
 		  SycMessageCmCommand.
 		  ClyMethodEditorCmCommand.
-		  SycVariableNavigationCmCommand }
+		  SycVariableNavigationCmCommand.
+		  SycSingleClassMenuCmCommand }
 ]
 
 { #category : 'context menu' }

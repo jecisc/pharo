@@ -3,10 +3,17 @@ I am a command to open browser on given class
 "
 Class {
 	#name : 'SycBrowseClassCommand',
-	#superclass : 'SycSingleClassCommand',
+	#superclass : 'SycSingleClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
+
+{ #category : 'testing' }
+SycBrowseClassCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ (super canBeExecutedInContext: aToolContext)
+		and: [ aToolContext isKindOf: ClySourceCodeContext ]
+]
 
 { #category : 'accessing' }
 SycBrowseClassCommand >> defaultMenuIconName [
@@ -19,8 +26,29 @@ SycBrowseClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycBrowseClassCommand >> execute [
+SycBrowseClassCommand >> executeRefactorings [
 	targetClass browse
+]
+
+{ #category : 'accessing' }
+SycBrowseClassCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+SycBrowseClassCommand >> order [
+
+	^ 1000
+]
+
+{ #category : 'preparation' }
+SycBrowseClassCommand >> prepareFullExecution [
+
+	| scope |
+	scope := RBBrowserEnvironment new.
+	targetClass := (scope at: self context selectedSourceNode name)
+		ifNil: [ self context lastSelectedClass ]
 ]
 
 { #category : 'execution' }

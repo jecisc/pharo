@@ -66,6 +66,14 @@ ClyBrowserContext >> browser [
 	^tool
 ]
 
+{ #category : 'testing' }
+ClyBrowserContext >> commanderCommandClasses [
+
+	^ (self isAboutBrowserItemType: ClyClass)
+		ifTrue: [ { SycSingleClassMenuCmCommand } ]
+		ifFalse: [ #() ]
+]
+
 { #category : 'copying' }
 ClyBrowserContext >> copyForBrowserStateSnapshot [
 

@@ -4,7 +4,7 @@ Rename Class Refactoring: Change the name of a selected class, update all refere
 "
 Class {
 	#name : 'SycRenameClassCommand2',
-	#superclass : 'SycSingleClassCommand',
+	#superclass : 'SycSingleClassMenuCmCommand',
 	#instVars : [
 		'toolContext'
 	],
@@ -23,7 +23,7 @@ SycRenameClassCommand2 >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRenameClassCommand2 >> execute [
+SycRenameClassCommand2 >> executeRefactorings [
 
 	toolContext class = ClyFullBrowserClassContext
 		ifTrue: [
@@ -44,6 +44,19 @@ SycRenameClassCommand2 >> execute [
 						model: RBBrowserEnvironment new;
 						scopes: toolContext refactoringScopes;
 						runRefactoring ] ]
+]
+
+{ #category : 'accessing' }
+SycRenameClassCommand2 >> order [
+
+	^ 1.2
+]
+
+{ #category : 'preparation' }
+SycRenameClassCommand2 >> prepareFullExecution [
+
+	super prepareFullExecution.
+	toolContext := self context
 ]
 
 { #category : 'execution' }
