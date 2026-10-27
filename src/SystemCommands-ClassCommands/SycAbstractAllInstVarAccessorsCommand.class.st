@@ -3,17 +3,10 @@ I command to launch the Abstract refactorings: create accessors and abstract the
 "
 Class {
 	#name : 'SycAbstractAllInstVarAccessorsCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
-
-{ #category : 'activation' }
-SycAbstractAllInstVarAccessorsCommand class >> sourceCodeMenuActivation [
-
-	<classAnnotation>
-	^ SycSourceCodeMenuActivation byRootGroupItemFor: ClySourceCodeContext
-]
 
 { #category : 'accessing' }
 SycAbstractAllInstVarAccessorsCommand >> asRefactorings [
@@ -41,9 +34,36 @@ SycAbstractAllInstVarAccessorsCommand >> defaultMenuItemName [
 	^'Abstract instance variables'
 ]
 
+{ #category : 'accessing' }
+SycAbstractAllInstVarAccessorsCommand >> fullBrowserOrder [
+
+	^ 2.1
+]
+
+{ #category : 'testing' }
+SycAbstractAllInstVarAccessorsCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
+		or: [ aToolContext isSourceCodeContext ]
+]
+
 { #category : 'testing' }
 SycAbstractAllInstVarAccessorsCommand >> isComplexRefactoring [
 	^ true
+]
+
+{ #category : 'accessing' }
+SycAbstractAllInstVarAccessorsCommand >> order [
+
+	^ 1000
+]
+
+{ #category : 'preparation' }
+SycAbstractAllInstVarAccessorsCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	classes := classes collect: [ :each | self context currentMetaLevelOf: each ].
+	self selectVariables
 ]
 
 { #category : 'testing' }

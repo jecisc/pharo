@@ -3,7 +3,7 @@ I am a command to generate all unimplemented methods of the given classes
 "
 Class {
 	#name : 'SycRealizeClassCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
@@ -21,15 +21,27 @@ SycRealizeClassCommand >> defaultMenuItemName [
 	^ self refactoringClass menuItemString
 ]
 
-{ #category : 'execution' }
-SycRealizeClassCommand >> execute [
+{ #category : 'accessing' }
+SycRealizeClassCommand >> fullBrowserOrder [
 
-	self executeRefactorings
+	^ 2.1
+]
+
+{ #category : 'testing' }
+SycRealizeClassCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
 ]
 
 { #category : 'testing' }
 SycRealizeClassCommand >> isComplexRefactoring [
 	^true
+]
+
+{ #category : 'accessing' }
+SycRealizeClassCommand >> order [
+
+	^ 2.1
 ]
 
 { #category : 'factory method' }

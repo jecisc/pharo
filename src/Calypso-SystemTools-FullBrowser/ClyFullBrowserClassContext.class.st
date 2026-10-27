@@ -17,6 +17,12 @@ ClyFullBrowserClassContext class >> selectionStrategy [
 ]
 
 { #category : 'testing' }
+ClyFullBrowserClassContext >> commanderCommandClasses [
+
+	^ super commanderCommandClasses , { SycClassMenuCmCommand }
+]
+
+{ #category : 'testing' }
 ClyFullBrowserClassContext >> isFullBrowserClassContext [
 
 	^ true

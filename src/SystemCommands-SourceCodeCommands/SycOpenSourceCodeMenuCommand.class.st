@@ -37,7 +37,8 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 		  SycMessageCmCommand.
 		  ClyMethodEditorCmCommand.
 		  SycVariableNavigationCmCommand.
-		  SycSingleClassMenuCmCommand }
+		  SycSingleClassMenuCmCommand.
+		  SycClassMenuCmCommand }
 ]
 
 { #category : 'context menu' }
@@ -81,9 +82,10 @@ SycOpenSourceCodeMenuCommand >> registerContextMenuItemsFor: aCommandItem withBu
 	| submenu |
 	RecursionStopper during: [
 		submenu := self activationStrategy buildMenuInContext: context.
+		"Commander2 items count for the activity check, so they must be added first"
+		self addCommandsTo: submenu.
 		submenu isActive ifTrue: [
 			self doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder.
-			self addCommandsTo: submenu.
 			submenu rootGroup name: aCommandItem name.
 			submenu registerContextMenuItemsWithBuilder: aBuilder ] ]
 ]

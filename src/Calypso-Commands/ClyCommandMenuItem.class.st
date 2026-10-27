@@ -28,6 +28,16 @@ ClyCommandMenuItem class >> on: aCommand inContext: aToolContext [
 		yourself
 ]
 
+{ #category : 'accessing' }
+ClyCommandMenuItem >> actualParentGroup [
+
+	"Same rule as the v1 menu items: an inlined group registers its children under its own parent."
+	parentGroup isRoot ifTrue: [ ^ parentGroup ].
+	^ parentGroup isInlined
+		ifTrue: [ parentGroup actualParentGroup ]
+		ifFalse: [ parentGroup ]
+]
+
 { #category : 'building' }
 ClyCommandMenuItem >> buildContextMenu: aMenu [
 
@@ -107,7 +117,7 @@ ClyCommandMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
 	(parentGroup isRoot not and: [ parentGroup isInlined ])
 		ifTrue: [ itemOrder := parentGroup order + (itemOrder / 10000000.0) ].
 	builderItem := (aBuilder item: command name)
-		parent: parentGroup name;
+		parent: self actualParentGroup name;
 		order: itemOrder;
 		help: command description;
 		action: [ command execute ];

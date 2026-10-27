@@ -3,7 +3,7 @@ I am a command to generate accessors for all inst vars of given classes
 "
 Class {
 	#name : 'SycGenerateAllInstVarAccessorsCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
@@ -32,15 +32,34 @@ SycGenerateAllInstVarAccessorsCommand >> defaultMenuItemName [
 	^'Generate accessors'
 ]
 
-{ #category : 'execution' }
-SycGenerateAllInstVarAccessorsCommand >> execute [
+{ #category : 'accessing' }
+SycGenerateAllInstVarAccessorsCommand >> fullBrowserOrder [
 
-	self executeRefactorings
+	^ 2.1
+]
+
+{ #category : 'testing' }
+SycGenerateAllInstVarAccessorsCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
 ]
 
 { #category : 'testing' }
 SycGenerateAllInstVarAccessorsCommand >> isComplexRefactoring [
 	^true
+]
+
+{ #category : 'accessing' }
+SycGenerateAllInstVarAccessorsCommand >> order [
+
+	^ 2.1
+]
+
+{ #category : 'preparation' }
+SycGenerateAllInstVarAccessorsCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	classes := classes collect: [ :class | self context currentMetaLevelOf: class ]
 ]
 
 { #category : 'execution' }

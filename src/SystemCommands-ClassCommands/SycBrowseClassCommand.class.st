@@ -8,13 +8,6 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'testing' }
-SycBrowseClassCommand class >> canBeExecutedInContext: aToolContext [
-
-	^ (super canBeExecutedInContext: aToolContext)
-		and: [ aToolContext isSourceCodeContext ]
-]
-
 { #category : 'accessing' }
 SycBrowseClassCommand >> defaultMenuIconName [
 	^#browse
@@ -28,6 +21,12 @@ SycBrowseClassCommand >> defaultMenuItemName [
 { #category : 'execution' }
 SycBrowseClassCommand >> executeRefactorings [
 	targetClass browse
+]
+
+{ #category : 'testing' }
+SycBrowseClassCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isSourceCodeContext
 ]
 
 { #category : 'accessing' }

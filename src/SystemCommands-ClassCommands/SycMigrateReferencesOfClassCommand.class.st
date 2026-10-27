@@ -8,7 +8,7 @@ newName:  <String>
 "
 Class {
 	#name : 'SycMigrateReferencesOfClassCommand',
-	#superclass : 'SycSingleClassCommand',
+	#superclass : 'SycSingleClassMenuCmCommand',
 	#instVars : [
 		'newName'
 	],
@@ -27,14 +27,40 @@ SycMigrateReferencesOfClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycMigrateReferencesOfClassCommand >> execute [
+SycMigrateReferencesOfClassCommand >> executeRefactorings [
 
 	self asRefactorings do: [ :ref | ref execute ]
+]
+
+{ #category : 'accessing' }
+SycMigrateReferencesOfClassCommand >> fullBrowserOrder [
+
+	^ 1.4
+]
+
+{ #category : 'testing' }
+SycMigrateReferencesOfClassCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
+		or: [ aToolContext isSourceCodeContext ]
 ]
 
 { #category : 'testing' }
 SycMigrateReferencesOfClassCommand >> isComplexRefactoring [
 	^ true
+]
+
+{ #category : 'accessing' }
+SycMigrateReferencesOfClassCommand >> order [
+
+	^ 1.3
+]
+
+{ #category : 'preparation' }
+SycMigrateReferencesOfClassCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	newName := self context requestSingleClass: 'Choose new class'
 ]
 
 { #category : 'execution' }

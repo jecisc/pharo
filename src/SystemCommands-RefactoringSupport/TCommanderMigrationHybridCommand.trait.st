@@ -26,7 +26,8 @@ TCommanderMigrationHybridCommand >> applyCommandResult [
 { #category : 'testing' }
 TCommanderMigrationHybridCommand >> canBeExecuted [
 
-	^ self class canBeExecutedInContext: self context
+	^ (self class canBeExecutedInContext: self context)
+		and: [ self isAvailableInMenuOf: self context ]
 ]
 
 { #category : 'accessing' }
@@ -50,16 +51,42 @@ TCommanderMigrationHybridCommand >> execute [
 			[
 				prepared := true.
 				self prepareFullExecution.
-				self executeRefactoring.
-				self applyCommandResult ]
+				self isComplexRefactoring
+					ifTrue: [ self executeComplexRefactoring ]
+					ifFalse: [
+						self executeRefactoring.
+						self applyCommandResult ] ]
 				on: Exception
 				do: [ :exception | self processCommandFailure: exception ] ]
+]
+
+{ #category : 'execution' }
+TCommanderMigrationHybridCommand >> executeComplexRefactoring [
+
+	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
+	| submitDialog |
+	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
+	submitDialog existChanges
+		ifTrue: [
+			submitDialog openDialog
+				okAction: [
+					submitDialog accept.
+					self applyCommandResult ];
+				cancelAction: [ :p | p beCancel ] ]
+		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
+	CmdCommandAborted signal
 ]
 
 { #category : 'execution' }
 TCommanderMigrationHybridCommand >> executeRefactoring [
 
 	^ self executeRefactorings
+]
+
+{ #category : 'testing' }
+TCommanderMigrationHybridCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ true
 ]
 
 { #category : 'testing' }

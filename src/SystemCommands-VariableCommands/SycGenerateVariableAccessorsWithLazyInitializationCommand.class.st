@@ -1,6 +1,6 @@
 Class {
 	#name : 'SycGenerateVariableAccessorsWithLazyInitializationCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycVariableCmCommand',
 	#instVars : [
 		'variable',
 		'value'
@@ -15,13 +15,6 @@ SycGenerateVariableAccessorsWithLazyInitializationCommand class >> canBeExecuted
 	^ (super canBeExecutedInContext: aToolContext) and: [
 		  aToolContext isVariableSelected and: [
 			  aToolContext isGlobalVariableSelected not ] ]
-]
-
-{ #category : 'activation' }
-SycGenerateVariableAccessorsWithLazyInitializationCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 2 for: ClyFullBrowserVariableContext
 ]
 
 { #category : 'converting' }
@@ -46,9 +39,39 @@ SycGenerateVariableAccessorsWithLazyInitializationCommand >> defaultMenuItemName
 	^ self refactoringClass menuItemString
 ]
 
+{ #category : 'accessing' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> fullBrowserOrder [
+
+	^ 2
+]
+
+{ #category : 'testing' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserVariableContext
+]
+
 { #category : 'testing' }
 SycGenerateVariableAccessorsWithLazyInitializationCommand >> isComplexRefactoring [
 	^true
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> order [
+
+	^ 2
+]
+
+{ #category : 'preparation' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	variable := self context lastSelectedVariable.
+	value := self context tool morphicUIManager
+		request: 'Default value of variable accessor'
+		initialAnswer: 'nil'
+		title: 'Default variable''s value'.
+	value isEmptyOrNil ifTrue: [ CmdCommandAborted signal ]
 ]
 
 { #category : 'execution' }
