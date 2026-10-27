@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowMessageImplementorCommand',
-	#superclass : 'SycMessageCommand',
+	#superclass : 'SycMessageMenuCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -27,24 +27,10 @@ ClyShowMessageImplementorCommand class >> methodBrowserToolbarActivation [
 ]
 
 { #category : 'activation' }
-ClyShowMessageImplementorCommand class >> methodMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyMethod asCalypsoItemContext
-]
-
-{ #category : 'activation' }
 ClyShowMessageImplementorCommand class >> methodShortcutActivation [
 	<classAnnotation>
 
 	^CmdShortcutActivation by: $m meta for: ClyMethod asCalypsoItemContext
-]
-
-{ #category : 'activation' }
-ClyShowMessageImplementorCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byItemOf: ClyQueryMenuGroup for: ClySourceCodeContext
 ]
 
 { #category : 'activation' }
@@ -73,17 +59,26 @@ ClyShowMessageImplementorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowMessageImplementorCommand >> execute [
+ClyShowMessageImplementorCommand >> executeRefactorings [
 
-	| selectors |
+	(Smalltalk tools toolNamed: #messageList) browseImplementorsOfAll: (messages collect: [ :message | message selector ])
+]
 
-	selectors := messages collect: [ :each | each selector ].
-	(Smalltalk tools toolNamed: #messageList) browseImplementorsOfAll: selectors
+{ #category : 'accessing' }
+ClyShowMessageImplementorCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowMessageImplementorCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
-ClyShowMessageImplementorCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+ClyShowMessageImplementorCommand >> prepareFullExecution [
 
-	browser := aToolContext browser
+	super prepareFullExecution.
+	browser := self context browser
 ]

@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowClassRefCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -23,13 +23,6 @@ Class {
 ClyShowClassRefCommand class >> forClasses: classes by: aBrowser [
 	^(self for: classes)
 		browser: aBrowser
-]
-
-{ #category : 'activation' }
-ClyShowClassRefCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyFullBrowserClassContext
 ]
 
 { #category : 'activation' }
@@ -47,13 +40,6 @@ ClyShowClassRefCommand class >> fullBrowserToolbarActivation [
 ]
 
 { #category : 'activation' }
-ClyShowClassRefCommand class >> queryBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyQueryBrowserContext
-]
-
-{ #category : 'activation' }
 ClyShowClassRefCommand class >> queryBrowserShortcutActivation [
 	<classAnnotation>
 
@@ -65,13 +51,6 @@ ClyShowClassRefCommand class >> queryBrowserToolbarActivation [
 	<classAnnotation>
 
 	^ClyToolbarActivation byItemOf: ClyButtonToolbarGroup for: ClyQueryBrowserContext
-]
-
-{ #category : 'activation' }
-ClyShowClassRefCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^SycSourceCodeMenuActivation byItemOf: ClyQueryMenuGroup for: ClySourceCodeContext
 ]
 
 { #category : 'accessing' }
@@ -92,14 +71,32 @@ ClyShowClassRefCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowClassRefCommand >> execute [
+ClyShowClassRefCommand >> executeRefactorings [
 
 	(Smalltalk tools toolNamed: #messageList) browseReferencesToClass: classes first
 ]
 
-{ #category : 'execution' }
-ClyShowClassRefCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+{ #category : 'testing' }
+ClyShowClassRefCommand >> isAvailableInMenuOf: aToolContext [
 
-	browser := aToolContext browser
+	^ aToolContext isFullBrowserClassContext or: [ aToolContext isQueryBrowserContext or: [ aToolContext isSourceCodeContext ] ]
+]
+
+{ #category : 'accessing' }
+ClyShowClassRefCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowClassRefCommand >> order [
+
+	^ 1000
+]
+
+{ #category : 'execution' }
+ClyShowClassRefCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	browser := self context browser
 ]

@@ -3,7 +3,7 @@ Retrieves the selected class traits.
 "
 Class {
 	#name : 'ClyShowTraitUsersCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -11,13 +11,6 @@ Class {
 	#package : 'Calypso-SystemTools-QueryBrowser',
 	#tag : 'Commands-Queries'
 }
-
-{ #category : 'activation' }
-ClyShowTraitUsersCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyFullBrowserClassContext
-]
 
 { #category : 'accessing' }
 ClyShowTraitUsersCommand >> browser [
@@ -37,14 +30,32 @@ ClyShowTraitUsersCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowTraitUsersCommand >> execute [
+ClyShowTraitUsersCommand >> executeRefactorings [
 
 	classes first isTrait ifTrue: [ (Smalltalk tools toolNamed: #messageList) browseUsersOfTrait: classes first ]
 ]
 
-{ #category : 'execution' }
-ClyShowTraitUsersCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+{ #category : 'testing' }
+ClyShowTraitUsersCommand >> isAvailableInMenuOf: aToolContext [
 
-	browser := aToolContext browser
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyShowTraitUsersCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowTraitUsersCommand >> order [
+
+	^ 1000
+]
+
+{ #category : 'execution' }
+ClyShowTraitUsersCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	browser := self context browser
 ]

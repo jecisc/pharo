@@ -16,7 +16,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyJumpToTestMethodCommand',
-	#superclass : 'SycMethodCommand',
+	#superclass : 'SycMethodMenuCmCommand',
 	#traits : 'TClyGenerateTestClass',
 	#classTraits : 'TClyGenerateTestClass classTrait',
 	#instVars : [
@@ -44,12 +44,6 @@ ClyJumpToTestMethodCommand class >> hasInstanceSelectedItemsIn: aBrowserContext 
 ]
 
 { #category : 'activation' }
-ClyJumpToTestMethodCommand class >> methodMenuActivation [
-	<classAnnotation>
-	^ CmdContextMenuActivation byItemOf: ClySUnitMethodMenuGroup order: 10 for: ClyMethod asCalypsoItemContext
-]
-
-{ #category : 'activation' }
 ClyJumpToTestMethodCommand class >> methodShortcutActivation [
 	<classAnnotation>
 	^ CmdShortcutActivation by: $h meta , $j meta for: ClyMethod asCalypsoItemContext
@@ -67,8 +61,9 @@ ClyJumpToTestMethodCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyJumpToTestMethodCommand >> execute [
-	self methods do: [ :method | self generateTestMethodFor: method ].
+ClyJumpToTestMethodCommand >> executeRefactorings [
+
+	methods do: [ :method | self generateTestMethodFor: method ].
 
 	testMethodToBrowse ifNotNil: [ :testMethod | browser selectMethod: testMethod ]
 ]
@@ -97,11 +92,24 @@ ClyJumpToTestMethodCommand >> generateTestMethodNamed: aSymbol in: aClass [
 	aClass compile: body classified: 'tests'
 ]
 
+{ #category : 'accessing' }
+ClyJumpToTestMethodCommand >> menuGroup [
+
+	^ ClySUnitMethodMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyJumpToTestMethodCommand >> order [
+
+	^ 10
+]
+
 { #category : 'execution' }
-ClyJumpToTestMethodCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	browser := aToolContext browser.
-	systemEnvironment := aToolContext systemEnvironment
+ClyJumpToTestMethodCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	browser := self context browser.
+	systemEnvironment := self context systemEnvironment
 ]
 
 { #category : 'accessing' }

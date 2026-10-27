@@ -16,6 +16,12 @@ ClyQueryBrowserContext class >> selectionStrategy [
 	^ClyContextSelectionStrategyAnnotation for: ClyQueryBrowserMorph
 ]
 
+{ #category : 'accessing' }
+ClyQueryBrowserContext >> commanderCommandClasses [
+
+	^ super commanderCommandClasses , { SycClassMenuCmCommand }
+]
+
 { #category : 'selection-classes' }
 ClyQueryBrowserContext >> isClassSelected [
 	"here we extract selected classes from selected items"

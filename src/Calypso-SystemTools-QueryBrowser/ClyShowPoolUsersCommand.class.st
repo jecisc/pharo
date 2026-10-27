@@ -3,7 +3,7 @@ Retrieves the selected class pool users.
 "
 Class {
 	#name : 'ClyShowPoolUsersCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'browser'
 	],
@@ -11,15 +11,6 @@ Class {
 	#package : 'Calypso-SystemTools-QueryBrowser',
 	#tag : 'Commands-Queries'
 }
-
-{ #category : 'activation' }
-ClyShowPoolUsersCommand class >> fullBrowserMenuActivation [
-
-	<classAnnotation>
-	^ CmdContextMenuActivation
-		  byItemOf: ClyQueryMenuGroup
-		  for: ClyFullBrowserClassContext
-]
 
 { #category : 'accessing' }
 ClyShowPoolUsersCommand >> browser [
@@ -40,15 +31,32 @@ ClyShowPoolUsersCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowPoolUsersCommand >> execute [
+ClyShowPoolUsersCommand >> executeRefactorings [
 
 	(Smalltalk tools toolNamed: #messageList) browseUsersOfSharedPool: classes first
 ]
 
+{ #category : 'testing' }
+ClyShowPoolUsersCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyShowPoolUsersCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowPoolUsersCommand >> order [
+
+	^ 1000
+]
+
 { #category : 'execution' }
-ClyShowPoolUsersCommand >> prepareFullExecutionInContext: aToolContext [
+ClyShowPoolUsersCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-
-	browser := aToolContext browser
+	super prepareFullExecution.
+	browser := self context browser
 ]
