@@ -3,7 +3,7 @@ I am a command to merge given variable into another
 "
 Class {
 	#name : 'SycMergeVariableCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycVariableCmCommand',
 	#instVars : [
 		'variable',
 		'newName'
@@ -51,12 +51,18 @@ SycMergeVariableCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycMergeVariableCommand >> execute [
+SycMergeVariableCommand >> executeRefactorings [
 
 	| refactoring |
 	refactoring := variable createVariableRefactoring: self classRefactoring.
 	refactoring newName: self newVariableName.
-	refactoring execute
+	^ refactoring execute
+]
+
+{ #category : 'testing' }
+SycMergeVariableCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserVariableContext
 ]
 
 { #category : 'accessing' }
@@ -75,16 +81,20 @@ SycMergeVariableCommand >> newVariableName [
 	^ newName name
 ]
 
+{ #category : 'accessing' }
+SycMergeVariableCommand >> order [
+
+	^ 1.1
+]
+
 { #category : 'execution' }
-SycMergeVariableCommand >> prepareFullExecutionInContext: aToolContext [
+SycMergeVariableCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-	variable := aToolContext lastSelectedVariable.
-
+	super prepareFullExecution.
+	variable := self context lastSelectedVariable.
 	newName := StBrowserSearchPresenter searchConfiguring: [ :presenter :dialog |
-		           dialog title: 'Select a variable'.
-		           presenter items:
-			           (aToolContext browser itemsForQuery: ClyAllInstanceVariablesQuery sorted inScope: (ClyClassScope of: variable definingClass) withInheritedScope) ]
+			           dialog title: 'Select a variable'.
+			           presenter items: (self context browser itemsForQuery: ClyAllInstanceVariablesQuery sorted inScope: (ClyClassScope of: variable definingClass) withInheritedScope) ]
 ]
 
 { #category : 'accessing' }

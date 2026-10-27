@@ -5,7 +5,7 @@ If the corresponding accessor methods do not exist, they will be generated autom
 "
 Class {
 	#name : 'SycAbstractVariableCommand',
-	#superclass : 'SycRefactorVariableCommand',
+	#superclass : 'SycVariableCmCommand',
 	#instVars : [
 		'selectedClass'
 	],
@@ -30,18 +30,26 @@ SycAbstractVariableCommand >> description [
 ]
 
 { #category : 'execution' }
-SycAbstractVariableCommand >> execute [
+SycAbstractVariableCommand >> executeRefactorings [
 
-	^ ((ReAbstractInstanceVariableDriver newApplication: self application)
-		   scopes: refactoringScopes
-		   name: variables first name
-		   class: selectedClass name) runRefactoring
+	^ ((ReAbstractInstanceVariableDriver newApplication: self application) scopes: refactoringScopes name: variables first name class: selectedClass name) runRefactoring
+]
+
+{ #category : 'testing' }
+SycAbstractVariableCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserVariableContext
+]
+
+{ #category : 'accessing' }
+SycAbstractVariableCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
-SycAbstractVariableCommand >> prepareFullExecutionInContext: aToolContext [
+SycAbstractVariableCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-	selectedClass := aToolContext selectedVariables first definingClass.
-	variables := aToolContext selectedVariables
+	super prepareFullExecution.
+	selectedClass := variables first definingClass
 ]
