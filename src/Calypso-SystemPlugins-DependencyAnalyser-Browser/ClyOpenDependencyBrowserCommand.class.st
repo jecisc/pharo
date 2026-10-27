@@ -3,17 +3,10 @@ I am a command to open dependency browser on set of packages
 "
 Class {
 	#name : 'ClyOpenDependencyBrowserCommand',
-	#superclass : 'SycPackageCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#category : 'Calypso-SystemPlugins-DependencyAnalyser-Browser',
 	#package : 'Calypso-SystemPlugins-DependencyAnalyser-Browser'
 }
-
-{ #category : 'activation' }
-ClyOpenDependencyBrowserCommand class >> packageContextMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: Package asCalypsoItemContext
-]
 
 { #category : 'accessing' }
 ClyOpenDependencyBrowserCommand >> defaultMenuItemName [
@@ -21,9 +14,19 @@ ClyOpenDependencyBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyOpenDependencyBrowserCommand >> execute [
+ClyOpenDependencyBrowserCommand >> executeRefactorings [
 
-	| packageNames |
-	packageNames := packages collect: [ :each | each name ].
-	(StPackageDependenciesPresenter onPackagesNamed: packageNames) open
+	(StPackageDependenciesPresenter onPackagesNamed: (packages collect: [ :package | package name ])) open
+]
+
+{ #category : 'accessing' }
+ClyOpenDependencyBrowserCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyOpenDependencyBrowserCommand >> order [
+
+	^ 1000
 ]

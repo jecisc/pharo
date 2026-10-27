@@ -3,18 +3,10 @@ I am a command to open a critic browser on given set of packages
 "
 Class {
 	#name : 'ClyOpenCriticBrowserCommand',
-	#superclass : 'SycPackageCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
-
-{ #category : 'activation' }
-ClyOpenCriticBrowserCommand class >> packageContextMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation
-		byItemOf: ClyQueryMenuGroup for: Package asCalypsoItemContext
-]
 
 { #category : 'activation' }
 ClyOpenCriticBrowserCommand >> defaultMenuItemName [
@@ -22,9 +14,21 @@ ClyOpenCriticBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyOpenCriticBrowserCommand >> execute [
-	| env |
+ClyOpenCriticBrowserCommand >> executeRefactorings [
 
+	| env |
 	env := RBPackageEnvironment new packages: packages.
 	StCritiqueRuleSelectorPresenter openWithEnvironment: env removeTestCase: false
+]
+
+{ #category : 'accessing' }
+ClyOpenCriticBrowserCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyOpenCriticBrowserCommand >> order [
+
+	^ 1000
 ]

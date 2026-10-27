@@ -73,6 +73,13 @@ ClyCommandMenuItem >> context: aToolContext [
 	context := aToolContext
 ]
 
+{ #category : 'accessing' }
+ClyCommandMenuItem >> findGroupLike: menuGroupClass ifExists: aBlockClosure [
+	"A command item never contains a group, so there is nothing to find."
+
+	^ nil
+]
+
 { #category : 'testing' }
 ClyCommandMenuItem >> isActive [
 

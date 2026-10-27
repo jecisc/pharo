@@ -4,18 +4,11 @@ I am a command to invert hierarhcy in the method visibility class list.
 "
 Class {
 	#name : 'ClyInvertMethodVisibilityHierarchyCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'SycMethodGroupExtraCmCommand',
 	#category : 'Calypso-SystemTools-FullBrowser-Commands-MethodGroups',
 	#package : 'Calypso-SystemTools-FullBrowser',
 	#tag : 'Commands-MethodGroups'
 }
-
-{ #category : 'activation' }
-ClyInvertMethodVisibilityHierarchyCommand class >> browserContextMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: CmdExtraMenuGroup for: ClyInheritedMethodGroup asCalypsoItemContext
-]
 
 { #category : 'accessing' }
 ClyInvertMethodVisibilityHierarchyCommand >> defaultMenuItemName [
@@ -23,7 +16,26 @@ ClyInvertMethodVisibilityHierarchyCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyInvertMethodVisibilityHierarchyCommand >> execute [
+ClyInvertMethodVisibilityHierarchyCommand >> executeRefactoring [
+
 	ClySubclassHierarchy invertMethodVisibilityHierarchy.
-	browser switchToMethodGroups
+	self context browser switchToMethodGroups
+]
+
+{ #category : 'testing' }
+ClyInvertMethodVisibilityHierarchyCommand >> isApplicable [
+
+	^ context isAboutBrowserItemType: ClyInheritedMethodGroup
+]
+
+{ #category : 'accessing' }
+ClyInvertMethodVisibilityHierarchyCommand >> name [
+
+	^ 'Invert hierarchy'
+]
+
+{ #category : 'accessing' }
+ClyInvertMethodVisibilityHierarchyCommand >> order [
+
+	^ 1000
 ]

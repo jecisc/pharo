@@ -14,7 +14,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyJumpToTestClassCommand',
-	#superclass : 'SycSingleClassCommand',
+	#superclass : 'SycSingleClassMenuCmCommand',
 	#traits : 'TClyGenerateTestClass',
 	#classTraits : 'TClyGenerateTestClass classTrait',
 	#instVars : [
@@ -25,13 +25,6 @@ Class {
 	#package : 'Calypso-SystemPlugins-SUnit-Browser',
 	#tag : 'Commands'
 }
-
-{ #category : 'activation' }
-ClyJumpToTestClassCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^ CmdContextMenuActivation byRootGroupItemOrder: 5 for: ClyFullBrowserClassContext
-]
 
 { #category : 'activation' }
 ClyJumpToTestClassCommand class >> fullBrowserShortcutActivation [
@@ -51,24 +44,33 @@ ClyJumpToTestClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyJumpToTestClassCommand >> execute [
+ClyJumpToTestClassCommand >> executeRefactorings [
 
-	self systemEnvironment 
-		classNamed: (self testClassNameFor: targetClass)
-		ifAbsent: [
-			(self confirm: 'Do you want to create a test class for: ' , targetClass asString )
-				ifFalse: [ ^ self ] ].
+	self systemEnvironment classNamed: (self testClassNameFor: targetClass) ifAbsent: [ (self confirm: 'Do you want to create a test class for: ' , targetClass asString) ifFalse: [ ^ self ] ].
 
 	[ browser selectClass: (self testClassFor: targetClass) ]
 		on: ClyInvalidClassForTestClassGeneration
 		do: [ :ex | self inform: 'Cannot generate test class for ' , ex baseClass printString , '.' ]
 ]
 
+{ #category : 'testing' }
+ClyJumpToTestClassCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyJumpToTestClassCommand >> order [
+
+	^ 5
+]
+
 { #category : 'execution' }
-ClyJumpToTestClassCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	browser := aToolContext browser.
-	systemEnvironment := aToolContext systemEnvironment
+ClyJumpToTestClassCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	browser := self context browser.
+	systemEnvironment := self context systemEnvironment
 ]
 
 { #category : 'accessing' }

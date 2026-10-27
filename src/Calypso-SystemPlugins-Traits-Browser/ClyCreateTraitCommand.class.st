@@ -12,7 +12,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyCreateTraitCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'package',
 		'packageTag'
@@ -28,13 +28,6 @@ ClyCreateTraitCommand class >> canBeExecutedInContext: aBrowserContext [
 	^aBrowserContext isPackageSelected
 ]
 
-{ #category : 'activation' }
-ClyCreateTraitCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 3 for: ClyFullBrowserClassContext
-]
-
 { #category : 'accessing' }
 ClyCreateTraitCommand >> defaultMenuIconName [
 	^#trait
@@ -45,8 +38,8 @@ ClyCreateTraitCommand >> defaultMenuItemName [
 	^'New trait'
 ]
 
-{ #category : 'command execution' }
-ClyCreateTraitCommand >> execute [
+{ #category : 'execution' }
+ClyCreateTraitCommand >> executeRefactorings [
 
 	| traitDefinition resultTrait |
 	traitDefinition := ClassDefinitionPrinter fluid traitDefinitionTemplateInPackage: package name tag: packageTag named: #TMyTrait.
@@ -56,11 +49,22 @@ ClyCreateTraitCommand >> execute [
 	resultTrait ifNotNil: [ browser selectClass: resultTrait ]
 ]
 
-{ #category : 'execution' }
-ClyCreateTraitCommand >> prepareFullExecutionInContext: aBrowserContext [
-	super prepareFullExecutionInContext: aBrowserContext.
+{ #category : 'testing' }
+ClyCreateTraitCommand >> isAvailableInMenuOf: aToolContext [
 
-	package := aBrowserContext lastSelectedPackage.
-	aBrowserContext isPackageTagSelected ifTrue: [
-		packageTag := aBrowserContext lastSelectedPackageTag]
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyCreateTraitCommand >> order [
+
+	^ 3
+]
+
+{ #category : 'execution' }
+ClyCreateTraitCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	package := self context lastSelectedPackage.
+	self context isPackageTagSelected ifTrue: [ packageTag := self context lastSelectedPackageTag ]
 ]

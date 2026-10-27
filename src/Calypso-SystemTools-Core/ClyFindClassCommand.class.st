@@ -5,7 +5,7 @@ By default I am executed by cmd+f shortcut
 "
 Class {
 	#name : 'ClyFindClassCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'class'
 	],
@@ -25,15 +25,32 @@ ClyFindClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyFindClassCommand >> execute [
+ClyFindClassCommand >> executeRefactorings [
 
 	browser selectClass: class
 ]
 
+{ #category : 'testing' }
+ClyFindClassCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserPackageContext
+]
+
+{ #category : 'accessing' }
+ClyFindClassCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyFindClassCommand >> order [
+
+	^ 1000
+]
+
 { #category : 'execution' }
-ClyFindClassCommand >> prepareFullExecutionInContext: aToolContext [
+ClyFindClassCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-
-	class := aToolContext requestSingleClass: 'Choose class'
+	super prepareFullExecution.
+	class := self context requestSingleClass: 'Choose class'
 ]

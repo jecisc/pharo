@@ -12,21 +12,11 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClySpawnFullBrowserCommand',
-	#superclass : 'CmdCommand',
-	#instVars : [
-		'browser'
-	],
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#category : 'Calypso-SystemTools-FullBrowser-Commands-Queries',
 	#package : 'Calypso-SystemTools-FullBrowser',
 	#tag : 'Commands-Queries'
 }
-
-{ #category : 'activation' }
-ClySpawnFullBrowserCommand class >> browserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClySystemBrowserContext
-]
 
 { #category : 'activation' }
 ClySpawnFullBrowserCommand class >> browserShortcutActivation [
@@ -64,14 +54,19 @@ ClySpawnFullBrowserCommand >> description [
 ]
 
 { #category : 'execution' }
-ClySpawnFullBrowserCommand >> execute [
+ClySpawnFullBrowserCommand >> executeRefactorings [
 
 	browser spawnFullBrowser
 ]
 
-{ #category : 'execution' }
-ClySpawnFullBrowserCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+{ #category : 'accessing' }
+ClySpawnFullBrowserCommand >> menuGroup [
 
-	browser := aToolContext browser
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClySpawnFullBrowserCommand >> order [
+
+	^ 1000
 ]

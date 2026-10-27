@@ -3,7 +3,7 @@ Generate New Test Class: Automatically create a test class for the selected clas
 "
 Class {
 	#name : 'ClyCreateTestCaseCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'package',
 		'packageTag'
@@ -19,13 +19,6 @@ ClyCreateTestCaseCommand class >> canBeExecutedInContext: aBrowserContext [
 	^aBrowserContext isPackageSelected
 ]
 
-{ #category : 'activation' }
-ClyCreateTestCaseCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 5 for: ClyFullBrowserClassContext
-]
-
 { #category : 'accessing' }
 ClyCreateTestCaseCommand >> defaultMenuIconName [
 	^#testGreen
@@ -36,8 +29,8 @@ ClyCreateTestCaseCommand >> defaultMenuItemName [
 	^'New test class'
 ]
 
-{ #category : 'command execution' }
-ClyCreateTestCaseCommand >> execute [
+{ #category : 'execution' }
+ClyCreateTestCaseCommand >> executeRefactorings [
 
 	| classDefinition resultClass |
 	classDefinition := ClassDefinitionPrinter fluid testClassDefinitionTemplateInPackage: package name tag: packageTag.
@@ -47,11 +40,22 @@ ClyCreateTestCaseCommand >> execute [
 	resultClass ifNotNil: [ browser selectClass: resultClass ]
 ]
 
-{ #category : 'execution' }
-ClyCreateTestCaseCommand >> prepareFullExecutionInContext: aBrowserContext [
-	super prepareFullExecutionInContext: aBrowserContext.
+{ #category : 'testing' }
+ClyCreateTestCaseCommand >> isAvailableInMenuOf: aToolContext [
 
-	package := aBrowserContext lastSelectedPackage.
-	aBrowserContext isPackageTagSelected ifTrue: [
-		packageTag := aBrowserContext lastSelectedPackageTag]
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyCreateTestCaseCommand >> order [
+
+	^ 5
+]
+
+{ #category : 'execution' }
+ClyCreateTestCaseCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	package := self context lastSelectedPackage.
+	self context isPackageTagSelected ifTrue: [ packageTag := self context lastSelectedPackageTag ]
 ]

@@ -7,7 +7,7 @@ By default I am activated by cmd+f.
 "
 Class {
 	#name : 'ClyFindMethodInBrowserCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'method'
 	],
@@ -15,13 +15,6 @@ Class {
 	#package : 'Calypso-SystemTools-FullBrowser',
 	#tag : 'Commands-Methods'
 }
-
-{ #category : 'menu' }
-ClyFindMethodInBrowserCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byItemOf: ClyQueryMenuGroup for: ClyFullBrowserMethodContext
-]
 
 { #category : 'menu' }
 ClyFindMethodInBrowserCommand class >> fullBrowserShortcutActivation [
@@ -41,18 +34,35 @@ ClyFindMethodInBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyFindMethodInBrowserCommand >> execute [
+ClyFindMethodInBrowserCommand >> executeRefactorings [
 
 	browser selectMethod: method
 ]
 
+{ #category : 'testing' }
+ClyFindMethodInBrowserCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserMethodContext
+]
+
+{ #category : 'accessing' }
+ClyFindMethodInBrowserCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyFindMethodInBrowserCommand >> order [
+
+	^ 1000
+]
+
 { #category : 'execution' }
-ClyFindMethodInBrowserCommand >> prepareFullExecutionInContext: aToolContext [
+ClyFindMethodInBrowserCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-
+	super prepareFullExecution.
 	method := StBrowserSearchPresenter searchConfiguring: [ :presenter :dialog |
-		          dialog title: 'Choose method'.
-		          presenter items: (aToolContext browser itemsForQuery: browser methodView query).
-		          presenter itemsList display: [ :aMethod | aMethod selector ] ]
+			          dialog title: 'Choose method'.
+			          presenter items: (browser itemsForQuery: browser methodView query).
+			          presenter itemsList display: [ :aMethod | aMethod selector ] ]
 ]

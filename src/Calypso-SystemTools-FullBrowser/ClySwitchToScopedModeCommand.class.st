@@ -1,6 +1,6 @@
 Class {
 	#name : 'ClySwitchToScopedModeCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'packages'
 	],
@@ -9,22 +9,27 @@ Class {
 	#tag : 'Commands-Packages'
 }
 
-{ #category : 'activation' }
-ClySwitchToScopedModeCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemFor: ClyFullBrowserPackageContext
-]
-
 { #category : 'accessing' }
 ClySwitchToScopedModeCommand >> defaultMenuItemName [
 	^'Set up scope'
 ]
 
 { #category : 'execution' }
-ClySwitchToScopedModeCommand >> execute [
+ClySwitchToScopedModeCommand >> executeRefactorings [
 
 	browser switchToPackageScopeOf: packages
+]
+
+{ #category : 'testing' }
+ClySwitchToScopedModeCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserPackageContext
+]
+
+{ #category : 'accessing' }
+ClySwitchToScopedModeCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'accessing' }
@@ -38,14 +43,12 @@ ClySwitchToScopedModeCommand >> packages: anObject [
 ]
 
 { #category : 'execution' }
-ClySwitchToScopedModeCommand >> prepareFullExecutionInContext: aBrowserContext [
+ClySwitchToScopedModeCommand >> prepareFullExecution [
 
-	| items |
-	super prepareFullExecutionInContext: aBrowserContext.
-	items := aBrowserContext selectedPackageItems collect: [ :e | e actualObject ].
+	super prepareFullExecution.
 	packages := StBrowserSearchPresenter searchConfiguring: [ :presenter :dialog |
-		            dialog title: 'Select package scope'.
-		            presenter
-			            items: (self browser itemsForQuery: ClyAllPackagesQuery sorted);
-			            multipleSelection ]
+			            dialog title: 'Select package scope'.
+			            presenter
+				            items: (browser itemsForQuery: ClyAllPackagesQuery sorted);
+				            multipleSelection ]
 ]

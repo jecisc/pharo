@@ -3,7 +3,7 @@ Provide a class definition to create a new class in the selected package.
 "
 Class {
 	#name : 'ClyCreateClassCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'package',
 		'packageTag'
@@ -19,13 +19,6 @@ ClyCreateClassCommand class >> canBeExecutedInContext: aBrowserContext [
 	^aBrowserContext isPackageSelected
 ]
 
-{ #category : 'activation' }
-ClyCreateClassCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 4 for: ClyFullBrowserClassContext
-]
-
 { #category : 'accessing' }
 ClyCreateClassCommand >> defaultMenuIconName [
 	^#class
@@ -36,8 +29,8 @@ ClyCreateClassCommand >> defaultMenuItemName [
 	^'New class'
 ]
 
-{ #category : 'command execution' }
-ClyCreateClassCommand >> execute [
+{ #category : 'execution' }
+ClyCreateClassCommand >> executeRefactorings [
 
 	| classDefinition resultTrait |
 	classDefinition := ClassDefinitionPrinter fluid classDefinitionTemplateInPackage: package name tag: packageTag named: #MyClass.
@@ -47,11 +40,22 @@ ClyCreateClassCommand >> execute [
 	resultTrait ifNotNil: [ browser selectClass: resultTrait ]
 ]
 
-{ #category : 'execution' }
-ClyCreateClassCommand >> prepareFullExecutionInContext: aBrowserContext [
-	super prepareFullExecutionInContext: aBrowserContext.
+{ #category : 'testing' }
+ClyCreateClassCommand >> isAvailableInMenuOf: aToolContext [
 
-	package := aBrowserContext lastSelectedPackage.
-	aBrowserContext isPackageTagSelected ifTrue: [
-		packageTag := aBrowserContext lastSelectedPackageTag]
+	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyCreateClassCommand >> order [
+
+	^ 4
+]
+
+{ #category : 'execution' }
+ClyCreateClassCommand >> prepareFullExecution [
+
+	super prepareFullExecution.
+	package := self context lastSelectedPackage.
+	self context isPackageTagSelected ifTrue: [ packageTag := self context lastSelectedPackageTag ]
 ]

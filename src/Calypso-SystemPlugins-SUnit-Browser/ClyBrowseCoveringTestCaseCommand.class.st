@@ -3,7 +3,7 @@ I am a command that opens a new browser on the test class corresponding to the s
 "
 Class {
 	#name : 'ClyBrowseCoveringTestCaseCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#instVars : [
 		'selectedClassItem'
 	],
@@ -19,31 +19,40 @@ ClyBrowseCoveringTestCaseCommand class >> canBeExecutedInContext: aBrowserContex
 	^ aBrowserContext lastSelectedItem hasProperty: ClyTestedClassProperty
 ]
 
-{ #category : 'activation' }
-ClyBrowseCoveringTestCaseCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-	^ CmdContextMenuActivation
-		byItemOf: ClyQueryMenuGroup
-		for: ClyClass asCalypsoItemContext
-]
-
 { #category : 'accessing' }
 ClyBrowseCoveringTestCaseCommand >> defaultMenuItemName [
 	^ 'Browse test class'
 ]
 
 { #category : 'execution' }
-ClyBrowseCoveringTestCaseCommand >> execute [
+ClyBrowseCoveringTestCaseCommand >> executeRefactorings [
+
 	| testCase |
 	testCase := (selectedClassItem getProperty: ClyTestedClassProperty) coveringTestCase.
+	browser spawnBrowser: ClyFullBrowserMorph withState: [ :b | b selectClass: testCase ]
+]
 
-	browser spawnBrowser: ClyFullBrowserMorph withState: [ :b |
-		b selectClass: testCase]
+{ #category : 'testing' }
+ClyBrowseCoveringTestCaseCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isAboutBrowserItemType: ClyClass
+]
+
+{ #category : 'accessing' }
+ClyBrowseCoveringTestCaseCommand >> menuGroup [
+
+	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyBrowseCoveringTestCaseCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
-ClyBrowseCoveringTestCaseCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+ClyBrowseCoveringTestCaseCommand >> prepareFullExecution [
 
-	selectedClassItem := aToolContext lastSelectedItem
+	super prepareFullExecution.
+	selectedClassItem := self context lastSelectedItem
 ]

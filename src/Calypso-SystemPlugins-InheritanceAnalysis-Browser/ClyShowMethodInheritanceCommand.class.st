@@ -10,13 +10,6 @@ Class {
 }
 
 { #category : 'activation' }
-ClyShowMethodInheritanceCommand class >> browserContextMenuActivation [
-
-	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemOrder: 2 for: ClyMethod asCalypsoItemContext
-]
-
-{ #category : 'activation' }
 ClyShowMethodInheritanceCommand class >> browserShortcutActivation [
 	<classAnnotation>
 
@@ -47,4 +40,10 @@ ClyShowMethodInheritanceCommand >> defaultMenuItemName [
 ClyShowMethodInheritanceCommand >> description [
 
 	^ 'Show all method implementors in full hierarchy of selected method classes.'
+]
+
+{ #category : 'accessing' }
+ClyShowMethodInheritanceCommand >> order [
+
+	^ 2
 ]

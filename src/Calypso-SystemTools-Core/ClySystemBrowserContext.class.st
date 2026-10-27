@@ -65,6 +65,12 @@ ClySystemBrowserContext class >> rememberedPackage: aPackage [
 	RememberedPackage := aPackage
 ]
 
+{ #category : 'accessing' }
+ClySystemBrowserContext >> commanderCommandClasses [
+
+	^ super commanderCommandClasses , { ClyBrowserMenuCmCommand }
+]
+
 { #category : 'user requests' }
 ClySystemBrowserContext >> confirmUnusedVariablesInDefiningClass: variables [
 	^tool confirmUnusedVariablesInDefiningClass: variables
