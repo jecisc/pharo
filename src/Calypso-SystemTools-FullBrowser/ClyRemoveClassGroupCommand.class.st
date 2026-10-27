@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRemoveClassGroupCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#instVars : [
 		'classGroup'
 	],
@@ -20,13 +20,6 @@ Class {
 { #category : 'testing' }
 ClyRemoveClassGroupCommand class >> canBeExecutedInContext: aToolContext [
 	^aToolContext isPackageTagSelected
-]
-
-{ #category : 'activation' }
-ClyRemoveClassGroupCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 10000 for: ClyFullBrowserClassGroupContext
 ]
 
 { #category : 'activation' }
@@ -63,19 +56,30 @@ ClyRemoveClassGroupCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRemoveClassGroupCommand >> execute [
+ClyRemoveClassGroupCommand >> executeRefactorings [
 
 	classGroup removeWithClasses
 ]
 
+{ #category : 'testing' }
+ClyRemoveClassGroupCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ aToolContext isFullBrowserClassGroupContext
+]
+
+{ #category : 'accessing' }
+ClyRemoveClassGroupCommand >> order [
+
+	^ 10000
+]
+
 { #category : 'execution' }
-ClyRemoveClassGroupCommand >> prepareFullExecutionInContext: aToolContext [
+ClyRemoveClassGroupCommand >> prepareFullExecution [
+
 	| confirmed |
-	super prepareFullExecutionInContext: aToolContext.
-
-	classGroup := aToolContext lastSelectedClassGroup.
-
+	super prepareFullExecution.
+	classGroup := self context lastSelectedClassGroup.
 	classGroup classesSize > 0 ifTrue: [
-		confirmed := self confirm: 'Are you sure you want to remove all classes in group ', classGroup name, '?'.
-		confirmed ifFalse: [CmdCommandAborted signal]]
+			confirmed := self confirm: 'Are you sure you want to remove all classes in group ' , classGroup name , '?'.
+			confirmed ifFalse: [ CmdCommandAborted signal ] ]
 ]

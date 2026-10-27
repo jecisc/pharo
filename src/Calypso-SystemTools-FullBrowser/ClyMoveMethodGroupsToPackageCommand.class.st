@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveMethodGroupsToPackageCommand',
-	#superclass : 'ClyMethodGroupCommand',
+	#superclass : 'ClyMethodGroupMenuCmCommand',
 	#instVars : [
 		'package'
 	],
@@ -21,13 +21,6 @@ Class {
 ClyMoveMethodGroupsToPackageCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ aToolContext isProtocolSelected
-]
-
-{ #category : 'activation' }
-ClyMoveMethodGroupsToPackageCommand class >> fullBrowserContextMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemFor: ClyMethodGroup asCalypsoItemContext
 ]
 
 { #category : 'activation' }
@@ -46,13 +39,19 @@ ClyMoveMethodGroupsToPackageCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupsToPackageCommand >> execute [
+ClyMoveMethodGroupsToPackageCommand >> executeRefactorings [
 
 	| repackagingCommand |
-	methodGroups do: [ :each |
-		repackagingCommand := SycMoveMethodsToPackageCommand for: each methods to: package.
-		repackagingCommand execute.
-		each removeWithMethods]
+	methodGroups do: [ :group |
+			repackagingCommand := SycMoveMethodsToPackageCommand for: group methods to: package.
+			repackagingCommand execute.
+			group removeWithMethods ]
+]
+
+{ #category : 'accessing' }
+ClyMoveMethodGroupsToPackageCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'accessing' }
@@ -72,8 +71,8 @@ ClyMoveMethodGroupsToPackageCommand >> prepareExecutionInDropContext: aToolConte
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupsToPackageCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+ClyMoveMethodGroupsToPackageCommand >> prepareFullExecution [
 
-	package := aToolContext requestSinglePackage: 'Choose package'
+	super prepareFullExecution.
+	package := self context requestSinglePackage: 'Choose package'
 ]

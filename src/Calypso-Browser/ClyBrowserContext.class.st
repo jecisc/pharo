@@ -66,18 +66,17 @@ ClyBrowserContext >> browser [
 	^tool
 ]
 
-{ #category : 'testing' }
+{ #category : 'accessing' }
 ClyBrowserContext >> commanderCommandClasses [
 
 	| roots |
 	roots := OrderedCollection new.
-	(self isAboutBrowserItemType: ClyClass)
-		ifTrue: [ roots add: SycSingleClassMenuCmCommand ].
-	(self isAboutBrowserItemType: ClyMethod)
-		ifTrue: [
+	(self isAboutBrowserItemType: ClyClass) ifTrue: [ roots add: SycSingleClassMenuCmCommand ].
+	(self isAboutBrowserItemType: ClyMethod) ifTrue: [
 			roots
 				add: SycChangeMessageMenuCmCommand;
-				add: SycMessageMenuCmCommand ].
+				add: SycMessageMenuCmCommand;
+				add: SycMethodMenuCmCommand ].
 	^ roots asArray
 ]
 

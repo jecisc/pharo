@@ -9,7 +9,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyConvertMethodGroupToProtocolCommand',
-	#superclass : 'ClyMethodGroupCommand',
+	#superclass : 'ClyMethodGroupMenuCmCommand',
 	#instVars : [
 		'protocol'
 	],
@@ -22,13 +22,6 @@ Class {
 ClyConvertMethodGroupToProtocolCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ aToolContext isExtensionMethodGroupSelected
-]
-
-{ #category : 'activation' }
-ClyConvertMethodGroupToProtocolCommand class >> fullBrowserContextMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemFor: ClyMethodGroup asCalypsoItemContext
 ]
 
 { #category : 'execution' }
@@ -45,17 +38,22 @@ ClyConvertMethodGroupToProtocolCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyConvertMethodGroupToProtocolCommand >> execute [
+ClyConvertMethodGroupToProtocolCommand >> executeRefactorings [
 
 	methodGroups do: [ :methodGroup | methodGroup categorizeMethodsIn: protocol ]
 ]
 
+{ #category : 'accessing' }
+ClyConvertMethodGroupToProtocolCommand >> order [
+
+	^ 1000
+]
+
 { #category : 'execution' }
-ClyConvertMethodGroupToProtocolCommand >> prepareFullExecutionInContext: aToolContext [
+ClyConvertMethodGroupToProtocolCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aToolContext.
-
-	protocol := StProtocolNameChooserPresenter requestProtocolNameConfiguring: [ :presenter | presenter concernedClass: aToolContext lastSelectedClass ]
+	super prepareFullExecution.
+	protocol := StProtocolNameChooserPresenter requestProtocolNameConfiguring: [ :presenter | presenter concernedClass: self context lastSelectedClass ]
 ]
 
 { #category : 'accessing' }

@@ -86,6 +86,12 @@ CmdToolContext >> isFullBrowserClassContext [
 ]
 
 { #category : 'testing' }
+CmdToolContext >> isFullBrowserClassGroupContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
 CmdToolContext >> isFullBrowserMethodGroupContext [
 
 	^ false

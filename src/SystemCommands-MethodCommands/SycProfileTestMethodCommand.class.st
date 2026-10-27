@@ -9,7 +9,7 @@ If there are multiple classes selected, the command will be aborted.
 "
 Class {
 	#name : 'SycProfileTestMethodCommand',
-	#superclass : 'SycMethodCommand',
+	#superclass : 'SycMethodMenuCmCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }
@@ -27,18 +27,23 @@ SycProfileTestMethodCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycProfileTestMethodCommand >> execute [
+SycProfileTestMethodCommand >> executeRefactorings [
 
-	methods 
-		select: [ : cm | cm isTestMethod ]
-		thenDo: [ : cm | self profileMethod: cm ].
-
+	methods
+		select: [ :cm | cm isTestMethod ]
+		thenDo: [ :cm | self profileMethod: cm ]
 ]
 
 { #category : 'execution' }
 SycProfileTestMethodCommand >> newProfilerPresenter [
 
 	^ self profilerPresenterClass new
+]
+
+{ #category : 'accessing' }
+SycProfileTestMethodCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'execution' }
@@ -59,18 +64,6 @@ SycProfileTestMethodCommand >> profilerPresenterClass [
 	^ Smalltalk
 		at: #StProfilerPresenter
 		ifAbsent: [ self error: 'Profiler not installed' ]
-]
-
-{ #category : 'initialization' }
-SycProfileTestMethodCommand >> setUpModelFromContext: aContext [
-
-	| browser |
-	
-	browser := aContext browser.
-	browser classSelection isMultipleSelected
-		ifTrue: [ ^ CmdCommandAborted signal ].
-
-
 ]
 
 { #category : 'execution' }

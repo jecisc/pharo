@@ -3,7 +3,7 @@ I am a command to remove method group with containing methods
 "
 Class {
 	#name : 'ClyRemoveMethodGroupCommand',
-	#superclass : 'ClyMethodGroupCommand',
+	#superclass : 'ClyMethodGroupMenuCmCommand',
 	#instVars : [
 		'selectedClasses'
 	],
@@ -11,13 +11,6 @@ Class {
 	#package : 'Calypso-SystemTools-FullBrowser',
 	#tag : 'Commands-MethodGroups'
 }
-
-{ #category : 'activation' }
-ClyRemoveMethodGroupCommand class >> fullBrowserMenuActivation [
-	<classAnnotation>
-
-	^CmdContextMenuActivation byRootGroupItemOrder: 100000 for: ClyFullBrowserMethodGroupContext
-]
 
 { #category : 'activation' }
 ClyRemoveMethodGroupCommand class >> fullBrowserShortcutActivation [
@@ -43,24 +36,28 @@ ClyRemoveMethodGroupCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRemoveMethodGroupCommand >> execute [
+ClyRemoveMethodGroupCommand >> executeRefactorings [
 
 	methodGroups do: [ :group |
-		group
-			removeWithMethods;
-			removeProtocolFrom: selectedClasses ]
+			group
+				removeWithMethods;
+				removeProtocolFrom: selectedClasses ]
+]
+
+{ #category : 'accessing' }
+ClyRemoveMethodGroupCommand >> order [
+
+	^ 100000
 ]
 
 { #category : 'execution' }
-ClyRemoveMethodGroupCommand >> prepareFullExecutionInContext: aToolContext [
+ClyRemoveMethodGroupCommand >> prepareFullExecution [
 
 	| tagsString confirmed |
-	super prepareFullExecutionInContext: aToolContext.
-	selectedClasses := aToolContext  selectedClasses.
-	
+	super prepareFullExecution.
+	selectedClasses := self context selectedClasses.
 	tagsString := ', ' join: (methodGroups collect: [ :each | each name ]).
 	(methodGroups anySatisfy: [ :each | each methodsSize > 0 ]) ifFalse: [ ^ self ].
-	
 	confirmed := self confirm: 'Are you sure you want to remove methods from ' , tagsString , '?'.
 	confirmed ifFalse: [ CmdCommandAborted signal ]
 ]

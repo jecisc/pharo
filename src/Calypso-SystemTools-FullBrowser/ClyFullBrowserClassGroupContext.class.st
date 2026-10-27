@@ -28,6 +28,12 @@ ClyFullBrowserClassGroupContext >> isClassGroupSelected [
 ]
 
 { #category : 'testing' }
+ClyFullBrowserClassGroupContext >> isFullBrowserClassGroupContext [
+
+	^ true
+]
+
+{ #category : 'testing' }
 ClyFullBrowserClassGroupContext >> isPackageSelected [
 	^tool packageSelection isEmpty not
 ]
