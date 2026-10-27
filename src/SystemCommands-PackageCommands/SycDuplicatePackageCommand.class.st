@@ -9,17 +9,11 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycDuplicatePackageCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#category : 'SystemCommands-PackageCommands-Scope',
 	#package : 'SystemCommands-PackageCommands',
 	#tag : 'Scope'
 }
-
-{ #category : 'testing' }
-SycDuplicatePackageCommand class >> canBeExecutedInContext: aToolContext [
-
-	^ aToolContext isPackageSelected
-]
 
 { #category : 'accessing' }
 SycDuplicatePackageCommand >> defaultMenuIconName [
@@ -38,19 +32,26 @@ SycDuplicatePackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycDuplicatePackageCommand >> prepareFullExecutionInContext: aToolContext [
+SycDuplicatePackageCommand >> executeRefactorings [
+	"The copy is made by the dialog in #prepareFullExecution."
+
+	
+]
+
+{ #category : 'accessing' }
+SycDuplicatePackageCommand >> order [
+
+	^ 1.1
+]
+
+{ #category : 'execution' }
+SycDuplicatePackageCommand >> prepareFullExecution [
 
 	| dialog package newName |
-
-	super prepareFullExecutionInContext: aToolContext.
-
-	package := aToolContext lastSelectedPackage.
-	newName := self morphicUIManager
-		request: 'New name of copied package'
-		initialAnswer: package name
-		title: 'Copy package'.
+	super prepareFullExecution.
+	package := self context lastSelectedPackage.
+	newName := self morphicUIManager request: 'New name of copied package' initialAnswer: package name title: 'Copy package'.
 	newName isEmptyOrNil | (newName = package name) ifTrue: [ ^ CmdCommandAborted signal ].
-
 	dialog := SycCopyClassUsingPatternPresenter openOn: package -> newName.
 	dialog cancelled ifTrue: [ ^ CmdCommandAborted signal ]
 ]

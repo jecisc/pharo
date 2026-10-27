@@ -16,7 +16,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycAddNewPackageCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#instVars : [
 		'systemEnvironment',
 		'packageName',
@@ -25,6 +25,12 @@ Class {
 	#category : 'SystemCommands-PackageCommands',
 	#package : 'SystemCommands-PackageCommands'
 }
+
+{ #category : 'testing' }
+SycAddNewPackageCommand class >> canBeExecutedInContext: aToolContext [
+
+	^ true
+]
 
 { #category : 'execution' }
 SycAddNewPackageCommand >> applyResultInContext: aToolContext [
@@ -49,11 +55,17 @@ SycAddNewPackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycAddNewPackageCommand >> execute [
+SycAddNewPackageCommand >> executeRefactorings [
 
 	resultPackage := [ systemEnvironment createPackageNamed: packageName ]
 		                 on: PackageConflictError
 		                 do: [ systemEnvironment packageNamed: packageName ]
+]
+
+{ #category : 'accessing' }
+SycAddNewPackageCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'accessing' }
@@ -67,17 +79,13 @@ SycAddNewPackageCommand >> packageName: anObject [
 ]
 
 { #category : 'execution' }
-SycAddNewPackageCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+SycAddNewPackageCommand >> prepareFullExecution [
 
-	systemEnvironment := aToolContext systemEnvironment.
+	systemEnvironment := self context systemEnvironment.
 	packageName := ''.
-	aToolContext isPackageSelected ifTrue: [
-		packageName := aToolContext lastSelectedPackage name].
-
-	packageName := self morphicUIManager
-		request: 'Name of the new package:' initialAnswer: packageName title: 'Create a new package'.
-	packageName isEmptyOrNil ifTrue: [ ^CmdCommandAborted signal]
+	self context isPackageSelected ifTrue: [ packageName := self context lastSelectedPackage name ].
+	packageName := self morphicUIManager request: 'Name of the new package:' initialAnswer: packageName title: 'Create a new package'.
+	packageName isEmptyOrNil ifTrue: [ ^ CmdCommandAborted signal ]
 ]
 
 { #category : 'accessing' }

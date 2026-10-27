@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycAddNewClassTagCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#instVars : [
 		'package',
 		'tagName'
@@ -41,9 +41,21 @@ SycAddNewClassTagCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddNewClassTagCommand >> execute [
+SycAddNewClassTagCommand >> executeRefactorings [
 
 	package ensureTag: tagName
+]
+
+{ #category : 'testing' }
+SycAddNewClassTagCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ true
+]
+
+{ #category : 'accessing' }
+SycAddNewClassTagCommand >> order [
+
+	^ 1000
 ]
 
 { #category : 'accessing' }
@@ -57,14 +69,11 @@ SycAddNewClassTagCommand >> package: anObject [
 ]
 
 { #category : 'execution' }
-SycAddNewClassTagCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	package := aToolContext lastSelectedPackage.
+SycAddNewClassTagCommand >> prepareFullExecution [
 
-	tagName := self morphicUIManager
-		request: ('New class tag in ' , package name)
-		initialAnswer: ''
-		title: 'Create a new class tag'.
+	super prepareFullExecution.
+	package := self context lastSelectedPackage.
+	tagName := self morphicUIManager request: 'New class tag in ' , package name initialAnswer: '' title: 'Create a new class tag'.
 	tagName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ]
 ]
 

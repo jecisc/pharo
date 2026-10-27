@@ -3,7 +3,7 @@ I am a command to remove given packages
 "
 Class {
 	#name : 'SycRemovePackageCommand',
-	#superclass : 'SycPackageCommand',
+	#superclass : 'SycPackageMenuCmCommand',
 	#category : 'SystemCommands-PackageCommands',
 	#package : 'SystemCommands-PackageCommands'
 }
@@ -46,21 +46,26 @@ SycRemovePackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRemovePackageCommand >> execute [
+SycRemovePackageCommand >> executeRefactorings [
 
 	self packages do: [ :each | each removeFromSystem ].
-	self packages: OrderedCollection new.
+	self packages: OrderedCollection new
+]
+
+{ #category : 'accessing' }
+SycRemovePackageCommand >> order [
+
+	^ 10000
 ]
 
 { #category : 'execution' }
-SycRemovePackageCommand >> prepareFullExecutionInContext: aToolContext [
+SycRemovePackageCommand >> prepareFullExecution [
 
 	| packagesWithClasses names answer |
-	super prepareFullExecutionInContext: aToolContext.
-	packagesWithClasses := packages reject: [ :each | each isEmpty].
+	super prepareFullExecution.
+	packagesWithClasses := self packages reject: [ :each | each isEmpty ].
 	packagesWithClasses ifNotEmpty: [
-		names := (packagesWithClasses collect: [:package | package name ]) joinUsing: ', '.
-		answer := self morphicUIManager confirm: (
-			'Are you sure you want to delete the selection(s)?', String cr, names, ' still contains classes.').
-		answer ifFalse: [ CmdCommandAborted signal ]]
+			names := (packagesWithClasses collect: [ :package | package name ]) joinUsing: ', '.
+			answer := self morphicUIManager confirm: 'Are you sure you want to delete the selection(s)?' , String cr , names , ' still contains classes.'.
+			answer ifFalse: [ CmdCommandAborted signal ] ]
 ]

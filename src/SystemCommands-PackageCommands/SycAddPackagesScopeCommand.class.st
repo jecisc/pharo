@@ -3,10 +3,7 @@ I am a command to add packages scope to listScopes
 "
 Class {
 	#name : 'SycAddPackagesScopeCommand',
-	#superclass : 'CmdCommand',
-	#instVars : [
-		'packages'
-	],
+	#superclass : 'SycPackageMenuCmCommand',
 	#category : 'SystemCommands-PackageCommands-Scope',
 	#package : 'SystemCommands-PackageCommands',
 	#tag : 'Scope'
@@ -23,30 +20,22 @@ SycAddPackagesScopeCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddPackagesScopeCommand >> execute [
+SycAddPackagesScopeCommand >> executeRefactorings [
 
 	| scope |
-	
-	scope := ScopesManager newScopeFrom: packages.
+	scope := ScopesManager newScopeFrom: self packages.
 	ScopesManager addScope: scope.
 	ScopesPresenter openSelecting: scope
 ]
 
 { #category : 'accessing' }
-SycAddPackagesScopeCommand >> packages [
+SycAddPackagesScopeCommand >> order [
 
-	^ packages
-]
-
-{ #category : 'accessing' }
-SycAddPackagesScopeCommand >> packages: anObject [
-
-	packages := anObject
+	^ 1000
 ]
 
 { #category : 'execution' }
-SycAddPackagesScopeCommand >> prepareFullExecutionInContext: aBrowserContext [
+SycAddPackagesScopeCommand >> prepareFullExecution [
 
-	super prepareFullExecutionInContext: aBrowserContext.
-	packages := aBrowserContext selectedPackageItems collect: [:e | e actualObject ]
+	packages := self context selectedPackageItems collect: [ :packageItem | packageItem actualObject ]
 ]

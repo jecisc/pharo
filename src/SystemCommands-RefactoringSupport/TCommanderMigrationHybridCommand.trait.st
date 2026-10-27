@@ -45,19 +45,19 @@ TCommanderMigrationHybridCommand >> context: aToolContext [
 { #category : 'execution' }
 TCommanderMigrationHybridCommand >> execute [
 
-	prepared
+	(prepared or: [ self context isNil ])
 		ifTrue: [ self executeRefactorings ]
 		ifFalse: [
-			[
-				prepared := true.
-				self prepareFullExecution.
-				self isComplexRefactoring
-					ifTrue: [ self executeComplexRefactoring ]
-					ifFalse: [
-						self executeRefactoring.
-						self applyCommandResult ] ]
-				on: Exception
-				do: [ :exception | self processCommandFailure: exception ] ]
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self isComplexRefactoring
+						ifTrue: [ self executeComplexRefactoring ]
+						ifFalse: [
+								self executeRefactoring.
+								self applyCommandResult ] ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
 ]
 
 { #category : 'execution' }
@@ -123,6 +123,12 @@ TCommanderMigrationHybridCommand >> menuGroup [
 TCommanderMigrationHybridCommand >> name [
 
 	^ self defaultMenuItemName
+]
+
+{ #category : 'accessing' }
+TCommanderMigrationHybridCommand >> orderInContext: aToolContext [
+
+	^ self order
 ]
 
 { #category : 'execution' }
