@@ -1,19 +1,27 @@
+"
+Recompiles all the methods of the selected packages.
+"
 Class {
 	#name : 'SycRecompilePackageCommand',
-	#superclass : 'SycPackageCommand',
+	#superclass : 'SycPackageExtraCmCommand',
 	#category : 'SystemCommands-PackageCommands',
 	#package : 'SystemCommands-PackageCommands'
 }
 
-{ #category : 'accessing' }
-SycRecompilePackageCommand >> defaultMenuItemName [
-	^'Recompile'
+{ #category : 'execution' }
+SycRecompilePackageCommand >> executeRefactoring [
+
+	self packages do: [ :package | package methods do: [ :method | method recompile ] ] displayingProgress: [ :package | 'Recompiling ' , package name ]
 ]
 
-{ #category : 'execution' }
-SycRecompilePackageCommand >> execute [
-	packages
-		do: [ :eachPackage |
-			eachPackage methods do: [ :eachMethod | eachMethod recompile ] ]
-		displayingProgress: [:eachPackage | 'Recompiling ', eachPackage name]
+{ #category : 'testing' }
+SycRecompilePackageCommand >> isApplicable [
+
+	^ context isAboutBrowserItemType: Package
+]
+
+{ #category : 'accessing' }
+SycRecompilePackageCommand >> name [
+
+	^ 'Recompile'
 ]
