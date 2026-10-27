@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycDeprecateMessageCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycChangeMessageMenuCmCommand',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
@@ -21,13 +21,6 @@ SycDeprecateMessageCommand class >> browserMenuOrder [
 { #category : 'testing' }
 SycDeprecateMessageCommand class >> canBeExecutedInContext: aToolContext [
 	^ aToolContext isMethodSelected
-]
-
-{ #category : 'menu' }
-SycDeprecateMessageCommand class >> sourceCodeMenuActivation [
-	<classAnnotation>
-
-	^ SycSourceCodeMenuActivation byRootGroupItemOrder: 1.3 for: ClyMethodSourceCodeContext
 ]
 
 { #category : 'execution' }
@@ -43,10 +36,24 @@ SycDeprecateMessageCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycDeprecateMessageCommand >> execute [
+SycDeprecateMessageCommand >> executeRefactorings [
 
 	(RBDeprecateMethodDriver
 		 deprecateMethod: originalMessage selector
 		 in: originalMessage methodClass
 		 scopes: refactoringScopes) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycDeprecateMessageCommand >> order [
+
+	^ 2.5
+]
+
+{ #category : 'accessing' }
+SycDeprecateMessageCommand >> orderInContext: aToolContext [
+
+	^ aToolContext isMethodSourceContext
+		ifTrue: [ 1.3 ]
+		ifFalse: [ self order ]
 ]

@@ -69,9 +69,16 @@ ClyBrowserContext >> browser [
 { #category : 'testing' }
 ClyBrowserContext >> commanderCommandClasses [
 
-	^ (self isAboutBrowserItemType: ClyClass)
-		ifTrue: [ { SycSingleClassMenuCmCommand } ]
-		ifFalse: [ #() ]
+	| roots |
+	roots := OrderedCollection new.
+	(self isAboutBrowserItemType: ClyClass)
+		ifTrue: [ roots add: SycSingleClassMenuCmCommand ].
+	(self isAboutBrowserItemType: ClyMethod)
+		ifTrue: [
+			roots
+				add: SycChangeMessageMenuCmCommand;
+				add: SycMessageMenuCmCommand ].
+	^ roots asArray
 ]
 
 { #category : 'copying' }

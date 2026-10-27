@@ -6,24 +6,6 @@ SycShowLocalSendersCommand class >> browserMenuOrder [
 ]
 
 { #category : '*Calypso-SystemTools-Core' }
-SycShowLocalSendersCommand class >> methodMenuActivation [
-	<classAnnotation>
-
-	^ CmdContextMenuActivation
-		byRootGroupItemOrder: self browserMenuOrder 
-		for: ClyMethod asCalypsoItemContext
-]
-
-{ #category : '*Calypso-SystemTools-Core' }
-SycShowLocalSendersCommand class >> sourceCodeMenuActivation [
-
-	<classAnnotation>
-	^ SycSourceCodeMenuActivation
-		  byRootGroupItemOrder: 1.2
-		  for: ClyMethodSourceCodeContext
-]
-
-{ #category : '*Calypso-SystemTools-Core' }
 SycShowLocalSendersCommand class >> sourceCodeShortcutActivation [
 	<classAnnotation>
 

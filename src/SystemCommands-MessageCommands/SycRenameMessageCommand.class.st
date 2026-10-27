@@ -3,7 +3,7 @@ Call the rename method refactoring (yes the class name is not good)
 "
 Class {
 	#name : 'SycRenameMessageCommand',
-	#superclass : 'SycChangeMessageSignatureCommand',
+	#superclass : 'SycChangeMessageMenuCmCommand',
 	#instVars : [
 		'newSignature',
 		'driver',
@@ -58,7 +58,7 @@ SycRenameMessageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenameMessageCommand >> execute [
+SycRenameMessageCommand >> executeRefactorings [
 
 	driver := ReRenameMethodDriver new
 		          scopes: refactoringScopes
@@ -79,6 +79,20 @@ SycRenameMessageCommand >> newSignature [
 SycRenameMessageCommand >> newSignature: anObject [
 
 	newSignature := anObject
+]
+
+{ #category : 'accessing' }
+SycRenameMessageCommand >> order [
+
+	^ 1.7
+]
+
+{ #category : 'accessing' }
+SycRenameMessageCommand >> orderInContext: aToolContext [
+
+	^ aToolContext isMethodSourceContext
+		ifTrue: [ 1.2 ]
+		ifFalse: [ self order ]
 ]
 
 { #category : 'execution' }

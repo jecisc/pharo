@@ -3,7 +3,7 @@ This command find the senders of a given method in the classes upper in the inhe
 "
 Class {
 	#name : 'SycShowLocalSendersCommand',
-	#superclass : 'SycMessageCommand',
+	#superclass : 'SycMessageMenuCmCommand',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
@@ -33,9 +33,15 @@ SycShowLocalSendersCommand >> description [
 ]
 
 { #category : 'execution' }
-SycShowLocalSendersCommand >> execute [
+SycShowLocalSendersCommand >> executeRefactorings [
 
 	(Smalltalk tools toolNamed: #messageList) browse: self searchInTheWholeHierarchy.
+]
+
+{ #category : 'accessing' }
+SycShowLocalSendersCommand >> order [
+
+	^ 2
 ]
 
 { #category : 'execution' }
