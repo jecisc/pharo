@@ -4,64 +4,11 @@ I am a Commander2 hybrid for the source code refactorings (inline, extract, conv
 Class {
 	#name : 'SycSourceCodeRefactoringCmCommand',
 	#superclass : 'SycSourceCodeRefactoringCommand',
-	#instVars : [
-		'prepared',
-		'context'
-	],
+	#traits : 'TCommanderMigrationHybridCommand',
+	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }
-
-{ #category : 'testing' }
-SycSourceCodeRefactoringCmCommand >> acceptVisitor: aVisitor [
-
-	^ aVisitor visitCommand: self
-]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCmCommand >> applyCommandResult [
-
-	self applyResultInContext: self context
-]
-
-{ #category : 'testing' }
-SycSourceCodeRefactoringCmCommand >> canBeExecuted [
-
-	^ self class canBeExecutedInContext: self context
-]
-
-{ #category : 'accessing' }
-SycSourceCodeRefactoringCmCommand >> context [
-
-	^ context
-]
-
-{ #category : 'accessing' }
-SycSourceCodeRefactoringCmCommand >> context: aToolContext [
-
-	context := aToolContext
-]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCmCommand >> execute [
-
-	prepared
-		ifTrue: [ self executeRefactorings ]
-		ifFalse: [
-			[
-				prepared := true.
-				self prepareFullExecution.
-				self executeRefactoring.
-				self applyCommandResult ]
-				on: Exception
-				do: [ :exception | self processCommandFailure: exception ] ]
-]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCmCommand >> executeRefactoring [
-
-	^ self executeRefactorings
-]
 
 { #category : 'execution' }
 SycSourceCodeRefactoringCmCommand >> executeRefactorings [
@@ -80,18 +27,6 @@ SycSourceCodeRefactoringCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'testing' }
-SycSourceCodeRefactoringCmCommand >> isCommand [
-
-	^ true
-]
-
-{ #category : 'testing' }
-SycSourceCodeRefactoringCmCommand >> isGroup [
-
-	^ false
 ]
 
 { #category : 'accessing' }
@@ -126,10 +61,4 @@ SycSourceCodeRefactoringCmCommand >> prepareFullExecutionInContext: aToolContext
 	self context: aToolContext.
 	super prepareFullExecutionInContext: aToolContext.
 	prepared := true
-]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCmCommand >> processCommandFailure: anException [
-
-	context processFailure: anException of: self
 ]

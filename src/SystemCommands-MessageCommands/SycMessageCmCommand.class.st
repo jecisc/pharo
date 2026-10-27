@@ -4,82 +4,17 @@ I am a temporary Commander2 bridge for message/signature commands. I subclass th
 Class {
 	#name : 'SycMessageCmCommand',
 	#superclass : 'SycChangeMessageSignatureCommand',
-	#instVars : [
-		'prepared',
-		'context'
-	],
+	#traits : 'TCommanderMigrationHybridCommand',
+	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
-
-{ #category : 'testing' }
-SycMessageCmCommand >> acceptVisitor: aVisitor [
-
-	^ aVisitor visitCommand: self
-]
-
-{ #category : 'execution' }
-SycMessageCmCommand >> applyCommandResult [
-
-	self applyResultInContext: self context
-]
-
-{ #category : 'testing' }
-SycMessageCmCommand >> canBeExecuted [
-
-	^ self class canBeExecutedInContext: self context
-]
-
-{ #category : 'accessing' }
-SycMessageCmCommand >> context [
-
-	^ context
-]
-
-{ #category : 'accessing' }
-SycMessageCmCommand >> context: aToolContext [
-
-	context := aToolContext
-]
-
-{ #category : 'execution' }
-SycMessageCmCommand >> execute [
-
-	prepared
-		ifTrue: [ self executeRefactorings ]
-		ifFalse: [
-				[
-					prepared := true.
-					self prepareFullExecution.
-					self executeRefactoring.
-					self applyCommandResult ]
-					on: Exception
-					do: [ :exception | self processCommandFailure: exception ] ]
-]
-
-{ #category : 'execution' }
-SycMessageCmCommand >> executeRefactoring [
-
-	^ self executeRefactorings
-]
 
 { #category : 'initialization' }
 SycMessageCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'testing' }
-SycMessageCmCommand >> isCommand [
-
-	^ true
-]
-
-{ #category : 'testing' }
-SycMessageCmCommand >> isGroup [
-
-	^ false
 ]
 
 { #category : 'accessing' }
@@ -111,10 +46,4 @@ SycMessageCmCommand >> prepareFullExecutionInContext: aToolContext [
 	self context: aToolContext.
 	super prepareFullExecutionInContext: aToolContext.
 	prepared := true
-]
-
-{ #category : 'execution' }
-SycMessageCmCommand >> processCommandFailure: anException [
-
-	context processFailure: anException of: self
 ]
