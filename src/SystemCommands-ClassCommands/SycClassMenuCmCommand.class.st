@@ -10,35 +10,11 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'accessing' }
-SycClassMenuCmCommand >> fullBrowserOrder [
-
-	^ self order
-]
-
-{ #category : 'accessing' }
-SycClassMenuCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 SycClassMenuCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'accessing' }
-SycClassMenuCmCommand >> menuGroup [
-
-	^ CmdRootMenuGroup
-]
-
-{ #category : 'accessing' }
-SycClassMenuCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }

@@ -10,29 +10,11 @@ Class {
 	#package : 'SystemCommands-MessageCommands'
 }
 
-{ #category : 'accessing' }
-SycChangeMessageMenuCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 SycChangeMessageMenuCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'accessing' }
-SycChangeMessageMenuCmCommand >> menuGroup [
-
-	^ CmdRootMenuGroup
-]
-
-{ #category : 'accessing' }
-SycChangeMessageMenuCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'preparation' }

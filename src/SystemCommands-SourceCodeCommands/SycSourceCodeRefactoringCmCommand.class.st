@@ -16,29 +16,11 @@ SycSourceCodeRefactoringCmCommand >> executeRefactorings [
 	^ self executeRefactoring: self asRefactorings
 ]
 
-{ #category : 'accessing' }
-SycSourceCodeRefactoringCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 SycSourceCodeRefactoringCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'accessing' }
-SycSourceCodeRefactoringCmCommand >> menuGroup [
-
-	^ CmdRootMenuGroup
-]
-
-{ #category : 'accessing' }
-SycSourceCodeRefactoringCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }

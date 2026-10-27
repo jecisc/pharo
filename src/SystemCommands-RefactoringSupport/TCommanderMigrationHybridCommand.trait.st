@@ -83,6 +83,18 @@ TCommanderMigrationHybridCommand >> executeRefactoring [
 	^ self executeRefactorings
 ]
 
+{ #category : 'accessing' }
+TCommanderMigrationHybridCommand >> fullBrowserOrder [
+
+	^ self order
+]
+
+{ #category : 'accessing' }
+TCommanderMigrationHybridCommand >> icon [
+
+	^ self defaultMenuIcon
+]
+
 { #category : 'testing' }
 TCommanderMigrationHybridCommand >> isAvailableInMenuOf: aToolContext [
 
@@ -99,6 +111,18 @@ TCommanderMigrationHybridCommand >> isCommand [
 TCommanderMigrationHybridCommand >> isGroup [
 
 	^ false
+]
+
+{ #category : 'accessing' }
+TCommanderMigrationHybridCommand >> menuGroup [
+
+	^ CmdRootMenuGroup
+]
+
+{ #category : 'accessing' }
+TCommanderMigrationHybridCommand >> name [
+
+	^ self defaultMenuItemName
 ]
 
 { #category : 'execution' }

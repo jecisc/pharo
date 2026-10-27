@@ -10,29 +10,11 @@ Class {
 	#package : 'Calypso-SystemTools-Core'
 }
 
-{ #category : 'accessing' }
-ClyMethodEditorCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 ClyMethodEditorCmCommand >> initialize [
 
 	super initialize.
 	prepared := false
-]
-
-{ #category : 'accessing' }
-ClyMethodEditorCmCommand >> menuGroup [
-
-	^ CmdRootMenuGroup
-]
-
-{ #category : 'accessing' }
-ClyMethodEditorCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }

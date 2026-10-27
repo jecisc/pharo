@@ -10,18 +10,6 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'accessing' }
-SycVariableNavigationCmCommand >> fullBrowserOrder [
-
-	^ self order
-]
-
-{ #category : 'accessing' }
-SycVariableNavigationCmCommand >> icon [
-
-	^ self defaultMenuIcon
-]
-
 { #category : 'initialization' }
 SycVariableNavigationCmCommand >> initialize [
 
@@ -33,12 +21,6 @@ SycVariableNavigationCmCommand >> initialize [
 SycVariableNavigationCmCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
-]
-
-{ #category : 'accessing' }
-SycVariableNavigationCmCommand >> name [
-
-	^ self defaultMenuItemName
 ]
 
 { #category : 'accessing' }
