@@ -3,7 +3,7 @@ This class is an extension so we can mix command of Commander2 with Commander.
 "
 Class {
 	#name : 'SycCmCommand',
-	#superclass : 'CmCommand',
+	#superclass : 'ClyCommand',
 	#traits : 'TRefactoringCommandSupport',
 	#classTraits : 'TRefactoringCommandSupport classTrait',
 	#instVars : [
@@ -71,6 +71,11 @@ SycCmCommand >> canBeExecuted [
 
 	"Bridge the legacy Commander applicability check to the Commander2 contract."
 	^ self isApplicable
+]
+
+{ #category : 'accessing' }
+SycCmCommand >> description [
+	^ basicDescription
 ]
 
 { #category : 'executing' }
