@@ -41,10 +41,10 @@ SycRunTestCommand >> description [
 SycRunTestCommand >> executeRefactorings [
 
 	| selector testClasses |
-	selector := method selector.
-	testClasses := method methodClass isAbstract
-					   ifTrue: [ method methodClass allSubclasses ]
-					   ifFalse: [ { method methodClass } ].
+	selector := self method selector.
+	testClasses := self method methodClass isAbstract
+					   ifTrue: [ self method methodClass allSubclasses ]
+					   ifFalse: [ { self method methodClass } ].
 
 	testClasses do: [ :concreteClass |
 		| testResult |

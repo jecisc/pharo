@@ -16,13 +16,13 @@ SycInlineTempCommand class >> canBeExecutedInContext: aSourceCodeContext [
 { #category : 'converting' }
 SycInlineTempCommand >> asRefactorings [ 
 	| assignment |
-	assignment := sourceNode methodNode assignmentNodes
-		detect: [:each | each variable = sourceNode ].
+	assignment := self sourceNode methodNode assignmentNodes
+		detect: [:each | each variable = self sourceNode ].
 
 	^ { ReInlineTemporaryRefactoring
 		inline: assignment sourceInterval
-		from: method selector
-		in: method origin }
+		from: self method selector
+		in: self method origin }
 
 ]
 
@@ -30,13 +30,13 @@ SycInlineTempCommand >> asRefactorings [
 SycInlineTempCommand >> executeRefactorings [
 
 	| assignment |
-	assignment := sourceNode methodNode assignmentNodes detect: [ :each | each variable = sourceNode ].
+	assignment := self sourceNode methodNode assignmentNodes detect: [ :each | each variable = self sourceNode ].
 
 	^ { ((ReInlineTemporaryDriver newApplication: self application)
 		   scopes: refactoringScopes
 		   interval: assignment sourceInterval
-		   selector: method selector
-		   class: method origin) runRefactoring }
+		   selector: self method selector
+		   class: self method origin) runRefactoring }
 ]
 
 { #category : 'accessing' }

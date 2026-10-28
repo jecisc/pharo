@@ -21,13 +21,13 @@ ClyAddWatchDebugPointCommand >> defaultMenuIconName [
 { #category : 'accessing' }
 ClyAddWatchDebugPointCommand >> defaultMenuItemName [
 
-	^ String streamContents: [ :stream | stream << 'Watch "' << sourceNode displaySourceCode << '"' ]
+	^ String streamContents: [ :stream | stream << 'Watch "' << self sourceNode displaySourceCode << '"' ]
 ]
 
 { #category : 'execution' }
 ClyAddWatchDebugPointCommand >> executeRefactorings [
 
 	| dp | 
-	dp := DebugPointManager installNew: WatchDebugPoint on: sourceNode.
+	dp := DebugPointManager installNew: WatchDebugPoint on: self sourceNode.
 	self putIconInProperties: dp
 ]

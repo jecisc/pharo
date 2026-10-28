@@ -33,11 +33,11 @@ ClySwitchToProjectsCommand >> description [
 { #category : 'execution' }
 ClySwitchToProjectsCommand >> executeRefactorings [
 
-	^ browser switchToProjects
+	^ self browser switchToProjects
 ]
 
 { #category : 'testing' }
 ClySwitchToProjectsCommand >> isAppliedToBrowser [
 
-	^ (browser packageView showsItemsFromQuery: ClyAllProjectsQuery) and: [ browser isScopedModeEnabled not ]
+	^ (self browser packageView showsItemsFromQuery: ClyAllProjectsQuery) and: [ self browser isScopedModeEnabled not ]
 ]

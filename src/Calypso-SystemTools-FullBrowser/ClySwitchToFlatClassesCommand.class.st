@@ -17,11 +17,11 @@ ClySwitchToFlatClassesCommand >> defaultMenuItemName [
 { #category : 'execution' }
 ClySwitchToFlatClassesCommand >> executeRefactorings [
 
-	browser switchToFlatClasses
+	self browser switchToFlatClasses
 ]
 
 { #category : 'testing' }
 ClySwitchToFlatClassesCommand >> isAppliedToBrowser [
 
-	^browser showsFlatClasses
+	^self browser showsFlatClasses
 ]

@@ -51,8 +51,8 @@ SycRenameArgOrTempCommand >> description [
 SycRenameArgOrTempCommand >> executeRefactorings [
 
 	^ (ReRenameArgumentOrTemporaryDriver new
-		   sourceNode: sourceNode;
-		   method: method;
+		   sourceNode: self sourceNode;
+		   method: self method;
 		   scopes: refactoringScopes;
 		   yourself) runRefactoring
 ]

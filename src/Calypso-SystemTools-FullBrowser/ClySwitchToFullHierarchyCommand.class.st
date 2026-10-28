@@ -24,11 +24,11 @@ ClySwitchToFullHierarchyCommand >> defaultMenuItemName [
 { #category : 'execution' }
 ClySwitchToFullHierarchyCommand >> executeRefactorings [
 
-	browser switchToFullClassHierarchy
+	self browser switchToFullClassHierarchy
 ]
 
 { #category : 'testing' }
 ClySwitchToFullHierarchyCommand >> isAppliedToBrowser [
 
-	^browser showsFullClassHierarchy
+	^self browser showsFullClassHierarchy
 ]

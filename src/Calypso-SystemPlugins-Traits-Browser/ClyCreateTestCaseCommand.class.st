@@ -36,8 +36,8 @@ ClyCreateTestCaseCommand >> executeRefactorings [
 	classDefinition := ClassDefinitionPrinter fluid testClassDefinitionTemplateInPackage: package name tag: packageTag.
 	classDefinition := self morphicUIManager multiLineRequest: 'Define test class:' initialAnswer: classDefinition answerHeight: 250.
 	classDefinition isEmptyOrNil ifTrue: [ ^ self ].
-	resultClass := browser compileANewClassFrom: classDefinition notifying: nil startingFrom: nil.
-	resultClass ifNotNil: [ browser selectClass: resultClass ]
+	resultClass := self browser compileANewClassFrom: classDefinition notifying: nil startingFrom: nil.
+	resultClass ifNotNil: [ self browser selectClass: resultClass ]
 ]
 
 { #category : 'testing' }

@@ -12,7 +12,7 @@ Class {
 
 { #category : 'execution' }
 ClySwitchToMethodGroupsCommand >> executeRefactorings [
-	browser switchToMethodGroups
+	self browser switchToMethodGroups
 ]
 
 { #category : 'accessing' }

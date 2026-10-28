@@ -155,8 +155,9 @@ ClyCommand >> prepareExecutionInDragContext: aToolContext [
 ClyCommand >> prepareExecutionInDropContext: aToolContext [
 ]
 
-{ #category : 'execution' }
-ClyCommand >> readParametersFromContext: aToolContext [
+{ #category : 'executing' }
+ClyCommand >> prepareFullExecution [
+	^ self
 ]
 
 { #category : 'context menu' }

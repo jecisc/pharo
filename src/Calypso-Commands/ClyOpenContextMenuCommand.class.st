@@ -58,13 +58,6 @@ ClyOpenContextMenuCommand >> fillContextMenu: aMenu using: aCommandActivator [
 	]
 ]
 
-{ #category : 'execution' }
-ClyOpenContextMenuCommand >> readParametersFromContext: aToolContext [
-	super readParametersFromContext: aToolContext.
-
-	self context: aToolContext
-]
-
 { #category : 'context menu' }
 ClyOpenContextMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
 	"Here we need to take care because this command itself is added to menu of same self context.

@@ -24,9 +24,9 @@ ClySwitchTraitHierarchyModeCommand class >> isAbstract [
 { #category : 'execution' }
 ClySwitchTraitHierarchyModeCommand >> executeRefactorings [
 	| classScope |
-	classScope := browser classSelection asItemsScope: ClyClassScope.
+	classScope := self browser classSelection asItemsScope: ClyClassScope.
 
-	browser
+	self browser
 		switchClassViewTo: self requiredQueryResult
 		inScope: classScope, (classScope asScope: self traitScopeClass)
 ]
@@ -34,7 +34,7 @@ ClySwitchTraitHierarchyModeCommand >> executeRefactorings [
 { #category : 'testing' }
 ClySwitchTraitHierarchyModeCommand >> isAppliedToBrowser [
 
-	^browser classView showsItemsFromScope: self traitScopeClass
+	^self browser classView showsItemsFromScope: self traitScopeClass
 ]
 
 { #category : 'execution' }

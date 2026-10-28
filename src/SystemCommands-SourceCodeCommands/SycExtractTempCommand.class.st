@@ -23,9 +23,9 @@ SycExtractTempCommand class >> canBeExecutedInContext: aSourceCodeContext [
 SycExtractTempCommand >> executeRefactorings [ 
 
 	(ReExtractTempDriver new
-		  extract: sourceNode sourceInterval
-		  from: method selector
-		  in: method origin;
+		  extract: self sourceNode sourceInterval
+		  from: self method selector
+		  in: self method origin;
 		  scopes: refactoringScopes) runRefactoring
 ]
 

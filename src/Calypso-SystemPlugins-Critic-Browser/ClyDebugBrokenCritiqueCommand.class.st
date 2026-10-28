@@ -43,7 +43,7 @@ ClyDebugBrokenCritiqueCommand >> defaultMenuItemName [
 { #category : 'execution' }
 ClyDebugBrokenCritiqueCommand >> executeRefactorings [
 
-	(OupsDebugRequest newForContext: critique stack)
-		label: critique message;
+	(OupsDebugRequest newForContext: self critique stack)
+		label: self critique message;
 		submit
 ]

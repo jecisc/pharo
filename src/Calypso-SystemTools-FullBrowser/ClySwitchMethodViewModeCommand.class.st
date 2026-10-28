@@ -38,7 +38,7 @@ ClySwitchMethodViewModeCommand >> defaultMenuItemName [
 
 { #category : 'testing' }
 ClySwitchMethodViewModeCommand >> isAppliedToBrowser [
-	^browser methodGroupView showsItemsOfType: self methodGroupType
+	^self browser methodGroupView showsItemsOfType: self methodGroupType
 ]
 
 { #category : 'accessing' }

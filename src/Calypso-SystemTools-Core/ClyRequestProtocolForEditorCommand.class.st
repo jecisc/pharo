@@ -21,8 +21,9 @@ ClyRequestProtocolForEditorCommand class >> methodEditorShorcutActivation [
 
 { #category : 'accessing' }
 ClyRequestProtocolForEditorCommand >> defaultMenuItemName [
-
-	^ menuItemName
+	^ self context tool hasUnacceptedEdits
+		ifTrue: [ 'Classify currently editing method' ]
+		ifFalse: [ 'Classify method' ]
 ]
 
 { #category : 'accessing' }
@@ -50,12 +51,4 @@ ClyRequestProtocolForEditorCommand >> name [
 ClyRequestProtocolForEditorCommand >> order [
 
 	^ 1000
-]
-
-{ #category : 'execution' }
-ClyRequestProtocolForEditorCommand >> readParametersFromContext: aToolContext [
-
-	menuItemName := aToolContext tool hasUnacceptedEdits
-		ifTrue: [ 'Classify currently editing method' ]
-		ifFalse: [ 'Classify method' ]
 ]

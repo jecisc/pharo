@@ -29,7 +29,7 @@ ClyBrowseCoveringTestCaseCommand >> executeRefactorings [
 
 	| testCase |
 	testCase := (selectedClassItem getProperty: ClyTestedClassProperty) coveringTestCase.
-	browser spawnBrowser: ClyFullBrowserMorph withState: [ :b | b selectClass: testCase ]
+	self browser spawnBrowser: ClyFullBrowserMorph withState: [ :b | b selectClass: testCase ]
 ]
 
 { #category : 'testing' }

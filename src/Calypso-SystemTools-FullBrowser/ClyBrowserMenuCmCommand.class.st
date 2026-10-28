@@ -33,9 +33,3 @@ ClyBrowserMenuCmCommand >> initialize [
 	super initialize.
 	prepared := false
 ]
-
-{ #category : 'execution' }
-ClyBrowserMenuCmCommand >> prepareFullExecution [
-
-	browser := self context browser
-]

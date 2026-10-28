@@ -49,7 +49,5 @@ SycSourceCodeRefactoringCmCommand >> orderInContext: aToolContext [
 { #category : 'execution' }
 SycSourceCodeRefactoringCmCommand >> prepareFullExecution [
 
-	method := self context lastSelectedMethod.
-	sourceNode := self context lastSelectedSourceNode.
 	refactoringScopes := self context refactoringScopes
 ]

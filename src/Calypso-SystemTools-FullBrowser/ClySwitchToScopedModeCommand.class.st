@@ -17,7 +17,7 @@ ClySwitchToScopedModeCommand >> defaultMenuItemName [
 { #category : 'execution' }
 ClySwitchToScopedModeCommand >> executeRefactorings [
 
-	browser switchToPackageScopeOf: packages
+	self browser switchToPackageScopeOf: packages
 ]
 
 { #category : 'testing' }
@@ -49,6 +49,6 @@ ClySwitchToScopedModeCommand >> prepareFullExecution [
 	packages := StBrowserSearchPresenter searchConfiguring: [ :presenter :dialog |
 			            dialog title: 'Select package scope'.
 			            presenter
-				            items: (browser itemsForQuery: ClyAllPackagesQuery sorted);
+				            items: (self browser itemsForQuery: ClyAllPackagesQuery sorted);
 				            multipleSelection ]
 ]

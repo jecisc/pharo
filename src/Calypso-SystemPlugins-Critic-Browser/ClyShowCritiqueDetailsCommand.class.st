@@ -15,11 +15,11 @@ ClyShowCritiqueDetailsCommand >> critiqueDescription [
 	^ String streamContents: [ :s |
 		  s
 			  nextPutAll: '[';
-			  nextPutAll: critique rule group;
+			  nextPutAll: self critique rule group;
 			  nextPutAll: ']';
 			  cr;
 			  cr;
-			  nextPutAll: critique description ]
+			  nextPutAll: self critique description ]
 ]
 
 { #category : 'accessing' }
@@ -36,7 +36,7 @@ ClyShowCritiqueDetailsCommand >> description [
 ClyShowCritiqueDetailsCommand >> executeRefactorings [
 
 	self specUIManager
-		title: critique title;
+		title: self critique title;
 		message: self critiqueDescription;
 		acceptLabel: 'close';
 		extent: 500 @ 500;

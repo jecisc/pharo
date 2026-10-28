@@ -48,12 +48,12 @@ ClySwitchClassMetaLevelCommand >> defaultMenuItemName [
 
 { #category : 'execution' }
 ClySwitchClassMetaLevelCommand >> executeRefactorings [
-	browser switchToMetaLevelScope: self metaLevelScope
+	self browser switchToMetaLevelScope: self metaLevelScope
 ]
 
 { #category : 'testing' }
 ClySwitchClassMetaLevelCommand >> isAppliedToBrowser [
-	^browser metaLevelScope = self metaLevelScope
+	^self browser metaLevelScope = self metaLevelScope
 ]
 
 { #category : 'execution' }

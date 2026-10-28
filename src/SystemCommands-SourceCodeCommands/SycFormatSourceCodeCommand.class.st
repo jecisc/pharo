@@ -60,9 +60,3 @@ SycFormatSourceCodeCommand >> order [
 
 	^ 100000
 ]
-
-{ #category : 'execution' }
-SycFormatSourceCodeCommand >> readParametersFromContext: aToolContext [
-
-	self context: aToolContext
-]

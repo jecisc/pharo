@@ -85,9 +85,3 @@ SycLegacyCmCommand >> prepared: aBoolean [
 
 	prepared := aBoolean
 ]
-
-{ #category : 'execution' }
-SycLegacyCmCommand >> readParametersFromContext: aToolContext [
-
-	self context: aToolContext
-]

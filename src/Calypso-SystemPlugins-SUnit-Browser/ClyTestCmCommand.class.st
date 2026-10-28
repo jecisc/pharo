@@ -39,9 +39,3 @@ ClyTestCmCommand >> initialize [
 	super initialize.
 	prepared := false
 ]
-
-{ #category : 'execution' }
-ClyTestCmCommand >> prepareFullExecution [
-
-	self readParametersFromContext: self context
-]

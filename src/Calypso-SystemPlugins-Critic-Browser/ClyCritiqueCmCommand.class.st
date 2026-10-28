@@ -39,10 +39,3 @@ ClyCritiqueCmCommand >> initialize [
 	super initialize.
 	prepared := false
 ]
-
-{ #category : 'execution' }
-ClyCritiqueCmCommand >> prepareFullExecution [
-
-	critique := self context selectedCritique.
-	analyzedObject := self context analyzedObject
-]

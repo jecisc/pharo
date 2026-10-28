@@ -18,10 +18,10 @@ ClySwitchToFlatQueryResultCommand >> defaultMenuItemName [
 
 { #category : 'execution' }
 ClySwitchToFlatQueryResultCommand >> executeRefactorings [
-	browser switchToFlatResult
+	self browser switchToFlatResult
 ]
 
 { #category : 'testing' }
 ClySwitchToFlatQueryResultCommand >> isAppliedToBrowser [
-	^browser showsFlatResult
+	^self browser showsFlatResult
 ]

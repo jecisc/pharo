@@ -12,7 +12,7 @@ Class {
 
 { #category : 'execution' }
 ClySwitchToVariablesCommand >> executeRefactorings [
-	browser switchToVariables
+	self browser switchToVariables
 ]
 
 { #category : 'accessing' }

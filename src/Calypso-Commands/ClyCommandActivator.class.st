@@ -15,10 +15,9 @@ Class {
 
 { #category : 'instance creation' }
 ClyCommandActivator class >> createCommand: aCommandClass inContext: aToolContext [
-	| command |
-	command := aCommandClass new.
-	command readParametersFromContext: aToolContext.
-	^ command
+	^ aCommandClass new
+		context: aToolContext;
+		yourself
 ]
 
 { #category : 'instance creation' }

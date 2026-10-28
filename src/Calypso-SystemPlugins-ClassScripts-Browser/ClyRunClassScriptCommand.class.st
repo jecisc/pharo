@@ -36,7 +36,7 @@ ClyRunClassScriptCommand class >> methodTableIconActivation [
 
 { #category : 'accessing' }
 ClyRunClassScriptCommand >> defaultMenuIconName [
-	^ script iconName
+	^ self script iconName
 ]
 
 { #category : 'accessing' }
@@ -46,22 +46,19 @@ ClyRunClassScriptCommand >> defaultMenuItemName [
 
 { #category : 'execution' }
 ClyRunClassScriptCommand >> executeRefactorings [
-	script executeOn: targetClass
+	self script executeOn: targetClass
 ]
 
 { #category : 'execution' }
 ClyRunClassScriptCommand >> prepareFullExecution [
 
 	super prepareFullExecution.
-	script := self context selectedClassScript.
 	targetClass := self context selectedClasses
-		               detect: [ :each | script isImplementedByClass: each ]
-		               ifNone: [ script implementorClass ]
+		               detect: [ :each | self script isImplementedByClass: each ]
+		               ifNone: [ self script implementorClass ]
 ]
 
-{ #category : 'execution' }
-ClyRunClassScriptCommand >> readParametersFromContext: aBrowserContext [
-	super readParametersFromContext: aBrowserContext.
-
-	script := aBrowserContext selectedClassScript
+{ #category : 'accessing' }
+ClyRunClassScriptCommand >> script [
+	^ script ifNil: [ self context ifNotNil: [ :ctx | ctx selectedClassScript ] ]
 ]

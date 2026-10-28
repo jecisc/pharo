@@ -46,16 +46,16 @@ SycNewExtractMethodCommand >> description [
 SycNewExtractMethodCommand >> executeRefactorings [
 
 	| selectedInterval driver |
-	selectedInterval := selectedTextInterval ifEmpty: [
-					sourceNode sourceInterval ].
+	selectedInterval := self selectedTextInterval ifEmpty: [
+					self sourceNode sourceInterval ].
 	driver := ReExtractMethodDriver new
 							scopes: refactoringScopes;
 							model: model;
-							extract: (method sourceCode
+							extract: (self method sourceCode
 										copyFrom: selectedInterval first
 										to: selectedInterval last)
-							   from: method
-							   in: method origin.
+							   from: self method
+							   in: self method origin.
 	driver runRefactoring
 ]
 
@@ -73,11 +73,9 @@ SycNewExtractMethodCommand >> prepareFullExecution [
 	selectedTextInterval := self context selectedTextInterval
 ]
 
-{ #category : 'execution' }
-SycNewExtractMethodCommand >> readParametersFromContext: aSourceCodeContext [
-	super readParametersFromContext: aSourceCodeContext.
-	self setUpModelFromContext: aSourceCodeContext.
-	selectedTextInterval := aSourceCodeContext selectedTextInterval
+{ #category : 'accessing' }
+SycNewExtractMethodCommand >> selectedTextInterval [
+	^ selectedTextInterval ifNil: [ self context ifNotNil: [ :ctx | ctx selectedTextInterval ] ]
 ]
 
 { #category : 'initialization' }

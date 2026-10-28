@@ -21,11 +21,11 @@ SycExtractSetUpCommand class >> canBeExecutedInContext: aToolContext [
 SycExtractSetUpCommand >> asRefactorings [
 	| selectedInterval refactoring |
 	selectedInterval := selectedTextInterval ifEmpty: [
-		                    sourceNode sourceInterval ].
+		                    self sourceNode sourceInterval ].
 	refactoring := RBExtractSetUpMethodAndOccurrences
 		extract: selectedInterval
-		from: method selector
-		in: method origin.
+		from: self method selector
+		in: self method origin.
 	
 	^ { refactoring }
 ]

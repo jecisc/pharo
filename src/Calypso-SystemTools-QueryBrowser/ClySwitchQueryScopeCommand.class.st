@@ -44,7 +44,7 @@ ClySwitchQueryScopeCommand class >> toScope: anEnvironmentScope in: aBrowser [
 ClySwitchQueryScopeCommand >> addToolbarItemInto: toolbarMorph using: aCommandActivator [
 
 	| compoBox |
-	compoBox := ClyScopeCompoBoxMorph for: browser.
+	compoBox := ClyScopeCompoBoxMorph for: self browser.
 
 	toolbarMorph addNewItem: compoBox
 ]
@@ -64,22 +64,22 @@ ClySwitchQueryScopeCommand >> defaultToolbarItemName [
 
 { #category : 'execution' }
 ClySwitchQueryScopeCommand >> executeRefactorings [
-	browser switchScopeTo: queryScope
+	self browser switchScopeTo: queryScope
 ]
 
 { #category : 'activation - context menu' }
 ClySwitchQueryScopeCommand >> fillContextMenu: aMenu using: aCommandActivator [
 	| concreteScopeCommand switchActivator |
 
-	browser allNavigationScopes do: [ :newScope |
-		concreteScopeCommand := self class toScope: newScope in: browser.
+	self browser allNavigationScopes do: [ :newScope |
+		concreteScopeCommand := self class toScope: newScope in: self browser.
 		switchActivator := aCommandActivator newForCommand: concreteScopeCommand.
 		aMenu 	add: switchActivator menuItemName target: switchActivator selector: #executeCommand]
 ]
 
 { #category : 'testing' }
 ClySwitchQueryScopeCommand >> isAppliedToBrowser [
-	^browser isQueryScopeActive: queryScope
+	^self browser isQueryScopeActive: queryScope
 ]
 
 { #category : 'accessing' }

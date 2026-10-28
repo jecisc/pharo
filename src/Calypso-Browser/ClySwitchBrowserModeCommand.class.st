@@ -23,7 +23,7 @@ ClySwitchBrowserModeCommand class >> isAbstract [
 { #category : 'execution' }
 ClySwitchBrowserModeCommand >> applyResultInContext: aToolContext [
 	super applyResultInContext: aToolContext.
-	browser rebuildToolbar
+	self browser rebuildToolbar
 ]
 
 { #category : 'activation - toolbar support' }

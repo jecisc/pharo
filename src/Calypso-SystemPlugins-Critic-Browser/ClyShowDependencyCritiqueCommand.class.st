@@ -28,5 +28,5 @@ ClyShowDependencyCritiqueCommand >> description [
 { #category : 'execution' }
 ClyShowDependencyCritiqueCommand >> executeRefactorings [
 
-	(StPackageDependenciesPresenter onPackagesNamed: { analyzedObject name }) open
+	(StPackageDependenciesPresenter onPackagesNamed: { self analyzedObject name }) open
 ]

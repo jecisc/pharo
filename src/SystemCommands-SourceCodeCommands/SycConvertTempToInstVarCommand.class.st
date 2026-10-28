@@ -18,9 +18,9 @@ SycConvertTempToInstVarCommand >> executeRefactorings [
 
 	^ ((ReConvertTemporaryToInstanceVariableDriver newApplication: self application)
 		   scopes: refactoringScopes
-		   class: method origin
-		   selector: method selector
-		   variable: sourceNode name) runRefactoring
+		   class: self method origin
+		   selector: self method selector
+		   variable: self sourceNode name) runRefactoring
 ]
 
 { #category : 'accessing' }

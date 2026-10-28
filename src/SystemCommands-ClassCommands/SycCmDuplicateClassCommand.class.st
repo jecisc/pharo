@@ -78,9 +78,3 @@ SycCmDuplicateClassCommand >> prepareFullExecution [
 	targetClass := context lastSelectedClass.
 
 ]
-
-{ #category : 'execution' }
-SycCmDuplicateClassCommand >> readParametersFromContext: aToolContext [
-
-	context := aToolContext
-]

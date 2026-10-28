@@ -63,13 +63,6 @@ ClyRunTestsFromSelectedItemsCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyRunTestsFromSelectedItemsCommand >> readParametersFromContext: aToolContext [
-	super readParametersFromContext: aToolContext.
-	testItems := aToolContext selectedItems
-		select: [ :each | each hasProperty: ClyTestResultProperty ]
-]
-
-{ #category : 'execution' }
 ClyRunTestsFromSelectedItemsCommand >> runTestCase: testCase results: testResult [
 
 	testCase resetHistory.
@@ -78,7 +71,7 @@ ClyRunTestsFromSelectedItemsCommand >> runTestCase: testCase results: testResult
 
 { #category : 'accessing' }
 ClyRunTestsFromSelectedItemsCommand >> testItems [
-	^ testItems
+	^ testItems ifNil: [ self context ifNotNil: [ :ctx | ctx selectedItems select: [ :each | each hasProperty: ClyTestResultProperty ] ] ]
 ]
 
 { #category : 'accessing' }
@@ -89,7 +82,7 @@ ClyRunTestsFromSelectedItemsCommand >> testItems: anObject [
 { #category : 'context menu support' }
 ClyRunTestsFromSelectedItemsCommand >> testResult [
 
-	^self testResultOf: testItems first
+	^self testResultOf: self testItems first
 ]
 
 { #category : 'context menu support' }

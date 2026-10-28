@@ -16,7 +16,7 @@ ClyClassSideLinkTableDecorator class >> decorateMainTableCell: anItemCellMorph i
 	super decorateMainTableCell: anItemCellMorph inContext: itemContext.
 
 	command := ClySwitchToClassSideCommand new.
-	command readParametersFromContext: itemContext.
+	command context: itemContext.
 	activator := ClyCommandActivator new
 			command: command;
 			context: itemContext.

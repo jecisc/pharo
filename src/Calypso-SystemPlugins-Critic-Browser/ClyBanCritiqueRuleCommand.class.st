@@ -28,5 +28,5 @@ ClyBanCritiqueRuleCommand >> description [
 { #category : 'execution' }
 ClyBanCritiqueRuleCommand >> executeRefactorings [
 
-	critique guidedBan
+	self critique guidedBan
 ]

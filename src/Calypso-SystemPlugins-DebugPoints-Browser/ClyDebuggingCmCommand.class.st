@@ -39,9 +39,3 @@ ClyDebuggingCmCommand >> initialize [
 	super initialize.
 	prepared := false
 ]
-
-{ #category : 'execution' }
-ClyDebuggingCmCommand >> prepareFullExecution [
-
-	self readParametersFromContext: self context
-]

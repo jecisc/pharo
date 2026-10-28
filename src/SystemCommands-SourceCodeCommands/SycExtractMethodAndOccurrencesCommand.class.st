@@ -29,12 +29,12 @@ SycExtractMethodAndOccurrencesCommand class >> methodEditorShortcutActivation [
 SycExtractMethodAndOccurrencesCommand >> asRefactorings [
 
 	| selectedInterval refactoring |
-	selectedInterval := (selectedTextInterval ifNil: [ (1 to: 0) ]) ifEmpty: [
-		                    sourceNode sourceInterval ].
+	selectedInterval := (self selectedTextInterval ifNil: [ (1 to: 0) ]) ifEmpty: [
+		                    self sourceNode sourceInterval ].
 	refactoring := RBExtractMethodAndOccurrences
 		               extract: selectedInterval
-		               from: method selector
-		               in: method origin.
+		               from: self method selector
+		               in: self method origin.
 	self setUpOptionsOf: refactoring.
 	^ { refactoring }
 ]
@@ -69,11 +69,9 @@ SycExtractMethodAndOccurrencesCommand >> prepareFullExecution [
 	selectedTextInterval := self context selectedTextInterval
 ]
 
-{ #category : 'execution' }
-SycExtractMethodAndOccurrencesCommand >> readParametersFromContext: aSourceCodeContext [
-	super readParametersFromContext: aSourceCodeContext.
-	self setUpModelFromContext: aSourceCodeContext.
-	selectedTextInterval := aSourceCodeContext selectedTextInterval
+{ #category : 'accessing' }
+SycExtractMethodAndOccurrencesCommand >> selectedTextInterval [
+	^ selectedTextInterval ifNil: [ self context ifNotNil: [ :ctx | ctx selectedTextInterval ] ]
 ]
 
 { #category : 'execution' }
@@ -99,7 +97,7 @@ SycExtractMethodAndOccurrencesCommand >> setUpOptionToChangeMethodNameDuring: re
 	| dialog |
 	
 	refactoring setOption: #methodName toUse: [ :methodName :ref | | invalidArgs |
-		invalidArgs := self computeInvalidArgNamesForSelector: method selector.
+		invalidArgs := self computeInvalidArgNamesForSelector: self method selector.
 		dialog := (StMethodNameEditorPresenter newApplication: StPharoApplication current model: methodName)
 			invalidArgNames: invalidArgs;
 			canRenameArgs: true;

@@ -19,7 +19,7 @@ SycInlineMethodCommand class >> canBeExecutedInContext: aSourceCodeContext [
 { #category : 'converting' }
 SycInlineMethodCommand >> asRefactorings [
 
-	^ { ((RBInlineMethodRefactoring inline: sourceNode sourceInterval inMethod: method selector forClass: method origin)
+	^ { ((RBInlineMethodRefactoring inline: self sourceNode sourceInterval inMethod: self method selector forClass: self method origin)
 		   setOption: #shouldNotCreateExtraBindings toUse: [ :ref :aString |
 			   (self confirm: ('Do you want to inline the expression ''<1s>'' in the current method?' expandMacrosWith: aString)) not ];
 		   yourself) }
@@ -30,9 +30,9 @@ SycInlineMethodCommand >> executeRefactorings [
 
 	^ ((ReInlineMethodDriver newApplication: self application)
 		   scopes: refactoringScopes
-		   interval: sourceNode sourceInterval
-		   selector: method selector
-		   class: method origin) runRefactoring 
+		   interval: self sourceNode sourceInterval
+		   selector: self method selector
+		   class: self method origin) runRefactoring 
 ]
 
 { #category : 'accessing' }

@@ -36,7 +36,7 @@ ClyFindMethodInBrowserCommand >> defaultMenuItemName [
 { #category : 'execution' }
 ClyFindMethodInBrowserCommand >> executeRefactorings [
 
-	browser selectMethod: method
+	self browser selectMethod: method
 ]
 
 { #category : 'testing' }
@@ -63,6 +63,6 @@ ClyFindMethodInBrowserCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	method := StBrowserSearchPresenter searchConfiguring: [ :presenter :dialog |
 			          dialog title: 'Choose method'.
-			          presenter items: (browser itemsForQuery: browser methodView query).
+			          presenter items: (self browser itemsForQuery: self browser methodView query).
 			          presenter itemsList display: [ :aMethod | aMethod selector ] ]
 ]

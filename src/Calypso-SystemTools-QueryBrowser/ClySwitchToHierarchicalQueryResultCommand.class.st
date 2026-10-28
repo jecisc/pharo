@@ -18,10 +18,10 @@ ClySwitchToHierarchicalQueryResultCommand >> defaultMenuItemName [
 
 { #category : 'execution' }
 ClySwitchToHierarchicalQueryResultCommand >> executeRefactorings [
-	browser switchToHierarchicalResult
+	self browser switchToHierarchicalResult
 ]
 
 { #category : 'testing' }
 ClySwitchToHierarchicalQueryResultCommand >> isAppliedToBrowser [
-	^browser showsFlatResult not
+	^self browser showsFlatResult not
 ]

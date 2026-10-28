@@ -28,11 +28,11 @@ ClySwitchToPackagesCommand >> description [
 { #category : 'execution' }
 ClySwitchToPackagesCommand >> executeRefactorings [
 
-	^ browser switchToPackages
+	^ self browser switchToPackages
 ]
 
 { #category : 'testing' }
 ClySwitchToPackagesCommand >> isAppliedToBrowser [
 
-	^ (browser packageView showsItemsFromQuery: ClyAllPackagesQuery) and: [ browser isScopedModeEnabled not ]
+	^ (self browser packageView showsItemsFromQuery: ClyAllPackagesQuery) and: [ self browser isScopedModeEnabled not ]
 ]
