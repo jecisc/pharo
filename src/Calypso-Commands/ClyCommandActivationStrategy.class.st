@@ -41,7 +41,7 @@ ClyCommandActivationStrategy >> commandClass [
 
 { #category : 'activation' }
 ClyCommandActivationStrategy >> defaultActivatorClass [
-	^CmdCommandActivator
+	^ ClyCommandActivator
 ]
 
 { #category : 'testing' }
