@@ -85,7 +85,7 @@ ClyToolbarMorph >> initialize [
 ClyToolbarMorph >> updateItems [
 
 	| menu |
-	menu := CmdMenu activatedBy: ClyToolbarActivation.
+	menu := ClyToolbarBuilder activatedBy: ClyToolbarActivation.
 	browser navigationContextsDo: [ :eachContext | menu buildInContext: eachContext].
 
 	self hide.

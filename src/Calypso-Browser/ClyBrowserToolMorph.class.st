@@ -195,7 +195,7 @@ ClyBrowserToolMorph >> addDecorator: aBrowserToolDecorator [
 ClyBrowserToolMorph >> addNotebookPageOn: aNotebook [
 	| menu |
 
-	menu := CmdMenu activatedBy: ClyBrowserTabCommandActivation.
+	menu := ClyToolbarBuilder activatedBy: ClyBrowserTabCommandActivation.
 	menu buildInContext: context.
 
 	containerTab := ClyNotebookPageMorph

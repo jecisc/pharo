@@ -59,12 +59,12 @@ ClyMenuCommandActivationStrategy class >> byRootGroupItem: itemName order: aNumb
 
 { #category : 'instance creation' }
 ClyMenuCommandActivationStrategy class >> byRootGroupItemFor: aToolContextClass [
-	^self byItemOf: CmdRootMenuGroup for: aToolContextClass
+	^self byItemOf: ClyToolbarGroup for: aToolContextClass
 ]
 
 { #category : 'instance creation' }
 ClyMenuCommandActivationStrategy class >> byRootGroupItemOrder: aNumber for: aToolContextClass [
-	^self byItemOf: CmdRootMenuGroup order: aNumber for: aToolContextClass
+	^self byItemOf: ClyToolbarGroup order: aNumber for: aToolContextClass
 ]
 
 { #category : 'testing' }
