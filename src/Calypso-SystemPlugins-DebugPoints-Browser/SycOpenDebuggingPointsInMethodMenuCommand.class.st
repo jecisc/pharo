@@ -12,7 +12,7 @@ Class {
 SycOpenDebuggingPointsInMethodMenuCommand class >> methodContextMenuActivation [
 
 	<classAnnotation>
-	^ CmdContextMenuActivation
+	^ ClyContextMenuActivation
 		  byRootGroupItemOrder: 1.4
 		  for: ClyMethod asCalypsoItemContext 
 ]

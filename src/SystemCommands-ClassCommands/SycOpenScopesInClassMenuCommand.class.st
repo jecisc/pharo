@@ -10,7 +10,7 @@ Class {
 SycOpenScopesInClassMenuCommand class >> browserContextMenuActivation [
 	<classAnnotation>
 
-	^ CmdContextMenuActivation byRootGroupItemOrder: 1.5 for: ClyClass asCalypsoItemContext
+	^ ClyContextMenuActivation byRootGroupItemOrder: 1.5 for: ClyClass asCalypsoItemContext
 ]
 
 { #category : 'execution' }

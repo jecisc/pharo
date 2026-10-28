@@ -112,7 +112,7 @@ SycCmCommand >> isEnabled [
 { #category : 'accessing' }
 SycCmCommand >> menuGroup [
 
-	^ CmdRootMenuGroup
+	^ ClyRootMenuGroup
 ]
 
 { #category : 'accessing' }

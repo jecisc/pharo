@@ -105,7 +105,7 @@ ClyMethodCodeEditorToolMorph >> buildLeftSideBar [
 
 	super buildLeftSideBar.
 
-	CmdTextLeftBarClickActivation enableInMorph: self leftSideBar withCommandsFrom: self.
+	ClyTextLeftBarClickActivation enableInMorph: self leftSideBar withCommandsFrom: self.
 	ClyTextLeftBarDoubleClickActivation enableInMorph: self leftSideBar withCommandsFrom: self
 ]
 

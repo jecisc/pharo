@@ -12,14 +12,14 @@ Class {
 SycOpenExtraInPackageMenuCommand class >> packageContextMenuActivation [
 
 	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10200 for: Package asCalypsoItemContext
+	^ ClyContextMenuActivation byRootGroupItemOrder: 10200 for: Package asCalypsoItemContext
 ]
 
 { #category : 'annotation' }
 SycOpenExtraInPackageMenuCommand class >> taggedClassGroupContextMenuActivation [
 
 	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10200 for: ClyTaggedClassGroup asCalypsoItemContext
+	^ ClyContextMenuActivation byRootGroupItemOrder: 10200 for: ClyTaggedClassGroup asCalypsoItemContext
 ]
 
 { #category : 'accessing' }

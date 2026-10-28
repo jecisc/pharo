@@ -17,8 +17,8 @@ SycOpenSourceCodeMenuCommand >> activationStrategy [
 { #category : 'context menu' }
 SycOpenSourceCodeMenuCommand >> addCommandsTo: aCmdMenu [
 
-	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: context) commands do: [ :command |
-		(aCmdMenu ensureGroup: command menuGroup) addItem: (ClyCommandMenuItem on: command inContext: context) ]
+	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: self context) commands do: [ :command |
+		(aCmdMenu ensureGroup: command menuGroup) addItem: (ClyCommandMenuItem on: command inContext: self context) ]
 ]
 
 { #category : 'context menu' }
@@ -47,10 +47,10 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 SycOpenSourceCodeMenuCommand >> createContextMenu [
 
 	| menu |
-	menu := CmdMenu activatedBy: self activationStrategy.
-	self activationStrategy visibleInstancesInContext: context do: [ :activationStrategy | menu buildCommandItemInContext: context activatingBy: activationStrategy ].
+	menu := ClyMenu activatedBy: self activationStrategy.
+	self activationStrategy visibleInstancesInContext: self context do: [ :activationStrategy | menu buildCommandItemInContext: self context activatingBy: activationStrategy ].
 	self addCommandsTo: menu.
-	^ menu buildContextMenuFor: context tool
+	^ menu buildContextMenuFor: self context tool
 ]
 
 { #category : 'accessing' }
@@ -72,8 +72,8 @@ SycOpenSourceCodeMenuCommand >> description [
 { #category : 'execution' }
 SycOpenSourceCodeMenuCommand >> execute [
 
-	context selectedTextInterval ifEmpty: [
-		context showSourceNode].
+	self context selectedTextInterval ifEmpty: [
+		self context showSourceNode].
 
 	super execute
 ]
@@ -83,7 +83,7 @@ SycOpenSourceCodeMenuCommand >> registerContextMenuItemsFor: aCommandItem withBu
 
 	| submenu |
 	RecursionStopper during: [
-		submenu := self activationStrategy buildMenuInContext: context.
+		submenu := self activationStrategy buildMenuInContext: self context.
 		"Commander2 items count for the activity check, so they must be added first"
 		self addCommandsTo: submenu.
 		submenu isActive ifTrue: [

@@ -12,14 +12,14 @@ Class {
 SycOpenExtraInMethodGroupMenuCommand class >> inheritedMethodGroupContextMenuActivation [
 
 	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10200 for: ClyInheritedMethodGroup asCalypsoItemContext
+	^ ClyContextMenuActivation byRootGroupItemOrder: 10200 for: ClyInheritedMethodGroup asCalypsoItemContext
 ]
 
 { #category : 'annotation' }
 SycOpenExtraInMethodGroupMenuCommand class >> variableMethodGroupContextMenuActivation [
 
 	<classAnnotation>
-	^ CmdContextMenuActivation byRootGroupItemOrder: 10200 for: ClyVariableMethodGroup asCalypsoItemContext
+	^ ClyContextMenuActivation byRootGroupItemOrder: 10200 for: ClyVariableMethodGroup asCalypsoItemContext
 ]
 
 { #category : 'accessing' }

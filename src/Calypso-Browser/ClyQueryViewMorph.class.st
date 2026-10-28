@@ -618,7 +618,7 @@ ClyQueryViewMorph >> menuColumn: column row: rowIndex [
 	| menuSelection context menu |
 	menuSelection := self grabSelectionAt: rowIndex.
 	context := self createSelectionContextOf: menuSelection.
-	menu := CmdContextMenuActivation buildMenuInContext: context.
+	menu := ClyContextMenuActivation buildMenuInContext: context.
 	
 	"This next code is more complex than needed but it is here to support Commande1 and 2 compatibility"
 	context commanderCommandClasses ifNotEmpty: [ :classes |

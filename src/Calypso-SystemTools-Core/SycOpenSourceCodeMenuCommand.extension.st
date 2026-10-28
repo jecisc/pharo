@@ -11,5 +11,5 @@ SycOpenSourceCodeMenuCommand class >> methodEditorShortcutActivation [
 SycOpenSourceCodeMenuCommand class >> sourceCodeMenuActivation [
 	<classAnnotation>
 
-	^CmdContextMenuActivation byRootGroupItemOrder: -10 for: ClySourceCodeContext
+	^ClyContextMenuActivation byRootGroupItemOrder: -10 for: ClySourceCodeContext
 ]

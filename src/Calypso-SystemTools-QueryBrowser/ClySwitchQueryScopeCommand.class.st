@@ -23,7 +23,7 @@ Class {
 ClySwitchQueryScopeCommand class >> queryBrowserMenuActivation [
 	<classAnnotation>
 
-	^CmdContextMenuActivation byItemOf: ClySwitchScopeMenuGroup for: ClyQueryBrowserContext
+	^ClyContextMenuActivation byItemOf: ClySwitchScopeMenuGroup for: ClyQueryBrowserContext
 ]
 
 { #category : 'activation' }

@@ -103,7 +103,7 @@ TCommanderMigrationHybridCommand >> isGroup [
 { #category : 'accessing' }
 TCommanderMigrationHybridCommand >> menuGroup [
 
-	^ CmdRootMenuGroup
+	^ ClyRootMenuGroup
 ]
 
 { #category : 'accessing' }

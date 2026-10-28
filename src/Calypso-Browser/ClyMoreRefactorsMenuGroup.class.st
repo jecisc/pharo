@@ -3,7 +3,7 @@ I am a submenu for rarely used refactorings
 "
 Class {
 	#name : 'ClyMoreRefactorsMenuGroup',
-	#superclass : 'CmdMenuGroup',
+	#superclass : 'ClyMenuGroup',
 	#category : 'Calypso-Browser-MenuGroups',
 	#package : 'Calypso-Browser',
 	#tag : 'MenuGroups'

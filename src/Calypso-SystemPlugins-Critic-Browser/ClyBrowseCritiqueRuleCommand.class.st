@@ -20,7 +20,7 @@ Class {
 { #category : 'activation' }
 ClyBrowseCritiqueRuleCommand class >> browserContextMenuActivation [
 	<classAnnotation>
-	^ CmdContextMenuActivation byItemOf: CmdExtraMenuGroup for: ClyCriticContext
+	^ ClyContextMenuActivation byItemOf: ClyExtraMenuGroup for: ClyCriticContext
 ]
 
 { #category : 'activation' }

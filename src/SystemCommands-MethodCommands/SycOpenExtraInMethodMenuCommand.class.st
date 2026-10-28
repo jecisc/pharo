@@ -10,8 +10,8 @@ SycOpenExtraInMethodMenuCommand class >> methodContextMenuActivation [
 
 	<classAnnotation>
 	
-	^ CmdContextMenuActivation
-		byItemOf: CmdRootMenuGroup 
+	^ ClyContextMenuActivation
+		byItemOf: ClyRootMenuGroup 
 		order: 11200 
 		for: ClyMethod asCalypsoItemContext
 ]

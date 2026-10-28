@@ -4,7 +4,7 @@ Extension { #name : 'SycOpenClassMenuCommand' }
 SycOpenClassMenuCommand class >> fullBrowserMenuActivation [
 	<classAnnotation>
 
-	^CmdContextMenuActivation byRootGroupItemOrder: 10100
+	^ClyContextMenuActivation byRootGroupItemOrder: 10100
 		for: ClyClass asCalypsoItemContext
 ]
 

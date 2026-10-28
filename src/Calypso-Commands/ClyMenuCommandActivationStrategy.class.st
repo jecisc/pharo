@@ -16,7 +16,7 @@ Class {
 { #category : 'menu creation' }
 ClyMenuCommandActivationStrategy class >> buildMenuInContext: aToolContext [
 	| menu |
-	menu := CmdMenu activatedBy: self.
+	menu := ClyMenu activatedBy: self.
 	menu buildInContext: aToolContext.
 	^ menu
 ]
@@ -59,12 +59,12 @@ ClyMenuCommandActivationStrategy class >> byRootGroupItem: itemName order: aNumb
 
 { #category : 'instance creation' }
 ClyMenuCommandActivationStrategy class >> byRootGroupItemFor: aToolContextClass [
-	^self byItemOf: ClyToolbarGroup for: aToolContextClass
+	^self byItemOf: ClyRootMenuGroup for: aToolContextClass
 ]
 
 { #category : 'instance creation' }
 ClyMenuCommandActivationStrategy class >> byRootGroupItemOrder: aNumber for: aToolContextClass [
-	^self byItemOf: ClyToolbarGroup order: aNumber for: aToolContextClass
+	^self byItemOf: ClyRootMenuGroup order: aNumber for: aToolContextClass
 ]
 
 { #category : 'testing' }
@@ -76,7 +76,7 @@ ClyMenuCommandActivationStrategy class >> isAbstract [
 ClyMenuCommandActivationStrategy >> initialize [
 	super initialize.
 	menuItemOrder := 1000.
-	menuGroup := CmdRootMenuGroup
+	menuGroup := ClyRootMenuGroup
 ]
 
 { #category : 'accessing' }

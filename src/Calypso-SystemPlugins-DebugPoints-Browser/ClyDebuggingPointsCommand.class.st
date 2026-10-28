@@ -35,7 +35,7 @@ ClyDebuggingPointsCommand class >> methodContextMenuActivation [
 ClyDebuggingPointsCommand class >> methodEditorLeftBarMenuActivation [
 
 	<classAnnotation>
-	^ CmdTextLeftBarMenuActivation
+	^ ClyTextLeftBarMenuActivation
 		  byItemOf: ClyDebuggingPointsMenuGroup
 		  order: self contextMenuOrder
 		  for: ClyMethodSourceCodeContext

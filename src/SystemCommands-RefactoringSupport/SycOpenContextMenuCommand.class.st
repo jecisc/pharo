@@ -4,7 +4,7 @@ I show in menu all commands annotated by activationStrategy class
 "
 Class {
 	#name : 'SycOpenContextMenuCommand',
-	#superclass : 'CmdOpenContextMenuCommand',
+	#superclass : 'ClyOpenContextMenuCommand',
 	#category : 'SystemCommands-RefactoringSupport',
 	#package : 'SystemCommands-RefactoringSupport'
 }
@@ -34,19 +34,19 @@ SycOpenContextMenuCommand >> createContextMenu [
 { #category : 'context menu' }
 SycOpenContextMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
 
-	"Here we need to take care because this command itself is added to menu of same context.
+	"Here we need to take care because this command itself is added to menu of same self context.
 	So we will always enter into this method during submenu generation.
 	We catch this recursion using RecursionStopper.
 	It is easier than adding extra logic to menu registration process"
 
 	| submenu |
 	RecursionStopper during: [
-		submenu := self activationStrategy buildMenuInContext: context.
+		submenu := self activationStrategy buildMenuInContext: self context.
 		submenu isActive ifTrue: [
 			self
 				doRegisterContextMenuItemsFor: aCommandItem
 				withBuilder: aBuilder.
-			self cmCommandClass addItemsToSubmenu: submenu forContext: context.
+			self cmCommandClass addItemsToSubmenu: submenu forContext: self context.
 
 			"Registration builder uses #name to bind children to parent"
 			submenu rootGroup name: aCommandItem name.

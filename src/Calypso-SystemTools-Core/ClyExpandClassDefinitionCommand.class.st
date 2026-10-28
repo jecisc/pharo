@@ -16,7 +16,7 @@ ClyExpandClassDefinitionCommand class >> canBeExecutedInContext: aToolContext [
 ClyExpandClassDefinitionCommand class >> contextMenuActivation [
 	<classAnnotation>
 
-	^CmdContextMenuActivation byRootGroupItemOrder: -20 for: ClyClassDefinitionContext 
+	^ClyContextMenuActivation byRootGroupItemOrder: -20 for: ClyClassDefinitionContext 
 ]
 
 { #category : 'activation' }

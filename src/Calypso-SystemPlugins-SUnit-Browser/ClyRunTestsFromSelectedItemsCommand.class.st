@@ -35,7 +35,7 @@ ClyRunTestsFromSelectedItemsCommand class >> contextClass [
 ClyRunTestsFromSelectedItemsCommand class >> fullBrowserMenuActivation [
 	<classAnnotation>
 
-	^CmdContextMenuActivation byRootGroupItemFor: self contextClass
+	^ClyContextMenuActivation byRootGroupItemFor: self contextClass
 ]
 
 { #category : 'activation' }
