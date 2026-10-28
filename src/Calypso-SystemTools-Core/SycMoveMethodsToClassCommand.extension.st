@@ -4,6 +4,6 @@ Extension { #name : 'SycMoveMethodsToClassCommand' }
 SycMoveMethodsToClassCommand class >> methodBrowserDragAndDropActivation [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyMethod asCalypsoItemContext toDropIn: ClyClass asCalypsoItemContext
 ]

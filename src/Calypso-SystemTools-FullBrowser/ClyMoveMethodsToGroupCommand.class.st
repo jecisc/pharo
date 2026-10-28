@@ -29,7 +29,7 @@ Class {
 ClyMoveMethodsToGroupCommand class >> fullBrowserDragAndDropActivation [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyMethod asCalypsoItemContext
 		toDropIn: ClyMethodsInProtocolGroup asCalypsoItemContext
 ]
@@ -38,7 +38,7 @@ ClyMoveMethodsToGroupCommand class >> fullBrowserDragAndDropActivation [
 ClyMoveMethodsToGroupCommand class >> fullBrowserDragAndDropActivation2 [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyMethod asCalypsoItemContext
 		toDropIn: ClyAllMethodGroup asCalypsoItemContext
 ]
@@ -47,7 +47,7 @@ ClyMoveMethodsToGroupCommand class >> fullBrowserDragAndDropActivation2 [
 ClyMoveMethodsToGroupCommand class >> fullBrowserDragAndDropActivation3 [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyMethod asCalypsoItemContext
 		toDropIn: ClyExternalPackageMethodGroup asCalypsoItemContext
 ]

@@ -238,7 +238,7 @@ ClyQueryViewMorph >> createDragPassengerFor: aSelection [
 	| context |
 	context := self createSelectionContextOf: aSelection.
 
-	^CmdDragAndDropActivation createDragPassengerInContext: context
+	^ClyDragAndDropActivation createDragPassengerInContext: context
 ]
 
 { #category : 'context' }
@@ -889,13 +889,13 @@ ClyQueryViewMorph >> treeStructure: anObject [
 { #category : 'event handling' }
 ClyQueryViewMorph >> triggerClickCommands [
 
-	CmdClickActivation executeCommandInContext: self createSelectionContext
+	ClyClickActivation executeCommandInContext: self createSelectionContext
 ]
 
 { #category : 'event handling' }
 ClyQueryViewMorph >> triggerDoubleClickCommands [
 
-	CmdDoubleClickActivation executeCommandInContext: self createSelectionContext
+	ClyDoubleClickActivation executeCommandInContext: self createSelectionContext
 ]
 
 { #category : 'controlling' }

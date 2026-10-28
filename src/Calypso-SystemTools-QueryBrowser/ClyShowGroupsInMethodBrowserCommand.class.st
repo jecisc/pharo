@@ -20,7 +20,7 @@ Class {
 ClyShowGroupsInMethodBrowserCommand class >> fullBrowserDoubleClickMenuActivation [
 	<classAnnotation>
 
-	^(CmdDoubleClickActivation for: ClyFullBrowserMethodGroupContext)
+	^(ClyDoubleClickActivation for: ClyFullBrowserMethodGroupContext)
 		priority: 10000
 ]
 

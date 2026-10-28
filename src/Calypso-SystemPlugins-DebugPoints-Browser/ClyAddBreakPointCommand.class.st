@@ -17,7 +17,7 @@ ClyAddBreakPointCommand class >> contextMenuOrder [
 ClyAddBreakPointCommand class >> methodEditorLeftBarClickActivation [
 
 	<classAnnotation>
-	^ CmdTextLeftBarDoubleClickActivation for: ClyMethodSourceCodeContext
+	^ ClyTextLeftBarDoubleClickActivation for: ClyMethodSourceCodeContext
 ]
 
 { #category : 'accessing' }

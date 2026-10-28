@@ -35,7 +35,7 @@ ClyMoveMethodGroupToClassCommand class >> canBeExecutedInContext: aToolContext [
 ClyMoveMethodGroupToClassCommand class >> fullBrowserDragAndDropActivation [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyMethodGroup asCalypsoItemContext
 		toDropIn: ClyClass asCalypsoItemContext
 ]

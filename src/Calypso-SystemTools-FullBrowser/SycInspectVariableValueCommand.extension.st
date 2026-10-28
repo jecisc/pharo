@@ -4,7 +4,7 @@ Extension { #name : 'SycInspectVariableValueCommand' }
 SycInspectVariableValueCommand class >> fullBrowserDoubleClickActivation [
 	<classAnnotation>
 
-	^(CmdDoubleClickActivation for: ClyFullBrowserVariableContext)
+	^(ClyDoubleClickActivation for: ClyFullBrowserVariableContext)
 		priority: 10000
 ]
 

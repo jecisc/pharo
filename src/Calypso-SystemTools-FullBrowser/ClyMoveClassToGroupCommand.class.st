@@ -30,7 +30,7 @@ ClyMoveClassToGroupCommand class >> browserContextMenuActivation [
 ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyClass asCalypsoItemContext
 		toDropIn: Package asCalypsoItemContext
 ]
@@ -39,7 +39,7 @@ ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation [
 ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation2 [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyClass asCalypsoItemContext
 		toDropIn: ClyTaggedClassGroup asCalypsoItemContext
 ]
@@ -48,7 +48,7 @@ ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation2 [
 ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation3 [
 	<classAnnotation>
 
-	^CmdDragAndDropActivation
+	^ClyDragAndDropActivation
 		for: ClyClass asCalypsoItemContext
 		toDropIn: ClyNoTagClassGroup asCalypsoItemContext
 ]

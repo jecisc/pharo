@@ -34,7 +34,7 @@ ClySpawnFullBrowserCommand class >> canBeExecutedInContext: aToolContext [
 ClySpawnFullBrowserCommand class >> fullBrowserDoubleClickMenuActivation [
 	<classAnnotation>
 
-	^CmdDoubleClickActivation for: ClyFullBrowserContext
+	^ClyDoubleClickActivation for: ClyFullBrowserContext
 ]
 
 { #category : 'accessing' }
