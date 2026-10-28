@@ -4,7 +4,7 @@ I open changes preview on them
 "
 Class {
 	#name : 'ClyFixCritiqueCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -27,7 +27,7 @@ ClyFixCritiqueCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyFixCritiqueCommand >> execute [
+ClyFixCritiqueCommand >> executeRefactorings [
 
 	(StChangesBrowserPresenter changes: { critique change }) open
 ]

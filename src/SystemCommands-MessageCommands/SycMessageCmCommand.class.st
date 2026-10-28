@@ -34,10 +34,10 @@ SycMessageCmCommand >> prepareFullExecution [
 	originalMessage := self context lastSelectedMessage
 ]
 
-{ #category : 'preparation' }
+{ #category : 'execution' }
 SycMessageCmCommand >> prepareFullExecutionInContext: aToolContext [
 
 	self context: aToolContext.
-	super prepareFullExecutionInContext: aToolContext.
+	self prepareFullExecution.
 	prepared := true
 ]

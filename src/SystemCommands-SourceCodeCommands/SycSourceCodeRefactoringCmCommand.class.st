@@ -41,6 +41,6 @@ SycSourceCodeRefactoringCmCommand >> prepareFullExecution [
 SycSourceCodeRefactoringCmCommand >> prepareFullExecutionInContext: aToolContext [
 
 	self context: aToolContext.
-	super prepareFullExecutionInContext: aToolContext.
+	self prepareFullExecution.
 	prepared := true
 ]

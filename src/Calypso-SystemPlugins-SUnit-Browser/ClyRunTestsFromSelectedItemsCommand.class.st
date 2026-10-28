@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRunTestsFromSelectedItemsCommand',
-	#superclass : 'ClyTestCommand',
+	#superclass : 'ClyTestCmCommand',
 	#instVars : [
 		'testItems'
 	],
@@ -42,7 +42,7 @@ ClyRunTestsFromSelectedItemsCommand class >> fullBrowserMenuActivation [
 ClyRunTestsFromSelectedItemsCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $t meta for: self contextClass
+	^ClyShortcutActivation by: $t meta for: self contextClass
 ]
 
 { #category : 'activation' }

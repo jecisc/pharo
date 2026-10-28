@@ -21,12 +21,6 @@ ClyRunTestsFromClassesCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRunTestsFromClassesCommand >> execute [
-
-	testItems do: [ :each | self runTestCase: each actualObject]
-]
-
-{ #category : 'execution' }
 ClyRunTestsFromClassesCommand >> runTestCase: testCase [
 
 	| testResult |

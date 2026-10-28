@@ -3,7 +3,7 @@ I define a command to add a watchpoint on the AST node corresponding to the sele
 "
 Class {
 	#name : 'ClyAddWatchDebugPointCommand',
-	#superclass : 'ClyDebuggingPointsCommand',
+	#superclass : 'ClyDebuggingCmCommand',
 	#category : 'Calypso-SystemPlugins-DebugPoints-Browser',
 	#package : 'Calypso-SystemPlugins-DebugPoints-Browser'
 }
@@ -25,7 +25,7 @@ ClyAddWatchDebugPointCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyAddWatchDebugPointCommand >> execute [
+ClyAddWatchDebugPointCommand >> executeRefactorings [
 
 	| dp | 
 	dp := DebugPointManager installNew: WatchDebugPoint on: sourceNode.

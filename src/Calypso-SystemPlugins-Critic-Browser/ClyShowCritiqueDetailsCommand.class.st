@@ -4,7 +4,7 @@ I just show the dialog with critique description and title
 "
 Class {
 	#name : 'ClyShowCritiqueDetailsCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -33,7 +33,7 @@ ClyShowCritiqueDetailsCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowCritiqueDetailsCommand >> execute [
+ClyShowCritiqueDetailsCommand >> executeRefactorings [
 
 	self specUIManager
 		title: critique title;

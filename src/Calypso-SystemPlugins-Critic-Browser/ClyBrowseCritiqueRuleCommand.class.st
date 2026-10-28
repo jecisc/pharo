@@ -12,7 +12,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyBrowseCritiqueRuleCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -44,6 +44,6 @@ ClyBrowseCritiqueRuleCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyBrowseCritiqueRuleCommand >> execute [
+ClyBrowseCritiqueRuleCommand >> executeRefactorings [
 	self critique rule class browse
 ]

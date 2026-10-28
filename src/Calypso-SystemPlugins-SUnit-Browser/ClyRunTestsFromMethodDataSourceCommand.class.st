@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRunTestsFromMethodDataSourceCommand',
-	#superclass : 'ClyTestCommand',
+	#superclass : 'ClyTestCmCommand',
 	#instVars : [
 		'methodDataSource'
 	],
@@ -51,7 +51,7 @@ ClyRunTestsFromMethodDataSourceCommand >> buildTestSuite [
 ]
 
 { #category : 'execution' }
-ClyRunTestsFromMethodDataSourceCommand >> execute [
+ClyRunTestsFromMethodDataSourceCommand >> executeRefactorings [
 	| testSuite result |
 	testSuite := self buildTestSuite.
 

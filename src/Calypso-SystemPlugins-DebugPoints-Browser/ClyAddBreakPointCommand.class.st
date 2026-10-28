@@ -3,7 +3,7 @@ I define a command to add a breakpoint on the AST node corresponding to the sele
 "
 Class {
 	#name : 'ClyAddBreakPointCommand',
-	#superclass : 'ClyDebuggingPointsCommand',
+	#superclass : 'ClyDebuggingCmCommand',
 	#category : 'Calypso-SystemPlugins-DebugPoints-Browser',
 	#package : 'Calypso-SystemPlugins-DebugPoints-Browser'
 }
@@ -32,7 +32,7 @@ ClyAddBreakPointCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyAddBreakPointCommand >> execute [
+ClyAddBreakPointCommand >> executeRefactorings [
 
 	| dp |
 	dp := DebugPointManager installNew: BreakDebugPoint on: sourceNode.

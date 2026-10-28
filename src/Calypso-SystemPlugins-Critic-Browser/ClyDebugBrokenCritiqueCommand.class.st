@@ -4,7 +4,7 @@ I expect that my critique is ReExceptionProperty instance representign the failu
 "
 Class {
 	#name : 'ClyDebugBrokenCritiqueCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -41,7 +41,7 @@ ClyDebugBrokenCritiqueCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyDebugBrokenCritiqueCommand >> execute [
+ClyDebugBrokenCritiqueCommand >> executeRefactorings [
 
 	(OupsDebugRequest newForContext: critique stack)
 		label: critique message;

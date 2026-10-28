@@ -58,12 +58,6 @@ ClyDebugVariableCommand >> defaultMenuItemName [
 	^ 'Add debug point:'
 ]
 
-{ #category : 'execution' }
-ClyDebugVariableCommand >> execute [
-
-	variables do: [ :var | self executeFor: var ]
-]
-
 { #category : 'private execution' }
 ClyDebugVariableCommand >> executeFor: aVariable [
 
@@ -72,4 +66,10 @@ ClyDebugVariableCommand >> executeFor: aVariable [
 		inClass: aVariable definingClass
 		onVariableNamed: aVariable name
 		accessStrategy: self accessStrategy
+]
+
+{ #category : 'execution' }
+ClyDebugVariableCommand >> executeRefactorings [
+
+	variables do: [ :var | self executeFor: var ]
 ]

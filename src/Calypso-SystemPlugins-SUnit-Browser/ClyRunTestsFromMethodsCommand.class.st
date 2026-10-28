@@ -42,7 +42,7 @@ ClyRunTestsFromMethodsCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRunTestsFromMethodsCommand >> execute [
+ClyRunTestsFromMethodsCommand >> executeRefactorings [
 	testItems do: [:each | self runTestItem: each ]
 ]
 

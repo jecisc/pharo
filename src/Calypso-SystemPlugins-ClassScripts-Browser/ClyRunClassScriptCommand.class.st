@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRunClassScriptCommand',
-	#superclass : 'CmdCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'targetClass',
 		'script'
@@ -45,18 +45,18 @@ ClyRunClassScriptCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyRunClassScriptCommand >> execute [
+ClyRunClassScriptCommand >> executeRefactorings [
 	script executeOn: targetClass
 ]
 
 { #category : 'execution' }
-ClyRunClassScriptCommand >> prepareFullExecutionInContext: aBrowserContext [
-	super prepareFullExecutionInContext: aBrowserContext.
+ClyRunClassScriptCommand >> prepareFullExecution [
 
-	script := aBrowserContext selectedClassScript.
-	targetClass := aBrowserContext selectedClasses
-		detect: [ :each | script isImplementedByClass: each ]
-		ifNone: [ script implementorClass ]
+	super prepareFullExecution.
+	script := self context selectedClassScript.
+	targetClass := self context selectedClasses
+		               detect: [ :each | script isImplementedByClass: each ]
+		               ifNone: [ script implementorClass ]
 ]
 
 { #category : 'execution' }

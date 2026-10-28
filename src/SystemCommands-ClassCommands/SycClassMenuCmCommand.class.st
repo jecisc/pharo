@@ -31,10 +31,10 @@ SycClassMenuCmCommand >> prepareFullExecution [
 	classes := self context selectedClasses
 ]
 
-{ #category : 'preparation' }
+{ #category : 'execution' }
 SycClassMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
 
 	self context: aToolContext.
-	super prepareFullExecutionInContext: aToolContext.
+	self prepareFullExecution.
 	prepared := true
 ]

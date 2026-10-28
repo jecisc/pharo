@@ -3,7 +3,7 @@ I a command which opens dependency browser of given package which is my analyzed
 "
 Class {
 	#name : 'ClyShowDependencyCritiqueCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -26,7 +26,7 @@ ClyShowDependencyCritiqueCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowDependencyCritiqueCommand >> execute [
+ClyShowDependencyCritiqueCommand >> executeRefactorings [
 
 	(StPackageDependenciesPresenter onPackagesNamed: { analyzedObject name }) open
 ]

@@ -3,7 +3,7 @@ I am a command to ban given critique rule
 "
 Class {
 	#name : 'ClyBanCritiqueRuleCommand',
-	#superclass : 'ClyCritiqueCommand',
+	#superclass : 'ClyCritiqueCmCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
@@ -26,7 +26,7 @@ ClyBanCritiqueRuleCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyBanCritiqueRuleCommand >> execute [
+ClyBanCritiqueRuleCommand >> executeRefactorings [
 
 	critique guidedBan
 ]

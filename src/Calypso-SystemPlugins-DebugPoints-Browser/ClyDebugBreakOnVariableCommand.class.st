@@ -3,7 +3,7 @@ I am a command to install breakpoints on variables of a class
 "
 Class {
 	#name : 'ClyDebugBreakOnVariableCommand',
-	#superclass : 'ClyDebugVariableCommand',
+	#superclass : 'ClyDebugVariableCmCommand',
 	#category : 'Calypso-SystemPlugins-DebugPoints-Browser',
 	#package : 'Calypso-SystemPlugins-DebugPoints-Browser'
 }
