@@ -3,7 +3,7 @@ Copy selected methods selector into Clipboard as testOriginalSelector
 "
 Class {
 	#name : 'SycCopyMethodNameToClypboardCommand',
-	#superclass : 'SycMethodCommand',
+	#superclass : 'SycMethodMenuCmCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }
@@ -24,7 +24,7 @@ SycCopyMethodNameToClypboardCommand >> description [
 ]
 
 { #category : 'execution' }
-SycCopyMethodNameToClypboardCommand >> execute [
+SycCopyMethodNameToClypboardCommand >> executeRefactorings [
 	| text |
 	text := (methods collect: [ :each | each displayString ]) joinUsing: String cr.
 	Clipboard clipboardText: text.

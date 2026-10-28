@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveClassToGroupCommand',
-	#superclass : 'SycClassCommand',
+	#superclass : 'SycClassMenuCmCommand',
 	#instVars : [
 		'classGroup'
 	],
@@ -57,7 +57,7 @@ ClyMoveClassToGroupCommand class >> fullBrowserDragAndDropActivation3 [
 ClyMoveClassToGroupCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $m meta, $c meta for: ClyFullBrowserClassContext
+	^ClyShortcutActivation by: $m meta, $c meta for: ClyFullBrowserClassContext
 ]
 
 { #category : 'accessing' }
@@ -81,7 +81,7 @@ ClyMoveClassToGroupCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveClassToGroupCommand >> execute [
+ClyMoveClassToGroupCommand >> executeRefactorings [
 
 	classes do: [ :class | classGroup addClass: class ]
 ]
@@ -95,9 +95,9 @@ ClyMoveClassToGroupCommand >> prepareExecutionInDropContext: aToolContext [
 ]
 
 { #category : 'execution' }
-ClyMoveClassToGroupCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	"class group could be package. In this activation it is only make sense to request user for package"
+ClyMoveClassToGroupCommand >> prepareFullExecution [
 
-	classGroup := aToolContext requestSinglePackage: 'Choose package'
+	super prepareFullExecution.
+	"class group could be package. In this activation it is only make sense to request user for package"
+	classGroup := self context requestSinglePackage: 'Choose package'
 ]

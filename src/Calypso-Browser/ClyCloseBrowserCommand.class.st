@@ -10,7 +10,7 @@ Before `$w` command, it keeps an empty tab without closing it.
 "
 Class {
 	#name : 'ClyCloseBrowserCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#category : 'Calypso-Browser-Commands',
 	#package : 'Calypso-Browser',
 	#tag : 'Commands'
@@ -20,17 +20,17 @@ Class {
 ClyCloseBrowserCommand class >> browserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $w meta for: ClyBrowserContext
+	^ClyShortcutActivation by: $w meta for: ClyBrowserContext
 ]
 
 { #category : 'activation' }
 ClyCloseBrowserCommand class >> textToolShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $w meta for: ClyTextEditorContext
+	^ClyShortcutActivation by: $w meta for: ClyTextEditorContext
 ]
 
 { #category : 'execution' }
-ClyCloseBrowserCommand >> execute [
+ClyCloseBrowserCommand >> executeRefactorings [
 	browser close
 ]

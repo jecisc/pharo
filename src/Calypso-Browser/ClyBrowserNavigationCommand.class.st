@@ -6,7 +6,7 @@ By default shorcuts are alt+left and alt+right to go back and forward.
 "
 Class {
 	#name : 'ClyBrowserNavigationCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#category : 'Calypso-Browser-NavigationHistory',
 	#package : 'Calypso-Browser',
 	#tag : 'NavigationHistory'
@@ -16,7 +16,7 @@ Class {
 ClyBrowserNavigationCommand class >> browserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: self defaultShortcut for: ClyBrowserContext
+	^ClyShortcutActivation by: self defaultShortcut for: ClyBrowserContext
 ]
 
 { #category : 'activation' }
@@ -42,5 +42,5 @@ ClyBrowserNavigationCommand class >> isAbstract [
 ClyBrowserNavigationCommand class >> textEditorShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: self defaultShortcut for: ClyTextEditorContext
+	^ClyShortcutActivation by: self defaultShortcut for: ClyTextEditorContext
 ]

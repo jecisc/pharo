@@ -31,7 +31,7 @@ ClySwitchToProjectsCommand >> description [
 ]
 
 { #category : 'execution' }
-ClySwitchToProjectsCommand >> execute [
+ClySwitchToProjectsCommand >> executeRefactorings [
 
 	^ browser switchToProjects
 ]

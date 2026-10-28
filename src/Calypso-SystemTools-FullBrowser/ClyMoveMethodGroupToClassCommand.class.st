@@ -15,7 +15,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveMethodGroupToClassCommand',
-	#superclass : 'ClyMethodGroupCommand',
+	#superclass : 'ClyMethodGroupMenuCmCommand',
 	#instVars : [
 		'targetClass',
 		'refactoringScopes'
@@ -41,11 +41,11 @@ ClyMoveMethodGroupToClassCommand class >> fullBrowserDragAndDropActivation [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupToClassCommand >> execute [
+ClyMoveMethodGroupToClassCommand >> executeRefactorings [
 
 	| moveCommand |
-	methodGroups do: [ :each |
-			moveCommand := SycMoveMethodsToClassCommand methods: each methods class: targetClass refactoringScopes: refactoringScopes.
+	methodGroups do: [ :group |
+			moveCommand := SycMoveMethodsToClassCommand methods: group methods class: targetClass refactoringScopes: refactoringScopes.
 			moveCommand execute ]
 ]
 
@@ -59,11 +59,12 @@ ClyMoveMethodGroupToClassCommand >> prepareExecutionInDropContext: aToolContext 
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupToClassCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
+ClyMoveMethodGroupToClassCommand >> prepareFullExecution [
 
-	targetClass := aToolContext requestSingleClass: 'Choose class'.
-	targetClass := aToolContext currentMetaLevelOf: targetClass
+	super prepareFullExecution.
+	targetClass := self context requestSingleClass: 'Choose class'.
+	targetClass := self context currentMetaLevelOf: targetClass.
+	refactoringScopes := self context refactoringScopes
 ]
 
 { #category : 'accessing' }

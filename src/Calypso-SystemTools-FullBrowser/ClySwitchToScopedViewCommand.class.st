@@ -24,7 +24,7 @@ ClySwitchToScopedViewCommand >> description [
 ]
 
 { #category : 'execution' }
-ClySwitchToScopedViewCommand >> execute [
+ClySwitchToScopedViewCommand >> executeRefactorings [
 
 	^ browser packageSelection actualObjects ifNotEmpty: [ :packages |
 		browser switchToPackageScopeOf: packages]

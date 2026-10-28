@@ -26,7 +26,7 @@ ClySwitchToPackagesCommand >> description [
 ]
 
 { #category : 'execution' }
-ClySwitchToPackagesCommand >> execute [
+ClySwitchToPackagesCommand >> executeRefactorings [
 
 	^ browser switchToPackages
 ]

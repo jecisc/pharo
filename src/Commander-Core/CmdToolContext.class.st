@@ -122,6 +122,12 @@ CmdToolContext >> isMethodSourceContext [
 ]
 
 { #category : 'testing' }
+CmdToolContext >> isQueryBrowserContext [
+
+	^ false
+]
+
+{ #category : 'testing' }
 CmdToolContext >> isSimilarTo: anotherToolContext [
 	^self = anotherToolContext
 ]

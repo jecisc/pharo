@@ -33,6 +33,6 @@ ClyNavigateBrowserBackCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyNavigateBrowserBackCommand >> execute [
+ClyNavigateBrowserBackCommand >> executeRefactorings [
 	browser navigateBack
 ]

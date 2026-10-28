@@ -14,7 +14,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveMethodsToGroupCommand',
-	#superclass : 'SycMethodCommand',
+	#superclass : 'SycMethodMenuCmCommand',
 	#instVars : [
 		'methodGroup',
 		'targetClass',
@@ -58,10 +58,10 @@ ClyMoveMethodsToGroupCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodsToGroupCommand >> execute [
+ClyMoveMethodsToGroupCommand >> executeRefactorings [
 
 	| methodsOfAnotherClass |
-	methodsOfAnotherClass := methods reject: [ :each | each origin = targetClass ].
+	methodsOfAnotherClass := methods reject: [ :method | method origin = targetClass ].
 	methodsOfAnotherClass ifNotEmpty: [
 		(SycMoveMethodsToClassCommand methods: methodsOfAnotherClass class: targetClass refactoringScopes: refactoringScopes) execute ].
 	methodGroup importMethods: methods

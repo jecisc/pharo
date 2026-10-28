@@ -3,7 +3,7 @@ I am a command to move browser focus to next (right) navigation pane
 "
 Class {
 	#name : 'ClySwitchFocusToNextBrowserPaneCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#category : 'Calypso-Browser-Commands',
 	#package : 'Calypso-Browser',
 	#tag : 'Commands'
@@ -15,6 +15,6 @@ ClySwitchFocusToNextBrowserPaneCommand class >> canBeExecutedInContext: aBrowser
 ]
 
 { #category : 'execution' }
-ClySwitchFocusToNextBrowserPaneCommand >> execute [
+ClySwitchFocusToNextBrowserPaneCommand >> executeRefactorings [
 	browser switchFocusToNextPane
 ]

@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'testing' }
+ClyClassDefinitionContext >> isArgOrTempVariableSelected [
+
+	^ false
+]
+
+{ #category : 'testing' }
 ClyClassDefinitionContext >> isClassDefinitionContext [
 
 	^ true

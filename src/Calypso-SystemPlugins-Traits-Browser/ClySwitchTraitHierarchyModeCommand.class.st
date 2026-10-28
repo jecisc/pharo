@@ -22,7 +22,7 @@ ClySwitchTraitHierarchyModeCommand class >> isAbstract [
 ]
 
 { #category : 'execution' }
-ClySwitchTraitHierarchyModeCommand >> execute [
+ClySwitchTraitHierarchyModeCommand >> executeRefactorings [
 	| classScope |
 	classScope := browser classSelection asItemsScope: ClyClassScope.
 

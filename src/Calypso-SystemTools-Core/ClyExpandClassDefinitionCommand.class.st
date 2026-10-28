@@ -1,6 +1,6 @@
 Class {
 	#name : 'ClyExpandClassDefinitionCommand',
-	#superclass : 'SycSingleClassCommand',
+	#superclass : 'SycSingleClassMenuCmCommand',
 	#category : 'Calypso-SystemTools-Core-Commands-Classes',
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Commands-Classes'
@@ -29,7 +29,7 @@ ClyExpandClassDefinitionCommand class >> sourceCodeMenuActivation [
 ClyExpandClassDefinitionCommand class >> sourceCodeShortcutActivation [
    <classAnnotation>
 
-   ^CmdShortcutActivation by: $e meta for: ClyClassDefinitionContext
+   ^ClyShortcutActivation by: $e meta for: ClyClassDefinitionContext
 ]
 
 { #category : 'accessing' }
@@ -56,8 +56,8 @@ ClyExpandClassDefinitionCommand >> description [
 	^ 'Expands the fluid definition to include all possible elements and shows the default values'
 ]
 
-{ #category : 'accessing' }
-ClyExpandClassDefinitionCommand >> execute [
+{ #category : 'execution' }
+ClyExpandClassDefinitionCommand >> executeRefactorings [
 	"
 	empty on purpose logic is in applyResultInContext:
 	"

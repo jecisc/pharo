@@ -13,7 +13,7 @@ Class {
 ClySwitchToFullHierarchyCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $h meta for: ClyFullBrowserClassContext
+	^ClyShortcutActivation by: $h meta for: ClyFullBrowserClassContext
 ]
 
 { #category : 'accessing' }
@@ -22,7 +22,7 @@ ClySwitchToFullHierarchyCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchToFullHierarchyCommand >> execute [
+ClySwitchToFullHierarchyCommand >> executeRefactorings [
 
 	browser switchToFullClassHierarchy
 ]

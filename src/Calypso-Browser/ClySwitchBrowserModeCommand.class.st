@@ -9,7 +9,7 @@ Also I force browser toolbar update after execution
 "
 Class {
 	#name : 'ClySwitchBrowserModeCommand',
-	#superclass : 'ClyBrowserCommand',
+	#superclass : 'ClyBrowserMenuCmCommand',
 	#category : 'Calypso-Browser-Commands',
 	#package : 'Calypso-Browser',
 	#tag : 'Commands'
