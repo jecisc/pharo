@@ -4,8 +4,7 @@ I hold the Commander2 lifecycle shared by the temporary hybrid commands that sit
 Trait {
 	#name : 'TCommanderMigrationHybridCommand',
 	#instVars : [
-		'prepared',
-		'context'
+		'prepared'
 	],
 	#category : 'SystemCommands-RefactoringSupport',
 	#package : 'SystemCommands-RefactoringSupport'
@@ -28,18 +27,6 @@ TCommanderMigrationHybridCommand >> canBeExecuted [
 
 	^ (self class canBeExecutedInContext: self context)
 		and: [ self isAvailableInMenuOf: self context ]
-]
-
-{ #category : 'accessing' }
-TCommanderMigrationHybridCommand >> context [
-
-	^ context
-]
-
-{ #category : 'accessing' }
-TCommanderMigrationHybridCommand >> context: aToolContext [
-
-	context := aToolContext
 ]
 
 { #category : 'execution' }
@@ -74,7 +61,7 @@ TCommanderMigrationHybridCommand >> executeComplexRefactoring [
 					self applyCommandResult ];
 				cancelAction: [ :p | p beCancel ] ]
 		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
-	CmdCommandAborted signal
+	CmCommandAborted signal
 ]
 
 { #category : 'execution' }

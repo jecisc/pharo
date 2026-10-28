@@ -21,6 +21,12 @@ ClyRunTestsFromClassesCommand >> description [
 ]
 
 { #category : 'execution' }
+ClyRunTestsFromClassesCommand >> executeRefactorings [
+
+	testItems do: [ :item | self runTestCase: item actualObject]
+]
+
+{ #category : 'execution' }
 ClyRunTestsFromClassesCommand >> runTestCase: testCase [
 
 	| testResult |

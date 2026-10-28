@@ -148,7 +148,7 @@ ClyProtocolEditorMorph >> requestProtocol [
 		               presenter
 			               protocolName: priorProtocol;
 			               concernedClass: ownerTool methodClass ].
-	newProtocol = priorProtocol ifTrue: [ ^ CmdCommandAborted signal ].
+	newProtocol = priorProtocol ifTrue: [ ^ CmCommandAborted signal ].
 
 	ownerTool methodProtocol: newProtocol
 ]

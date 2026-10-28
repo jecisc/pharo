@@ -46,7 +46,7 @@ SycPushDownVariableCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	(variables allSatisfy: [ :selectedVar | selectedVar definingClass hasSubclasses ]) ifTrue: [ ^ self ].
 	self inform: 'One of the selected variables belongs to a class that has no subclasses to push down the selection(s)'.
-	CmdCommandAborted signal
+	CmCommandAborted signal
 ]
 
 { #category : 'execution' }

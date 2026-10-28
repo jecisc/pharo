@@ -21,7 +21,7 @@ There are several operation with browser which can be performed using me:
 "
 Class {
 	#name : 'ClyBrowserContext',
-	#superclass : 'CmdToolContext',
+	#superclass : 'ClyToolContext',
 	#instVars : [
 		'selectedItems'
 	],

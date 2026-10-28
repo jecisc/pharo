@@ -90,7 +90,7 @@ SycExtractMethodAndOccurrencesCommand >> setUpOptionToChangeExtractionClass: ref
 		].
 		cls ifNil: [
 			self inform: 'Command aborted, you must select a class.'.
-			CmdCommandAborted signal ].
+			CmCommandAborted signal ].
 		cls ]
 ]
 
@@ -106,7 +106,7 @@ SycExtractMethodAndOccurrencesCommand >> setUpOptionToChangeMethodNameDuring: re
 			canRemoveArgs: false;
 			canAddArgs: false;
 			openModal.
-		dialog cancelled ifTrue: [ CmdCommandAborted signal ].
+		dialog cancelled ifTrue: [ CmCommandAborted signal ].
 		methodName ]
 ]
 

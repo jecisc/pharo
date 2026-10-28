@@ -96,5 +96,5 @@ ClyRenamePackageTagCommand >> prepareFullExecution [
 	package := self context lastSelectedPackage.
 	packageTag := self context lastSelectedClassGroup.
 	newName := self morphicUIManager request: 'New name of the class tag' initialAnswer: packageTag name title: 'Rename a class tag'.
-	newName isEmptyOrNil | (newName = packageTag name) ifTrue: [ CmdCommandAborted signal ]
+	newName isEmptyOrNil | (newName = packageTag name) ifTrue: [ CmCommandAborted signal ]
 ]

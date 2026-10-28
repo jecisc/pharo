@@ -85,7 +85,7 @@ SycAddNewPackageCommand >> prepareFullExecution [
 	packageName := ''.
 	self context isPackageSelected ifTrue: [ packageName := self context lastSelectedPackage name ].
 	packageName := self morphicUIManager request: 'Name of the new package:' initialAnswer: packageName title: 'Create a new package'.
-	packageName isEmptyOrNil ifTrue: [ ^ CmdCommandAborted signal ]
+	packageName isEmptyOrNil ifTrue: [ ^ CmCommandAborted signal ]
 ]
 
 { #category : 'accessing' }

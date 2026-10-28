@@ -74,7 +74,7 @@ SycAddNewClassTagCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	package := self context lastSelectedPackage.
 	tagName := self morphicUIManager request: 'New class tag in ' , package name initialAnswer: '' title: 'Create a new class tag'.
-	tagName isEmptyOrNil ifTrue: [ CmdCommandAborted signal ]
+	tagName isEmptyOrNil ifTrue: [ CmCommandAborted signal ]
 ]
 
 { #category : 'accessing' }

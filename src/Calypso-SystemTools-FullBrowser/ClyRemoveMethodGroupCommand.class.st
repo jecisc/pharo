@@ -59,5 +59,5 @@ ClyRemoveMethodGroupCommand >> prepareFullExecution [
 	tagsString := ', ' join: (methodGroups collect: [ :each | each name ]).
 	(methodGroups anySatisfy: [ :each | each methodsSize > 0 ]) ifFalse: [ ^ self ].
 	confirmed := self confirm: 'Are you sure you want to remove methods from ' , tagsString , '?'.
-	confirmed ifFalse: [ CmdCommandAborted signal ]
+	confirmed ifFalse: [ CmCommandAborted signal ]
 ]
