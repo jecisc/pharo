@@ -602,7 +602,7 @@ ClyQueryViewMorph >> itemsChangedIn: aDataSource [
 { #category : 'keymapping' }
 ClyQueryViewMorph >> kmDispatcher [
 
-	^ CmdKMDispatcher attachedTo: self
+	^ ClyKMDispatcher attachedTo: self
 ]
 
 { #category : 'accessing' }

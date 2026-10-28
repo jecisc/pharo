@@ -11,5 +11,5 @@ SycOpenMethodMenuCommand class >> methodContextMenuActivation [
 SycOpenMethodMenuCommand class >> methodEditorShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $t meta for: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation by: $t meta for: ClyMethod asCalypsoItemContext
 ]

@@ -135,7 +135,7 @@ ClyCommandMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
 { #category : 'building' }
 ClyCommandMenuItem >> setUpShortcutTipForMenuItem: aMenuItem [
 
-	CmdShortcutActivation
+	ClyShortcutActivation
 		activeInstancesFor: command class
 		inContext: context
 		do: [ :shortcut |

@@ -12,5 +12,5 @@ SycOpenClassMenuCommand class >> fullBrowserMenuActivation [
 SycOpenClassMenuCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $t meta for: ClyClass asCalypsoItemContext
+	^ClyShortcutActivation by: $t meta for: ClyClass asCalypsoItemContext
 ]

@@ -4,7 +4,7 @@ Extension { #name : 'SycOpenSourceCodeMenuCommand' }
 SycOpenSourceCodeMenuCommand class >> methodEditorShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $t meta for: ClySourceCodeContext
+	^ClyShortcutActivation by: $t meta for: ClySourceCodeContext
 ]
 
 { #category : '*Calypso-SystemTools-Core' }

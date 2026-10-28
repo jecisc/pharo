@@ -19,7 +19,7 @@ ClyCommandActivator >> registerContextMenuItemsFor: aCommandItem withBuilder: aB
 { #category : '*Commander-Activators-ContextMenu' }
 ClyCommandActivator >> setUpShortcutTipForMenuItem: aMenuItemMorph [
 
-	CmdShortcutActivation
+	ClyShortcutActivation
 		activeInstancesFor: self command class inContext: self context
 		do: [ :shortcut |
 			aMenuItemMorph keyText: (shortcut keyCombination acceptVisitor: OSPlatform current shortcutPrinter)]

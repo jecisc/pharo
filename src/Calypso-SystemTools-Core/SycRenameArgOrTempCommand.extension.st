@@ -5,5 +5,5 @@ SycRenameArgOrTempCommand class >> sourceCodeShortcutActivation [
 "	<classAnnotation>"
 	"Disabled to make the rename shortcut trigger the new solution."
 
-	^CmdShortcutActivation renamingFor: ClyMethodSourceCodeContext
+	^ClyShortcutActivation renamingFor: ClyMethodSourceCodeContext
 ]

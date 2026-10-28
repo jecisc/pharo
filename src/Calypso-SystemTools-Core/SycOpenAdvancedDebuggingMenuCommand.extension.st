@@ -4,7 +4,7 @@ Extension { #name : 'SycOpenAdvancedDebuggingMenuCommand' }
 SycOpenAdvancedDebuggingMenuCommand class >> methodEditorShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $h meta shift for: ClySourceCodeContext
+	^ClyShortcutActivation by: $h meta shift for: ClySourceCodeContext
 ]
 
 { #category : '*Calypso-SystemTools-Core' }
