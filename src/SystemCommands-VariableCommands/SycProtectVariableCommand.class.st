@@ -50,10 +50,3 @@ SycProtectVariableCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	selectedClass := variables first definingClass
 ]
-
-{ #category : 'execution' }
-SycProtectVariableCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	selectedClass := aToolContext selectedVariables first definingClass.
-]

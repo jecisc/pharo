@@ -48,10 +48,3 @@ SycPushDownVariableCommand >> prepareFullExecution [
 	self inform: 'One of the selected variables belongs to a class that has no subclasses to push down the selection(s)'.
 	CmCommandAborted signal
 ]
-
-{ #category : 'execution' }
-SycPushDownVariableCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	self prepareFullExecution
-]

@@ -50,13 +50,6 @@ SycMessageCommand >> messages: anObject [
 	messages := anObject
 ]
 
-{ #category : 'execution' }
-SycMessageCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	messages := aToolContext selectedMessages
-]
-
 { #category : 'accessing' }
 SycMessageCommand >> selectedClass [
 	"Answer the receiver's selected <Class>"

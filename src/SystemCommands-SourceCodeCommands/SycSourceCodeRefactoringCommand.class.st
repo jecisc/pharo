@@ -34,10 +34,3 @@ SycSourceCodeRefactoringCommand >> executeRefactoring: refactoring [
 		on: RBRefactoringError
 		do: [ :e | self morphicUIManager alert: e messageText ]
 ]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	refactoringScopes := aToolContext refactoringScopes.
-]

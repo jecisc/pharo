@@ -54,10 +54,3 @@ ClyShowVariableRefCommand >> order [
 
 	^ 1000
 ]
-
-{ #category : 'execution' }
-ClyShowVariableRefCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	browser := aToolContext browser
-]

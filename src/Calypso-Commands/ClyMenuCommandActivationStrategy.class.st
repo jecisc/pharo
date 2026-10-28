@@ -13,6 +13,14 @@ Class {
 	#package : 'Calypso-Commands'
 }
 
+{ #category : 'context menu' }
+ClyMenuCommandActivationStrategy class >> buildContextMenuFor: aMorph inContext: aToolContext [
+
+	| menu |
+	menu := self buildMenuInContext: aToolContext.
+	^menu buildContextMenuFor: aMorph
+]
+
 { #category : 'menu creation' }
 ClyMenuCommandActivationStrategy class >> buildMenuInContext: aToolContext [
 	| menu |
@@ -70,6 +78,13 @@ ClyMenuCommandActivationStrategy class >> byRootGroupItemOrder: aNumber for: aTo
 { #category : 'testing' }
 ClyMenuCommandActivationStrategy class >> isAbstract [
 	^ self subclasses isEmpty not
+]
+
+{ #category : 'context menu' }
+ClyMenuCommandActivationStrategy class >> registerContextMenuOn: aBuilder inContext: aToolContext [
+	| menu |
+	menu := self buildMenuInContext: aToolContext.
+	menu registerContextMenuItemsWithBuilder: aBuilder
 ]
 
 { #category : 'initialization' }

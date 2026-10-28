@@ -39,11 +39,3 @@ ClyBrowserMenuCmCommand >> prepareFullExecution [
 
 	browser := self context browser
 ]
-
-{ #category : 'execution' }
-ClyBrowserMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

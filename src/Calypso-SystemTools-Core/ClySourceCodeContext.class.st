@@ -49,15 +49,6 @@ ClySourceCodeContext >> confirmUnusedVariablesInDefiningClass: variables [
 	^self browser confirmUnusedVariablesInDefiningClass: variables
 ]
 
-{ #category : 'command execution' }
-ClySourceCodeContext >> executeCommand: aCommand by: aCommandActivator [
-
-	aCommand isComplexRefactoring ifTrue: [
-		aCommand confirmRefactoringInContext: self by: aCommandActivator].
-
-	aCommand execute
-]
-
 { #category : 'testing' }
 ClySourceCodeContext >> hasUnacceptedEdits [
 	^ self tool hasUnacceptedEdits 

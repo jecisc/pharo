@@ -62,10 +62,3 @@ SycMigrateReferencesOfClassCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	newName := self context requestSingleClass: 'Choose new class'
 ]
-
-{ #category : 'execution' }
-SycMigrateReferencesOfClassCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	newName := aToolContext requestSingleClass: 'Choose new class'
-]

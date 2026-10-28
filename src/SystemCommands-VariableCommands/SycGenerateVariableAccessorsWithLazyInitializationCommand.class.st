@@ -74,18 +74,6 @@ SycGenerateVariableAccessorsWithLazyInitializationCommand >> prepareFullExecutio
 	value isEmptyOrNil ifTrue: [ CmCommandAborted signal ]
 ]
 
-{ #category : 'execution' }
-SycGenerateVariableAccessorsWithLazyInitializationCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	variable := aToolContext lastSelectedVariable. 
-	value := aToolContext tool morphicUIManager
-		           request: 'Default value of variable accessor'
-		           initialAnswer: 'nil'
-		           title: 'Default variable''s value'.
-	value isEmptyOrNil ifTrue: [ CmCommandAborted signal ]
-]
-
 { #category : 'factory method' }
 SycGenerateVariableAccessorsWithLazyInitializationCommand >> refactoringClass [
 

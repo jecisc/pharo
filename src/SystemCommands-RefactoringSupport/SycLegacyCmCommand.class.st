@@ -75,14 +75,6 @@ SycLegacyCmCommand >> isComplexRefactoring [
 	^ false
 ]
 
-{ #category : 'execution' }
-SycLegacyCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]
-
 { #category : 'accessing' }
 SycLegacyCmCommand >> prepared [
 	^ prepared

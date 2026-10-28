@@ -46,11 +46,3 @@ ClyCritiqueCmCommand >> prepareFullExecution [
 	critique := self context selectedCritique.
 	analyzedObject := self context analyzedObject
 ]
-
-{ #category : 'execution' }
-ClyCritiqueCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

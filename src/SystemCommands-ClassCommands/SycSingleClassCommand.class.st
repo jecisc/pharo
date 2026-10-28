@@ -35,13 +35,6 @@ SycSingleClassCommand >> description [
 	^ self class comment.
 ]
 
-{ #category : 'execution' }
-SycSingleClassCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	targetClass := aToolContext lastSelectedClass
-]
-
 { #category : 'accessing' }
 SycSingleClassCommand >> targetClass [
 	^ targetClass

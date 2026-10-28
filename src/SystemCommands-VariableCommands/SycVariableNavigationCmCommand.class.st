@@ -54,11 +54,3 @@ SycVariableNavigationCmCommand >> prepareFullExecution [
 	variables := self context selectedVariables.
 	toolContext := self context
 ]
-
-{ #category : 'execution' }
-SycVariableNavigationCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

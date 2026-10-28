@@ -80,12 +80,6 @@ SycCmDuplicateClassCommand >> prepareFullExecution [
 ]
 
 { #category : 'execution' }
-SycCmDuplicateClassCommand >> prepareFullExecutionInContext: aClyFullBrowserClassContext [ 
-	
-	"Nothing"
-]
-
-{ #category : 'execution' }
 SycCmDuplicateClassCommand >> readParametersFromContext: aToolContext [
 
 	context := aToolContext

@@ -45,11 +45,3 @@ ClyTestCmCommand >> prepareFullExecution [
 
 	self readParametersFromContext: self context
 ]
-
-{ #category : 'execution' }
-ClyTestCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

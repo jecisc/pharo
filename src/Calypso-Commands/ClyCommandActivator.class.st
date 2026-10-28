@@ -52,6 +52,14 @@ ClyCommandActivator >> asCommandActivator [
 	^self
 ]
 
+{ #category : 'context menu' }
+ClyCommandActivator >> buildContextMenu: aMenu [
+
+	self canExecuteCommand ifFalse: [ ^self ].
+
+	command fillContextMenu: aMenu using: self
+]
+
 { #category : 'testing' }
 ClyCommandActivator >> canExecuteCommand [
 
@@ -89,6 +97,21 @@ ClyCommandActivator >> executeCommand [
 	[ command context: context.
 		command execute ]
 	on: Exception do: [ :exc | context processFailure: exc of: command ]
+]
+
+{ #category : 'spec2 compatibility' }
+ClyCommandActivator >> getShortcutTipForMenuItem [
+
+	ClyShortcutActivation
+		activeInstancesFor: self command class
+		inContext: self context
+		do: [ :shortcut | "this is trick to show shortcut on menu with existing menu support" ^ shortcut keyCombination ].
+	^ nil
+]
+
+{ #category : 'spec2 compatibility' }
+ClyCommandActivator >> help [
+	^ self command class defaultHelp
 ]
 
 { #category : 'testing' }
@@ -129,4 +152,21 @@ ClyCommandActivator >> printOn: aStream [
 	aStream nextPut: $(.
 	command printOn: aStream.
 	aStream nextPut: $)
+]
+
+{ #category : 'context menu' }
+ClyCommandActivator >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
+
+	self canExecuteCommand ifFalse: [ ^self ].
+
+	self command registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder
+]
+
+{ #category : 'context menu' }
+ClyCommandActivator >> setUpShortcutTipForMenuItem: aMenuItemMorph [
+
+	ClyShortcutActivation
+		activeInstancesFor: self command class inContext: self context
+		do: [ :shortcut |
+			aMenuItemMorph keyText: (shortcut keyCombination acceptVisitor: OSPlatform current shortcutPrinter)]
 ]

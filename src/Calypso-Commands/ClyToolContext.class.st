@@ -17,26 +17,21 @@ ClyToolContext class >> for: aTool [
 		tool: aTool
 ]
 
+{ #category : 'drag and drop' }
+ClyToolContext >> allowsDropExecutionOf: aCommand [
+	^aCommand canBeExecutedInDropContext: self
+]
+
 { #category : 'testing' }
 ClyToolContext >> allowsExecutionOf: aCommandClass [
 
 	^aCommandClass canBeExecutedInContext: self
 ]
 
-{ #category : 'command execution' }
-ClyToolContext >> applyResultOf: aCommand [
-	aCommand applyResultInContext: self
-]
-
 { #category : 'testing' }
 ClyToolContext >> commanderCommandClasses [
 
 	^ #()
-]
-
-{ #category : 'command execution' }
-ClyToolContext >> executeCommand: aCommand by: aCommandActivator [
-	aCommand execute
 ]
 
 { #category : 'testing' }
@@ -113,16 +108,6 @@ ClyToolContext >> isSourceCodeContext [
 ClyToolContext >> openContextMenu: aMenu [
 
 	tool openContextMenu: aMenu
-]
-
-{ #category : 'command execution' }
-ClyToolContext >> prepareFullExecutionOf: aCommand [
-	aCommand prepareFullExecutionInContext: self
-]
-
-{ #category : 'command execution' }
-ClyToolContext >> prepareNewCommand: aCommand [
-	aCommand readParametersFromContext: self
 ]
 
 { #category : 'command execution' }

@@ -42,11 +42,3 @@ SycChangeMessageMenuCmCommand >> prepareFullExecution [
 	refactoringScopes := self context refactoringScopes.
 	originalMessage := self context lastSelectedMessage
 ]
-
-{ #category : 'execution' }
-SycChangeMessageMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

@@ -45,11 +45,3 @@ SycPackageMenuCmCommand >> prepareFullExecution [
 
 	packages := self context selectedPackages
 ]
-
-{ #category : 'execution' }
-SycPackageMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

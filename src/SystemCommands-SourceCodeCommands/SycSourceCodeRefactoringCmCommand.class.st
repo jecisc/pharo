@@ -53,11 +53,3 @@ SycSourceCodeRefactoringCmCommand >> prepareFullExecution [
 	sourceNode := self context lastSelectedSourceNode.
 	refactoringScopes := self context refactoringScopes
 ]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

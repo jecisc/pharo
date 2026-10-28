@@ -57,10 +57,3 @@ ClyMethodEditorCommand >> methodEditor [
 ClyMethodEditorCommand >> methodEditor: anObject [
 	methodEditor := anObject
 ]
-
-{ #category : 'execution' }
-ClyMethodEditorCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	methodEditor := aToolContext tool
-]

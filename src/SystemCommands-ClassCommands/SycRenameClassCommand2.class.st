@@ -57,11 +57,3 @@ SycRenameClassCommand2 >> prepareFullExecution [
 	super prepareFullExecution.
 	toolContext := self context
 ]
-
-{ #category : 'execution' }
-SycRenameClassCommand2 >> prepareFullExecutionInContext: aToolContext [
-	
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext
-
-]

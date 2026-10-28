@@ -76,15 +76,6 @@ ClySystemBrowserContext >> confirmUnusedVariablesInDefiningClass: variables [
 	^tool confirmUnusedVariablesInDefiningClass: variables
 ]
 
-{ #category : 'command execution' }
-ClySystemBrowserContext >> executeCommand: aCommand by: aCommandActivator [
-
-	aCommand isComplexRefactoring ifTrue: [
-		aCommand confirmRefactoringInContext: self by: aCommandActivator].
-
-	aCommand execute
-]
-
 { #category : 'refactoring support' }
 ClySystemBrowserContext >> firstNavigationScopes [
 

@@ -20,6 +20,12 @@ ClyMenuItem >> actualParentGroup [
 		ifFalse: [ parentGroup]
 ]
 
+{ #category : 'context menu' }
+ClyMenuItem >> buildContextMenu: aMenu [
+
+	self subclassResponsibility
+]
+
 { #category : 'accessing' }
 ClyMenuItem >> description [
 	self subclassResponsibility
@@ -96,6 +102,12 @@ ClyMenuItem >> pathToRoot [
 	^parentGroup
 		ifNil: [ ^#() ]
 		ifNotNil: [ parentGroup pathToRoot, {parentGroup} ]
+]
+
+{ #category : 'context menu' }
+ClyMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
+
+	self subclassResponsibility
 ]
 
 { #category : 'updating' }

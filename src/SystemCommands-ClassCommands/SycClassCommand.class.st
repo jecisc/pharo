@@ -57,9 +57,3 @@ SycClassCommand >> prepareExecutionInDragContext: aToolContext [
 
 	classes := aToolContext selectedClasses
 ]
-
-{ #category : 'execution' }
-SycClassCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	classes := aToolContext selectedClasses
-]

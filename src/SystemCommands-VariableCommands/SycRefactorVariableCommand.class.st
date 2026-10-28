@@ -55,10 +55,3 @@ SycRefactorVariableCommand >> execute [
 
 	self executeRefactorings
 ]
-
-{ #category : 'execution' }
-SycRefactorVariableCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	refactoringScopes := toolContext refactoringScopes
-]

@@ -49,11 +49,3 @@ SycVariableCmCommand >> prepareFullExecution [
 	toolContext := self context.
 	refactoringScopes := self context refactoringScopes
 ]
-
-{ #category : 'execution' }
-SycVariableCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

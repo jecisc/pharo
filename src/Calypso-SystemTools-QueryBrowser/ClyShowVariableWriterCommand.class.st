@@ -54,10 +54,3 @@ ClyShowVariableWriterCommand >> order [
 
 	^ 1000
 ]
-
-{ #category : 'execution' }
-ClyShowVariableWriterCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	browser := aToolContext browser
-]

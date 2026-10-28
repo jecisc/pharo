@@ -96,13 +96,6 @@ SycRenameMessageCommand >> orderInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycRenameMessageCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	toolContext := aToolContext
-]
-
-{ #category : 'execution' }
 SycRenameMessageCommand >> resultMessageSelector [
 
 	^ newSignature selector

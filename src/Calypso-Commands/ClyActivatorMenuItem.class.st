@@ -27,6 +27,25 @@ ClyActivatorMenuItem >> activator: anObject [
 	activator := anObject
 ]
 
+{ #category : 'spec2 compatibility' }
+ClyActivatorMenuItem >> addToMenuPresenter: aSpMenuPresenter [
+	aSpMenuPresenter
+		addItem: [ :anItem |
+			anItem
+				name: self name;
+				icon: self icon;
+				action: [ self executeCommand ];
+				enabled: self isActive;
+				description: self command class defaultHelp.
+				self getShortcutTipForMenuItem ifNotNil: [ :shortcut | anItem shortcut: shortcut ] ]
+]
+
+{ #category : 'context menu' }
+ClyActivatorMenuItem >> buildContextMenu: aMenuView [
+
+	activator buildContextMenu: aMenuView
+]
+
 { #category : 'accessing' }
 ClyActivatorMenuItem >> command [
 	^ activator command
@@ -44,6 +63,12 @@ ClyActivatorMenuItem >> executeCommand [
 
 { #category : 'accessing' }
 ClyActivatorMenuItem >> findGroupLike: menuGroupClass ifExists: aBlockClosure [
+]
+
+{ #category : 'spec2 compatibility' }
+ClyActivatorMenuItem >> getShortcutTipForMenuItem [
+
+	^ self activator getShortcutTipForMenuItem
 ]
 
 { #category : 'accessing' }
@@ -89,6 +114,18 @@ ClyActivatorMenuItem >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: self name.
 	aStream nextPut: $)
+]
+
+{ #category : 'context menu' }
+ClyActivatorMenuItem >> registerContextMenuItemsWithBuilder: aBuilder [
+
+	activator registerContextMenuItemsFor: self withBuilder: aBuilder
+]
+
+{ #category : 'context menu' }
+ClyActivatorMenuItem >> setUpShortcutTipForMenuItem: aMenuItemMorph [
+
+	self activator setUpShortcutTipForMenuItem: aMenuItemMorph
 ]
 
 { #category : 'updating' }

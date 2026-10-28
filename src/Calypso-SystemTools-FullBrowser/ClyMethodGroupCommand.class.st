@@ -43,10 +43,3 @@ ClyMethodGroupCommand >> prepareExecutionInDragContext: aToolContext [
 
 	methodGroups := aToolContext selectedMethodGroups
 ]
-
-{ #category : 'execution' }
-ClyMethodGroupCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	methodGroups := aToolContext selectedMethodGroups
-]

@@ -29,6 +29,15 @@ ClyMenu >> activationStrategyClass: anObject [
 	activationStrategyClass := anObject
 ]
 
+{ #category : 'spec2 compatibility' }
+ClyMenu >> asSpMenuPresenter [
+
+	| menu |
+	menu := SpMenuPresenter new.
+	self rootGroup contents do: [ :each | each addToMenuPresenter: menu ].
+	^ menu
+]
+
 { #category : 'building' }
 ClyMenu >> buildCommandItemInContext: aToolContext activatingBy: anActivationStrategy [
 
@@ -37,6 +46,20 @@ ClyMenu >> buildCommandItemInContext: aToolContext activatingBy: anActivationStr
 
 	group := self ensureGroup: anActivationStrategy menuGroup.
 	group addItem: (ClyActivatorMenuItem activatingBy: commandActivator)
+]
+
+{ #category : 'context menu' }
+ClyMenu >> buildContextMenuFor: aMorph [
+
+	| menu |
+	menu := MorphicUIManager new newMenuIn: aMorph for: aMorph.
+
+	self rootGroup buildContextMenu: menu.
+
+	menu hasSubmorphs ifTrue: [
+		menu lastSubmorph isMenuLineMorph ifTrue: [
+			menu lastSubmorph delete ] ].
+	^ menu
 ]
 
 { #category : 'building' }
@@ -94,6 +117,12 @@ ClyMenu >> itemsWithCommandLike: aCommandClass [
 	groups := self groupsWithCommandLike: aCommandClass.
 	^groups
 		flatCollect: [ :each | { each. each commandItemLike: aCommandClass } ]
+]
+
+{ #category : 'context menu' }
+ClyMenu >> registerContextMenuItemsWithBuilder: aBuilder [
+
+	rootGroup registerContextMenuItemsWithBuilder: aBuilder
 ]
 
 { #category : 'accessing' }

@@ -1,6 +1,6 @@
 Extension { #name : 'MouseButtonEvent' }
 
-{ #category : '*Commander-Activators-Mouse' }
+{ #category : '*Calypso-Commands' }
 MouseButtonEvent >> fixStateForClickAndModifierIssue [
 
 	self isMouseUp ifFalse: [ ^ self ].

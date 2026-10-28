@@ -62,12 +62,6 @@ SycFormatSourceCodeCommand >> order [
 ]
 
 { #category : 'execution' }
-SycFormatSourceCodeCommand >> prepareFullExecutionInContext: aToolContext [
-
-	"Nothing"
-]
-
-{ #category : 'execution' }
 SycFormatSourceCodeCommand >> readParametersFromContext: aToolContext [
 
 	self context: aToolContext

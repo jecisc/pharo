@@ -45,11 +45,3 @@ ClyDebuggingCmCommand >> prepareFullExecution [
 
 	self readParametersFromContext: self context
 ]
-
-{ #category : 'execution' }
-ClyDebuggingCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

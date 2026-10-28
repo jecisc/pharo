@@ -48,9 +48,7 @@ CmdShortcutActivation class >> moveFor: anAnnotationUser [
 
 { #category : 'accessing' }
 CmdShortcutActivation class >> registeredInstances [
-	"Calypso shortcuts are kept in their own registry entries, so the shortcut consumers see both kinds."
-
-	^ (self registry allInstancesOf: self) asArray , ClyShortcutActivation registeredInstances asArray
+	^ self registry allInstancesOf: self
 ]
 
 { #category : 'well known shortcuts' }

@@ -50,11 +50,3 @@ SycMessageCmCommand >> prepareFullExecution [
 	refactoringScopes := self context refactoringScopes.
 	originalMessage := self context lastSelectedMessage
 ]
-
-{ #category : 'execution' }
-SycMessageCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

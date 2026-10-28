@@ -61,10 +61,3 @@ SycGenerateAllInstVarAccessorsCommand >> prepareFullExecution [
 	super prepareFullExecution.
 	classes := classes collect: [ :class | self context currentMetaLevelOf: class ]
 ]
-
-{ #category : 'execution' }
-SycGenerateAllInstVarAccessorsCommand >> prepareFullExecutionInContext: aToolContext [
-
-	super prepareFullExecutionInContext: aToolContext.
-	classes := classes collect: [:each | aToolContext currentMetaLevelOf: each]
-]

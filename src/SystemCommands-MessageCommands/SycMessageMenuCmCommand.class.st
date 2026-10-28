@@ -47,11 +47,3 @@ SycMessageMenuCmCommand >> prepareFullExecution [
 
 	messages := self context selectedMessages
 ]
-
-{ #category : 'execution' }
-SycMessageMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

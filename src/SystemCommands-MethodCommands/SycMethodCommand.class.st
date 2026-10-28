@@ -50,9 +50,3 @@ SycMethodCommand >> prepareExecutionInDragContext: aToolContext [
 
 	methods := aToolContext selectedMethods
 ]
-
-{ #category : 'execution' }
-SycMethodCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-	methods := aToolContext selectedMethods
-]

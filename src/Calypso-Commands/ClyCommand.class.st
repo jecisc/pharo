@@ -13,6 +13,11 @@ ClyCommand class >> canBeExecutedInContext: aToolContext [
 	^self isAbstract not
 ]
 
+{ #category : 'spec2 compatibility' }
+ClyCommand class >> defaultHelp [
+	^ self defaultMenuItemName
+]
+
 { #category : 'accessing' }
 ClyCommand class >> defaultMenuIconName [
 	"For compatibility the actual icon named can be defined on class side.
@@ -42,16 +47,17 @@ ClyCommand >> application [
 	^ StPharoApplication current
 ]
 
+{ #category : 'drag and drop' }
+ClyCommand >> applyDropResultInContext: aToolContext [
+]
+
 { #category : 'execution' }
 ClyCommand >> applyResultInContext: aToolContext [
 ]
 
-{ #category : 'converting' }
-ClyCommand >> asCommandActivator [
-	^CmdCommandActivator new
-		command: self;
-		context: CmdNullToolContext new;
-		activationStrategy: (CmdManualActivationStrategy withAnnotatedClass: self class)
+{ #category : 'drag and drop' }
+ClyCommand >> canBeExecutedInDropContext: aToolContext [
+	^true
 ]
 
 { #category : 'ui requests' }
@@ -103,18 +109,60 @@ ClyCommand >> description [
 	^nil
 ]
 
+{ #category : 'context menu' }
+ClyCommand >> doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
+	| item itemOrder |
+	itemOrder := aCommandItem order.
+	aCommandItem parentGroup isRoot not & aCommandItem parentGroup isInlined ifTrue: [
+		"When we are inlining we should try keep order according to the order of parent.
+		So we just put item order as deimal addition to parent order"
+		itemOrder := aCommandItem parentGroup order + (itemOrder / 10000000.0)].
+	item := (aBuilder item: aCommandItem name)
+		parent: aCommandItem actualParentGroup name;
+		order: itemOrder;
+		help: aCommandItem description;
+		action: [aCommandItem executeCommand].
+
+	aCommandItem setUpShortcutTipForMenuItem: item.
+	self setUpIconForMenuItem: item
+]
+
+{ #category : 'context menu' }
+ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
+	| item |
+
+	item := aMenu
+		add: aCommandActivator menuItemName
+		target: aCommandActivator
+		selector: #executeCommand.
+
+	aCommandActivator setUpShortcutTipForMenuItem: item.
+	self setUpIconForMenuItem: item.
+	self description ifNotNil: [:d | item setBalloonText: d]
+]
+
 { #category : 'accessing' }
 ClyCommand >> morphicUIManager [
 
 	^ MorphicUIManager new
 ]
 
-{ #category : 'execution' }
-ClyCommand >> prepareFullExecutionInContext: aToolContext [
+{ #category : 'drag and drop' }
+ClyCommand >> prepareExecutionInDragContext: aToolContext [
+]
+
+{ #category : 'drag and drop' }
+ClyCommand >> prepareExecutionInDropContext: aToolContext [
 ]
 
 { #category : 'execution' }
 ClyCommand >> readParametersFromContext: aToolContext [
+]
+
+{ #category : 'context menu' }
+ClyCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
+
+	^ self doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder
 ]
 
 { #category : 'accessing' }
@@ -124,6 +172,19 @@ ClyCommand >> secureMenuIcon [
 	which will indicate missing icon as a problem"
 
 	^self defaultMenuIcon ifNil: [ Smalltalk ui iconNamed: #error ]
+]
+
+{ #category : 'context menu' }
+ClyCommand >> setUpIconForMenuItem: menuItem [
+
+	self defaultMenuIconFormSet ifNotNil: [:iconFormSet |
+		menuItem iconFormSet: iconFormSet ]
+]
+
+{ #category : 'context menu' }
+ClyCommand >> setUpIconNamed: aString forMenuItem: aMenuItemMorph [
+
+	aMenuItemMorph icon: (aMenuItemMorph iconNamed: aString)
 ]
 
 { #category : 'accessing' }

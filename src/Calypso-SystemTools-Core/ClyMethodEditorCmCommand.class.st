@@ -45,11 +45,3 @@ ClyMethodEditorCmCommand >> prepareFullExecution [
 
 	methodEditor := self context tool
 ]
-
-{ #category : 'execution' }
-ClyMethodEditorCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

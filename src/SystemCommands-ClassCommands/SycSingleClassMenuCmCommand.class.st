@@ -44,11 +44,3 @@ SycSingleClassMenuCmCommand >> prepareFullExecution [
 
 	targetClass := self context lastSelectedClass
 ]
-
-{ #category : 'execution' }
-SycSingleClassMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

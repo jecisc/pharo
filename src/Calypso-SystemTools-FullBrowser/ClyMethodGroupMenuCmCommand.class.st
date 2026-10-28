@@ -39,11 +39,3 @@ ClyMethodGroupMenuCmCommand >> prepareFullExecution [
 
 	methodGroups := self context selectedMethodGroups
 ]
-
-{ #category : 'execution' }
-ClyMethodGroupMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

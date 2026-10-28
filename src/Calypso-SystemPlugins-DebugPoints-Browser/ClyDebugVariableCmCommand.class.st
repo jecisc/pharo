@@ -45,11 +45,3 @@ ClyDebugVariableCmCommand >> prepareFullExecution [
 
 	variables := self context selectedVariables
 ]
-
-{ #category : 'execution' }
-ClyDebugVariableCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

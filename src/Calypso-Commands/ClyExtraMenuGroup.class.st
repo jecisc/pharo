@@ -8,6 +8,13 @@ Class {
 	#package : 'Calypso-Commands'
 }
 
+{ #category : 'context menu' }
+ClyExtraMenuGroup >> buildContextMenu: aMenu [
+	aMenu addLine.
+
+	super buildContextMenu: aMenu
+]
+
 { #category : 'accessing' }
 ClyExtraMenuGroup >> description [
 	^'Rarely used commands'

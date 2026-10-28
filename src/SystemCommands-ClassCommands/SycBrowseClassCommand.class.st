@@ -49,13 +49,3 @@ SycBrowseClassCommand >> prepareFullExecution [
 	targetClass := (scope at: self context selectedSourceNode name)
 		ifNil: [ self context lastSelectedClass ]
 ]
-
-{ #category : 'execution' }
-SycBrowseClassCommand >> prepareFullExecutionInContext: aToolContext [
-
-	| scope |
-	scope := RBBrowserEnvironment new.
-	super prepareFullExecutionInContext: aToolContext.
-	targetClass := (scope at: aToolContext selectedSourceNode name) 
-		ifNil: [ aToolContext lastSelectedClass ]
-]

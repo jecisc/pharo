@@ -22,6 +22,20 @@ ClyMenuGroup >> addItem: aMenuItem [
 	contents add: aMenuItem
 ]
 
+{ #category : 'spec2 compatibility' }
+ClyMenuGroup >> addToMenuPresenter: aSpMenuPresenter [
+	| subMenuPresenter |
+	subMenuPresenter := SpMenuPresenter new.
+	self contents
+		do: [ :each | each addToMenuPresenter: subMenuPresenter ].
+	aSpMenuPresenter
+		addItem: [ :item |
+			item
+				name: self name;
+				icon: self icon;
+				subMenu: subMenuPresenter ]
+]
+
 { #category : 'accessing' }
 ClyMenuGroup >> allGroupsWhich: aBlock [
 	| result |
@@ -47,6 +61,29 @@ ClyMenuGroup >> allItemsWhich: aBlock [
 			result addAll: (each allItemsWhich: aBlock) ]].
 
 	^result
+]
+
+{ #category : 'context menu' }
+ClyMenuGroup >> buildContextMenu: aMenu [
+
+	self isInlined
+		ifTrue: [ self inlineContextMenuItemsInto: aMenu ]
+		ifFalse: [ self buildContextSubMenuIn: aMenu ]
+]
+
+{ #category : 'context menu' }
+ClyMenuGroup >> buildContextSubMenuIn: aMenu [
+
+	| submenu |
+	submenu := MorphicUIManager new
+		           newMenuIn: aMenu defaultTarget
+		           for: aMenu defaultTarget.
+
+	self contents do: [ :each | each buildContextMenu: submenu ].
+
+	submenu hasItems ifTrue: [
+		aMenu add: self name icon: self icon subMenu: submenu.
+		self description ifNotNil: [ :d | aMenu lastItem setBalloonText: d ] ]
 ]
 
 { #category : 'accessing' }
@@ -136,6 +173,16 @@ ClyMenuGroup >> initialize [
 			ifFalse: [ a order <= b order ]]
 ]
 
+{ #category : 'context menu' }
+ClyMenuGroup >> inlineContextMenuItemsInto: aMenu [
+
+	aMenu addLine.
+
+	self contents do: [ :each | each buildContextMenu: aMenu ].
+
+	aMenu addLine
+]
+
 { #category : 'testing' }
 ClyMenuGroup >> isActive [
 	^contents anySatisfy: [ :each | each isActive ]
@@ -189,6 +236,33 @@ ClyMenuGroup >> name [
 { #category : 'accessing' }
 ClyMenuGroup >> order [
 	^500
+]
+
+{ #category : 'context menu' }
+ClyMenuGroup >> registerContextMenuItemsWithBuilder: aBuilder [
+
+	self isActive ifFalse: [ ^self ].
+
+	self isInlined
+		ifTrue: [ aBuilder items ifNotEmpty: [aBuilder withSeparatorAfter] ]
+		ifFalse: [ self registerContextSubMenuWithBuilder: aBuilder].
+
+	contents do: [ :each |
+		each registerContextMenuItemsWithBuilder: aBuilder ].
+
+	self isInlined & aBuilder items notEmpty
+		ifTrue: [ aBuilder withSeparatorAfter ]
+]
+
+{ #category : 'context menu' }
+ClyMenuGroup >> registerContextSubMenuWithBuilder: aBuilder [
+
+	(aBuilder item: self name)
+		order: self order;
+		parent: self parentGroup name;
+		target: self;
+		icon: self icon;
+		help: self description
 ]
 
 { #category : 'accessing' }

@@ -39,11 +39,3 @@ SycMethodMenuCmCommand >> prepareFullExecution [
 
 	methods := self context selectedMethods
 ]
-
-{ #category : 'execution' }
-SycMethodMenuCmCommand >> prepareFullExecutionInContext: aToolContext [
-
-	self context: aToolContext.
-	self prepareFullExecution.
-	prepared := true
-]

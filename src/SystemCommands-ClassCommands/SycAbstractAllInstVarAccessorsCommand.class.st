@@ -66,14 +66,6 @@ SycAbstractAllInstVarAccessorsCommand >> prepareFullExecution [
 	self selectVariables
 ]
 
-{ #category : 'testing' }
-SycAbstractAllInstVarAccessorsCommand >> prepareFullExecutionInContext: aToolContext [
-	super prepareFullExecutionInContext: aToolContext.
-
-	classes := classes collect: [:each | aToolContext currentMetaLevelOf: each].
-	self selectVariables
-]
-
 { #category : 'execution' }
 SycAbstractAllInstVarAccessorsCommand >> selectVariables [
 
