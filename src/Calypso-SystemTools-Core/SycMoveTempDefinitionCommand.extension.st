@@ -4,5 +4,5 @@ Extension { #name : 'SycMoveTempDefinitionCommand' }
 SycMoveTempDefinitionCommand class >> sourceCodeShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation moveFor: ClyMethodSourceCodeContext
+	^ClyShortcutActivation moveFor: ClyMethodSourceCodeContext
 ]

@@ -9,7 +9,7 @@ SycShowLocalSendersCommand class >> browserMenuOrder [
 SycShowLocalSendersCommand class >> sourceCodeShortcutActivation [
 	<classAnnotation>
 
-	^ CmdShortcutActivation 
+	^ ClyShortcutActivation 
 		by: $y shift meta
 		for: ClyMethodSourceCodeContext
 ]

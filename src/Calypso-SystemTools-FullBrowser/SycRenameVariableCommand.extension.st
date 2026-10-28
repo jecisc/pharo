@@ -4,5 +4,5 @@ Extension { #name : 'SycRenameVariableCommand' }
 SycRenameVariableCommand class >> fullBrowserShortcutActivation [
 
 	<classAnnotation>
-	^ CmdShortcutActivation renamingFor: ClyFullBrowserVariableContext
+	^ ClyShortcutActivation renamingFor: ClyFullBrowserVariableContext
 ]

@@ -4,5 +4,5 @@ Extension { #name : 'SycMoveMethodsToInstanceSideCommand' }
 SycMoveMethodsToInstanceSideCommand class >> methodShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $t meta, $i meta for: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation by: $t meta, $i meta for: ClyMethod asCalypsoItemContext
 ]

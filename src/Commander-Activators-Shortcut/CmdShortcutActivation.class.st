@@ -46,6 +46,13 @@ CmdShortcutActivation class >> moveFor: anAnnotationUser [
 	^self by: $o meta for: anAnnotationUser
 ]
 
+{ #category : 'accessing' }
+CmdShortcutActivation class >> registeredInstances [
+	"Calypso shortcuts are kept in their own registry entries, so the shortcut consumers see both kinds."
+
+	^ (self registry allInstancesOf: self) asArray , ClyShortcutActivation registeredInstances asArray
+]
+
 { #category : 'well known shortcuts' }
 CmdShortcutActivation class >> removalFor: anAnnotationUser [
 	<classAnnotationDependency>

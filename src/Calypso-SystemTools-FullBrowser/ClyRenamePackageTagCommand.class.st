@@ -31,7 +31,7 @@ ClyRenamePackageTagCommand class >> canBeExecutedInContext: aToolContext [
 ClyRenamePackageTagCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation renamingFor: ClyFullBrowserClassGroupContext
+	^ClyShortcutActivation renamingFor: ClyFullBrowserClassGroupContext
 ]
 
 { #category : 'execution' }

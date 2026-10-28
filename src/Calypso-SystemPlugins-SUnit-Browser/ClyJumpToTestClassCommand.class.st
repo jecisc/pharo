@@ -30,7 +30,7 @@ Class {
 ClyJumpToTestClassCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^ CmdShortcutActivation by: $g meta, $j meta for: ClyFullBrowserClassContext
+	^ ClyShortcutActivation by: $g meta, $j meta for: ClyFullBrowserClassContext
 ]
 
 { #category : 'accessing' }

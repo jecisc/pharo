@@ -9,7 +9,7 @@ Class {
 SycRemoveMethodCommand class >> methodShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation removalFor: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation removalFor: ClyMethod asCalypsoItemContext
 ]
 
 { #category : 'accessing' }

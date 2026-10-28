@@ -4,5 +4,5 @@ Extension { #name : 'SycRemoveVariablesCommand' }
 SycRemoveVariablesCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^ CmdShortcutActivation removalFor: ClyFullBrowserVariableContext
+	^ ClyShortcutActivation removalFor: ClyFullBrowserVariableContext
 ]

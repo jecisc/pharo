@@ -4,5 +4,5 @@ Extension { #name : 'SycDuplicatePackageCommand' }
 SycDuplicatePackageCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $c meta for: ClyFullBrowserPackageContext
+	^ClyShortcutActivation by: $c meta for: ClyFullBrowserPackageContext
 ]

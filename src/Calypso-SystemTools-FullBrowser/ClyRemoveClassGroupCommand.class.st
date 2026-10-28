@@ -26,7 +26,7 @@ ClyRemoveClassGroupCommand class >> canBeExecutedInContext: aToolContext [
 ClyRemoveClassGroupCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation removalFor: ClyFullBrowserClassGroupContext
+	^ClyShortcutActivation removalFor: ClyFullBrowserClassGroupContext
 ]
 
 { #category : 'accessing' }

@@ -4,5 +4,5 @@ Extension { #name : 'ClyFindClassCommand' }
 ClyFindClassCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $f meta for: ClyFullBrowserGlobalContext
+	^ClyShortcutActivation by: $f meta for: ClyFullBrowserGlobalContext
 ]

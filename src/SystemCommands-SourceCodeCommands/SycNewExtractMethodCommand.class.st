@@ -22,7 +22,7 @@ SycNewExtractMethodCommand class >> canBeExecutedInContext: aSourceCodeContext [
 SycNewExtractMethodCommand class >> methodEditorShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $e meta, $m meta, $t meta for: ClySourceCodeContext
+	^ClyShortcutActivation by: $e meta, $m meta, $t meta for: ClySourceCodeContext
 ]
 
 { #category : 'accessing' }

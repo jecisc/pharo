@@ -4,5 +4,5 @@ Extension { #name : 'SycRenameVariableCommand' }
 SycRenameVariableCommand class >> sourceCodeShortcutActivation [
 
 	<classAnnotation>
-	^ CmdShortcutActivation renamingFor: ClySourceCodeContext
+	^ ClyShortcutActivation renamingFor: ClySourceCodeContext
 ]

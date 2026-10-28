@@ -4,5 +4,5 @@ Extension { #name : 'SycPullUpMethodCommand' }
 SycPullUpMethodCommand class >> methodShortcutActivation [
 	
 	<classAnnotation>
-	^CmdShortcutActivation by: $p meta, $u meta for: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation by: $p meta, $u meta for: ClyMethod asCalypsoItemContext
 ]

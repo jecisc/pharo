@@ -12,7 +12,7 @@ SycInspectVariableValueCommand class >> fullBrowserDoubleClickActivation [
 SycInspectVariableValueCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^(CmdShortcutActivation
+	^(ClyShortcutActivation
 		by: PharoShortcuts current inspectItShortcut for: ClyFullBrowserVariableContext)
 			priority: 100000
 ]

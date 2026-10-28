@@ -4,5 +4,5 @@ Extension { #name : 'SycRenamePackageCommand' }
 SycRenamePackageCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation renamingFor: ClyFullBrowserPackageContext
+	^ClyShortcutActivation renamingFor: ClyFullBrowserPackageContext
 ]

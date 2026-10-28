@@ -4,7 +4,7 @@ Extension { #name : 'SycFormatSourceCodeCommand' }
 SycFormatSourceCodeCommand class >> methodEditorShorcutActivation [
 
 	<classAnnotation>
-	^ CmdShortcutActivation
+	^ ClyShortcutActivation
 		by: $f meta shift
 		for: ClyTextEditorContext
 ]

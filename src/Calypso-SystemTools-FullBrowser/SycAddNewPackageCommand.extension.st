@@ -4,5 +4,5 @@ Extension { #name : 'SycAddNewPackageCommand' }
 SycAddNewPackageCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $k meta, $p meta for: ClyFullBrowserGlobalContext
+	^ClyShortcutActivation by: $k meta, $p meta for: ClyFullBrowserGlobalContext
 ]

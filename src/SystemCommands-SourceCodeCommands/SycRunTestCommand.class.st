@@ -15,7 +15,7 @@ SycRunTestCommand class >> canBeExecutedInContext: aToolContext [
 SycRunTestCommand class >> methodEditorShorcutActivation [
 
 	<classAnnotation>
-	^ CmdShortcutActivation
+	^ ClyShortcutActivation
 		  by: $e meta , $t meta
 		  for: ClyTextEditorContext
 ]

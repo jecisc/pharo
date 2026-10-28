@@ -10,7 +10,7 @@ Class {
 SycCmDuplicateClassCommand class >> browserShortcutActivation [
 
 	<classAnnotation>
-	^ CmdShortcutActivation
+	^ ClyShortcutActivation
 		  by: $d meta
 		  for: ClyClass asCalypsoItemContext
 ]
@@ -38,8 +38,7 @@ SycCmDuplicateClassCommand >> executeRefactoring [
 	"The class name is necessary so the browser can select the new subclass"
 
 	| driver |
-	driver := (ReDuplicateClassDriver className: self targetClass name)
-		          scopes: refactoringScopes.
+	driver := (ReDuplicateClassDriver className: self targetClass name) scopes: { (ClyClassScope of: self targetClass) }.
 	driver runRefactoring
 ]
 

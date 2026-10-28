@@ -4,6 +4,6 @@ Extension { #name : 'SycInspectVariableValueCommand' }
 SycInspectVariableValueCommand class >> sourceCodeShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation
+	^ClyShortcutActivation
 		by: PharoShortcuts current inspectItShortcut for: ClySourceCodeContext
 ]

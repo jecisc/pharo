@@ -20,7 +20,7 @@ Class {
 ClyFindMethodInBrowserCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $f meta for: ClyFullBrowserMethodContext
+	^ClyShortcutActivation by: $f meta for: ClyFullBrowserMethodContext
 ]
 
 { #category : 'accessing' }

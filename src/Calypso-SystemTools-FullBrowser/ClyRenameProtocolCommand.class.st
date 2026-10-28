@@ -31,7 +31,7 @@ ClyRenameProtocolCommand class >> canBeExecutedInContext: aToolContext [
 ClyRenameProtocolCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation renamingFor: ClyFullBrowserMethodGroupContext
+	^ClyShortcutActivation renamingFor: ClyFullBrowserMethodGroupContext
 ]
 
 { #category : 'execution' }

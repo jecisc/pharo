@@ -29,7 +29,7 @@ ClyShowClassRefCommand class >> forClasses: classes by: aBrowser [
 ClyShowClassRefCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $n meta for: ClyFullBrowserClassContext
+	^ClyShortcutActivation by: $n meta for: ClyFullBrowserClassContext
 ]
 
 { #category : 'activation' }
@@ -43,7 +43,7 @@ ClyShowClassRefCommand class >> fullBrowserToolbarActivation [
 ClyShowClassRefCommand class >> queryBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $c meta, $n meta for: ClyQueryBrowserContext
+	^ClyShortcutActivation by: $c meta, $n meta for: ClyQueryBrowserContext
 ]
 
 { #category : 'activation' }

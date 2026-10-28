@@ -21,7 +21,7 @@ ClyCommitPackageCommand class >> canBeExecutedInContext: aToolContext [
 ClyCommitPackageCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $s meta for: ClyFullBrowserGlobalContext
+	^ClyShortcutActivation by: $s meta for: ClyFullBrowserGlobalContext
 ]
 
 { #category : 'accessing' }

@@ -36,7 +36,7 @@ ClyShowMessageSenderCommand class >> methodBrowserToolbarActivation [
 ClyShowMessageSenderCommand class >> methodShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $n meta for: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation by: $n meta for: ClyMethod asCalypsoItemContext
 ]
 
 { #category : 'activation' }

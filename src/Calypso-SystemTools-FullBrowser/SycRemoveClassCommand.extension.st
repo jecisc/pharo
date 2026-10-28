@@ -4,5 +4,5 @@ Extension { #name : 'SycRemoveClassCommand' }
 SycRemoveClassCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation removalFor: ClyFullBrowserClassContext
+	^ClyShortcutActivation removalFor: ClyFullBrowserClassContext
 ]

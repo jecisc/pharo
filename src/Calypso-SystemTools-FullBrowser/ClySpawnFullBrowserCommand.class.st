@@ -22,7 +22,7 @@ Class {
 ClySpawnFullBrowserCommand class >> browserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $b meta for: ClySystemBrowserContext
+	^ClyShortcutActivation by: $b meta for: ClySystemBrowserContext
 ]
 
 { #category : 'testing' }

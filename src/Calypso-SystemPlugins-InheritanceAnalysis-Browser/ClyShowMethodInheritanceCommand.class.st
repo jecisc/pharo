@@ -13,7 +13,7 @@ Class {
 ClyShowMethodInheritanceCommand class >> browserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $h meta for: ClyMethod asCalypsoItemContext
+	^ClyShortcutActivation by: $h meta for: ClyMethod asCalypsoItemContext
 ]
 
 { #category : 'execution' }

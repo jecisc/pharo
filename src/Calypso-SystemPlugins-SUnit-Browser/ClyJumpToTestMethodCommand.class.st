@@ -46,7 +46,7 @@ ClyJumpToTestMethodCommand class >> hasInstanceSelectedItemsIn: aBrowserContext 
 { #category : 'activation' }
 ClyJumpToTestMethodCommand class >> methodShortcutActivation [
 	<classAnnotation>
-	^ CmdShortcutActivation by: $h meta , $j meta for: ClyMethod asCalypsoItemContext
+	^ ClyShortcutActivation by: $h meta , $j meta for: ClyMethod asCalypsoItemContext
 ]
 
 { #category : 'accessing' }

@@ -13,7 +13,7 @@ Class {
 ClyResetProtocolForEditorCommand class >> methodEditorShorcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $e meta, $u meta for: ClyTextEditorContext
+	^ClyShortcutActivation by: $e meta, $u meta for: ClyTextEditorContext
 ]
 
 { #category : 'accessing' }

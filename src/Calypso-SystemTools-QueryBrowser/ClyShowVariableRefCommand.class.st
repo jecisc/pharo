@@ -23,7 +23,7 @@ Class {
 ClyShowVariableRefCommand class >> fullBrowserShortcutActivation [
 	<classAnnotation>
 
-	^CmdShortcutActivation by: $n meta for: ClyFullBrowserVariableContext
+	^ClyShortcutActivation by: $n meta for: ClyFullBrowserVariableContext
 ]
 
 { #category : 'accessing' }
