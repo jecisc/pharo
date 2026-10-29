@@ -4,9 +4,6 @@ I am a temporary bridge between the legacy CmdCommand API and Commander2. I keep
 Class {
 	#name : 'SycLegacyCmCommand',
 	#superclass : 'SycCmCommand',
-	#instVars : [
-		'prepared'
-	],
 	#category : 'SystemCommands-RefactoringSupport',
 	#package : 'SystemCommands-RefactoringSupport'
 }
@@ -62,26 +59,8 @@ SycLegacyCmCommand >> executeRefactorings [
 	self asRefactorings do: [ :each | each execute ]
 ]
 
-{ #category : 'initialization' }
-SycLegacyCmCommand >> initialize [
-
-	super initialize.
-	prepared := false
-]
-
 { #category : 'testing' }
 SycLegacyCmCommand >> isComplexRefactoring [
 
 	^ false
-]
-
-{ #category : 'accessing' }
-SycLegacyCmCommand >> prepared [
-	^ prepared
-]
-
-{ #category : 'accessing' }
-SycLegacyCmCommand >> prepared: aBoolean [
-
-	prepared := aBoolean
 ]

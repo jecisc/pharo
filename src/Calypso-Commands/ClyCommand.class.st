@@ -5,7 +5,8 @@ Class {
 	#name : 'ClyCommand',
 	#superclass : 'CmCommand',
 	#instVars : [
-		'dropContext'
+		'dropContext',
+		'prepared'
 	],
 	#category : 'Calypso-Commands',
 	#package : 'Calypso-Commands'
@@ -44,6 +45,12 @@ ClyCommand class >> isAbstract [
 	^self = ClyCommand
 ]
 
+{ #category : 'testing' }
+ClyCommand >> acceptVisitor: aVisitor [
+
+	^ aVisitor visitCommand: self
+]
+
 { #category : 'ui requests' }
 ClyCommand >> application [
 
@@ -51,7 +58,20 @@ ClyCommand >> application [
 ]
 
 { #category : 'execution' }
+ClyCommand >> applyCommandResult [
+
+	self applyResultInContext: self context
+]
+
+{ #category : 'execution' }
 ClyCommand >> applyResultInContext: aToolContext [
+]
+
+{ #category : 'testing' }
+ClyCommand >> canBeExecuted [
+
+	^ (self class canBeExecutedInContext: self context)
+		and: [ self isAvailableInMenuOf: self context ]
 ]
 
 { #category : 'ui requests' }
@@ -131,6 +151,47 @@ ClyCommand >> dropContext: aToolContext [
 	dropContext := aToolContext
 ]
 
+{ #category : 'execution' }
+ClyCommand >> execute [
+
+	(prepared or: [ self context isNil ])
+		ifTrue: [ self executeRefactorings ]
+		ifFalse: [
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self isComplexRefactoring
+						ifTrue: [ self executeComplexRefactoring ]
+						ifFalse: [
+								self executeRefactoring.
+								self applyCommandResult ] ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
+]
+
+{ #category : 'execution' }
+ClyCommand >> executeComplexRefactoring [
+
+	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
+	| submitDialog |
+	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
+	submitDialog existChanges
+		ifTrue: [
+			submitDialog openDialog
+				okAction: [
+					submitDialog accept.
+					self applyCommandResult ];
+				cancelAction: [ :p | p beCancel ] ]
+		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
+	CmCommandAborted signal
+]
+
+{ #category : 'execution' }
+ClyCommand >> executeRefactoring [
+
+	^ self executeRefactorings
+]
+
 { #category : 'context menu' }
 ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
 	| item |
@@ -146,14 +207,84 @@ ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
 ]
 
 { #category : 'accessing' }
+ClyCommand >> fullBrowserOrder [
+
+	^ self order
+]
+
+{ #category : 'accessing' }
+ClyCommand >> icon [
+
+	^ self defaultMenuIcon
+]
+
+{ #category : 'initialization' }
+ClyCommand >> initialize [
+	super initialize.
+	prepared := false
+]
+
+{ #category : 'testing' }
+ClyCommand >> isAvailableInMenuOf: aToolContext [
+
+	^ true
+]
+
+{ #category : 'testing' }
+ClyCommand >> isCommand [
+
+	^ true
+]
+
+{ #category : 'testing' }
+ClyCommand >> isGroup [
+
+	^ false
+]
+
+{ #category : 'accessing' }
+ClyCommand >> menuGroup [
+
+	^ ClyRootMenuGroup
+]
+
+{ #category : 'accessing' }
 ClyCommand >> morphicUIManager [
 
 	^ MorphicUIManager new
 ]
 
+{ #category : 'accessing' }
+ClyCommand >> name [
+
+	^ self defaultMenuItemName
+]
+
+{ #category : 'accessing' }
+ClyCommand >> orderInContext: aToolContext [
+
+	^ self order
+]
+
 { #category : 'executing' }
 ClyCommand >> prepareFullExecution [
 	^ self
+]
+
+{ #category : 'accessing' }
+ClyCommand >> prepared [
+	^ prepared
+]
+
+{ #category : 'accessing' }
+ClyCommand >> prepared: aBoolean [
+	prepared := aBoolean
+]
+
+{ #category : 'execution' }
+ClyCommand >> processCommandFailure: anException [
+
+	context processFailure: anException of: self
 ]
 
 { #category : 'context menu' }

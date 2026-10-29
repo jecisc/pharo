@@ -4,35 +4,9 @@ I am a Commander2 hybrid for the message commands that browse senders (hierarchi
 Class {
 	#name : 'SycMessageMenuCmCommand',
 	#superclass : 'SycMessageCommand',
-	#traits : 'TCommanderMigrationHybridCommand',
-	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
-
-{ #category : 'execution' }
-SycMessageMenuCmCommand >> executeComplexRefactoring [
-
-	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
-	| submitDialog |
-	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
-	submitDialog existChanges
-		ifTrue: [
-			submitDialog openDialog
-				okAction: [
-					submitDialog accept.
-					self applyCommandResult ];
-				cancelAction: [ :p | p beCancel ] ]
-		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
-	CmCommandAborted signal
-]
-
-{ #category : 'initialization' }
-SycMessageMenuCmCommand >> initialize [
-
-	super initialize.
-	prepared := false
-]
 
 { #category : 'accessing' }
 SycMessageMenuCmCommand >> orderInContext: aToolContext [

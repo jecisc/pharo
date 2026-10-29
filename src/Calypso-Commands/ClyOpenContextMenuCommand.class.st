@@ -58,6 +58,11 @@ ClyOpenContextMenuCommand >> fillContextMenu: aMenu using: aCommandActivator [
 	]
 ]
 
+{ #category : 'accessing' }
+ClyOpenContextMenuCommand >> name [
+	^ basicName
+]
+
 { #category : 'context menu' }
 ClyOpenContextMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
 	"Here we need to take care because this command itself is added to menu of same self context.

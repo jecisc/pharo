@@ -4,34 +4,26 @@ I am a Commander2 hybrid for the variable refactorings (protect, push up, push d
 Class {
 	#name : 'SycVariableCmCommand',
 	#superclass : 'SycRefactorVariableCommand',
-	#traits : 'TCommanderMigrationHybridCommand',
-	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }
 
 { #category : 'execution' }
-SycVariableCmCommand >> executeComplexRefactoring [
+SycVariableCmCommand >> execute [
 
-	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
-	| submitDialog |
-	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
-	submitDialog existChanges
-		ifTrue: [
-			submitDialog openDialog
-				okAction: [
-					submitDialog accept.
-					self applyCommandResult ];
-				cancelAction: [ :p | p beCancel ] ]
-		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
-	CmCommandAborted signal
-]
-
-{ #category : 'initialization' }
-SycVariableCmCommand >> initialize [
-
-	super initialize.
-	prepared := false
+	(prepared or: [ self context isNil ])
+		ifTrue: [ self executeRefactorings ]
+		ifFalse: [
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self isComplexRefactoring
+						ifTrue: [ self executeComplexRefactoring ]
+						ifFalse: [
+								self executeRefactoring.
+								self applyCommandResult ] ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
 ]
 
 { #category : 'accessing' }

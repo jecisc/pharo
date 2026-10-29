@@ -4,34 +4,26 @@ I am a temporary Commander2 bridge for message/signature commands. I subclass th
 Class {
 	#name : 'SycMessageCmCommand',
 	#superclass : 'SycChangeMessageSignatureCommand',
-	#traits : 'TCommanderMigrationHybridCommand',
-	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
 
 { #category : 'execution' }
-SycMessageCmCommand >> executeComplexRefactoring [
+SycMessageCmCommand >> execute [
 
-	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
-	| submitDialog |
-	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
-	submitDialog existChanges
-		ifTrue: [
-			submitDialog openDialog
-				okAction: [
-					submitDialog accept.
-					self applyCommandResult ];
-				cancelAction: [ :p | p beCancel ] ]
-		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
-	CmCommandAborted signal
-]
-
-{ #category : 'initialization' }
-SycMessageCmCommand >> initialize [
-
-	super initialize.
-	prepared := false
+	(prepared or: [ self context isNil ])
+		ifTrue: [ self executeRefactorings ]
+		ifFalse: [
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self isComplexRefactoring
+						ifTrue: [ self executeComplexRefactoring ]
+						ifFalse: [
+								self executeRefactoring.
+								self applyCommandResult ] ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
 ]
 
 { #category : 'accessing' }

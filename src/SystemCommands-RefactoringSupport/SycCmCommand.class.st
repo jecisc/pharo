@@ -116,6 +116,11 @@ SycCmCommand >> menuGroup [
 ]
 
 { #category : 'accessing' }
+SycCmCommand >> name [
+	^ basicName
+]
+
+{ #category : 'accessing' }
 SycCmCommand >> order [
 
 	^ 10100

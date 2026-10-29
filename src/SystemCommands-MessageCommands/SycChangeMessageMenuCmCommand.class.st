@@ -4,34 +4,26 @@ I am a Commander2 hybrid for the rename and deprecate message commands, which sh
 Class {
 	#name : 'SycChangeMessageMenuCmCommand',
 	#superclass : 'SycChangeMessageSignatureCommand',
-	#traits : 'TCommanderMigrationHybridCommand',
-	#classTraits : 'TCommanderMigrationHybridCommand classTrait',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
 
 { #category : 'execution' }
-SycChangeMessageMenuCmCommand >> executeComplexRefactoring [
+SycChangeMessageMenuCmCommand >> execute [
 
-	"Same preview as the v1 path: apply the picked changes on OK, nothing on cancel."
-	| submitDialog |
-	submitDialog := SycRefactoringPreviewPresenter for: self scopes: self context refactoringScopes.
-	submitDialog existChanges
-		ifTrue: [
-			submitDialog openDialog
-				okAction: [
-					submitDialog accept.
-					self applyCommandResult ];
-				cancelAction: [ :p | p beCancel ] ]
-		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
-	CmCommandAborted signal
-]
-
-{ #category : 'initialization' }
-SycChangeMessageMenuCmCommand >> initialize [
-
-	super initialize.
-	prepared := false
+	(prepared or: [ self context isNil ])
+		ifTrue: [ self executeRefactorings ]
+		ifFalse: [
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self isComplexRefactoring
+						ifTrue: [ self executeComplexRefactoring ]
+						ifFalse: [
+								self executeRefactoring.
+								self applyCommandResult ] ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
 ]
 
 { #category : 'preparation' }
