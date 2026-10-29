@@ -39,7 +39,7 @@ ClyMoveMethodGroupsToPackageCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupsToPackageCommand >> executeRefactorings [
+ClyMoveMethodGroupsToPackageCommand >> executeRefactoring [
 
 	| repackagingCommand |
 	methodGroups do: [ :group |

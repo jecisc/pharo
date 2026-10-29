@@ -22,7 +22,7 @@ SycMoveMethodsToTheDefiningClassCommand >> canBeExecuted [
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToTheDefiningClassCommand >> executeRefactorings [
+SycMoveMethodsToTheDefiningClassCommand >> executeRefactoring [
 
 	self methods
 		select: [ :method | method isExtension ]

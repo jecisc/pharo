@@ -25,10 +25,10 @@ SycMoveTempDefinitionCommand class >> canBeExecutedInContext: aSourceCodeContext
 ]
 
 { #category : 'execution' }
-SycMoveTempDefinitionCommand >> applyResultInContext: aSourceCodeContext [
+SycMoveTempDefinitionCommand >> applyCommandResult [
 
-	super applyResultInContext: aSourceCodeContext.
-	aSourceCodeContext showVariableNamed: newName
+	super applyCommandResult.
+	self context showVariableNamed: newName
 ]
 
 { #category : 'accessing' }
@@ -50,7 +50,7 @@ SycMoveTempDefinitionCommand >> description [
 ]
 
 { #category : 'execution' }
-SycMoveTempDefinitionCommand >> executeRefactorings [
+SycMoveTempDefinitionCommand >> executeRefactoring [
 
 	^ (ReMoveTemporaryDefinitionDriver new
 		   sourceNode: self sourceNode;

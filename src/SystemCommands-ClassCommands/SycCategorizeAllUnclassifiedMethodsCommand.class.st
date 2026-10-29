@@ -19,7 +19,7 @@ SycCategorizeAllUnclassifiedMethodsCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycCategorizeAllUnclassifiedMethodsCommand >> executeRefactorings [
+SycCategorizeAllUnclassifiedMethodsCommand >> executeRefactoring [
 	"MethodClassifier should not be hardcoded and should be based on Smalltalk tools"
 
 	classes do: [ :each | each uncategorizedSelectors do: [ :selector | MethodClassifier classify: each >> selector ] ]

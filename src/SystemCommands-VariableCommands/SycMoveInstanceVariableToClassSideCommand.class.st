@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'execution' }
-SycMoveInstanceVariableToClassSideCommand >> executeRefactorings [
+SycMoveInstanceVariableToClassSideCommand >> executeRefactoring [
 
 	^ ((ReMoveVariablesToClassSideDriver newApplication: self application) scopes: refactoringScopes variables: variables)
 		runRefactoring

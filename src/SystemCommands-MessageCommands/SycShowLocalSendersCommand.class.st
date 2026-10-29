@@ -33,7 +33,7 @@ SycShowLocalSendersCommand >> description [
 ]
 
 { #category : 'execution' }
-SycShowLocalSendersCommand >> executeRefactorings [
+SycShowLocalSendersCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browse: self searchInTheWholeHierarchy.
 ]

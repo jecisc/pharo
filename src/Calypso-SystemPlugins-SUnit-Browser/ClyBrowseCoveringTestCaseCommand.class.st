@@ -25,7 +25,7 @@ ClyBrowseCoveringTestCaseCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyBrowseCoveringTestCaseCommand >> executeRefactorings [
+ClyBrowseCoveringTestCaseCommand >> executeRefactoring [
 
 	| testCase |
 	testCase := (selectedClassItem getProperty: ClyTestedClassProperty) coveringTestCase.

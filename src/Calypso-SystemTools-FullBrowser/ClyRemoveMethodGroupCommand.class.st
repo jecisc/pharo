@@ -36,7 +36,7 @@ ClyRemoveMethodGroupCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRemoveMethodGroupCommand >> executeRefactorings [
+ClyRemoveMethodGroupCommand >> executeRefactoring [
 
 	methodGroups do: [ :group |
 			group

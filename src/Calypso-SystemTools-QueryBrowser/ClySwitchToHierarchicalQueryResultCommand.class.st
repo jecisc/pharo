@@ -17,7 +17,7 @@ ClySwitchToHierarchicalQueryResultCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchToHierarchicalQueryResultCommand >> executeRefactorings [
+ClySwitchToHierarchicalQueryResultCommand >> executeRefactoring [
 	self browser switchToHierarchicalResult
 ]
 

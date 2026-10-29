@@ -30,7 +30,7 @@ ClyShowTraitUsersCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowTraitUsersCommand >> executeRefactorings [
+ClyShowTraitUsersCommand >> executeRefactoring [
 
 	classes first isTrait ifTrue: [ (Smalltalk tools toolNamed: #messageList) browseUsersOfTrait: classes first ]
 ]

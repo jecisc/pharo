@@ -41,7 +41,7 @@ ClyMoveMethodGroupToClassCommand class >> fullBrowserDragAndDropActivation [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodGroupToClassCommand >> executeRefactorings [
+ClyMoveMethodGroupToClassCommand >> executeRefactoring [
 
 	| moveCommand |
 	methodGroups do: [ :group |

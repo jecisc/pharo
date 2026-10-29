@@ -15,6 +15,6 @@ ClySwitchFocusToNextBrowserPaneCommand class >> canBeExecutedInContext: aBrowser
 ]
 
 { #category : 'execution' }
-ClySwitchFocusToNextBrowserPaneCommand >> executeRefactorings [
+ClySwitchFocusToNextBrowserPaneCommand >> executeRefactoring [
 	self browser switchFocusToNextPane
 ]

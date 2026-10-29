@@ -15,7 +15,7 @@ ClySwitchToFlatClassesCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchToFlatClassesCommand >> executeRefactorings [
+ClySwitchToFlatClassesCommand >> executeRefactoring [
 
 	self browser switchToFlatClasses
 ]

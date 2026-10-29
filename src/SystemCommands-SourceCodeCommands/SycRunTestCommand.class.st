@@ -38,7 +38,7 @@ SycRunTestCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRunTestCommand >> executeRefactorings [
+SycRunTestCommand >> executeRefactoring [
 
 	| selector testClasses |
 	selector := self method selector.

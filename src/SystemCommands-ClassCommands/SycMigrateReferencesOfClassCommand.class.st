@@ -27,7 +27,7 @@ SycMigrateReferencesOfClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycMigrateReferencesOfClassCommand >> executeRefactorings [
+SycMigrateReferencesOfClassCommand >> executeRefactoring [
 
 	self asRefactorings do: [ :ref | ref execute ]
 ]

@@ -29,7 +29,7 @@ SycBrowseVariableCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycBrowseVariableCommand >> executeRefactorings [
+SycBrowseVariableCommand >> executeRefactoring [
 
 	variables last openBrowser
 ]

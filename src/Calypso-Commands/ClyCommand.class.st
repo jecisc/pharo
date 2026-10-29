@@ -59,12 +59,7 @@ ClyCommand >> application [
 
 { #category : 'execution' }
 ClyCommand >> applyCommandResult [
-
-	self applyResultInContext: self context
-]
-
-{ #category : 'execution' }
-ClyCommand >> applyResultInContext: aToolContext [
+	^ self
 ]
 
 { #category : 'testing' }
@@ -155,7 +150,7 @@ ClyCommand >> dropContext: aToolContext [
 ClyCommand >> execute [
 
 	(prepared or: [ self context isNil ])
-		ifTrue: [ self executeRefactorings ]
+		ifTrue: [ self executeRefactoring ]
 		ifFalse: [
 				[
 					prepared := true.
@@ -184,12 +179,6 @@ ClyCommand >> executeComplexRefactoring [
 				cancelAction: [ :p | p beCancel ] ]
 		ifFalse: [ submitDialog alert: 'There is no change produced by this refactoring' ].
 	CmCommandAborted signal
-]
-
-{ #category : 'execution' }
-ClyCommand >> executeRefactoring [
-
-	^ self executeRefactorings
 ]
 
 { #category : 'context menu' }

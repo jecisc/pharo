@@ -69,7 +69,7 @@ ClyDebugVariableCommand >> executeFor: aVariable [
 ]
 
 { #category : 'execution' }
-ClyDebugVariableCommand >> executeRefactorings [
+ClyDebugVariableCommand >> executeRefactoring [
 
 	variables do: [ :var | self executeFor: var ]
 ]

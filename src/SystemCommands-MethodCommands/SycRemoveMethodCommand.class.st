@@ -29,7 +29,7 @@ SycRemoveMethodCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRemoveMethodCommand >> executeRefactorings [
+SycRemoveMethodCommand >> executeRefactoring [
 
 	(ReRemoveMethodDriver new scopes: self context refactoringScopes methods: methods) runRefactoring
 ]

@@ -14,7 +14,7 @@ ClyOpenDependencyBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyOpenDependencyBrowserCommand >> executeRefactorings [
+ClyOpenDependencyBrowserCommand >> executeRefactoring [
 
 	(StPackageDependenciesPresenter onPackagesNamed: (packages collect: [ :package | package name ])) open
 ]

@@ -25,10 +25,10 @@ ClyConvertMethodGroupToProtocolCommand class >> canBeExecutedInContext: aToolCon
 ]
 
 { #category : 'execution' }
-ClyConvertMethodGroupToProtocolCommand >> applyResultInContext: aToolContext [
+ClyConvertMethodGroupToProtocolCommand >> applyCommandResult [
 
-	super applyResultInContext: aToolContext.
-	aToolContext showProtocol: protocol
+	super applyCommandResult.
+	self context showProtocol: protocol
 ]
 
 { #category : 'accessing' }
@@ -38,7 +38,7 @@ ClyConvertMethodGroupToProtocolCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyConvertMethodGroupToProtocolCommand >> executeRefactorings [
+ClyConvertMethodGroupToProtocolCommand >> executeRefactoring [
 
 	methodGroups do: [ :methodGroup | methodGroup categorizeMethodsIn: protocol ]
 ]

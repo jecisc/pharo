@@ -31,6 +31,6 @@ ClyCloseBrowserCommand class >> textToolShortcutActivation [
 ]
 
 { #category : 'execution' }
-ClyCloseBrowserCommand >> executeRefactorings [
+ClyCloseBrowserCommand >> executeRefactoring [
 	self browser close
 ]

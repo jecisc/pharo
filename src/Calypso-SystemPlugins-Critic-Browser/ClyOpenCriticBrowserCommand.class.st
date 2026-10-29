@@ -14,7 +14,7 @@ ClyOpenCriticBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyOpenCriticBrowserCommand >> executeRefactorings [
+ClyOpenCriticBrowserCommand >> executeRefactoring [
 
 	| env |
 	env := RBPackageEnvironment new packages: packages.

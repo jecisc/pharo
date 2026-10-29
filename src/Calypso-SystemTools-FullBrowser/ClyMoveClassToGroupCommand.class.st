@@ -81,7 +81,7 @@ ClyMoveClassToGroupCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveClassToGroupCommand >> executeRefactorings [
+ClyMoveClassToGroupCommand >> executeRefactoring [
 
 	classes do: [ :class | classGroup addClass: class ]
 ]

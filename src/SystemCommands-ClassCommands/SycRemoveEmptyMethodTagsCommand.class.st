@@ -19,7 +19,7 @@ SycRemoveEmptyMethodTagsCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRemoveEmptyMethodTagsCommand >> executeRefactorings [
+SycRemoveEmptyMethodTagsCommand >> executeRefactoring [
 
 	classes do: [ :class | class removeEmptyProtocols ]
 ]

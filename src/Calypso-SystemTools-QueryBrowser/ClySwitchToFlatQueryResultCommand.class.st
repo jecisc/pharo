@@ -17,7 +17,7 @@ ClySwitchToFlatQueryResultCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchToFlatQueryResultCommand >> executeRefactorings [
+ClySwitchToFlatQueryResultCommand >> executeRefactoring [
 	self browser switchToFlatResult
 ]
 

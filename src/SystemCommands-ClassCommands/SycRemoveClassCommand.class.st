@@ -19,7 +19,7 @@ SycRemoveClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRemoveClassCommand >> executeRefactorings [
+SycRemoveClassCommand >> executeRefactoring [
 
 	^ ((ReRemoveClassDriver newApplication: self application) scopes: self context refactoringScopes classes: classes) runRefactoring
 ]

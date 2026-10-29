@@ -39,18 +39,6 @@ SycMethodCmCommand >> application [
 	^ StPharoApplication current
 ]
 
-{ #category : 'execution' }
-SycMethodCmCommand >> applyCommandResult [
-
-	self applyResultInContext: self context
-]
-
-{ #category : 'execution' }
-SycMethodCmCommand >> applyResultInContext: aToolContext [
-
-	
-]
-
 { #category : 'testing' }
 SycMethodCmCommand >> canBeExecuted [
 	^ self methods isNotEmpty
@@ -66,7 +54,7 @@ SycMethodCmCommand >> confirm: aString [
 SycMethodCmCommand >> execute [
 
 	prepared
-		ifTrue: [ self executeRefactorings ]
+		ifTrue: [ self executeRefactoring ]
 		ifFalse: [
 				[
 					prepared := true.
@@ -79,12 +67,6 @@ SycMethodCmCommand >> execute [
 
 { #category : 'execution' }
 SycMethodCmCommand >> executeRefactoring [
-
-	^ self executeRefactorings
-]
-
-{ #category : 'execution' }
-SycMethodCmCommand >> executeRefactorings [
 
 	self asRefactorings do: [ :each | each execute ]
 ]

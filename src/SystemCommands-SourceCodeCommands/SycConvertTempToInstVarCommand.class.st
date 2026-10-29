@@ -14,7 +14,7 @@ SycConvertTempToInstVarCommand class >> canBeExecutedInContext: aSourceCodeConte
 ]
 
 { #category : 'execution' }
-SycConvertTempToInstVarCommand >> executeRefactorings [
+SycConvertTempToInstVarCommand >> executeRefactoring [
 
 	^ ((ReConvertTemporaryToInstanceVariableDriver newApplication: self application)
 		   scopes: refactoringScopes

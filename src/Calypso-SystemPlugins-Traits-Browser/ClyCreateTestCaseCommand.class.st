@@ -30,7 +30,7 @@ ClyCreateTestCaseCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyCreateTestCaseCommand >> executeRefactorings [
+ClyCreateTestCaseCommand >> executeRefactoring [
 
 	| classDefinition resultClass |
 	classDefinition := ClassDefinitionPrinter fluid testClassDefinitionTemplateInPackage: package name tag: packageTag.

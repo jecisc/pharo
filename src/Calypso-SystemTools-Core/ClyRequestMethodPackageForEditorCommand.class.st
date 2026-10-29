@@ -34,7 +34,7 @@ ClyRequestMethodPackageForEditorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRequestMethodPackageForEditorCommand >> executeRefactorings [
+ClyRequestMethodPackageForEditorCommand >> executeRefactoring [
 	| packageEditor |
 	packageEditor := methodEditor protocolAndPackageEditor.
 	packageEditor requestChangeBy: [ packageEditor requestPackage]

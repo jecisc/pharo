@@ -38,7 +38,7 @@ ClyShowVariableWriterCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowVariableWriterCommand >> executeRefactorings [
+ClyShowVariableWriterCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseWritersOfVariables: variables 
 ]

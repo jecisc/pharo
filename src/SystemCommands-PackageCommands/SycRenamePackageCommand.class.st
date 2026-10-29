@@ -35,7 +35,7 @@ SycRenamePackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenamePackageCommand >> executeRefactorings [
+SycRenamePackageCommand >> executeRefactoring [
 
 	^ ((ReRenamePackageDriver newApplication: self application) scopes: refactoringScopes packageName: package name) runRefactoring
 ]

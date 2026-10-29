@@ -41,7 +41,7 @@ ClyCommitPackageCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyCommitPackageCommand >> executeRefactorings [
+ClyCommitPackageCommand >> executeRefactoring [
 
 	| repos targetRepo |
 	packages ifEmpty: [ ^ IceTipRepositoriesBrowser ensureIsOpen ].

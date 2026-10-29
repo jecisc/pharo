@@ -39,7 +39,7 @@ ClyCreateTraitCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyCreateTraitCommand >> executeRefactorings [
+ClyCreateTraitCommand >> executeRefactoring [
 
 	| traitDefinition resultTrait |
 	traitDefinition := ClassDefinitionPrinter fluid traitDefinitionTemplateInPackage: package name tag: packageTag named: #TMyTrait.

@@ -23,7 +23,7 @@ SycRenameClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycRenameClassCommand >> executeRefactorings [
+SycRenameClassCommand >> executeRefactoring [
 
 	toolContext isFullBrowserClassContext
 		ifTrue: [

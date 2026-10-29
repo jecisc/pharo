@@ -38,7 +38,7 @@ ClyShowVariableRefCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowVariableRefCommand >> executeRefactorings [
+ClyShowVariableRefCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseReferencesToVariables: variables 
 ]

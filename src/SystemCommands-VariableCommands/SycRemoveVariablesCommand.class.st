@@ -33,7 +33,7 @@ SycRemoveVariablesCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRemoveVariablesCommand >> executeRefactorings [
+SycRemoveVariablesCommand >> executeRefactoring [
 	"Clearly from the UI we do not accept variables mixed from different classes and kinds"
 	
 	variables first isClassVariable

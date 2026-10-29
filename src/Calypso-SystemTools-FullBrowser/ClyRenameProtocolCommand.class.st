@@ -35,9 +35,9 @@ ClyRenameProtocolCommand class >> fullBrowserShortcutActivation [
 ]
 
 { #category : 'execution' }
-ClyRenameProtocolCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	aToolContext showProtocol: newName
+ClyRenameProtocolCommand >> applyCommandResult [
+	super applyCommandResult.
+	self context showProtocol: newName
 ]
 
 { #category : 'accessing' }
@@ -52,7 +52,7 @@ ClyRenameProtocolCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRenameProtocolCommand >> executeRefactorings [
+ClyRenameProtocolCommand >> executeRefactoring [
 
 	methodGroup isEmpty
 		ifTrue: [

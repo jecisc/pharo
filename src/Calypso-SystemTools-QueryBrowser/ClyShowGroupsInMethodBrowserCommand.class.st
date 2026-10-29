@@ -35,7 +35,7 @@ ClyShowGroupsInMethodBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowGroupsInMethodBrowserCommand >> executeRefactorings [
+ClyShowGroupsInMethodBrowserCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browse: methodGroups first methods
 ]

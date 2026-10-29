@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'execution' }
-SycProtectVariableCommand >> executeRefactorings [
+SycProtectVariableCommand >> executeRefactoring [
 
 	^ ((ReProtectInstanceVariableDriver newApplication: self application)
 		scopes: refactoringScopes

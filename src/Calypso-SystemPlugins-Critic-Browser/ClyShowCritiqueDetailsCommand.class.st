@@ -33,7 +33,7 @@ ClyShowCritiqueDetailsCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowCritiqueDetailsCommand >> executeRefactorings [
+ClyShowCritiqueDetailsCommand >> executeRefactoring [
 
 	self specUIManager
 		title: self critique title;

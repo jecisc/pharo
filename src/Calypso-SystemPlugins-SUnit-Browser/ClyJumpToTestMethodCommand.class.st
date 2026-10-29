@@ -61,7 +61,7 @@ ClyJumpToTestMethodCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyJumpToTestMethodCommand >> executeRefactorings [
+ClyJumpToTestMethodCommand >> executeRefactoring [
 
 	methods do: [ :method | self generateTestMethodFor: method ].
 

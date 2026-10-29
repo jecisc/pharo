@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'execution' }
-ClySwitchToMethodGroupsCommand >> executeRefactorings [
+ClySwitchToMethodGroupsCommand >> executeRefactoring [
 	self browser switchToMethodGroups
 ]
 

@@ -29,7 +29,7 @@ ClyResetProtocolForEditorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyResetProtocolForEditorCommand >> executeRefactorings [
+ClyResetProtocolForEditorCommand >> executeRefactoring [
 
 	methodEditor protocolAndPackageEditor resetProtocolAndPackage
 ]

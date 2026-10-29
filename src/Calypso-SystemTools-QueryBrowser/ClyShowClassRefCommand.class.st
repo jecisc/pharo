@@ -71,7 +71,7 @@ ClyShowClassRefCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowClassRefCommand >> executeRefactorings [
+ClyShowClassRefCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseReferencesToClass: classes first
 ]

@@ -59,7 +59,7 @@ ClyShowMessageImplementorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowMessageImplementorCommand >> executeRefactorings [
+ClyShowMessageImplementorCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseImplementorsOfAll: (messages collect: [ :message | message selector ])
 ]

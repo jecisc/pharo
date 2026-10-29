@@ -44,6 +44,6 @@ ClyBrowseCritiqueRuleCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyBrowseCritiqueRuleCommand >> executeRefactorings [
+ClyBrowseCritiqueRuleCommand >> executeRefactoring [
 	self critique rule class browse
 ]

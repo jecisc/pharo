@@ -14,7 +14,7 @@ SycFindAndReplaceMethodCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycFindAndReplaceMethodCommand >> applyResultInContext: aToolContext [
+SycFindAndReplaceMethodCommand >> applyCommandResult [
 ]
 
 { #category : 'execution' }

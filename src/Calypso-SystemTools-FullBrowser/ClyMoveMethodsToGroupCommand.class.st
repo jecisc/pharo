@@ -58,7 +58,7 @@ ClyMoveMethodsToGroupCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyMoveMethodsToGroupCommand >> executeRefactorings [
+ClyMoveMethodsToGroupCommand >> executeRefactoring [
 
 	| methodsOfAnotherClass |
 	methodsOfAnotherClass := methods reject: [ :method | method origin = targetClass ].

@@ -14,15 +14,15 @@ SycRemovePackageCommand class >> defaultMenuIconName [
 ]
 
 { #category : 'execution' }
-SycRemovePackageCommand >> applyResultInContext: aToolContext [
+SycRemovePackageCommand >> applyCommandResult [
 	"Update the browser's title and method editor  after removal of a package"
 
 	| browserTool |
 	
-	super applyResultInContext: aToolContext.
+	super applyCommandResult.
 
-	browserTool := aToolContext tool.
-	aToolContext tool navigationEnvironment: ClyNavigationEnvironment currentImage.
+	browserTool := self context tool.
+	self context tool navigationEnvironment: ClyNavigationEnvironment currentImage.
 	browserTool 
 		updateWindowTitle;
 		updateMethodEditorAfterPackageRemoval.
@@ -46,7 +46,7 @@ SycRemovePackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRemovePackageCommand >> executeRefactorings [
+SycRemovePackageCommand >> executeRefactoring [
 
 	self packages do: [ :each | each removeFromSystem ].
 	self packages: OrderedCollection new

@@ -33,9 +33,9 @@ SycAddNewPackageCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycAddNewPackageCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	aToolContext showPackage: resultPackage
+SycAddNewPackageCommand >> applyCommandResult [
+	super applyCommandResult.
+	self context showPackage: resultPackage
 ]
 
 { #category : 'accessing' }
@@ -55,7 +55,7 @@ SycAddNewPackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycAddNewPackageCommand >> executeRefactorings [
+SycAddNewPackageCommand >> executeRefactoring [
 
 	resultPackage := [ systemEnvironment createPackageNamed: packageName ]
 		                 on: PackageConflictError

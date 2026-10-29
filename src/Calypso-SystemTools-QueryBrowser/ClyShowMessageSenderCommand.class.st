@@ -77,7 +77,7 @@ ClyShowMessageSenderCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyShowMessageSenderCommand >> executeRefactorings [
+ClyShowMessageSenderCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseSendersOfAll: (messages collect: [ :message | message selector ])
 ]

@@ -27,7 +27,7 @@ SycInlineTempCommand >> asRefactorings [
 ]
 
 { #category : 'execution' }
-SycInlineTempCommand >> executeRefactorings [
+SycInlineTempCommand >> executeRefactoring [
 
 	| assignment |
 	assignment := self sourceNode methodNode assignmentNodes detect: [ :each | each variable = self sourceNode ].

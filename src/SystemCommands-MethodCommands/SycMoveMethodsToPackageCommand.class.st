@@ -25,7 +25,7 @@ SycMoveMethodsToPackageCommand class >> for: methods to: aPackage [
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToPackageCommand >> executeRefactorings [
+SycMoveMethodsToPackageCommand >> executeRefactoring [
 
 	self methods do: [ :method |
 			self moveMethod: method toPackage: package.

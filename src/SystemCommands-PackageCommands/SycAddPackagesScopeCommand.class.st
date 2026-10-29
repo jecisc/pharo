@@ -20,7 +20,7 @@ SycAddPackagesScopeCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddPackagesScopeCommand >> executeRefactorings [
+SycAddPackagesScopeCommand >> executeRefactoring [
 
 	| scope |
 	scope := ScopesManager newScopeFrom: self packages.

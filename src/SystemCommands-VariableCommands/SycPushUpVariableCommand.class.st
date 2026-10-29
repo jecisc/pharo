@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'accessing' }
-SycPushUpVariableCommand >> executeRefactorings [
+SycPushUpVariableCommand >> executeRefactoring [
 
 	^ ((RePushUpVariableDriver newApplication: self application)
 		   scopes: refactoringScopes

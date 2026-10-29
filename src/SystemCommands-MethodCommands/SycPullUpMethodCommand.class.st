@@ -20,7 +20,7 @@ SycPullUpMethodCommand >> description [
 ]
 
 { #category : 'execution' }
-SycPullUpMethodCommand >> executeRefactorings [
+SycPullUpMethodCommand >> executeRefactoring [
 
 	^ ((RePullUpMethodDriver newApplication: self application)
 		   model: model

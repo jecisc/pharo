@@ -25,10 +25,10 @@ SycRenameArgOrTempCommand2 class >> canBeExecutedInContext: aSourceCodeContext [
 ]
 
 { #category : 'execution' }
-SycRenameArgOrTempCommand2 >> applyResultInContext: aSourceCodeContext [
-	super applyResultInContext: aSourceCodeContext.
+SycRenameArgOrTempCommand2 >> applyCommandResult [
+	super applyCommandResult.
 
-	aSourceCodeContext showVariableNamed: newName
+	self context showVariableNamed: newName
 ]
 
 { #category : 'accessing' }
@@ -48,7 +48,7 @@ SycRenameArgOrTempCommand2 >> description [
 ]
 
 { #category : 'execution' }
-SycRenameArgOrTempCommand2 >> executeRefactorings [
+SycRenameArgOrTempCommand2 >> executeRefactoring [
 
 	^ (ReRenameArgumentOrTemporaryDriver2 new
 		   sourceNode: self sourceNode;

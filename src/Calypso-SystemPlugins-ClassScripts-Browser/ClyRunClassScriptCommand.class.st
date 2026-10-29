@@ -45,7 +45,7 @@ ClyRunClassScriptCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyRunClassScriptCommand >> executeRefactorings [
+ClyRunClassScriptCommand >> executeRefactoring [
 	self script executeOn: targetClass
 ]
 

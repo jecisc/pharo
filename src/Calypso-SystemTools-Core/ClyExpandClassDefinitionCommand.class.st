@@ -33,10 +33,10 @@ ClyExpandClassDefinitionCommand class >> sourceCodeShortcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyExpandClassDefinitionCommand >> applyResultInContext: aToolContext [
+ClyExpandClassDefinitionCommand >> applyCommandResult [
 
-	super applyResultInContext: aToolContext.
-	aToolContext tool pendingText: aToolContext tool editingClass expandedDefinitionString
+	super applyCommandResult.
+	self context tool pendingText: self context tool editingClass expandedDefinitionString
 ]
 
 { #category : 'accessing' }
@@ -57,7 +57,7 @@ ClyExpandClassDefinitionCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyExpandClassDefinitionCommand >> executeRefactorings [
+ClyExpandClassDefinitionCommand >> executeRefactoring [
 	"
 	empty on purpose logic is in applyResultInContext:
 	"

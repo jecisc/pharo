@@ -30,7 +30,7 @@ ClyCreateClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyCreateClassCommand >> executeRefactorings [
+ClyCreateClassCommand >> executeRefactoring [
 
 	| classDefinition resultTrait |
 	classDefinition := ClassDefinitionPrinter fluid classDefinitionTemplateInPackage: package name tag: packageTag named: #MyClass.

@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'execution' }
-SycPushDownVariableCommand >> executeRefactorings [
+SycPushDownVariableCommand >> executeRefactoring [
 
 	^ ((RePushDownInstanceVariableDriver newApplication: self application)
 		scopes: refactoringScopes;

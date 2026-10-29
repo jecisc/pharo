@@ -15,7 +15,7 @@ ClySwitchToScopedModeCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchToScopedModeCommand >> executeRefactorings [
+ClySwitchToScopedModeCommand >> executeRefactoring [
 
 	self browser switchToPackageScopeOf: packages
 ]

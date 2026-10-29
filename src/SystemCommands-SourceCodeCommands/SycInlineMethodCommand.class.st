@@ -26,7 +26,7 @@ SycInlineMethodCommand >> asRefactorings [
 ]
 
 { #category : 'execution' }
-SycInlineMethodCommand >> executeRefactorings [
+SycInlineMethodCommand >> executeRefactoring [
 
 	^ ((ReInlineMethodDriver newApplication: self application)
 		   scopes: refactoringScopes

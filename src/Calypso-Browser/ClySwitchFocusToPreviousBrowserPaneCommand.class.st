@@ -15,6 +15,6 @@ ClySwitchFocusToPreviousBrowserPaneCommand class >> canBeExecutedInContext: aBro
 ]
 
 { #category : 'execution' }
-ClySwitchFocusToPreviousBrowserPaneCommand >> executeRefactorings [
+ClySwitchFocusToPreviousBrowserPaneCommand >> executeRefactoring [
 	self browser switchFocusToPreviousPane
 ]

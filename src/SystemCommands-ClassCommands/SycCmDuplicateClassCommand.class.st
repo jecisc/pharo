@@ -22,7 +22,7 @@ SycCmDuplicateClassCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycCmDuplicateClassCommand >> applyResultInContext: aClyFullBrowserClassContext [ 
+SycCmDuplicateClassCommand >> applyCommandResult [
 	
 	"Nothing"
 ]

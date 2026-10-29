@@ -30,7 +30,7 @@ SycAbstractVariableCommand >> description [
 ]
 
 { #category : 'execution' }
-SycAbstractVariableCommand >> executeRefactorings [
+SycAbstractVariableCommand >> executeRefactoring [
 
 	^ ((ReAbstractInstanceVariableDriver newApplication: self application) scopes: refactoringScopes name: variables first name class: selectedClass name) runRefactoring
 ]

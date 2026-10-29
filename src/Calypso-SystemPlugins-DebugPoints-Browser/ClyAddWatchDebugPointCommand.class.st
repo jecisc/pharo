@@ -25,7 +25,7 @@ ClyAddWatchDebugPointCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyAddWatchDebugPointCommand >> executeRefactorings [
+ClyAddWatchDebugPointCommand >> executeRefactoring [
 
 	| dp | 
 	dp := DebugPointManager installNew: WatchDebugPoint on: self sourceNode.

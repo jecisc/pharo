@@ -19,9 +19,9 @@ Class {
 }
 
 { #category : 'execution' }
-SycAddNewProtocolCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	aToolContext showProtocol: protocol
+SycAddNewProtocolCommand >> applyCommandResult [
+	super applyCommandResult.
+	self context showProtocol: protocol
 ]
 
 { #category : 'accessing' }
@@ -37,7 +37,7 @@ SycAddNewProtocolCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycAddNewProtocolCommand >> executeRefactorings [
+SycAddNewProtocolCommand >> executeRefactoring [
 
 	targetClass addProtocol: protocol
 ]

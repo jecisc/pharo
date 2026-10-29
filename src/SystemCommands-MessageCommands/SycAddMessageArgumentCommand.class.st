@@ -29,7 +29,7 @@ SycAddMessageArgumentCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycAddMessageArgumentCommand >> applyResultInContext: aToolContext [
+SycAddMessageArgumentCommand >> applyCommandResult [
 	"The refactoring was applied by the driver while executing the command."
 
 	
@@ -52,7 +52,7 @@ SycAddMessageArgumentCommand >> createRefactoring [
 ]
 
 { #category : 'execution' }
-SycAddMessageArgumentCommand >> executeRefactorings [
+SycAddMessageArgumentCommand >> executeRefactoring [
 
 	ReAddParameterDriver new
 		scopes: refactoringScopes

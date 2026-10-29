@@ -20,7 +20,7 @@ SycExtractTempCommand class >> canBeExecutedInContext: aSourceCodeContext [
 ]
 
 { #category : 'execution' }
-SycExtractTempCommand >> executeRefactorings [ 
+SycExtractTempCommand >> executeRefactoring [ 
 
 	(ReExtractTempDriver new
 		  extract: self sourceNode sourceInterval

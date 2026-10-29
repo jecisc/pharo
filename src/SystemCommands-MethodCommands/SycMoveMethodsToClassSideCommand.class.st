@@ -27,7 +27,7 @@ SycMoveMethodsToClassSideCommand >> description [
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToClassSideCommand >> executeRefactorings [
+SycMoveMethodsToClassSideCommand >> executeRefactoring [
 
 	(ReMoveMethodsToClassSideDriver scopes: self refactoringScopes methods: self methods) runRefactoring
 ]

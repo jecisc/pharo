@@ -30,7 +30,7 @@ SycMoveMethodsToClassCommand class >> methods: methods class: targetClass refact
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToClassCommand >> executeRefactorings [
+SycMoveMethodsToClassCommand >> executeRefactoring [
 
 	self methods
 		collect: [ :method | (ReMoveMethodToClassDriver newApplication: self application) scopes: self refactoringScopes method: method class: targetClass ]

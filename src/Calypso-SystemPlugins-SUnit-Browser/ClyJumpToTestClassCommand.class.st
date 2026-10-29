@@ -44,7 +44,7 @@ ClyJumpToTestClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyJumpToTestClassCommand >> executeRefactorings [
+ClyJumpToTestClassCommand >> executeRefactoring [
 
 	self systemEnvironment classNamed: (self testClassNameFor: targetClass) ifAbsent: [ (self confirm: 'Do you want to create a test class for: ' , targetClass asString) ifFalse: [ ^ self ] ].
 

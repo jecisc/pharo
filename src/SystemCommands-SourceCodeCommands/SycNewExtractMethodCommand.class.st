@@ -43,7 +43,7 @@ SycNewExtractMethodCommand >> description [
 ]
 
 { #category : 'execution' }
-SycNewExtractMethodCommand >> executeRefactorings [
+SycNewExtractMethodCommand >> executeRefactoring [
 
 	| selectedInterval driver |
 	selectedInterval := self selectedTextInterval ifEmpty: [

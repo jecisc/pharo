@@ -62,10 +62,6 @@ SycCmCommand class >> defaultDescription [
 	^ self comment
 ]
 
-{ #category : 'execution' }
-SycCmCommand >> applyCommandResult [
-]
-
 { #category : 'testing' }
 SycCmCommand >> canBeExecuted [
 

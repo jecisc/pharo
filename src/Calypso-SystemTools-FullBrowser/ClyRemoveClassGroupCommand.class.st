@@ -56,7 +56,7 @@ ClyRemoveClassGroupCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRemoveClassGroupCommand >> executeRefactorings [
+ClyRemoveClassGroupCommand >> executeRefactoring [
 
 	classGroup removeWithClasses
 ]

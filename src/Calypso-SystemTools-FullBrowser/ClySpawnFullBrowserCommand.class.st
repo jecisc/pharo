@@ -54,7 +54,7 @@ ClySpawnFullBrowserCommand >> description [
 ]
 
 { #category : 'execution' }
-ClySpawnFullBrowserCommand >> executeRefactorings [
+ClySpawnFullBrowserCommand >> executeRefactoring [
 
 	self browser spawnFullBrowser
 ]

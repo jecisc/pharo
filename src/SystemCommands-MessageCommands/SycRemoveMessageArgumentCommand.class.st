@@ -29,7 +29,7 @@ SycRemoveMessageArgumentCommand >> abort [
 ]
 
 { #category : 'execution' }
-SycRemoveMessageArgumentCommand >> applyResultInContext: aToolContext [
+SycRemoveMessageArgumentCommand >> applyCommandResult [
 	"The refactoring was applied by the driver while executing the command."
 
 	
@@ -58,7 +58,7 @@ SycRemoveMessageArgumentCommand >> createRefactoring [
 ]
 
 { #category : 'execution' }
-SycRemoveMessageArgumentCommand >> executeRefactorings [
+SycRemoveMessageArgumentCommand >> executeRefactoring [
 
 	ReRemoveParameterDriver new
 		scopes: refactoringScopes

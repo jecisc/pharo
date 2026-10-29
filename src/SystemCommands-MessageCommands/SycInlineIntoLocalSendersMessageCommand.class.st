@@ -14,7 +14,7 @@ SycInlineIntoLocalSendersMessageCommand class >> canBeExecutedInContext: aToolCo
 ]
 
 { #category : 'execution' }
-SycInlineIntoLocalSendersMessageCommand >> executeRefactorings [
+SycInlineIntoLocalSendersMessageCommand >> executeRefactoring [
 
 	| methodOrigin |
 	methodOrigin := originalMessage contextUser compiledMethod origin.

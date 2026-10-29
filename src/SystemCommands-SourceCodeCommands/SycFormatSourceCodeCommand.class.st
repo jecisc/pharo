@@ -20,7 +20,7 @@ SycFormatSourceCodeCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycFormatSourceCodeCommand >> applyResultInContext: aToolContext [
+SycFormatSourceCodeCommand >> applyCommandResult [
 
 	"Nothing"
 ]

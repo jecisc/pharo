@@ -45,7 +45,7 @@ ClyIcebergShowMethodVersionCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyIcebergShowMethodVersionCommand >> executeRefactorings [
+ClyIcebergShowMethodVersionCommand >> executeRefactoring [
 
 	| browserClass packageName repositoriesWithPackage repository |
 	packageName := method package name.

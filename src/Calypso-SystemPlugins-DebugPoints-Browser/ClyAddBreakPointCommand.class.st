@@ -32,7 +32,7 @@ ClyAddBreakPointCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyAddBreakPointCommand >> executeRefactorings [
+ClyAddBreakPointCommand >> executeRefactoring [
 
 	| dp |
 	dp := DebugPointManager installNew: BreakDebugPoint on: self sourceNode.

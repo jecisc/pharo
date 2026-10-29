@@ -24,7 +24,7 @@ SycDeprecateMessageCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'execution' }
-SycDeprecateMessageCommand >> applyResultInContext: aContext [
+SycDeprecateMessageCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
@@ -36,7 +36,7 @@ SycDeprecateMessageCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycDeprecateMessageCommand >> executeRefactorings [
+SycDeprecateMessageCommand >> executeRefactoring [
 
 	(RBDeprecateMethodDriver
 		 deprecateMethod: originalMessage selector

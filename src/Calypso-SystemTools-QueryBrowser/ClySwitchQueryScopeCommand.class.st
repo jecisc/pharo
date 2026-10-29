@@ -63,7 +63,7 @@ ClySwitchQueryScopeCommand >> defaultToolbarItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchQueryScopeCommand >> executeRefactorings [
+ClySwitchQueryScopeCommand >> executeRefactoring [
 	self browser switchScopeTo: queryScope
 ]
 

@@ -34,7 +34,7 @@ SycInspectVariableValueCommand >> description [
 ]
 
 { #category : 'execution' }
-SycInspectVariableValueCommand >> executeRefactorings [
+SycInspectVariableValueCommand >> executeRefactoring [
 
 	variables last openValueInspector
 ]

@@ -47,7 +47,7 @@ ClySwitchClassMetaLevelCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClySwitchClassMetaLevelCommand >> executeRefactorings [
+ClySwitchClassMetaLevelCommand >> executeRefactoring [
 	self browser switchToMetaLevelScope: self metaLevelScope
 ]
 

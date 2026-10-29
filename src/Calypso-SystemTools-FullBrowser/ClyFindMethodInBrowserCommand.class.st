@@ -34,7 +34,7 @@ ClyFindMethodInBrowserCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyFindMethodInBrowserCommand >> executeRefactorings [
+ClyFindMethodInBrowserCommand >> executeRefactoring [
 
 	self browser selectMethod: method
 ]

@@ -27,7 +27,7 @@ SycProfileTestMethodCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycProfileTestMethodCommand >> executeRefactorings [
+SycProfileTestMethodCommand >> executeRefactoring [
 
 	methods
 		select: [ :cm | cm isTestMethod ]

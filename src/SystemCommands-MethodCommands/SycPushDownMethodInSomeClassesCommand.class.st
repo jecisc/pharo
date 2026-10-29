@@ -17,7 +17,7 @@ SycPushDownMethodInSomeClassesCommand >> asRefactorings [
 ]
 
 { #category : 'execution' }
-SycPushDownMethodInSomeClassesCommand >> executeRefactorings [
+SycPushDownMethodInSomeClassesCommand >> executeRefactoring [
 
 	(RePushDownMethodInSomeClassesDriver model: model scopes: self refactoringScopes pushDownMethods: self methods) runRefactoring
 ]

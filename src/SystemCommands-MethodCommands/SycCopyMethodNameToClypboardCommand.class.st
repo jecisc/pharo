@@ -24,7 +24,7 @@ SycCopyMethodNameToClypboardCommand >> description [
 ]
 
 { #category : 'execution' }
-SycCopyMethodNameToClypboardCommand >> executeRefactorings [
+SycCopyMethodNameToClypboardCommand >> executeRefactoring [
 	| text |
 	text := (methods collect: [ :each | each displayString ]) joinUsing: String cr.
 	Clipboard clipboardText: text.

@@ -33,7 +33,7 @@ ClyRequestProtocolForEditorCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRequestProtocolForEditorCommand >> executeRefactorings [
+ClyRequestProtocolForEditorCommand >> executeRefactoring [
 	| protocolEditor |
 	protocolEditor := methodEditor protocolAndPackageEditor.
 	protocolEditor requestChangeBy: [ protocolEditor requestProtocol]

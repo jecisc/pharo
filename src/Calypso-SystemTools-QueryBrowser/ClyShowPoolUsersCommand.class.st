@@ -31,7 +31,7 @@ ClyShowPoolUsersCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyShowPoolUsersCommand >> executeRefactorings [
+ClyShowPoolUsersCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #messageList) browseUsersOfSharedPool: classes first
 ]

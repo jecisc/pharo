@@ -33,6 +33,6 @@ ClyNavigateBrowserForwardCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyNavigateBrowserForwardCommand >> executeRefactorings [
+ClyNavigateBrowserForwardCommand >> executeRefactoring [
 	self browser navigateForward
 ]

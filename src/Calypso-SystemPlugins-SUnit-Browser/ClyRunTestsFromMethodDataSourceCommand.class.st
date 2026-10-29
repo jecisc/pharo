@@ -51,7 +51,7 @@ ClyRunTestsFromMethodDataSourceCommand >> buildTestSuite [
 ]
 
 { #category : 'execution' }
-ClyRunTestsFromMethodDataSourceCommand >> executeRefactorings [
+ClyRunTestsFromMethodDataSourceCommand >> executeRefactoring [
 	| testSuite result |
 	testSuite := self buildTestSuite.
 

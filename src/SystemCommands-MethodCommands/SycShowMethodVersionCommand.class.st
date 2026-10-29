@@ -40,7 +40,7 @@ SycShowMethodVersionCommand >> description [
 ]
 
 { #category : 'execution' }
-SycShowMethodVersionCommand >> executeRefactorings [
+SycShowMethodVersionCommand >> executeRefactoring [
 
 	(Smalltalk tools toolNamed: #versionBrowser) browseVersionsForMethod: method
 ]

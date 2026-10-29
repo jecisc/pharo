@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'execution' }
-ClySwitchToVariablesCommand >> executeRefactorings [
+ClySwitchToVariablesCommand >> executeRefactoring [
 	self browser switchToVariables
 ]
 

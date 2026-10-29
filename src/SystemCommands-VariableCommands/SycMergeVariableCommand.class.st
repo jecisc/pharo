@@ -35,9 +35,9 @@ SycMergeVariableCommand class >> sourceCodeShortcutActivation [
 ]
 
 { #category : 'execution' }
-SycMergeVariableCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	aToolContext showVariableNamed: newName
+SycMergeVariableCommand >> applyCommandResult [
+	super applyCommandResult.
+	self context showVariableNamed: newName
 ]
 
 { #category : 'execution' }
@@ -51,7 +51,7 @@ SycMergeVariableCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycMergeVariableCommand >> executeRefactorings [
+SycMergeVariableCommand >> executeRefactoring [
 
 	| refactoring |
 	refactoring := variable createVariableRefactoring: self classRefactoring.

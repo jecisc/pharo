@@ -15,18 +15,18 @@ SycSourceCodeRefactoringCommand >> asRefactorings [
 	self subclassResponsibility
 ]
 
+{ #category : 'execution' }
+SycSourceCodeRefactoringCommand >> executeRefactoring [
+
+	^ self executeRefactoring: self asRefactorings
+]
+
 { #category : 'private' }
 SycSourceCodeRefactoringCommand >> executeRefactoring: refactoring [
 
 	[ refactoring first execute ]
 		on: RBRefactoringError
 		do: [ :e | self morphicUIManager alert: e messageText ]
-]
-
-{ #category : 'execution' }
-SycSourceCodeRefactoringCommand >> executeRefactorings [
-
-	^ self executeRefactoring: self asRefactorings
 ]
 
 { #category : 'accessing' }

@@ -49,7 +49,7 @@ ClyShowLocalImplementorsCommand >> createQueryScope [
 ]
 
 { #category : 'execution' }
-ClyShowLocalImplementorsCommand >> executeRefactorings [
+ClyShowLocalImplementorsCommand >> executeRefactoring [
 
 	| query scopedMethods |
 	query := ClyMessageImplementorsQuery ofAny: (methods collect: [ :method | method selector ]) from: self createQueryScope.

@@ -31,7 +31,7 @@ SycRenameVariableCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenameVariableCommand >> executeRefactorings [
+SycRenameVariableCommand >> executeRefactoring [
 
 	| variable driver |
 	variable := toolContext lastSelectedVariable.

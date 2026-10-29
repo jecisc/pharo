@@ -19,7 +19,7 @@ SycBrowseClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycBrowseClassCommand >> executeRefactorings [
+SycBrowseClassCommand >> executeRefactoring [
 	targetClass browse
 ]
 

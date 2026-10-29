@@ -25,7 +25,7 @@ ClyFindClassCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-ClyFindClassCommand >> executeRefactorings [
+ClyFindClassCommand >> executeRefactoring [
 
 	self browser selectClass: class
 ]

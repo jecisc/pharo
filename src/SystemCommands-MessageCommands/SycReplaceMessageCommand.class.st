@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'execution' }
-SycReplaceMessageCommand >> executeRefactorings [
+SycReplaceMessageCommand >> executeRefactoring [
 
 	^ ((ReReplaceMessageSendDriver newApplication: self application)
 		scopes: refactoringScopes

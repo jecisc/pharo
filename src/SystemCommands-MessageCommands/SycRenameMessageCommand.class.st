@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'execution' }
-SycRenameMessageCommand >> applyResultInContext: aToolContext [
+SycRenameMessageCommand >> applyCommandResult [
 	"I have problem to understand how to plug the call to the driver in the cmd architecture
 	in a way that I can come back here only once the refactoring is applied."
 
@@ -58,7 +58,7 @@ SycRenameMessageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycRenameMessageCommand >> executeRefactorings [
+SycRenameMessageCommand >> executeRefactoring [
 
 	driver := ReRenameMethodDriver new
 		          scopes: refactoringScopes

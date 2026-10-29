@@ -27,7 +27,7 @@ SycMoveMethodsToInstanceSideCommand >> description [
 ]
 
 { #category : 'execution' }
-SycMoveMethodsToInstanceSideCommand >> executeRefactorings [
+SycMoveMethodsToInstanceSideCommand >> executeRefactoring [
 
 	self methods
 		collect: [ :each | (ReMoveMethodToClassDriver newApplication: self application) scopes: self refactoringScopes method: each class: each origin instanceSide ]

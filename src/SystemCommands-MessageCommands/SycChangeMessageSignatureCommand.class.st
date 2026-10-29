@@ -38,10 +38,10 @@ SycChangeMessageSignatureCommand class >> isAbstract [
 ]
 
 { #category : 'execution' }
-SycChangeMessageSignatureCommand >> applyResultInContext: aToolContext [
+SycChangeMessageSignatureCommand >> applyCommandResult [
 
-	super applyResultInContext: aToolContext.
-	aToolContext
+	super applyCommandResult.
+	self context
 		showMessage: originalMessage
 		renamedTo: self resultMessageSelector asSymbol
 ]

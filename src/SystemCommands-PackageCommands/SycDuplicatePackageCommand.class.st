@@ -32,7 +32,7 @@ SycDuplicatePackageCommand >> description [
 ]
 
 { #category : 'execution' }
-SycDuplicatePackageCommand >> executeRefactorings [
+SycDuplicatePackageCommand >> executeRefactoring [
 	"The copy is made by the dialog in #prepareFullExecution."
 
 	

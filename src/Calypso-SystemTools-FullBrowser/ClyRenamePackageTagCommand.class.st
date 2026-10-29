@@ -35,9 +35,9 @@ ClyRenamePackageTagCommand class >> fullBrowserShortcutActivation [
 ]
 
 { #category : 'execution' }
-ClyRenamePackageTagCommand >> applyResultInContext: aToolContext [
-	super applyResultInContext: aToolContext.
-	aToolContext showPackage: package tag: newName
+ClyRenamePackageTagCommand >> applyCommandResult [
+	super applyCommandResult.
+	self context showPackage: package tag: newName
 ]
 
 { #category : 'accessing' }
@@ -52,7 +52,7 @@ ClyRenamePackageTagCommand >> description [
 ]
 
 { #category : 'execution' }
-ClyRenamePackageTagCommand >> executeRefactorings [
+ClyRenamePackageTagCommand >> executeRefactoring [
 
 	packageTag renameTagTo: newName
 ]

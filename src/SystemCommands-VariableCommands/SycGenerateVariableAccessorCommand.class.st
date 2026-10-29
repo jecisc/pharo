@@ -21,7 +21,7 @@ SycGenerateVariableAccessorCommand >> defaultMenuItemName [
 ]
 
 { #category : 'execution' }
-SycGenerateVariableAccessorCommand >> executeRefactorings [
+SycGenerateVariableAccessorCommand >> executeRefactoring [
 
 	(ReGenerateAccessorsDriver new
 		 targetClass: variables first definingClass;
