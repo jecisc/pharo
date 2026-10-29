@@ -12,7 +12,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClySpawnFullBrowserCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#category : 'Calypso-SystemTools-FullBrowser-Commands-Queries',
 	#package : 'Calypso-SystemTools-FullBrowser',
 	#tag : 'Commands-Queries'

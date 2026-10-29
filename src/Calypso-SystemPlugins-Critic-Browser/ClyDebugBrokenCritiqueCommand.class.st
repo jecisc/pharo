@@ -4,7 +4,7 @@ I expect that my critique is ReExceptionProperty instance representign the failu
 "
 Class {
 	#name : 'ClyDebugBrokenCritiqueCommand',
-	#superclass : 'ClyCritiqueCmCommand',
+	#superclass : 'ClyCritiqueCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }

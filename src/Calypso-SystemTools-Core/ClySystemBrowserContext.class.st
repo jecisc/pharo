@@ -68,7 +68,7 @@ ClySystemBrowserContext class >> rememberedPackage: aPackage [
 { #category : 'accessing' }
 ClySystemBrowserContext >> commanderCommandClasses [
 
-	^ super commanderCommandClasses , { ClyBrowserMenuCmCommand }
+	^ super commanderCommandClasses , { ClyBrowserCommand }
 ]
 
 { #category : 'user requests' }

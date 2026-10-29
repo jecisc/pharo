@@ -9,7 +9,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyConvertMethodGroupToProtocolCommand',
-	#superclass : 'ClyMethodGroupMenuCmCommand',
+	#superclass : 'ClyMethodGroupCommand',
 	#instVars : [
 		'protocol'
 	],

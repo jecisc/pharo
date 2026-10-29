@@ -1,6 +1,6 @@
 Class {
 	#name : 'SycRemoveMethodCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }

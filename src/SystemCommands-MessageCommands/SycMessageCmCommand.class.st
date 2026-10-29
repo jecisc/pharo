@@ -15,12 +15,3 @@ SycMessageCmCommand >> orderInContext: aToolContext [
 		ifTrue: [ 1.3 ]
 		ifFalse: [ self order ]
 ]
-
-{ #category : 'preparation' }
-SycMessageCmCommand >> prepareFullExecution [
-
-	self setUpModelFromContext: self context.
-	refactoredClass := self context lastSelectedMessage methodClass.
-	refactoringScopes := self context refactoringScopes.
-	originalMessage := self context lastSelectedMessage
-]

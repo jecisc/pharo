@@ -3,7 +3,7 @@ I am a command to move given instance variable to its class side
 "
 Class {
 	#name : 'SycMoveInstanceVariableToClassSideCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }

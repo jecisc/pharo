@@ -3,7 +3,7 @@ I am a command to request a protocol from the user which should be used to recla
 "
 Class {
 	#name : 'ClyRequestProtocolForEditorCommand',
-	#superclass : 'ClyMethodEditorCmCommand',
+	#superclass : 'ClyMethodEditorCommand',
 	#instVars : [
 		'menuItemName'
 	],

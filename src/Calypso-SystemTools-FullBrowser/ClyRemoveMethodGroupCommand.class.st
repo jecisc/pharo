@@ -3,7 +3,7 @@ I am a command to remove method group with containing methods
 "
 Class {
 	#name : 'ClyRemoveMethodGroupCommand',
-	#superclass : 'ClyMethodGroupMenuCmCommand',
+	#superclass : 'ClyMethodGroupCommand',
 	#instVars : [
 		'selectedClasses'
 	],

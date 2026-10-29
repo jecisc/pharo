@@ -3,7 +3,7 @@ I am a command to generate accessors for all inst vars of given classes
 "
 Class {
 	#name : 'SycGenerateAllInstVarAccessorsCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

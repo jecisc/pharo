@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycShowMethodVersionCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#instVars : [
 		'method'
 	],

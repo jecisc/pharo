@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowGroupsInMethodBrowserCommand',
-	#superclass : 'ClyMethodGroupMenuCmCommand',
+	#superclass : 'ClyMethodGroupCommand',
 	#category : 'Calypso-SystemTools-QueryBrowser-Commands-Queries',
 	#package : 'Calypso-SystemTools-QueryBrowser',
 	#tag : 'Commands-Queries'

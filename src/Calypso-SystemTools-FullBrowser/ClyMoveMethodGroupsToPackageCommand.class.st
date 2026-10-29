@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveMethodGroupsToPackageCommand',
-	#superclass : 'ClyMethodGroupMenuCmCommand',
+	#superclass : 'ClyMethodGroupCommand',
 	#instVars : [
 		'package'
 	],

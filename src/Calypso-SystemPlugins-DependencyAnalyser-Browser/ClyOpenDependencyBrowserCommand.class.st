@@ -3,7 +3,7 @@ I am a command to open dependency browser on set of packages
 "
 Class {
 	#name : 'ClyOpenDependencyBrowserCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#category : 'Calypso-SystemPlugins-DependencyAnalyser-Browser',
 	#package : 'Calypso-SystemPlugins-DependencyAnalyser-Browser'
 }

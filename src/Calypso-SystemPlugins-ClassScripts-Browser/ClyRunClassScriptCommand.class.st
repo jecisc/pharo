@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRunClassScriptCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#instVars : [
 		'targetClass',
 		'script'

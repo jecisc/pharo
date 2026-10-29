@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycAddNewClassTagCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#instVars : [
 		'package',
 		'tagName'

@@ -28,7 +28,7 @@ ClyFullBrowserVariableContext class >> selectionStrategy2 [
 ClyFullBrowserVariableContext >> commanderCommandClasses [
 
 	^ {
-		  SycVariableCmCommand.
+		  SycRefactorVariableCommand.
 		  SycVariableNavigationCmCommand }
 ]
 

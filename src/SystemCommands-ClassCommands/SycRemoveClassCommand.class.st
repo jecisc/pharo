@@ -3,7 +3,7 @@ Remove Class Refactoring: Safely delete a selected class, ensuring no references
 "
 Class {
 	#name : 'SycRemoveClassCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

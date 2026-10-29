@@ -3,7 +3,7 @@ Retrieves the selected class pool users.
 "
 Class {
 	#name : 'ClyShowPoolUsersCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#instVars : [
 		'browser'
 	],

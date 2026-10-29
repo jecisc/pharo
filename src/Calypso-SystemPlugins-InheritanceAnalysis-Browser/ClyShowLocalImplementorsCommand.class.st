@@ -18,7 +18,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyShowLocalImplementorsCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#instVars : [
 		'browser'
 	],

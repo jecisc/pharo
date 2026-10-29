@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRunTestsFromMethodDataSourceCommand',
-	#superclass : 'ClyTestCmCommand',
+	#superclass : 'ClyTestCommand',
 	#instVars : [
 		'methodDataSource'
 	],

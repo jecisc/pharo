@@ -19,7 +19,7 @@ ClyQueryBrowserContext class >> selectionStrategy [
 { #category : 'accessing' }
 ClyQueryBrowserContext >> commanderCommandClasses [
 
-	^ super commanderCommandClasses , { SycClassMenuCmCommand }
+	^ super commanderCommandClasses , { SycClassCommand }
 ]
 
 { #category : 'selection-classes' }

@@ -3,7 +3,7 @@ I am a command that opens a new browser on the test class corresponding to the s
 "
 Class {
 	#name : 'ClyBrowseCoveringTestCaseCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'selectedClassItem'
 	],

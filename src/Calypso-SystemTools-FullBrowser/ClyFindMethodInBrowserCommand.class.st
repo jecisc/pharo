@@ -7,7 +7,7 @@ By default I am activated by cmd+f.
 "
 Class {
 	#name : 'ClyFindMethodInBrowserCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'method'
 	],

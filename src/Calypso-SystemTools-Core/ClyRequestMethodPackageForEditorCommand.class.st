@@ -3,7 +3,7 @@ I am a command to request package from the user which should be used as editing 
 "
 Class {
 	#name : 'ClyRequestMethodPackageForEditorCommand',
-	#superclass : 'ClyMethodEditorCmCommand',
+	#superclass : 'ClyMethodEditorCommand',
 	#category : 'Calypso-SystemTools-Core-Editors-Methods',
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Editors-Methods'

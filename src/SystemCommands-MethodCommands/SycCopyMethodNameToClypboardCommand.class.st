@@ -3,7 +3,7 @@ Copy selected methods selector into Clipboard as testOriginalSelector
 "
 Class {
 	#name : 'SycCopyMethodNameToClypboardCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }

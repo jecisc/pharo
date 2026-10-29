@@ -29,11 +29,6 @@ SycClassCommand class >> for: classes [
 		classes: classes
 ]
 
-{ #category : 'testing' }
-SycClassCommand class >> isAbstract [
-	^self = SycClassCommand
-]
-
 { #category : 'accessing' }
 SycClassCommand >> classes [
 	^ classes
@@ -49,4 +44,18 @@ SycClassCommand >> description [
 	"Answer a <String> describing the receiver, useful for instance in menu items pop-ups"
 
 	^ self class comment.
+]
+
+{ #category : 'accessing' }
+SycClassCommand >> orderInContext: aToolContext [
+
+	^ aToolContext isFullBrowserClassContext
+		ifTrue: [ self fullBrowserOrder ]
+		ifFalse: [ self order ]
+]
+
+{ #category : 'preparation' }
+SycClassCommand >> prepareFullExecution [
+
+	classes := self context selectedClasses
 ]

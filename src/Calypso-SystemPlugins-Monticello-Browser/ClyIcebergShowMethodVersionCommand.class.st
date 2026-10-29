@@ -10,7 +10,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyIcebergShowMethodVersionCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#instVars : [
 		'method'
 	],

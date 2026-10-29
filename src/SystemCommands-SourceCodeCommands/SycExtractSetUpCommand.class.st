@@ -3,7 +3,7 @@ I am a command to extract setUp method and then replaces its occurrences
 "
 Class {
 	#name : 'SycExtractSetUpCommand',
-	#superclass : 'SycSourceCodeRefactoringCmCommand',
+	#superclass : 'SycSourceCodeRefactoringCommand',
 	#instVars : [
 		'selectedTextInterval'
 	],

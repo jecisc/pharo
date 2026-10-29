@@ -5,7 +5,7 @@ If the corresponding accessor methods do not exist, they will be generated autom
 "
 Class {
 	#name : 'SycAbstractVariableCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#instVars : [
 		'selectedClass'
 	],

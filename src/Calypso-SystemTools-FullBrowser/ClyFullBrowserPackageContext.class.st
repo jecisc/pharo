@@ -19,7 +19,7 @@ ClyFullBrowserPackageContext class >> selectionStrategy [
 { #category : 'accessing' }
 ClyFullBrowserPackageContext >> commanderCommandClasses [
 
-	^ super commanderCommandClasses , { SycPackageMenuCmCommand }
+	^ super commanderCommandClasses , { SycPackageCommand }
 ]
 
 { #category : 'selection-class groups' }

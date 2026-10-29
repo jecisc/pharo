@@ -3,7 +3,7 @@ I am a command to generate accessors for given variables
 "
 Class {
 	#name : 'SycGenerateVariableAccessorCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }

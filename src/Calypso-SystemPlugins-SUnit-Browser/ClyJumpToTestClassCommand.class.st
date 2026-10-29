@@ -14,7 +14,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyJumpToTestClassCommand',
-	#superclass : 'SycSingleClassMenuCmCommand',
+	#superclass : 'SycSingleClassCommand',
 	#traits : 'TClyGenerateTestClass',
 	#classTraits : 'TClyGenerateTestClass classTrait',
 	#instVars : [

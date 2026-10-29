@@ -29,11 +29,6 @@ SycMethodCommand class >> for: methods [
 		methods: methods
 ]
 
-{ #category : 'testing' }
-SycMethodCommand class >> isAbstract [
-	^self = SycMethodCommand
-]
-
 { #category : 'accessing' }
 SycMethodCommand >> methods [
 	^ methods
@@ -42,4 +37,10 @@ SycMethodCommand >> methods [
 { #category : 'accessing' }
 SycMethodCommand >> methods: anObject [
 	methods := anObject
+]
+
+{ #category : 'execution' }
+SycMethodCommand >> prepareFullExecution [
+
+	methods := self context selectedMethods
 ]

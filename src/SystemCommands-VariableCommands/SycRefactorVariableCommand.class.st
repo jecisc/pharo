@@ -30,11 +30,6 @@ SycRefactorVariableCommand class >> canBeExecutedInContext: aToolContext [
 		and: [ aToolContext isGlobalVariableSelected not ]
 ]
 
-{ #category : 'testing' }
-SycRefactorVariableCommand class >> isAbstract [
-	^self = SycRefactorVariableCommand
-]
-
 { #category : 'execution' }
 SycRefactorVariableCommand >> createRefactorings: variableRefactoringClass [
 	^self createRefactorings: variableRefactoringClass using: [ ]
@@ -48,4 +43,20 @@ SycRefactorVariableCommand >> createRefactorings: variableRefactoringClass using
 		  refactoring := eachVar createVariableRefactoring: variableRefactoringClass.
 		  initBlock cull: refactoring cull: eachVar.
 		  refactoring ]
+]
+
+{ #category : 'accessing' }
+SycRefactorVariableCommand >> orderInContext: aToolContext [
+
+	^ aToolContext isFullBrowserVariableContext
+		ifTrue: [ self fullBrowserOrder ]
+		ifFalse: [ self order ]
+]
+
+{ #category : 'execution' }
+SycRefactorVariableCommand >> prepareFullExecution [
+
+	variables := self context selectedVariables.
+	toolContext := self context.
+	refactoringScopes := self context refactoringScopes
 ]

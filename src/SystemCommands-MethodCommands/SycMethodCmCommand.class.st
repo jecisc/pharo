@@ -3,7 +3,7 @@ This class is an extension so we can mix command of Commander2 with Commander.
 "
 Class {
 	#name : 'SycMethodCmCommand',
-	#superclass : 'SycLegacyCmCommand',
+	#superclass : 'SycCmCommand',
 	#instVars : [
 		'methods',
 		'refactoringScopes'
@@ -33,9 +33,66 @@ SycMethodCmCommand class >> for: methods [
 		  yourself
 ]
 
+{ #category : 'accessing' }
+SycMethodCmCommand >> application [
+
+	^ StPharoApplication current
+]
+
+{ #category : 'execution' }
+SycMethodCmCommand >> applyCommandResult [
+
+	self applyResultInContext: self context
+]
+
+{ #category : 'execution' }
+SycMethodCmCommand >> applyResultInContext: aToolContext [
+
+	
+]
+
 { #category : 'testing' }
 SycMethodCmCommand >> canBeExecuted [
 	^ self methods isNotEmpty
+]
+
+{ #category : 'ui requests' }
+SycMethodCmCommand >> confirm: aString [
+
+	^ self application confirm: aString
+]
+
+{ #category : 'execution' }
+SycMethodCmCommand >> execute [
+
+	prepared
+		ifTrue: [ self executeRefactorings ]
+		ifFalse: [
+				[
+					prepared := true.
+					self prepareFullExecution.
+					self executeRefactoring.
+					self applyCommandResult ]
+					on: Exception
+					do: [ :exception | self processCommandFailure: exception ] ]
+]
+
+{ #category : 'execution' }
+SycMethodCmCommand >> executeRefactoring [
+
+	^ self executeRefactorings
+]
+
+{ #category : 'execution' }
+SycMethodCmCommand >> executeRefactorings [
+
+	self asRefactorings do: [ :each | each execute ]
+]
+
+{ #category : 'testing' }
+SycMethodCmCommand >> isComplexRefactoring [
+
+	^ false
 ]
 
 { #category : 'accessing' }

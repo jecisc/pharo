@@ -10,12 +10,6 @@ Class {
 	#package : 'SystemCommands-SourceCodeCommands'
 }
 
-{ #category : 'testing' }
-SycSourceCodeRefactoringCommand class >> isAbstract [
-
-	^ self == SycSourceCodeRefactoringCommand
-]
-
 { #category : 'converting' }
 SycSourceCodeRefactoringCommand >> asRefactorings [
 	self subclassResponsibility
@@ -27,4 +21,22 @@ SycSourceCodeRefactoringCommand >> executeRefactoring: refactoring [
 	[ refactoring first execute ]
 		on: RBRefactoringError
 		do: [ :e | self morphicUIManager alert: e messageText ]
+]
+
+{ #category : 'execution' }
+SycSourceCodeRefactoringCommand >> executeRefactorings [
+
+	^ self executeRefactoring: self asRefactorings
+]
+
+{ #category : 'accessing' }
+SycSourceCodeRefactoringCommand >> orderInContext: aToolContext [
+
+	^ self order
+]
+
+{ #category : 'execution' }
+SycSourceCodeRefactoringCommand >> prepareFullExecution [
+
+	refactoringScopes := self context refactoringScopes
 ]

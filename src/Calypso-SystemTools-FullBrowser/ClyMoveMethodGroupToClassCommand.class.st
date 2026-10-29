@@ -15,7 +15,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyMoveMethodGroupToClassCommand',
-	#superclass : 'ClyMethodGroupMenuCmCommand',
+	#superclass : 'ClyMethodGroupCommand',
 	#instVars : [
 		'targetClass',
 		'refactoringScopes'

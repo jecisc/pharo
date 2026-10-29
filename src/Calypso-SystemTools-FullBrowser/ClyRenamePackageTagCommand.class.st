@@ -11,7 +11,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyRenamePackageTagCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#instVars : [
 		'package',
 		'newName',

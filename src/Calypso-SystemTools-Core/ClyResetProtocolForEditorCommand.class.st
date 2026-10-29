@@ -3,7 +3,7 @@ I am a command that unclasifies a method.
 "
 Class {
 	#name : 'ClyResetProtocolForEditorCommand',
-	#superclass : 'ClyMethodEditorCmCommand',
+	#superclass : 'ClyMethodEditorCommand',
 	#category : 'Calypso-SystemTools-Core-Editors-Methods',
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Editors-Methods'

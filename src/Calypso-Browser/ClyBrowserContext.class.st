@@ -71,12 +71,12 @@ ClyBrowserContext >> commanderCommandClasses [
 
 	| roots |
 	roots := OrderedCollection new.
-	(self isAboutBrowserItemType: ClyClass) ifTrue: [ roots add: SycSingleClassMenuCmCommand ].
+	(self isAboutBrowserItemType: ClyClass) ifTrue: [ roots add: SycSingleClassCommand ].
 	(self isAboutBrowserItemType: ClyMethod) ifTrue: [
 			roots
 				add: SycChangeMessageMenuCmCommand;
-				add: SycMessageMenuCmCommand;
-				add: SycMethodMenuCmCommand ].
+				add: SycMessageCommand;
+				add: SycMethodCommand ].
 	^ roots asArray
 ]
 

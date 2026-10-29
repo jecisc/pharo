@@ -73,3 +73,9 @@ ClyDebugVariableCommand >> executeRefactorings [
 
 	variables do: [ :var | self executeFor: var ]
 ]
+
+{ #category : 'execution' }
+ClyDebugVariableCommand >> prepareFullExecution [
+
+	variables := self context selectedVariables
+]

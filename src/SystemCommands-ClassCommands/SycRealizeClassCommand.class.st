@@ -3,7 +3,7 @@ I am a command to generate all unimplemented methods of the given classes
 "
 Class {
 	#name : 'SycRealizeClassCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

@@ -3,7 +3,7 @@ I command to launch the Abstract refactorings: create accessors and abstract the
 "
 Class {
 	#name : 'SycAbstractAllInstVarAccessorsCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

@@ -1,6 +1,6 @@
 Class {
 	#name : 'ClyExpandClassDefinitionCommand',
-	#superclass : 'SycSingleClassMenuCmCommand',
+	#superclass : 'SycSingleClassCommand',
 	#category : 'Calypso-SystemTools-Core-Commands-Classes',
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Commands-Classes'

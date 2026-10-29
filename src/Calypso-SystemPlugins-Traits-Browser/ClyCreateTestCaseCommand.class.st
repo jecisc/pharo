@@ -3,7 +3,7 @@ Generate New Test Class: Automatically create a test class for the selected clas
 "
 Class {
 	#name : 'ClyCreateTestCaseCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'package',
 		'packageTag'

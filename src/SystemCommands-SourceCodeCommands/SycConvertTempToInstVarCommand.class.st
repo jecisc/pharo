@@ -3,7 +3,7 @@ I am a command to convert a temp variable in instance variable.
 "
 Class {
 	#name : 'SycConvertTempToInstVarCommand',
-	#superclass : 'SycSourceCodeRefactoringCmCommand',
+	#superclass : 'SycSourceCodeRefactoringCommand',
 	#category : 'SystemCommands-SourceCodeCommands',
 	#package : 'SystemCommands-SourceCodeCommands'
 }

@@ -15,11 +15,6 @@ Class {
 	#tag : 'Commands'
 }
 
-{ #category : 'testing' }
-ClyBrowserCommand class >> isAbstract [
-	^self = ClyBrowserCommand
-]
-
 { #category : 'accessing' }
 ClyBrowserCommand >> browser [
 	^ browser ifNil: [ self context ifNotNil: [ :ctx | ctx browser ] ]

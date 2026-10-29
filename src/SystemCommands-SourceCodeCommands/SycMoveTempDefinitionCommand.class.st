@@ -8,7 +8,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'SycMoveTempDefinitionCommand',
-	#superclass : 'SycSourceCodeRefactoringCmCommand',
+	#superclass : 'SycSourceCodeRefactoringCommand',
 	#instVars : [
 		'newName',
 		'toolContext'

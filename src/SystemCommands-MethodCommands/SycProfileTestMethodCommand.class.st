@@ -9,7 +9,7 @@ If there are multiple classes selected, the command will be aborted.
 "
 Class {
 	#name : 'SycProfileTestMethodCommand',
-	#superclass : 'SycMethodMenuCmCommand',
+	#superclass : 'SycMethodCommand',
 	#category : 'SystemCommands-MethodCommands',
 	#package : 'SystemCommands-MethodCommands'
 }

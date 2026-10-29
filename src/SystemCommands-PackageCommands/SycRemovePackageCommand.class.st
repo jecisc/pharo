@@ -3,7 +3,7 @@ I am a command to remove given packages
 "
 Class {
 	#name : 'SycRemovePackageCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#category : 'SystemCommands-PackageCommands',
 	#package : 'SystemCommands-PackageCommands'
 }

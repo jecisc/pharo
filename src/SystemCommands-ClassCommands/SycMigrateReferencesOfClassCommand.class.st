@@ -8,7 +8,7 @@ newName:  <String>
 "
 Class {
 	#name : 'SycMigrateReferencesOfClassCommand',
-	#superclass : 'SycSingleClassMenuCmCommand',
+	#superclass : 'SycSingleClassCommand',
 	#instVars : [
 		'newName'
 	],

@@ -12,7 +12,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'ClyCreateTraitCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'package',
 		'packageTag'

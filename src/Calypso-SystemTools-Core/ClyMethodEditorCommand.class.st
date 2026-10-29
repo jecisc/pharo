@@ -43,11 +43,6 @@ ClyMethodEditorCommand class >> canBeExecutedInMethodEditor: aTool [
 	^ false
 ]
 
-{ #category : 'testing' }
-ClyMethodEditorCommand class >> isAbstract [
-	^self = ClyMethodEditorCommand
-]
-
 { #category : 'accessing' }
 ClyMethodEditorCommand >> methodEditor [
 	^ methodEditor
@@ -56,4 +51,16 @@ ClyMethodEditorCommand >> methodEditor [
 { #category : 'accessing' }
 ClyMethodEditorCommand >> methodEditor: anObject [
 	methodEditor := anObject
+]
+
+{ #category : 'accessing' }
+ClyMethodEditorCommand >> orderInContext: aToolContext [
+
+	^ self order
+]
+
+{ #category : 'preparation' }
+ClyMethodEditorCommand >> prepareFullExecution [
+
+	methodEditor := self context tool
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : 'SycGenerateVariableAccessorsWithLazyInitializationCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#instVars : [
 		'variable',
 		'value'

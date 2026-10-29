@@ -3,7 +3,7 @@ I am a command to categorize all unclassified methods of given classes
 "
 Class {
 	#name : 'SycCategorizeAllUnclassifiedMethodsCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

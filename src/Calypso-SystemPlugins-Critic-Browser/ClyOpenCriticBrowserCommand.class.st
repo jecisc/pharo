@@ -3,7 +3,7 @@ I am a command to open a critic browser on given set of packages
 "
 Class {
 	#name : 'ClyOpenCriticBrowserCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }

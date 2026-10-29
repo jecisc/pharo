@@ -4,7 +4,7 @@ Rename Class Refactoring: Change the name of a selected class, update all refere
 "
 Class {
 	#name : 'SycRenameClassCommand2',
-	#superclass : 'SycSingleClassMenuCmCommand',
+	#superclass : 'SycSingleClassCommand',
 	#instVars : [
 		'toolContext'
 	],

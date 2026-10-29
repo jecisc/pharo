@@ -6,7 +6,7 @@ By default shorcuts are alt+left and alt+right to go back and forward.
 "
 Class {
 	#name : 'ClyBrowserNavigationCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#category : 'Calypso-Browser-NavigationHistory',
 	#package : 'Calypso-Browser',
 	#tag : 'NavigationHistory'

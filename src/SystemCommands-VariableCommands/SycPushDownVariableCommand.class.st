@@ -3,7 +3,7 @@ I am a command to push down given variables
 "
 Class {
 	#name : 'SycPushDownVariableCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }

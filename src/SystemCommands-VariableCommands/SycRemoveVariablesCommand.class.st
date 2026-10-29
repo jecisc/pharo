@@ -5,7 +5,7 @@ My responsibility is to delegate removal execution to the remove variable driver
 "
 Class {
 	#name : 'SycRemoveVariablesCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }

@@ -5,7 +5,7 @@ By default I am executed by cmd+f shortcut
 "
 Class {
 	#name : 'ClyFindClassCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'class'
 	],

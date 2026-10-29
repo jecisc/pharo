@@ -10,7 +10,7 @@ Before `$w` command, it keeps an empty tab without closing it.
 "
 Class {
 	#name : 'ClyCloseBrowserCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#category : 'Calypso-Browser-Commands',
 	#package : 'Calypso-Browser',
 	#tag : 'Commands'

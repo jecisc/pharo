@@ -22,11 +22,6 @@ ClyMethodGroupCommand class >> canBeExecutedInContext: aToolContext [
 	^aToolContext isMethodGroupSelected
 ]
 
-{ #category : 'testing' }
-ClyMethodGroupCommand class >> isAbstract [
-	^self = ClyMethodGroupCommand
-]
-
 { #category : 'accessing' }
 ClyMethodGroupCommand >> methodGroups [
 	^ methodGroups
@@ -35,4 +30,10 @@ ClyMethodGroupCommand >> methodGroups [
 { #category : 'accessing' }
 ClyMethodGroupCommand >> methodGroups: anObject [
 	methodGroups := anObject
+]
+
+{ #category : 'execution' }
+ClyMethodGroupCommand >> prepareFullExecution [
+
+	methodGroups := self context selectedMethodGroups
 ]

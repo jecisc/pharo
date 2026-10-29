@@ -3,7 +3,7 @@ I am a command to move browser focus to previous (left) navigation pane
 "
 Class {
 	#name : 'ClySwitchFocusToPreviousBrowserPaneCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#category : 'Calypso-Browser-Commands',
 	#package : 'Calypso-Browser',
 	#tag : 'Commands'

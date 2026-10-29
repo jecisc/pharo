@@ -3,7 +3,7 @@ I am a command to add packages scope to listScopes
 "
 Class {
 	#name : 'SycAddPackagesScopeCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#category : 'SystemCommands-PackageCommands-Scope',
 	#package : 'SystemCommands-PackageCommands',
 	#tag : 'Scope'

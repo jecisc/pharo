@@ -1,6 +1,6 @@
 Class {
 	#name : 'ClySwitchToScopedModeCommand',
-	#superclass : 'ClyBrowserMenuCmCommand',
+	#superclass : 'ClyBrowserCommand',
 	#instVars : [
 		'packages'
 	],

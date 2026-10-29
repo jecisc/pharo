@@ -6,7 +6,7 @@ Otherwise I use Komitter.
 "
 Class {
 	#name : 'ClyCommitPackageCommand',
-	#superclass : 'SycPackageMenuCmCommand',
+	#superclass : 'SycPackageCommand',
 	#category : 'Calypso-SystemPlugins-Monticello-Browser',
 	#package : 'Calypso-SystemPlugins-Monticello-Browser'
 }

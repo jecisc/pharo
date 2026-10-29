@@ -3,7 +3,7 @@ This command find the senders of a given method in the classes upper in the inhe
 "
 Class {
 	#name : 'SycShowLocalSendersCommand',
-	#superclass : 'SycMessageMenuCmCommand',
+	#superclass : 'SycMessageCommand',
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }

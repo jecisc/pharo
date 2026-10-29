@@ -3,7 +3,7 @@ I am a command to open browser on given class
 "
 Class {
 	#name : 'SycBrowseClassCommand',
-	#superclass : 'SycSingleClassMenuCmCommand',
+	#superclass : 'SycSingleClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }

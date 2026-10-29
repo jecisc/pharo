@@ -7,12 +7,3 @@ Class {
 	#category : 'SystemCommands-MessageCommands',
 	#package : 'SystemCommands-MessageCommands'
 }
-
-{ #category : 'preparation' }
-SycChangeMessageMenuCmCommand >> prepareFullExecution [
-
-	self setUpModelFromContext: self context.
-	refactoredClass := self context lastSelectedMessage methodClass.
-	refactoringScopes := self context refactoringScopes.
-	originalMessage := self context lastSelectedMessage
-]

@@ -3,7 +3,7 @@ I am a command to extract selected ast node into separate method
 "
 Class {
 	#name : 'SycNewExtractMethodCommand',
-	#superclass : 'SycSourceCodeRefactoringCmCommand',
+	#superclass : 'SycSourceCodeRefactoringCommand',
 	#instVars : [
 		'selectedTextInterval'
 	],

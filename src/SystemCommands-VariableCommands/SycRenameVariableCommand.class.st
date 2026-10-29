@@ -3,7 +3,7 @@ I am a command to rename a variable.
 "
 Class {
 	#name : 'SycRenameVariableCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#category : 'SystemCommands-VariableCommands',
 	#package : 'SystemCommands-VariableCommands'
 }

@@ -4,7 +4,7 @@ I open changes preview on them
 "
 Class {
 	#name : 'ClyFixCritiqueCommand',
-	#superclass : 'ClyCritiqueCmCommand',
+	#superclass : 'ClyCritiqueCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }

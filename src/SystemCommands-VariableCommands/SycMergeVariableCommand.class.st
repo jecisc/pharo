@@ -3,7 +3,7 @@ I am a command to merge given variable into another
 "
 Class {
 	#name : 'SycMergeVariableCommand',
-	#superclass : 'SycVariableCmCommand',
+	#superclass : 'SycRefactorVariableCommand',
 	#instVars : [
 		'variable',
 		'newName'

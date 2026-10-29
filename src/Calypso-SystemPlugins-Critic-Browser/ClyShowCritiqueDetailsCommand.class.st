@@ -4,7 +4,7 @@ I just show the dialog with critique description and title
 "
 Class {
 	#name : 'ClyShowCritiqueDetailsCommand',
-	#superclass : 'ClyCritiqueCmCommand',
+	#superclass : 'ClyCritiqueCommand',
 	#category : 'Calypso-SystemPlugins-Critic-Browser',
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }

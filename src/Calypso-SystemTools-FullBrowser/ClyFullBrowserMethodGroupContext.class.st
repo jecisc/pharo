@@ -20,8 +20,8 @@ ClyFullBrowserMethodGroupContext class >> selectionStrategy [
 ClyFullBrowserMethodGroupContext >> commanderCommandClasses [
 
 	^ super commanderCommandClasses , {
-		  SycClassMenuCmCommand.
-		  ClyMethodGroupMenuCmCommand }
+		  SycClassCommand.
+		  ClyMethodGroupCommand }
 ]
 
 { #category : 'testing' }

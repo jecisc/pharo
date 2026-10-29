@@ -3,7 +3,7 @@ I am a command to clean all unused method tags (empty protocols) of given classe
 "
 Class {
 	#name : 'SycRemoveEmptyMethodTagsCommand',
-	#superclass : 'SycClassMenuCmCommand',
+	#superclass : 'SycClassCommand',
 	#category : 'SystemCommands-ClassCommands',
 	#package : 'SystemCommands-ClassCommands'
 }
