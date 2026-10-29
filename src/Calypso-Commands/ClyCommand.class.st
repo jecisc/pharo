@@ -4,6 +4,9 @@ I am the root of the Calypso commands. I am a Commander2 command, and I keep the
 Class {
 	#name : 'ClyCommand',
 	#superclass : 'CmCommand',
+	#instVars : [
+		'dropContext'
+	],
 	#category : 'Calypso-Commands',
 	#package : 'Calypso-Commands'
 }
@@ -47,17 +50,8 @@ ClyCommand >> application [
 	^ StPharoApplication current
 ]
 
-{ #category : 'drag and drop' }
-ClyCommand >> applyDropResultInContext: aToolContext [
-]
-
 { #category : 'execution' }
 ClyCommand >> applyResultInContext: aToolContext [
-]
-
-{ #category : 'drag and drop' }
-ClyCommand >> canBeExecutedInDropContext: aToolContext [
-	^true
 ]
 
 { #category : 'ui requests' }
@@ -127,6 +121,16 @@ ClyCommand >> doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder 
 	self setUpIconForMenuItem: item
 ]
 
+{ #category : 'accessing' }
+ClyCommand >> dropContext [
+	^ dropContext
+]
+
+{ #category : 'accessing' }
+ClyCommand >> dropContext: aToolContext [
+	dropContext := aToolContext
+]
+
 { #category : 'context menu' }
 ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
 	| item |
@@ -145,14 +149,6 @@ ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
 ClyCommand >> morphicUIManager [
 
 	^ MorphicUIManager new
-]
-
-{ #category : 'drag and drop' }
-ClyCommand >> prepareExecutionInDragContext: aToolContext [
-]
-
-{ #category : 'drag and drop' }
-ClyCommand >> prepareExecutionInDropContext: aToolContext [
 ]
 
 { #category : 'executing' }

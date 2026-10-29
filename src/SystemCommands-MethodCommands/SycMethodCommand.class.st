@@ -43,10 +43,3 @@ SycMethodCommand >> methods [
 SycMethodCommand >> methods: anObject [
 	methods := anObject
 ]
-
-{ #category : 'activation - drag and drop' }
-SycMethodCommand >> prepareExecutionInDragContext: aToolContext [
-	super prepareExecutionInDragContext: aToolContext.
-
-	methods := aToolContext selectedMethods
-]

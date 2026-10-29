@@ -11,20 +11,6 @@ Class {
 	#package : 'Calypso-Commands'
 }
 
-{ #category : 'instance creation' }
-ClyDragAndDropCommandActivator class >> createCommand: aCommandClass inContext: aToolContext [
-	| command |
-	command := super createCommand: aCommandClass inContext: aToolContext.
-	command prepareExecutionInDragContext: aToolContext.
-	^ command
-]
-
-{ #category : 'executing' }
-ClyDragAndDropCommandActivator >> applyCommandResult [
-	command applyResultInContext: context.
-	command applyDropResultInContext: dropContext
-]
-
 { #category : 'testing' }
 ClyDragAndDropCommandActivator >> canExecuteCommand [
 
@@ -33,17 +19,14 @@ ClyDragAndDropCommandActivator >> canExecuteCommand [
 
 { #category : 'testing' }
 ClyDragAndDropCommandActivator >> canExecuteDropInContext: aToolContext [
-
-	^(activationStrategy isDropActiveInContext: aToolContext)
-		and: [  aToolContext allowsDropExecutionOf: command ]
+	^ activationStrategy isDropActiveInContext: aToolContext
 ]
 
 { #category : 'executing' }
 ClyDragAndDropCommandActivator >> executeCommand [
-	[ self prepareCommandForExecution.
-		command context: context.
-		command execute.
-		self applyCommandResult ]
+	[ command context: context.
+		command dropContext: dropContext.
+		command execute ]
 	on: Exception do: [ :exc | context processFailure: exc of: command ]
 ]
 
@@ -51,10 +34,4 @@ ClyDragAndDropCommandActivator >> executeCommand [
 ClyDragAndDropCommandActivator >> executeDropInContext: aToolContext [
 	dropContext := aToolContext.
 	self executeCommand
-]
-
-{ #category : 'executing' }
-ClyDragAndDropCommandActivator >> prepareCommandForExecution [
-	command prepareExecutionInDragContext: context.
-	command prepareExecutionInDropContext: dropContext
 ]

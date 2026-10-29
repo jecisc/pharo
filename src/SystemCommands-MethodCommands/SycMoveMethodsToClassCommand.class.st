@@ -56,24 +56,16 @@ SycMoveMethodsToClassCommand >> order [
 	^ 60
 ]
 
-{ #category : 'drag and drop support' }
-SycMoveMethodsToClassCommand >> prepareExecutionInDropContext: aToolContext [
-
-	self context: aToolContext.
-	targetClass := aToolContext lastSelectedClass.
-	targetClass := aToolContext currentMetaLevelOf: targetClass.
-	self refactoringScopes: aToolContext refactoringScopes.
-	self prepared: true
-]
-
-{ #category : 'preparation' }
+{ #category : 'executing' }
 SycMoveMethodsToClassCommand >> prepareFullExecution [
-
+	| toolContext |
 	super prepareFullExecution.
-
-	targetClass := self context requestSingleClass: 'Choose class'.
-	targetClass := self context currentMetaLevelOf: targetClass.
-	self refactoringScopes: self context refactoringScopes
+	toolContext := self dropContext ifNil: [ self context ].
+	targetClass := self dropContext
+		ifNil: [ self context requestSingleClass: 'Choose class' ]
+		ifNotNil: [ :drop | drop lastSelectedClass ].
+	targetClass := toolContext currentMetaLevelOf: targetClass.
+	self refactoringScopes: toolContext refactoringScopes
 ]
 
 { #category : 'accessing' }

@@ -71,17 +71,10 @@ SycMoveMethodsToPackageCommand >> package: anObject [
 	package := anObject
 ]
 
-{ #category : 'drag and drop support' }
-SycMoveMethodsToPackageCommand >> prepareExecutionInDropContext: aToolContext [
-
-	self context: aToolContext.
-	package := aToolContext lastSelectedPackage.
-	self prepared: true
-]
-
-{ #category : 'preparation' }
+{ #category : 'executing' }
 SycMoveMethodsToPackageCommand >> prepareFullExecution [
-
 	super prepareFullExecution.
-	package := self context requestSinglePackage: 'Choose package'
+	package := self dropContext
+		ifNil: [ self context requestSinglePackage: 'Choose package' ]
+		ifNotNil: [ :drop | drop lastSelectedPackage ]
 ]

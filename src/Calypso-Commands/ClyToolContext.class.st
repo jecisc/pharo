@@ -17,11 +17,6 @@ ClyToolContext class >> for: aTool [
 		tool: aTool
 ]
 
-{ #category : 'drag and drop' }
-ClyToolContext >> allowsDropExecutionOf: aCommand [
-	^aCommand canBeExecutedInDropContext: self
-]
-
 { #category : 'testing' }
 ClyToolContext >> allowsExecutionOf: aCommandClass [
 

@@ -33,19 +33,9 @@ SycMethodCmCommand class >> for: methods [
 		  yourself
 ]
 
-{ #category : 'drag and drop' }
-SycMethodCmCommand >> applyDropResultInContext: aToolContext [
-]
-
 { #category : 'testing' }
 SycMethodCmCommand >> canBeExecuted [
 	^ self methods isNotEmpty
-]
-
-{ #category : 'drag and drop' }
-SycMethodCmCommand >> canBeExecutedInDropContext: aToolContext [
-
-    ^ true
 ]
 
 { #category : 'accessing' }
@@ -61,13 +51,6 @@ SycMethodCmCommand >> methods [
 SycMethodCmCommand >> methods: aCollection [
 
 	methods := aCollection
-]
-
-{ #category : 'drag and drop' }
-SycMethodCmCommand >> prepareExecutionInDragContext: aToolContext [
-
-    self context: aToolContext.
-    methods := aToolContext selectedMethods
 ]
 
 { #category : 'preparation' }

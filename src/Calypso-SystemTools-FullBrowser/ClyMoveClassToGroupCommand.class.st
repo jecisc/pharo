@@ -86,18 +86,11 @@ ClyMoveClassToGroupCommand >> executeRefactorings [
 	classes do: [ :class | classGroup addClass: class ]
 ]
 
-{ #category : 'execution' }
-ClyMoveClassToGroupCommand >> prepareExecutionInDropContext: aToolContext [
-	super prepareExecutionInDropContext: aToolContext.
-	classGroup := aToolContext lastSelectedClassGroup
-	"this command can be also activated on package which is polimorphic to class group.
-	If given context is package context then it will return package as class group"
-]
-
-{ #category : 'execution' }
+{ #category : 'executing' }
 ClyMoveClassToGroupCommand >> prepareFullExecution [
-
 	super prepareFullExecution.
 	"class group could be package. In this activation it is only make sense to request user for package"
-	classGroup := self context requestSinglePackage: 'Choose package'
+	classGroup := self dropContext
+		ifNil: [ self context requestSinglePackage: 'Choose package' ]
+		ifNotNil: [ :drop | drop lastSelectedClassGroup ]
 ]

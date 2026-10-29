@@ -49,22 +49,16 @@ ClyMoveMethodGroupToClassCommand >> executeRefactorings [
 			moveCommand execute ]
 ]
 
-{ #category : 'execution' }
-ClyMoveMethodGroupToClassCommand >> prepareExecutionInDropContext: aToolContext [
-
-	super prepareExecutionInDropContext: aToolContext.
-	targetClass := aToolContext lastSelectedClass.
-	targetClass := aToolContext currentMetaLevelOf: targetClass.
-	refactoringScopes := aToolContext refactoringScopes
-]
-
-{ #category : 'execution' }
+{ #category : 'executing' }
 ClyMoveMethodGroupToClassCommand >> prepareFullExecution [
-
+	| toolContext |
 	super prepareFullExecution.
-	targetClass := self context requestSingleClass: 'Choose class'.
-	targetClass := self context currentMetaLevelOf: targetClass.
-	refactoringScopes := self context refactoringScopes
+	toolContext := self dropContext ifNil: [ self context ].
+	targetClass := self dropContext
+		ifNil: [ self context requestSingleClass: 'Choose class' ]
+		ifNotNil: [ :drop | drop lastSelectedClass ].
+	targetClass := toolContext currentMetaLevelOf: targetClass.
+	refactoringScopes := toolContext refactoringScopes
 ]
 
 { #category : 'accessing' }

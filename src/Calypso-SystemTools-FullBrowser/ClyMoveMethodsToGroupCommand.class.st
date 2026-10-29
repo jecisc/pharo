@@ -77,18 +77,17 @@ ClyMoveMethodsToGroupCommand >> methodGroup: anObject [
 	methodGroup := anObject
 ]
 
-{ #category : 'drag and drop support' }
-ClyMoveMethodsToGroupCommand >> prepareExecutionInDropContext: aToolContext [
-
+{ #category : 'executing' }
+ClyMoveMethodsToGroupCommand >> prepareFullExecution [
 	| selectedClasses |
-	super prepareExecutionInDropContext: aToolContext.
-	methodGroup := aToolContext lastSelectedMethodGroup.
-	selectedClasses := aToolContext selectedClasses.
-	selectedClasses := selectedClasses collect: [ :each | aToolContext currentMetaLevelOf: each ].
+	super prepareFullExecution.
+	methodGroup := self dropContext lastSelectedMethodGroup.
+	selectedClasses := self dropContext selectedClasses
+		collect: [ :each | self dropContext currentMetaLevelOf: each ].
 	targetClass := selectedClasses size > 1
-		               ifTrue: [ aToolContext requestSingleClass: 'In what class you want to move method?' from: selectedClasses ]
-		               ifFalse: [ selectedClasses last ].
-	refactoringScopes := aToolContext refactoringScopes
+		ifTrue: [ self dropContext requestSingleClass: 'In what class you want to move method?' from: selectedClasses ]
+		ifFalse: [ selectedClasses last ].
+	refactoringScopes := self dropContext refactoringScopes
 ]
 
 { #category : 'accessing' }

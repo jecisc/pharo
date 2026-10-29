@@ -50,10 +50,3 @@ SycClassCommand >> description [
 
 	^ self class comment.
 ]
-
-{ #category : 'activation - drag and drop' }
-SycClassCommand >> prepareExecutionInDragContext: aToolContext [
-	super prepareExecutionInDragContext: aToolContext.
-
-	classes := aToolContext selectedClasses
-]

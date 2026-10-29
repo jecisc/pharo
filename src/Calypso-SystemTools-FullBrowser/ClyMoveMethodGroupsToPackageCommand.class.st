@@ -64,15 +64,10 @@ ClyMoveMethodGroupsToPackageCommand >> package: anObject [
 	package := anObject
 ]
 
-{ #category : 'execution' }
-ClyMoveMethodGroupsToPackageCommand >> prepareExecutionInDropContext: aToolContext [
-	super prepareExecutionInDropContext: aToolContext.
-	package := aToolContext lastSelectedPackage
-]
-
-{ #category : 'execution' }
+{ #category : 'executing' }
 ClyMoveMethodGroupsToPackageCommand >> prepareFullExecution [
-
 	super prepareFullExecution.
-	package := self context requestSinglePackage: 'Choose package'
+	package := self dropContext
+		ifNil: [ self context requestSinglePackage: 'Choose package' ]
+		ifNotNil: [ :drop | drop lastSelectedPackage ]
 ]
