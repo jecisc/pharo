@@ -76,12 +76,6 @@ SycChangeMessageSignatureCommand >> createRefactoring [
 	self subclassResponsibility
 ]
 
-{ #category : 'execution' }
-SycChangeMessageSignatureCommand >> execute [
-
-	self executeRefactorings
-]
-
 { #category : 'accessing' }
 SycChangeMessageSignatureCommand >> originalMessage [
 	^ originalMessage

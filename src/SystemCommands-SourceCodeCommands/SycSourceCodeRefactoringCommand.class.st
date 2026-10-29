@@ -21,12 +21,6 @@ SycSourceCodeRefactoringCommand >> asRefactorings [
 	self subclassResponsibility
 ]
 
-{ #category : 'execution' }
-SycSourceCodeRefactoringCommand >> execute [
-
-	self executeRefactoring: self asRefactorings
-]
-
 { #category : 'private' }
 SycSourceCodeRefactoringCommand >> executeRefactoring: refactoring [
 

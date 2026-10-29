@@ -49,9 +49,3 @@ SycRefactorVariableCommand >> createRefactorings: variableRefactoringClass using
 		  initBlock cull: refactoring cull: eachVar.
 		  refactoring ]
 ]
-
-{ #category : 'execution' }
-SycRefactorVariableCommand >> execute [
-
-	self executeRefactorings
-]

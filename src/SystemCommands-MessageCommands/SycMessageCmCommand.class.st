@@ -8,24 +8,6 @@ Class {
 	#package : 'SystemCommands-MessageCommands'
 }
 
-{ #category : 'execution' }
-SycMessageCmCommand >> execute [
-
-	(prepared or: [ self context isNil ])
-		ifTrue: [ self executeRefactorings ]
-		ifFalse: [
-				[
-					prepared := true.
-					self prepareFullExecution.
-					self isComplexRefactoring
-						ifTrue: [ self executeComplexRefactoring ]
-						ifFalse: [
-								self executeRefactoring.
-								self applyCommandResult ] ]
-					on: Exception
-					do: [ :exception | self processCommandFailure: exception ] ]
-]
-
 { #category : 'accessing' }
 SycMessageCmCommand >> orderInContext: aToolContext [
 
