@@ -28,10 +28,16 @@ ClyOpenContextMenuCommand >> addPureItemsTo: aPresentedRoot [
 
 { #category : 'building' }
 ClyOpenContextMenuCommand >> createContextMenu [
-	"The activation part of the sub-menu, built as the Commander2 tree and drawn by its renderer. The pure commands are added afterwards by each opener (addClyCommandsToMenu:), unchanged."
-	^ ClyCommandGroupMenuRenderer new
+	"The activation part of the sub-menu, drawn from the Commander2 tree, then the pure commands of this opener."
+	| menu |
+	menu := ClyCommandGroupMenuRenderer new
 		renderTree: (ClyCommandGroupBuilder new buildMenuFor: self activationStrategy context: self context pureRoots: #())
-		on: self context tool
+		on: self context tool.
+	ClyCommandGroupMenuRenderer new
+		renderPureMenuItems: self pureMenuCommands
+		on: menu
+		placement: self pureMenuPlacement.
+	^ menu
 ]
 
 { #category : 'execution' }
@@ -57,6 +63,18 @@ ClyOpenContextMenuCommand >> menuSubmenuFor: aCommandActivator [
 { #category : 'accessing' }
 ClyOpenContextMenuCommand >> name [
 	^ 'Open self context menu'
+]
+
+{ #category : 'menu' }
+ClyOpenContextMenuCommand >> pureMenuCommands [
+	"The pure commands this opener adds to its menu. None by default."
+	^ #()
+]
+
+{ #category : 'menu' }
+ClyOpenContextMenuCommand >> pureMenuPlacement [
+	"Where the pure commands go: #append after the activations, or #prepend in front of them."
+	^ #append
 ]
 
 { #category : 'registering' }

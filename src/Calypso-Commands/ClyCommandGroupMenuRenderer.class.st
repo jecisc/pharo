@@ -177,6 +177,18 @@ ClyCommandGroupMenuRenderer >> renderItem: aPresentedCommand on: aMenu [
 ]
 
 { #category : 'rendering' }
+ClyCommandGroupMenuRenderer >> renderPureMenuItems: commands on: aMenu placement: placement [
+	"Draws the pure commands of an opener: appended to the menu, or put in front of its items keeping their order."
+	placement = #prepend
+		ifTrue: [
+			| temp |
+			temp := MenuMorph new.
+			commands do: [ :each | self renderCommand: each on: temp ].
+			temp items reverseDo: [ :each | aMenu addMorphFront: each ] ]
+		ifFalse: [ commands do: [ :each | self renderCommand: each on: aMenu ] ]
+]
+
+{ #category : 'rendering' }
 ClyCommandGroupMenuRenderer >> renderSubMenuOf: aPresentedGroup on: aMenu [
 	"Renders a group as a sub-menu item, as ClyMenuGroup>>buildContextSubMenuIn: does."
 	| descriptor submenu |

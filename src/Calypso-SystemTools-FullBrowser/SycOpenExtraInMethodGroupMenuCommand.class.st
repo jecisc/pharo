@@ -28,14 +28,6 @@ SycOpenExtraInMethodGroupMenuCommand >> activationStrategy [
 	^ SycExtraMenuActivation
 ]
 
-{ #category : 'building' }
-SycOpenExtraInMethodGroupMenuCommand >> addClyCommandsToMenu: aMenuMorph [
-
-	| group |
-	group := ClyCommandGroupBuilder buildFor: self cmCommandClass context: self context.
-	^ ClyCommandGroupMenuRenderer render: group on: aMenuMorph
-]
-
 { #category : 'accessing' }
 SycOpenExtraInMethodGroupMenuCommand >> cmCommandClass [
 
@@ -52,4 +44,10 @@ SycOpenExtraInMethodGroupMenuCommand >> iconName [
 SycOpenExtraInMethodGroupMenuCommand >> name [
 
 	^ 'Extras'
+]
+
+{ #category : 'menu' }
+SycOpenExtraInMethodGroupMenuCommand >> pureMenuCommands [
+	"The commands of the class of this opener that apply here, in the order they are built."
+	^ self classFamilyPureMenuCommands
 ]

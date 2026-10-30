@@ -18,26 +18,6 @@ SycCmCommand class >> activationStrategy [
 	self subclassResponsibility
 ]
 
-{ #category : 'adding' }
-SycCmCommand class >> addMenuItemsTo: menuMorph onContext: context [
-
-	| commands |
-
-	commands := self allSubclasses collect: [:aClass |
-		aClass new
-			context: context;
-			yourself] thenSelect: [:aCommand | aCommand isApplicable ].
-
-	commands do: [ :aCommand | | anItem |
-		anItem := menuMorph add: aCommand name target: aCommand selector: #execute.
-		anItem enabled: aCommand isEnabled.
-		anItem setBalloonText: aCommand description.
-		aCommand icon ifNotNil: [ anItem icon: aCommand icon ].
-	].
-
-	^ menuMorph
-]
-
 { #category : 'default' }
 SycCmCommand class >> defaultDescription [
 	"Answer a <String> describing the receiver, useful for instance in menu items pop-ups"

@@ -40,3 +40,9 @@ SycOpenDebuggingPointsInMethodMenuCommand >> name [
 
 	^ 'Debug Points' 
 ]
+
+{ #category : 'menu' }
+SycOpenDebuggingPointsInMethodMenuCommand >> pureMenuCommands [
+	"Its sub-menu holds debugging points only: no pure commands."
+	^ #()
+]

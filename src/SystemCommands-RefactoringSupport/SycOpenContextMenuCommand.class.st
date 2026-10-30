@@ -9,14 +9,6 @@ Class {
 	#package : 'SystemCommands-RefactoringSupport'
 }
 
-{ #category : 'execution' }
-SycOpenContextMenuCommand >> addClyCommandsToMenu: aMenuMorph [
-
-	self cmCommandClass
-		addMenuItemsTo: aMenuMorph
-		onContext: self context
-]
-
 { #category : 'registering' }
 SycOpenContextMenuCommand >> addPureItemsTo: aPresentedRoot [
 	"The pure commands of cmCommandClass are added to the sub-menu of a pragma menu builder only when their own activation strategy is the strategy of this sub-menu, as addItemsToSubmenu:forContext: did."
@@ -32,16 +24,21 @@ SycOpenContextMenuCommand >> addPureItemsTo: aPresentedRoot [
 			yourself) ]
 ]
 
+{ #category : 'menu' }
+SycOpenContextMenuCommand >> classFamilyPureMenuCommands [
+	"The commands of the class of this opener that apply here, in the order they are built (for the class-family openers)."
+	^ (ClyCommandGroupBuilder buildFor: self cmCommandClass context: self context) commands
+]
+
 { #category : 'context menu' }
 SycOpenContextMenuCommand >> cmCommandClass [
 	self subclassResponsibility
 ]
 
-{ #category : 'execution' }
-SycOpenContextMenuCommand >> createContextMenu [
-
-	| menuMorph |
-	menuMorph := super createContextMenu.
-	self addClyCommandsToMenu: menuMorph.
-	^ menuMorph
+{ #category : 'menu' }
+SycOpenContextMenuCommand >> pureMenuCommands [
+	"The commands of the class of this opener that apply here (the generic drawing of addMenuItemsTo:onContext:)."
+	^ self cmCommandClass allSubclasses
+		collect: [ :each | each new context: self context; yourself ]
+		thenSelect: [ :each | each isApplicable ]
 ]

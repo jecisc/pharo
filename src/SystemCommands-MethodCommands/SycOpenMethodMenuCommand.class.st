@@ -14,18 +14,6 @@ SycOpenMethodMenuCommand >> activationStrategy [
 	^ SycMethodMenuActivation
 ]
 
-{ #category : 'menu' }
-SycOpenMethodMenuCommand >> addClyCommandsToMenu: aMenuMorph [
-
-	| group groupMenu |
-	self activationStrategy = SycMethodMenuActivation ifFalse: [ ^ aMenuMorph ].
-	group := ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: self context.
-	groupMenu := MenuMorph new.
-	ClyCommandGroupMenuRenderer render: group on: groupMenu.
-	groupMenu items reverseDo: [ :each | aMenuMorph addMorphFront: each ].
-	^ aMenuMorph
-]
-
 { #category : 'context menu' }
 SycOpenMethodMenuCommand >> cmCommandClass [
 	^ SycMethodCmCommand
@@ -48,4 +36,15 @@ SycOpenMethodMenuCommand >> description [
 { #category : 'accessing' }
 SycOpenMethodMenuCommand >> name [
 	^'Refactorings'
+]
+
+{ #category : 'menu' }
+SycOpenMethodMenuCommand >> pureMenuCommands [
+	"The sorted commands of the method menu, placed in front of the activations."
+	^ (ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: self context) commands
+]
+
+{ #category : 'menu' }
+SycOpenMethodMenuCommand >> pureMenuPlacement [
+	^ #prepend
 ]
