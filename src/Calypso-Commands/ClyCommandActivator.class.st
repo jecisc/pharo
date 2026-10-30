@@ -51,14 +51,6 @@ ClyCommandActivator >> asCommandActivator [
 	^self
 ]
 
-{ #category : 'context menu' }
-ClyCommandActivator >> buildContextMenu: aMenu [
-
-	self canExecuteCommand ifFalse: [ ^self ].
-
-	command fillContextMenu: aMenu using: self
-]
-
 { #category : 'testing' }
 ClyCommandActivator >> canExecuteCommand [
 
@@ -99,16 +91,6 @@ ClyCommandActivator >> executeCommand [
 ]
 
 { #category : 'spec2 compatibility' }
-ClyCommandActivator >> getShortcutTipForMenuItem [
-
-	ClyShortcutActivation
-		activeInstancesFor: self command class
-		inContext: self context
-		do: [ :shortcut | "this is trick to show shortcut on menu with existing menu support" ^ shortcut keyCombination ].
-	^ nil
-]
-
-{ #category : 'spec2 compatibility' }
 ClyCommandActivator >> help [
 	^ self command class name
 ]
@@ -118,11 +100,6 @@ ClyCommandActivator >> isSimilarTo: anotherCommandActivator [
 
 	^(activationStrategy isSimilarTo: anotherCommandActivator activationStrategy)
 		and: [context isSimilarTo: anotherCommandActivator context ]
-]
-
-{ #category : 'accessing' }
-ClyCommandActivator >> menuItemIcon [
-	^self command defaultMenuIcon
 ]
 
 { #category : 'accessing' }

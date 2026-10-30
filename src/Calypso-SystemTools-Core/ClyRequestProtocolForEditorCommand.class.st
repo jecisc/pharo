@@ -4,9 +4,6 @@ I am a command to request a protocol from the user which should be used to recla
 Class {
 	#name : 'ClyRequestProtocolForEditorCommand',
 	#superclass : 'ClyMethodEditorCommand',
-	#instVars : [
-		'menuItemName'
-	],
 	#category : 'Calypso-SystemTools-Core-Editors-Methods',
 	#package : 'Calypso-SystemTools-Core',
 	#tag : 'Editors-Methods'
