@@ -128,17 +128,20 @@ Class {
 
 { #category : 'accessing' }
 ClyQueryViewMorph class >> defaultDragAndDropDelay [
-^ 1500
+
+	^ 1500
 ]
 
 { #category : 'accessing' }
 ClyQueryViewMorph class >> dragAndDropDelay [
-"Modified by settings CodeBrowsing/Calypso: self classSide >> #settingsDragAndDropDelayOn:"
-^ DragAndDropDelay ifNil: [ self defaultDragAndDropDelay ]
+	"Modified by settings CodeBrowsing/Calypso: self classSide >> #settingsDragAndDropDelayOn:"
+
+	^ DragAndDropDelay ifNil: [ self defaultDragAndDropDelay ]
 ]
 
 { #category : 'accessing' }
 ClyQueryViewMorph class >> dragAndDropDelay: aNumber [
+
 	DragAndDropDelay := aNumber
 ]
 
