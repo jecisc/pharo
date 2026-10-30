@@ -13,20 +13,12 @@ Class {
 	#package : 'Calypso-Commands'
 }
 
-{ #category : 'context menu' }
+{ #category : 'building' }
 ClyMenuCommandActivationStrategy class >> buildContextMenuFor: aMorph inContext: aToolContext [
-
-	| menu |
-	menu := self buildMenuInContext: aToolContext.
-	^menu buildContextMenuFor: aMorph
-]
-
-{ #category : 'menu creation' }
-ClyMenuCommandActivationStrategy class >> buildMenuInContext: aToolContext [
-	| menu |
-	menu := ClyMenu activatedBy: self.
-	menu buildInContext: aToolContext.
-	^ menu
+	"The context menu of this kind of activation, built as the Commander2 tree and drawn by its renderer."
+	^ ClyCommandGroupMenuRenderer new
+		renderTree: (ClyCommandGroupBuilder new buildMenuFor: self context: aToolContext pureRoots: #())
+		on: aMorph
 ]
 
 { #category : 'instance creation' }
@@ -80,11 +72,12 @@ ClyMenuCommandActivationStrategy class >> isAbstract [
 	^ self subclasses isEmpty not
 ]
 
-{ #category : 'context menu' }
+{ #category : 'building' }
 ClyMenuCommandActivationStrategy class >> registerContextMenuOn: aBuilder inContext: aToolContext [
-	| menu |
-	menu := self buildMenuInContext: aToolContext.
-	menu registerContextMenuItemsWithBuilder: aBuilder
+	"Registers the context menu of this kind of activation in a pragma menu builder, from the Commander2 tree."
+	ClyCommandGroupMenuRenderer new
+		registerTree: (ClyCommandGroupBuilder new buildMenuFor: self context: aToolContext pureRoots: #())
+		on: aBuilder rootName: nil
 ]
 
 { #category : 'initialization' }

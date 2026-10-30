@@ -154,14 +154,6 @@ ClyCommandActivator >> printOn: aStream [
 ]
 
 { #category : 'context menu' }
-ClyCommandActivator >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
-
-	self canExecuteCommand ifFalse: [ ^self ].
-
-	self command registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder
-]
-
-{ #category : 'context menu' }
 ClyCommandActivator >> setUpShortcutTipForMenuItem: aMenuItemMorph [
 
 	ClyShortcutActivation

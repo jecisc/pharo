@@ -20,10 +20,18 @@ ClyOpenContextMenuCommand >> activationStrategy [
 	self subclassResponsibility
 ]
 
-{ #category : 'context menu' }
-ClyOpenContextMenuCommand >> createContextMenu [
+{ #category : 'registering' }
+ClyOpenContextMenuCommand >> addPureItemsTo: aPresentedRoot [
+	"Hook: the pure commands an opener adds to its sub-menu. None by default."
+	^ self
+]
 
-	^self activationStrategy buildContextMenuFor: self context tool inContext: self context
+{ #category : 'building' }
+ClyOpenContextMenuCommand >> createContextMenu [
+	"The activation part of the sub-menu, built as the Commander2 tree and drawn by its renderer. The pure commands are added afterwards by each opener (addClyCommandsToMenu:), unchanged."
+	^ ClyCommandGroupMenuRenderer new
+		renderTree: (ClyCommandGroupBuilder new buildMenuFor: self activationStrategy context: self context pureRoots: #())
+		on: self context tool
 ]
 
 { #category : 'execution' }
@@ -58,19 +66,13 @@ ClyOpenContextMenuCommand >> name [
 	^ 'Open self context menu'
 ]
 
-{ #category : 'context menu' }
-ClyOpenContextMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
-	"Here we need to take care because this command itself is added to menu of same self context.
-	So we will always enter into this method during submenu generation.
-	We catch this recursion using RecursionStopper.
-	It is easier than adding extra logic to menu registration process"
-	| submenu |
-	RecursionStopper during: [
-		submenu := self activationStrategy buildMenuInContext: self context.
+{ #category : 'registering' }
+ClyOpenContextMenuCommand >> registerPresented: aPresentedCommand on: aBuilder inGroup: aGroup actualName: actualName [
+	"The sub-menu of an opener in a pragma menu builder: registered only when its activations are active (the pure commands of addPureItemsTo: do not count), under the opener label."
+	RecursionStopper during: [ | submenu |
+		submenu := ClyCommandGroupBuilder new buildMenuFor: self activationStrategy context: self context pureRoots: #().
 		submenu isActive ifTrue: [
-			self doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder.
-			"Registration builder uses #name to bind children to parent"
-			submenu rootGroup name: aCommandItem name.
-			submenu registerContextMenuItemsWithBuilder: aBuilder]
-	]
+			self registerActivationItem: aPresentedCommand on: aBuilder inGroup: aGroup actualName: actualName.
+			self addPureItemsTo: submenu.
+			ClyCommandGroupMenuRenderer new registerTree: submenu on: aBuilder rootName: aPresentedCommand dynamicName ] ]
 ]

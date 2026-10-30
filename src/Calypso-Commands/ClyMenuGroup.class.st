@@ -3,10 +3,7 @@ I am a group of a Calypso context menu tree. I hold the items and the nested gro
 "
 Class {
 	#name : 'ClyMenuGroup',
-	#superclass : 'ClyMenuItem',
-	#instVars : [
-		'contents'
-	],
+	#superclass : 'Object',
 	#category : 'Calypso-Commands',
 	#package : 'Calypso-Commands'
 }
@@ -17,121 +14,21 @@ ClyMenuGroup class >> parentGroup [
 ]
 
 { #category : 'accessing' }
-ClyMenuGroup >> addItem: aMenuItem [
-	aMenuItem parentGroup: self.
-	contents add: aMenuItem
-]
-
-{ #category : 'spec2 compatibility' }
-ClyMenuGroup >> addToMenuPresenter: aSpMenuPresenter [
-	| subMenuPresenter |
-	subMenuPresenter := SpMenuPresenter new.
-	self contents
-		do: [ :each | each addToMenuPresenter: subMenuPresenter ].
-	aSpMenuPresenter
-		addItem: [ :item |
-			item
-				name: self name;
-				icon: self icon;
-				subMenu: subMenuPresenter ]
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> allGroupsWhich: aBlock [
-	| result |
-	result := OrderedCollection new.
-
-	contents
-		reject: [ :each | each isCommandItem ]
-		thenDo: [ :each |
-			(aBlock value: each) ifTrue: [ result add: each ].
-			result addAll: (each allGroupsWhich: aBlock) ].
-
-	^result
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> allItemsWhich: aBlock [
-	| result |
-	result := OrderedCollection new.
-
-	contents do: [ :each |
-		(aBlock value: each) ifTrue: [ result add: each ].
-		each isCommandItem ifFalse: [
-			result addAll: (each allItemsWhich: aBlock) ]].
-
-	^result
-]
-
-{ #category : 'context menu' }
-ClyMenuGroup >> buildContextMenu: aMenu [
-
-	self isInlined
-		ifTrue: [ self inlineContextMenuItemsInto: aMenu ]
-		ifFalse: [ self buildContextSubMenuIn: aMenu ]
-]
-
-{ #category : 'context menu' }
-ClyMenuGroup >> buildContextSubMenuIn: aMenu [
-
-	| submenu |
-	submenu := MorphicUIManager new
-		           newMenuIn: aMenu defaultTarget
-		           for: aMenu defaultTarget.
-
-	self contents do: [ :each | each buildContextMenu: submenu ].
-
-	submenu hasItems ifTrue: [
-		aMenu add: self name icon: self icon subMenu: submenu.
-		self description ifNotNil: [ :d | aMenu lastItem setBalloonText: d ] ]
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> commandItemLike: aCommandClass [
-
-	^contents detect: [ :each |
-		each isCommandItem and: [ each includesCommand: aCommandClass ]]
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> commands [
-	^contents
-		select: [ :each | each isCommandItem ]
-		thenCollect: [ :each | each command ]
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> contents [
-	^ contents
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> contents: anObject [
-	contents := anObject
-]
-
-{ #category : 'accessing' }
 ClyMenuGroup >> description [
 	"By default the result is nil which is not really nice
 	but it is already expected by many tools. So it is easy to allow nil"
 	^nil
 ]
 
-{ #category : 'accessing' }
-ClyMenuGroup >> findGroupLike: menuGroupClass ifExists: foundBlock [
-
-	contents detect: [ :each | each isKindOf: menuGroupClass] ifFound: foundBlock.
-
-	contents do: [ :each | each findGroupLike: menuGroupClass ifExists: foundBlock ]
+{ #category : 'presenting' }
+ClyMenuGroup >> hasLineAfter [
+	^ false
 ]
 
-{ #category : 'accessing' }
-ClyMenuGroup >> findItemSimilarTo: aMenuItem ifPresent: presentBlock ifAbsent: absentBlock [
-
-	contents
-		detect: [:each | each isSimilarTo: aMenuItem  ]
-		ifFound: presentBlock
-		ifNone: absentBlock
+{ #category : 'presenting' }
+ClyMenuGroup >> hasLineBefore [
+	"Lines drawn around this group in a context menu (see ClyCommandGroupMenuRenderer)."
+	^ false
 ]
 
 { #category : 'accessing' }
@@ -153,79 +50,13 @@ ClyMenuGroup >> iconName [
 ]
 
 { #category : 'testing' }
-ClyMenuGroup >> includes: aMenuItem [
-	^contents anySatisfy: [ :each | each isSimilarTo: aMenuItem ]
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> includesCommand: aClass [
-	"It answers only about itself without looking recursively into child groups"
-	^contents anySatisfy: [:each |
-		each isCommandItem and: [each includesCommand: aClass] ]
-]
-
-{ #category : 'initialization' }
-ClyMenuGroup >> initialize [
-	super initialize.
-	contents := SortedCollection sortBlock: [ :a :b |
-		a order = b order
-			ifTrue: [ a name <= b name ]
-			ifFalse: [ a order <= b order ]]
-]
-
-{ #category : 'context menu' }
-ClyMenuGroup >> inlineContextMenuItemsInto: aMenu [
-
-	aMenu addLine.
-
-	self contents do: [ :each | each buildContextMenu: aMenu ].
-
-	aMenu addLine
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> isActive [
-	^contents anySatisfy: [ :each | each isActive ]
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> isCommandItem [
-	^false
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> isEmpty [
-	^contents isEmpty
-]
-
-{ #category : 'testing' }
 ClyMenuGroup >> isInlined [
 	^false
 ]
 
 { #category : 'testing' }
-ClyMenuGroup >> isLastActiveMenuItem: childMenuItem [
-
-	contents reverseDo: [ :each |
-		each isActive ifTrue: [ ^each == childMenuItem ] ].
-
-	^false
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> isLastMenuItem: childMenuItem [
-
-	^contents last == childMenuItem and: [ self isLastInMenu ]
-]
-
-{ #category : 'testing' }
 ClyMenuGroup >> isRoot [
 	^false
-]
-
-{ #category : 'testing' }
-ClyMenuGroup >> isSimilarTo: aMenuItem [
-	^self class == aMenuItem class
 ]
 
 { #category : 'accessing' }
@@ -236,54 +67,4 @@ ClyMenuGroup >> name [
 { #category : 'accessing' }
 ClyMenuGroup >> order [
 	^500
-]
-
-{ #category : 'context menu' }
-ClyMenuGroup >> registerContextMenuItemsWithBuilder: aBuilder [
-
-	self isActive ifFalse: [ ^self ].
-
-	self isInlined
-		ifTrue: [ aBuilder items ifNotEmpty: [aBuilder withSeparatorAfter] ]
-		ifFalse: [ self registerContextSubMenuWithBuilder: aBuilder].
-
-	contents do: [ :each |
-		each registerContextMenuItemsWithBuilder: aBuilder ].
-
-	self isInlined & aBuilder items notEmpty
-		ifTrue: [ aBuilder withSeparatorAfter ]
-]
-
-{ #category : 'context menu' }
-ClyMenuGroup >> registerContextSubMenuWithBuilder: aBuilder [
-
-	(aBuilder item: self name)
-		order: self order;
-		parent: self parentGroup name;
-		target: self;
-		icon: self icon;
-		help: self description
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> removeItem: aGroupOrCommand [
-	contents remove: aGroupOrCommand
-]
-
-{ #category : 'accessing' }
-ClyMenuGroup >> size [
-	^contents size
-]
-
-{ #category : 'updating' }
-ClyMenuGroup >> synchronizeContentWith: anotherGroup [
-
-	contents removeAllSuchThat: [ :each | (anotherGroup includes: each) not].
-	anotherGroup contents do: [ :each |
-		self
-			findItemSimilarTo: each
-			ifPresent: [ :existing |
-				existing synchronizeContentWith: each.
-				existing isEmpty ifTrue: [ self removeItem: existing ] ]
-			ifAbsent: [ self addItem: each]]
 ]

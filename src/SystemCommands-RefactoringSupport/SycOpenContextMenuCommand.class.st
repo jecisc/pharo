@@ -17,6 +17,21 @@ SycOpenContextMenuCommand >> addClyCommandsToMenu: aMenuMorph [
 		onContext: self context
 ]
 
+{ #category : 'registering' }
+SycOpenContextMenuCommand >> addPureItemsTo: aPresentedRoot [
+	"The pure commands of cmCommandClass are added to the sub-menu of a pragma menu builder only when their own activation strategy is the strategy of this sub-menu, as addItemsToSubmenu:forContext: did."
+	| commands |
+	self cmCommandClass activationStrategy = self activationStrategy ifFalse: [ ^ self ].
+	commands := self cmCommandClass subclasses
+		collect: [ :each | each new context: self context; yourself ]
+		thenSelect: [ :each | each isApplicable ].
+	commands do: [ :each |
+		aPresentedRoot register: (ClyPresentedCommand new
+			decorate: each;
+			identifier: each class name;
+			yourself) ]
+]
+
 { #category : 'context menu' }
 SycOpenContextMenuCommand >> cmCommandClass [
 	self subclassResponsibility
@@ -29,26 +44,4 @@ SycOpenContextMenuCommand >> createContextMenu [
 	menuMorph := super createContextMenu.
 	self addClyCommandsToMenu: menuMorph.
 	^ menuMorph
-]
-
-{ #category : 'context menu' }
-SycOpenContextMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
-
-	"Here we need to take care because this command itself is added to menu of same self context.
-	So we will always enter into this method during submenu generation.
-	We catch this recursion using RecursionStopper.
-	It is easier than adding extra logic to menu registration process"
-
-	| submenu |
-	RecursionStopper during: [
-		submenu := self activationStrategy buildMenuInContext: self context.
-		submenu isActive ifTrue: [
-			self
-				doRegisterContextMenuItemsFor: aCommandItem
-				withBuilder: aBuilder.
-			self cmCommandClass addItemsToSubmenu: submenu forContext: self context.
-
-			"Registration builder uses #name to bind children to parent"
-			submenu rootGroup name: aCommandItem name.
-			submenu registerContextMenuItemsWithBuilder: aBuilder ] ]
 ]

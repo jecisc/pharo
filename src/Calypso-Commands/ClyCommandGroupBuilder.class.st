@@ -71,6 +71,105 @@ ClyCommandGroupBuilder >> buildForAll: commandClasses context: aContext [
 	^ group
 ]
 
+{ #category : 'building' }
+ClyCommandGroupBuilder >> buildMenuFor: strategyClass context: aToolContext pureRoots: rootClasses [
+	"Answers the Commander2 tree of the menu of aToolContext: the presentation that ClyMenu gives. Hybrid commands come from the activations of strategyClass, then the pure commands of rootClasses are placed in their groups, in the same order consumers add them. Each group keeps its entries sorted as ClyMenuGroup does. Identifiers are unique inside their group; labels may repeat."
+	| root groups entries names sortBlock uniqueName ensureGroup |
+	sortBlock := [ :a :b | a order = b order ifTrue: [ a dynamicName <= b dynamicName ] ifFalse: [ a order <= b order ] ].
+	root := ClyPresentedGroup new.
+	root descriptor: ClyRootMenuGroup new.
+	root name: ClyRootMenuGroup name.
+	groups := IdentityDictionary new.
+	entries := IdentityDictionary new.
+	names := IdentityDictionary new.
+	groups at: ClyRootMenuGroup put: root.
+	entries at: root put: (SortedCollection sortBlock: sortBlock).
+	names at: root put: Set new.
+	uniqueName := [ :group :base | | candidate count |
+		count := 1.
+		candidate := base.
+		[ (names at: group) includes: candidate ] whileTrue: [
+			count := count + 1.
+			candidate := base, '#', count printString ].
+		(names at: group) add: candidate.
+		candidate ].
+	ensureGroup := nil.
+	ensureGroup := [ :groupClass |
+		groups at: groupClass ifAbsent: [ | parent group |
+			parent := ensureGroup value: groupClass parentGroup.
+			group := ClyPresentedGroup new.
+			group descriptor: groupClass new.
+			group name: (uniqueName value: parent value: groupClass name).
+			groups at: groupClass put: group.
+			entries at: group put: (SortedCollection sortBlock: sortBlock).
+			names at: group put: Set new.
+			(entries at: parent) add: group.
+			group ] ].
+	strategyClass visibleInstancesInContext: aToolContext do: [ :activation | | activator group item |
+		activator := activation newActivatorFor: aToolContext.
+		group := ensureGroup value: activation menuGroup.
+		item := ClyPresentedCommand new.
+		item decorate: activator command.
+		item activator: activator.
+		item identifier: (uniqueName value: group value: activator command class name).
+		(entries at: group) add: item ].
+	(ClyCommandGroupBuilder buildSortedForAll: rootClasses context: aToolContext) commands do: [ :command | | group item |
+		group := ensureGroup value: command menuGroup.
+		item := ClyPresentedCommand new.
+		item decorate: command.
+		item identifier: (uniqueName value: group value: command class name).
+		(entries at: group) add: item ].
+	groups valuesDo: [ :group |
+		(entries at: group) do: [ :each | group register: each ] ].
+	^ root
+]
+
+{ #category : 'building' }
+ClyCommandGroupBuilder >> buildToolbarFor: strategyClass contexts: toolContexts [
+	"Answers the Commander2 tree of a toolbar or of the browser tab actions: one presented group per toolbar group class, holding the presented activations of strategyClass in every context. Groups and entries are sorted as ClyToolbarBuilder sorts them."
+	| root groups entries names sortBlock uniqueName ensureGroup |
+	sortBlock := [ :a :b | a order = b order ifTrue: [ a dynamicName <= b dynamicName ] ifFalse: [ a order <= b order ] ].
+	root := ClyPresentedGroup new.
+	root descriptor: ClyToolbarGroup new.
+	root name: ClyToolbarGroup name.
+	groups := IdentityDictionary new.
+	entries := IdentityDictionary new.
+	names := IdentityDictionary new.
+	entries at: root put: (SortedCollection sortBlock: sortBlock).
+	names at: root put: Set new.
+	uniqueName := [ :group :base | | candidate count |
+		count := 1.
+		candidate := base.
+		[ (names at: group) includes: candidate ] whileTrue: [
+			count := count + 1.
+			candidate := base, '#', count printString ].
+		(names at: group) add: candidate.
+		candidate ].
+	ensureGroup := [ :groupClass |
+		groups at: groupClass ifAbsent: [ | group |
+			group := ClyPresentedGroup new.
+			group descriptor: groupClass new.
+			group name: (uniqueName value: root value: groupClass name).
+			groups at: groupClass put: group.
+			entries at: group put: (SortedCollection sortBlock: sortBlock).
+			names at: group put: Set new.
+			(entries at: root) add: group.
+			group ] ].
+	toolContexts do: [ :toolContext |
+		strategyClass visibleInstancesInContext: toolContext do: [ :activation | | activator group item |
+			activator := activation newActivatorFor: toolContext.
+			group := ensureGroup value: activation menuGroup.
+			item := ClyPresentedCommand new.
+			item decorate: activator command.
+			item activator: activator.
+			item identifier: (uniqueName value: group value: activator command class name).
+			(entries at: group) add: item ] ].
+	(entries at: root) do: [ :each | root register: each ].
+	groups valuesDo: [ :group |
+		(entries at: group) do: [ :each | group register: each ] ].
+	^ root
+]
+
 { #category : 'private' }
 ClyCommandGroupBuilder >> sortedByOrder: commands [
 	"Compatibility method that should be removed in the future"

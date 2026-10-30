@@ -19,23 +19,6 @@ SycCmCommand class >> activationStrategy [
 ]
 
 { #category : 'adding' }
-SycCmCommand class >> addItemsToSubmenu: aCmdMenu forContext: aClyMethodContext [
-
-	| commands |
-
-	aCmdMenu activationStrategyClass = self activationStrategy ifFalse: [ ^ self ].
-
-	commands := self subclasses
-		            collect: [ :e |
-			            e new
-				            context: aClyMethodContext;
-				            yourself ]
-		            thenSelect: [ :e | e isApplicable ].
-
-	commands do: [ :e | aCmdMenu rootGroup addItem: e ]
-]
-
-{ #category : 'adding' }
 SycCmCommand class >> addMenuItemsTo: menuMorph onContext: context [
 
 	| commands |

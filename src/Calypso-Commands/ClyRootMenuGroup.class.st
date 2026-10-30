@@ -23,18 +23,6 @@ ClyRootMenuGroup >> isInlined [
 ]
 
 { #category : 'testing' }
-ClyRootMenuGroup >> isLastActiveItemInMenu [
-	"menu have only root. So I am always last in menu"
-	^true
-]
-
-{ #category : 'testing' }
-ClyRootMenuGroup >> isLastInMenu [
-	"menu have only root. So I am always last in menu"
-	^true
-]
-
-{ #category : 'testing' }
 ClyRootMenuGroup >> isRoot [
 	^true
 ]

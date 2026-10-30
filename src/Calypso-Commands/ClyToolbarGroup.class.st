@@ -8,6 +8,12 @@ Class {
 	#package : 'Calypso-Commands'
 }
 
+{ #category : 'presenting' }
+ClyToolbarGroup >> isInlined [
+	"Toolbar groups are never drawn inline in a menu."
+	^ false
+]
+
 { #category : 'accessing' }
 ClyToolbarGroup >> name [
 	^ self class name

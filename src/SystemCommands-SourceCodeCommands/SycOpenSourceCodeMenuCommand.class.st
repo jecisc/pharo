@@ -15,13 +15,6 @@ SycOpenSourceCodeMenuCommand >> activationStrategy [
 ]
 
 { #category : 'context menu' }
-SycOpenSourceCodeMenuCommand >> addCommandsTo: aCmdMenu [
-
-	(ClyCommandGroupBuilder buildSortedForAll: self cmCommandClasses context: self context) commands do: [ :command |
-		(aCmdMenu ensureGroup: command menuGroup) addItem: (ClyCommandMenuItem on: command inContext: self context) ]
-]
-
-{ #category : 'context menu' }
 SycOpenSourceCodeMenuCommand >> cmCommandClass [
 
 	^ SycSourceCodeCmCommand
@@ -43,14 +36,12 @@ SycOpenSourceCodeMenuCommand >> cmCommandClasses [
 		  SycMessageCommand }
 ]
 
-{ #category : 'context menu' }
+{ #category : 'building' }
 SycOpenSourceCodeMenuCommand >> createContextMenu [
-
-	| menu |
-	menu := ClyMenu activatedBy: self activationStrategy.
-	self activationStrategy visibleInstancesInContext: self context do: [ :activationStrategy | menu buildCommandItemInContext: self context activatingBy: activationStrategy ].
-	self addCommandsTo: menu.
-	^ menu buildContextMenuFor: self context tool
+	"The source-code menu: the activations and the pure commands of cmCommandClasses, built as the Commander2 tree and drawn by its renderer."
+	^ ClyCommandGroupMenuRenderer new
+		renderTree: (ClyCommandGroupBuilder new buildMenuFor: self activationStrategy context: self context pureRoots: self cmCommandClasses)
+		on: self context tool
 ]
 
 { #category : 'accessing' }
@@ -78,16 +69,12 @@ SycOpenSourceCodeMenuCommand >> name [
 	^'Source code'
 ]
 
-{ #category : 'context menu' }
-SycOpenSourceCodeMenuCommand >> registerContextMenuItemsFor: aCommandItem withBuilder: aBuilder [
-
-	| submenu |
-	RecursionStopper during: [
-		submenu := self activationStrategy buildMenuInContext: self context.
-		"Commander2 items count for the activity check, so they must be added first"
-		self addCommandsTo: submenu.
+{ #category : 'registering' }
+SycOpenSourceCodeMenuCommand >> registerPresented: aPresentedCommand on: aBuilder inGroup: aGroup actualName: actualName [
+	"The source-code sub-menu in a pragma menu builder: the activations and the pure commands of cmCommandClasses."
+	RecursionStopper during: [ | submenu |
+		submenu := ClyCommandGroupBuilder new buildMenuFor: self activationStrategy context: self context pureRoots: self cmCommandClasses.
 		submenu isActive ifTrue: [
-			self doRegisterContextMenuItemsFor: aCommandItem withBuilder: aBuilder.
-			submenu rootGroup name: aCommandItem name.
-			submenu registerContextMenuItemsWithBuilder: aBuilder ] ]
+			self registerActivationItem: aPresentedCommand on: aBuilder inGroup: aGroup actualName: actualName.
+			ClyCommandGroupMenuRenderer new registerTree: submenu on: aBuilder rootName: aPresentedCommand dynamicName ] ]
 ]

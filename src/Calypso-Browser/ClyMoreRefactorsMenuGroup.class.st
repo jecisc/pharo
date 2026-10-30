@@ -9,12 +9,14 @@ Class {
 	#tag : 'MenuGroups'
 }
 
-{ #category : 'accessing' }
-ClyMoreRefactorsMenuGroup >> buildContextMenu: aMenu [
-	aMenu addLine.
+{ #category : 'presenting' }
+ClyMoreRefactorsMenuGroup >> hasLineAfter [
+	^ true
+]
 
-	super buildContextMenu: aMenu.
-	aMenu addLine
+{ #category : 'presenting' }
+ClyMoreRefactorsMenuGroup >> hasLineBefore [
+	^ true
 ]
 
 { #category : 'accessing' }
