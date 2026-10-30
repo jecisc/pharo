@@ -1,3 +1,6 @@
+"
+I am a command that moves methods to another place in the code. I classify each moved method under a protocol: I ask the user for a protocol name, suggesting one for the method, using the protocol chooser of the new protocol dialog. My subclasses decide where the methods go.
+"
 Class {
 	#name : 'SycMethodRepackagingCmCommand',
 	#superclass : 'SycMethodCmCommand',

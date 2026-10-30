@@ -38,15 +38,6 @@ SycCmCommand >> description [
 ]
 
 { #category : 'executing' }
-SycCmCommand >> execute [
-	
-	[self prepareFullExecution.
-	self executeRefactoring.
-	self applyCommandResult]
-		on: Exception do: [ :exc | self processCommandFailure: exc ]
-]
-
-{ #category : 'executing' }
 SycCmCommand >> executeRefactoring [
 ]
 
