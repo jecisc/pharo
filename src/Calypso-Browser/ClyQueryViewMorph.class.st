@@ -127,9 +127,14 @@ Class {
 }
 
 { #category : 'accessing' }
+ClyQueryViewMorph class >> defaultDragAndDropDelay [
+^ 1500
+]
+
+{ #category : 'accessing' }
 ClyQueryViewMorph class >> dragAndDropDelay [
-	"Modified by settings CodeBrowsing/Calypso: self classSide >> #settingsDragAndDropDelayOn:"
-	^ DragAndDropDelay
+"Modified by settings CodeBrowsing/Calypso: self classSide >> #settingsDragAndDropDelayOn:"
+^ DragAndDropDelay ifNil: [ self defaultDragAndDropDelay ]
 ]
 
 { #category : 'accessing' }
@@ -149,7 +154,7 @@ ClyQueryViewMorph class >> settingsDragAndDropDelayOn: aBuilder [
 	<systemsettings>
 	(aBuilder setting: #dragAndDropDelay)
 		parentName: #Calypso;
-		defaultValue: 1500;
+		defaultValue: self defaultDragAndDropDelay;
 		label: 'DragAndDrop delay (ms)';
 		description: 'Delay to extend the list of item in the target of a drag and drop.
 For example drag and drop on a package which contains tag will be extended after dragAndDropDelay miliseconds.
