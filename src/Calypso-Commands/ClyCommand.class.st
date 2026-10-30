@@ -63,6 +63,12 @@ ClyCommand >> confirm: aString [
 	^ self application confirm:  aString
 ]
 
+{ #category : 'toolbar' }
+ClyCommand >> decoratesToolbarItem [
+	"Whether the toolbar item of this command gets its balloon text and icon."
+	^ true
+]
+
 { #category : 'accessing' }
 ClyCommand >> defaultMenuIcon [
 
@@ -130,20 +136,6 @@ ClyCommand >> executeComplexRefactoring [
 	CmCommandAborted signal
 ]
 
-{ #category : 'context menu' }
-ClyCommand >> fillContextMenu: aMenu using: aCommandActivator [
-	| item |
-
-	item := aMenu
-		add: aCommandActivator menuItemName
-		target: aCommandActivator
-		selector: #executeCommand.
-
-	aCommandActivator setUpShortcutTipForMenuItem: item.
-	self setUpIconForMenuItem: item.
-	self description ifNotNil: [:d | item setBalloonText: d]
-]
-
 { #category : 'accessing' }
 ClyCommand >> fullBrowserOrder [
 
@@ -192,10 +184,22 @@ ClyCommand >> isGroup [
 	^ false
 ]
 
+{ #category : 'menu' }
+ClyCommand >> menuAlternatives [
+	"The commands this command stands for in a context menu, one item each (the scope switcher). Empty when it is a single item."
+	^ #()
+]
+
 { #category : 'accessing' }
 ClyCommand >> menuGroup [
 
 	^ ClyRootMenuGroup
+]
+
+{ #category : 'menu' }
+ClyCommand >> menuSubmenuFor: aCommandActivator [
+	"The sub-menu this command opens in a context menu, or nil when it is a plain item. An empty menu means that the item is not shown."
+	^ nil
 ]
 
 { #category : 'accessing' }
@@ -284,4 +288,10 @@ ClyCommand >> setUpIconNamed: aString forMenuItem: aMenuItemMorph [
 ClyCommand >> specUIManager [
 
 	^ SpAlertDialog new
+]
+
+{ #category : 'toolbar' }
+ClyCommand >> toolbarItemFor: aCommandActivator [
+	"The widget this command puts in a toolbar for its activator, or nil for the default toolbar button."
+	^ nil
 ]

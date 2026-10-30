@@ -26,13 +26,12 @@ ClySwitchBrowserModeCommand >> applyCommandResult [
 	self browser rebuildToolbar
 ]
 
-{ #category : 'activation - toolbar support' }
-ClySwitchBrowserModeCommand >> createToolbarItemFor: aCommandActivator [
-
-	^ClyBrowserModeSwitchMorph activatingBy: aCommandActivator
-]
-
 { #category : 'testing' }
 ClySwitchBrowserModeCommand >> isAppliedToBrowser [
 	self subclassResponsibility
+]
+
+{ #category : 'toolbar' }
+ClySwitchBrowserModeCommand >> toolbarItemFor: aCommandActivator [
+	^ ClyBrowserModeSwitchMorph activatingBy: aCommandActivator
 ]

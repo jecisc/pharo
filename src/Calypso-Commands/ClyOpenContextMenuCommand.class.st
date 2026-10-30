@@ -45,20 +45,13 @@ ClyOpenContextMenuCommand >> execute [
 	menu invokeModal
 ]
 
-{ #category : 'context menu' }
-ClyOpenContextMenuCommand >> fillContextMenu: aMenu using: aCommandActivator [
-	"Here we need to take care because this command itself is added to menu of same self context.
-	So we will always enter into this method during submenu generation.
-	We catch this recursion using RecursionStopper.
-	It is easier than adding extra logic to menu building process"
+{ #category : 'menu' }
+ClyOpenContextMenuCommand >> menuSubmenuFor: aCommandActivator [
+	"The menu of this opener, built from its own activations and pure commands. It stays empty while this command is being built, which is how the recursion through this opener is stopped."
 	| submenu |
-	RecursionStopper during: [
-		submenu := self createContextMenu.
-		submenu hasItems ifFalse: [ ^self ].
-
-		super fillContextMenu: aMenu using: aCommandActivator.
-		aMenu lastItem subMenu: submenu
-	]
+	submenu := MenuMorph new.
+	RecursionStopper during: [ submenu := self createContextMenu ].
+	^ submenu
 ]
 
 { #category : 'accessing' }

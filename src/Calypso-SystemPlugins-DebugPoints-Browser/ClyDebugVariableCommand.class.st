@@ -31,7 +31,7 @@ ClyDebugVariableCommand class >> fullBrowserMenuActivation [
 { #category : 'testing' }
 ClyDebugVariableCommand class >> isAbstract [
 
-	^ true
+	^ false
 ]
 
 { #category : 'accessing' }

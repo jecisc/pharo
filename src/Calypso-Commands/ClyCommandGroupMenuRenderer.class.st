@@ -22,12 +22,24 @@ ClyCommandGroupMenuRenderer class >> render: aCommandGroup on: aMenuMorph [
 ]
 
 { #category : 'rendering' }
+ClyCommandGroupMenuRenderer >> notebookActionsFor: aPresentedCommand [
+	"The notebook action buttons of one command, nothing when it cannot run."
+	| activator |
+	aPresentedCommand isActive ifFalse: [ ^ #() ].
+	activator := aPresentedCommand activator.
+	^ { ClyNotebookPageActionButtonMorph forAction: (ClyNotebookPageAction
+		action: [ activator executeCommand ]
+		icon: aPresentedCommand command browserTabActionIcon
+		label: activator commandDescription) }
+]
+
+{ #category : 'rendering' }
 ClyCommandGroupMenuRenderer >> notebookActionsOf: aPresentedRoot [
-	"Answers the notebook actions of the tab tree, sorted flat over all groups as ClyToolbarBuilder>>buildBrowserNotebookActions does."
+	"Answers the notebook actions of the tab tree, sorted flat over all groups."
 	| sorted |
 	sorted := (aPresentedRoot entries flatCollect: [ :group | group entries ]) asSortedCollection: [ :a :c |
 		a order = c order ifTrue: [ a dynamicName <= c dynamicName ] ifFalse: [ a order <= c order ] ].
-	^ sorted flatCollect: [ :each | each activator buildBrowserNotebookActions ]
+	^ sorted flatCollect: [ :each | self notebookActionsFor: each ]
 ]
 
 { #category : 'registering' }
@@ -143,12 +155,25 @@ ClyCommandGroupMenuRenderer >> renderGroup: aPresentedGroup on: aMenu [
 
 { #category : 'rendering' }
 ClyCommandGroupMenuRenderer >> renderItem: aPresentedCommand on: aMenu [
-	"Renders one command. Activation items are drawn by their command exactly as ClyCommandActivator>>buildContextMenu: does (openers and the scope switcher draw more than one item); pure commands are drawn as Commander2 commands."
-	| activator |
+	"Renders one command as a context menu item of its activation: the alternatives it stands for, or one item, with its sub-menu when it opens one."
+	| activator command submenu item |
 	aPresentedCommand isActive ifFalse: [ ^ self ].
 	activator := aPresentedCommand activator.
 	activator ifNil: [ ^ self renderCommand: aPresentedCommand command on: aMenu ].
-	aPresentedCommand command fillContextMenu: aMenu using: activator
+	command := aPresentedCommand command.
+	command menuAlternatives notEmpty
+		ifTrue: [
+			command menuAlternatives do: [ :each | | alternative |
+				alternative := activator newForCommand: each.
+				aMenu add: alternative menuItemName target: alternative selector: #executeCommand ].
+			^ self ].
+	submenu := command menuSubmenuFor: activator.
+	(submenu notNil and: [ submenu hasItems not ]) ifTrue: [ ^ self ].
+	item := aMenu add: activator menuItemName target: activator selector: #executeCommand.
+	activator setUpShortcutTipForMenuItem: item.
+	command setUpIconForMenuItem: item.
+	command description ifNotNil: [ :text | item setBalloonText: text ].
+	submenu ifNotNil: [ aMenu lastItem subMenu: submenu ]
 ]
 
 { #category : 'rendering' }
@@ -164,12 +189,26 @@ ClyCommandGroupMenuRenderer >> renderSubMenuOf: aPresentedGroup on: aMenu [
 ]
 
 { #category : 'rendering' }
+ClyCommandGroupMenuRenderer >> renderToolbarItem: aPresentedCommand on: aToolbarMorph [
+	"Adds the toolbar item of one active command: its widget, or a button for its activator, decorated with its balloon and icon when it asks for it."
+	| activator command item |
+	aPresentedCommand isActive ifFalse: [ ^ self ].
+	activator := aPresentedCommand activator.
+	command := aPresentedCommand command.
+	item := (command toolbarItemFor: activator) ifNil: [ ClyBrowserButtonMorph activatingBy: activator ].
+	command decoratesToolbarItem ifTrue: [
+		command description ifNotNil: [ :text | item setBalloonText: text ].
+		command defaultMenuIconFormSet ifNotNil: [ :iconFormSet | item addIcon: iconFormSet asMorph ] ].
+	aToolbarMorph addNewItem: item
+]
+
+{ #category : 'rendering' }
 ClyCommandGroupMenuRenderer >> renderToolbarOf: aPresentedRoot on: aToolbarMorph [
-	"Draws the toolbar tree as ClyToolbarBuilder>>buildBrowserToolbar: does: a separator before each group that has an active entry, then each entry in order."
+	"Draws the toolbar tree: a separator before each group that has an active entry, then each entry in order."
 	aPresentedRoot entries do: [ :group |
 		(group entries anySatisfy: [ :each | each isActive ]) ifTrue: [
 			aToolbarMorph submorphs ifNotEmpty: [ aToolbarMorph addNewItem: ClyToolbarSeparatorMorph new ].
-			group entries do: [ :each | each activator buildBrowserToolbar: aToolbarMorph ] ] ]
+			group entries do: [ :each | self renderToolbarItem: each on: aToolbarMorph ] ] ]
 ]
 
 { #category : 'rendering' }
