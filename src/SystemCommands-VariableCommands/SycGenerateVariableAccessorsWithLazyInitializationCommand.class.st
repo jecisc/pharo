@@ -28,21 +28,14 @@ SycGenerateVariableAccessorsWithLazyInitializationCommand >> asRefactorings [
 ]
 
 { #category : 'accessing' }
-SycGenerateVariableAccessorsWithLazyInitializationCommand >> defaultMenuIconName [
-	^ #smallAdd
-]
-
-{ #category : 'accessing' }
-SycGenerateVariableAccessorsWithLazyInitializationCommand >> defaultMenuItemName [
-	"Make sure that the user knows that this is a transformation by adding (T) in front of the menu item name."
-
-	^ self refactoringClass menuItemString
-]
-
-{ #category : 'accessing' }
 SycGenerateVariableAccessorsWithLazyInitializationCommand >> fullBrowserOrder [
 
 	^ 2
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> iconName [
+	^ #smallAdd
 ]
 
 { #category : 'testing' }
@@ -54,6 +47,13 @@ SycGenerateVariableAccessorsWithLazyInitializationCommand >> isAvailableInMenuOf
 { #category : 'testing' }
 SycGenerateVariableAccessorsWithLazyInitializationCommand >> isComplexRefactoring [
 	^true
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorsWithLazyInitializationCommand >> name [
+	"Make sure that the user knows that this is a transformation by adding (T) in front of the menu item name."
+
+	^ self refactoringClass menuItemString
 ]
 
 { #category : 'accessing' }

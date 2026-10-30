@@ -34,19 +34,19 @@ ClyRunClassScriptCommand class >> methodTableIconActivation [
 	^ClyTableIconCommandActivation for: ClyMethod asCalypsoItemContext
 ]
 
+{ #category : 'execution' }
+ClyRunClassScriptCommand >> executeRefactoring [
+	self script executeOn: targetClass
+]
+
 { #category : 'accessing' }
-ClyRunClassScriptCommand >> defaultMenuIconName [
+ClyRunClassScriptCommand >> iconName [
 	^ self script iconName
 ]
 
 { #category : 'accessing' }
-ClyRunClassScriptCommand >> defaultMenuItemName [
+ClyRunClassScriptCommand >> name [
 	^'Run script'
-]
-
-{ #category : 'execution' }
-ClyRunClassScriptCommand >> executeRefactoring [
-	self script executeOn: targetClass
 ]
 
 { #category : 'execution' }

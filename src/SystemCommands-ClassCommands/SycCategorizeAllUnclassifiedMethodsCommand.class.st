@@ -8,16 +8,6 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'accessing' }
-SycCategorizeAllUnclassifiedMethodsCommand >> defaultMenuIconName [
-	^#browse
-]
-
-{ #category : 'accessing' }
-SycCategorizeAllUnclassifiedMethodsCommand >> defaultMenuItemName [
-	^'Categorize all uncategorized'
-]
-
 { #category : 'execution' }
 SycCategorizeAllUnclassifiedMethodsCommand >> executeRefactoring [
 	"MethodClassifier should not be hardcoded and should be based on Smalltalk tools"
@@ -25,10 +15,20 @@ SycCategorizeAllUnclassifiedMethodsCommand >> executeRefactoring [
 	classes do: [ :each | each uncategorizedSelectors do: [ :selector | MethodClassifier classify: each >> selector ] ]
 ]
 
+{ #category : 'accessing' }
+SycCategorizeAllUnclassifiedMethodsCommand >> iconName [
+	^#browse
+]
+
 { #category : 'testing' }
 SycCategorizeAllUnclassifiedMethodsCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycCategorizeAllUnclassifiedMethodsCommand >> name [
+	^'Categorize all uncategorized'
 ]
 
 { #category : 'accessing' }

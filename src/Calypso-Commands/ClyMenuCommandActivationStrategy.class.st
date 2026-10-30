@@ -116,7 +116,7 @@ ClyMenuCommandActivationStrategy >> menuItemName: anObject [
 
 { #category : 'accessing' }
 ClyMenuCommandActivationStrategy >> menuItemNameFor: aCommand [
-	^ menuItemName ifNil: [ aCommand defaultMenuItemName ]
+	^ menuItemName ifNil: [ aCommand name ]
 ]
 
 { #category : 'accessing' }

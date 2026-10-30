@@ -20,13 +20,6 @@ ClyRequestProtocolForEditorCommand class >> methodEditorShorcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyRequestProtocolForEditorCommand >> defaultMenuItemName [
-	^ self context tool hasUnacceptedEdits
-		ifTrue: [ 'Classify currently editing method' ]
-		ifFalse: [ 'Classify method' ]
-]
-
-{ #category : 'accessing' }
 ClyRequestProtocolForEditorCommand >> description [
 
 	^ 'Requests a protocol to reclassify a method.'

@@ -33,17 +33,6 @@ ClyIcebergShowMethodVersionCommand class >> methodBrowserTabActivation [
 	^ClyBrowserTabCommandActivation for: ClyMethod asCalypsoItemContext
 ]
 
-{ #category : 'accessing' }
-ClyIcebergShowMethodVersionCommand >> defaultMenuIconName [
-	^#komitterSmalltalkhubRemote
-]
-
-{ #category : 'accessing' }
-ClyIcebergShowMethodVersionCommand >> defaultMenuItemName [
-
-	^ 'Commit history'
-]
-
 { #category : 'execution' }
 ClyIcebergShowMethodVersionCommand >> executeRefactoring [
 
@@ -66,9 +55,20 @@ ClyIcebergShowMethodVersionCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+ClyIcebergShowMethodVersionCommand >> iconName [
+	^#komitterSmalltalkhubRemote
+]
+
+{ #category : 'accessing' }
 ClyIcebergShowMethodVersionCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyIcebergShowMethodVersionCommand >> name [
+
+	^ 'Commit history'
 ]
 
 { #category : 'accessing' }

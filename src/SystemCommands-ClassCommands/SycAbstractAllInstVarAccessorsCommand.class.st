@@ -25,19 +25,14 @@ SycAbstractAllInstVarAccessorsCommand >> asRefactorings [
 ]
 
 { #category : 'accessing' }
-SycAbstractAllInstVarAccessorsCommand >> defaultMenuIconName [
-	^ #smallAdd
-]
-
-{ #category : 'accessing' }
-SycAbstractAllInstVarAccessorsCommand >> defaultMenuItemName [
-	^'Abstract instance variables'
-]
-
-{ #category : 'accessing' }
 SycAbstractAllInstVarAccessorsCommand >> fullBrowserOrder [
 
 	^ 2.1
+]
+
+{ #category : 'accessing' }
+SycAbstractAllInstVarAccessorsCommand >> iconName [
+	^ #smallAdd
 ]
 
 { #category : 'testing' }
@@ -50,6 +45,11 @@ SycAbstractAllInstVarAccessorsCommand >> isAvailableInMenuOf: aToolContext [
 { #category : 'testing' }
 SycAbstractAllInstVarAccessorsCommand >> isComplexRefactoring [
 	^ true
+]
+
+{ #category : 'accessing' }
+SycAbstractAllInstVarAccessorsCommand >> name [
+	^'Abstract instance variables'
 ]
 
 { #category : 'accessing' }

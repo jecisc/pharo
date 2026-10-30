@@ -22,11 +22,6 @@ ClyShowCritiqueDetailsCommand >> critiqueDescription [
 			  nextPutAll: self critique description ]
 ]
 
-{ #category : 'accessing' }
-ClyShowCritiqueDetailsCommand >> defaultMenuIconName [
-	^#smallQuestion
-]
-
 { #category : 'table decoration' }
 ClyShowCritiqueDetailsCommand >> description [
 	^'View rationale behind the rule'
@@ -41,4 +36,9 @@ ClyShowCritiqueDetailsCommand >> executeRefactoring [
 		acceptLabel: 'close';
 		extent: 500 @ 500;
 		openDialog
+]
+
+{ #category : 'accessing' }
+ClyShowCritiqueDetailsCommand >> iconName [
+	^#smallQuestion
 ]

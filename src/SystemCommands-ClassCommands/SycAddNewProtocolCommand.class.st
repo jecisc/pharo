@@ -24,28 +24,28 @@ SycAddNewProtocolCommand >> applyCommandResult [
 	self context showProtocol: protocol
 ]
 
-{ #category : 'accessing' }
-SycAddNewProtocolCommand >> defaultMenuIconName [
-
-	^ #add
-]
-
-{ #category : 'accessing' }
-SycAddNewProtocolCommand >> defaultMenuItemName [
-
-	^ 'New protocol'
-]
-
 { #category : 'execution' }
 SycAddNewProtocolCommand >> executeRefactoring [
 
 	targetClass addProtocol: protocol
 ]
 
+{ #category : 'accessing' }
+SycAddNewProtocolCommand >> iconName [
+
+	^ #add
+]
+
 { #category : 'testing' }
 SycAddNewProtocolCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycAddNewProtocolCommand >> name [
+
+	^ 'New protocol'
 ]
 
 { #category : 'accessing' }

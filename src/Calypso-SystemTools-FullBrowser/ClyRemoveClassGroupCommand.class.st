@@ -40,16 +40,6 @@ ClyRemoveClassGroupCommand >> classGroup: anObject [
 ]
 
 { #category : 'accessing' }
-ClyRemoveClassGroupCommand >> defaultMenuIconName [
-	^#remove
-]
-
-{ #category : 'accessing' }
-ClyRemoveClassGroupCommand >> defaultMenuItemName [
-	^'Remove'
-]
-
-{ #category : 'accessing' }
 ClyRemoveClassGroupCommand >> description [
 
 ^ 'Removes class group with containing classes.'
@@ -61,10 +51,20 @@ ClyRemoveClassGroupCommand >> executeRefactoring [
 	classGroup removeWithClasses
 ]
 
+{ #category : 'accessing' }
+ClyRemoveClassGroupCommand >> iconName [
+	^#remove
+]
+
 { #category : 'testing' }
 ClyRemoveClassGroupCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassGroupContext
+]
+
+{ #category : 'accessing' }
+ClyRemoveClassGroupCommand >> name [
+	^'Remove'
 ]
 
 { #category : 'accessing' }

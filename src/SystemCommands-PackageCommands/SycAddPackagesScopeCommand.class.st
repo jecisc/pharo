@@ -9,16 +9,6 @@ Class {
 	#tag : 'Scope'
 }
 
-{ #category : 'accessing' }
-SycAddPackagesScopeCommand >> defaultMenuIconName [
-	^ #smallPushpin
-]
-
-{ #category : 'accessing' }
-SycAddPackagesScopeCommand >> defaultMenuItemName [
-	^ 'Create scope from selected package(s)'
-]
-
 { #category : 'execution' }
 SycAddPackagesScopeCommand >> executeRefactoring [
 
@@ -26,6 +16,16 @@ SycAddPackagesScopeCommand >> executeRefactoring [
 	scope := ScopesManager newScopeFrom: self packages.
 	ScopesManager addScope: scope.
 	ScopesPresenter openSelecting: scope
+]
+
+{ #category : 'accessing' }
+SycAddPackagesScopeCommand >> iconName [
+	^ #smallPushpin
+]
+
+{ #category : 'accessing' }
+SycAddPackagesScopeCommand >> name [
+	^ 'Create scope from selected package(s)'
 ]
 
 { #category : 'accessing' }

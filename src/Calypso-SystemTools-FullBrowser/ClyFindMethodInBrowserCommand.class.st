@@ -23,20 +23,15 @@ ClyFindMethodInBrowserCommand class >> fullBrowserShortcutActivation [
 	^ClyShortcutActivation by: $f meta for: ClyFullBrowserMethodContext
 ]
 
-{ #category : 'accessing' }
-ClyFindMethodInBrowserCommand >> defaultMenuIconName [
-	^#smallFind
-]
-
-{ #category : 'accessing' }
-ClyFindMethodInBrowserCommand >> defaultMenuItemName [
-	^'Find method'
-]
-
 { #category : 'execution' }
 ClyFindMethodInBrowserCommand >> executeRefactoring [
 
 	self browser selectMethod: method
+]
+
+{ #category : 'accessing' }
+ClyFindMethodInBrowserCommand >> iconName [
+	^#smallFind
 ]
 
 { #category : 'testing' }
@@ -49,6 +44,11 @@ ClyFindMethodInBrowserCommand >> isAvailableInMenuOf: aToolContext [
 ClyFindMethodInBrowserCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyFindMethodInBrowserCommand >> name [
+	^'Find method'
 ]
 
 { #category : 'accessing' }

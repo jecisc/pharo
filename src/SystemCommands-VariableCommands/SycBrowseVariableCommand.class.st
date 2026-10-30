@@ -18,20 +18,20 @@ SycBrowseVariableCommand class >> canBeExecutedInContext: aToolContext [
 		and: [ super canBeExecutedInContext: aToolContext ]
 ]
 
-{ #category : 'accessing' }
-SycBrowseVariableCommand >> defaultMenuIconName [
-	^#browse
-]
-
-{ #category : 'accessing' }
-SycBrowseVariableCommand >> defaultMenuItemName [
-	^'Browse'
-]
-
 { #category : 'execution' }
 SycBrowseVariableCommand >> executeRefactoring [
 
 	variables last openBrowser
+]
+
+{ #category : 'accessing' }
+SycBrowseVariableCommand >> iconName [
+	^#browse
+]
+
+{ #category : 'accessing' }
+SycBrowseVariableCommand >> name [
+	^'Browse'
 ]
 
 { #category : 'accessing' }

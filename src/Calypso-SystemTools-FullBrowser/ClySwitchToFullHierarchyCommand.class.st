@@ -16,11 +16,6 @@ ClySwitchToFullHierarchyCommand class >> fullBrowserShortcutActivation [
 	^ClyShortcutActivation by: $h meta for: ClyFullBrowserClassContext
 ]
 
-{ #category : 'accessing' }
-ClySwitchToFullHierarchyCommand >> defaultMenuItemName [
-	^'Hier.'
-]
-
 { #category : 'execution' }
 ClySwitchToFullHierarchyCommand >> executeRefactoring [
 
@@ -31,4 +26,9 @@ ClySwitchToFullHierarchyCommand >> executeRefactoring [
 ClySwitchToFullHierarchyCommand >> isAppliedToBrowser [
 
 	^self browser showsFullClassHierarchy
+]
+
+{ #category : 'accessing' }
+ClySwitchToFullHierarchyCommand >> name [
+	^'Hier.'
 ]

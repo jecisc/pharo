@@ -16,16 +16,6 @@ Class {
 }
 
 { #category : 'accessing' }
-SycDuplicatePackageCommand >> defaultMenuIconName [
-	^#smallCopy
-]
-
-{ #category : 'accessing' }
-SycDuplicatePackageCommand >> defaultMenuItemName [
-	^'Duplicate package'
-]
-
-{ #category : 'accessing' }
 SycDuplicatePackageCommand >> description [
 
 	^ 'Copy a given package.'
@@ -36,6 +26,16 @@ SycDuplicatePackageCommand >> executeRefactoring [
 	"The copy is made by the dialog in #prepareFullExecution."
 
 	
+]
+
+{ #category : 'accessing' }
+SycDuplicatePackageCommand >> iconName [
+	^#smallCopy
+]
+
+{ #category : 'accessing' }
+SycDuplicatePackageCommand >> name [
+	^'Duplicate package'
 ]
 
 { #category : 'accessing' }

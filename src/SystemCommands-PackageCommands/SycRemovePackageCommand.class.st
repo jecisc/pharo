@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'accessing' }
-SycRemovePackageCommand class >> defaultMenuIconName [
+SycRemovePackageCommand class >> iconName [
 	^ #delete
 ]
 
@@ -30,16 +30,6 @@ SycRemovePackageCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
-SycRemovePackageCommand >> defaultMenuIconName [
-	^#remove
-]
-
-{ #category : 'accessing' }
-SycRemovePackageCommand >> defaultMenuItemName [
-	^'Remove'
-]
-
-{ #category : 'accessing' }
 SycRemovePackageCommand >> description [
 
 	^ 'Removes Packages.'
@@ -50,6 +40,16 @@ SycRemovePackageCommand >> executeRefactoring [
 
 	self packages do: [ :each | each removeFromSystem ].
 	self packages: OrderedCollection new
+]
+
+{ #category : 'accessing' }
+SycRemovePackageCommand >> iconName [
+	^#remove
+]
+
+{ #category : 'accessing' }
+SycRemovePackageCommand >> name [
+	^'Remove'
 ]
 
 { #category : 'accessing' }

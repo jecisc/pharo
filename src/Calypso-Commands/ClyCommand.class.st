@@ -17,13 +17,8 @@ ClyCommand class >> canBeExecutedInContext: aToolContext [
 	^self isAbstract not
 ]
 
-{ #category : 'spec2 compatibility' }
-ClyCommand class >> defaultHelp [
-	^ self defaultMenuItemName
-]
-
 { #category : 'accessing' }
-ClyCommand class >> defaultMenuIconName [
+ClyCommand class >> iconName [
 	"For compatibility the actual icon named can be defined on class side.
 	But right way it to use same instance side method.
 
@@ -31,13 +26,6 @@ ClyCommand class >> defaultMenuIconName [
 	So it is easy to allow nil.
 	But users should use instance side method defaultMenuIcon which should return Form instance"
 	^nil
-]
-
-{ #category : 'accessing' }
-ClyCommand class >> defaultMenuItemName [
-	"It should be defined on instance side.
-	But for compatibility default instance side method delegates to class side"
-	^self name
 ]
 
 { #category : 'testing' }
@@ -85,30 +73,9 @@ ClyCommand >> defaultMenuIcon [
 ClyCommand >> defaultMenuIconFormSet [
 	"By default the result is nil which is not really nice
 	but it is already expected by many tools.	So it is easy to allow nil.
-	For simple cases users should implement class side method #defaultMenuIconName"
-	^self defaultMenuIconName ifNotNil: [ :iconName |
+	For simple cases users should implement class side method #iconName"
+	^self iconName ifNotNil: [ :iconName |
 		Smalltalk ui iconFormSetNamed: iconName ]
-]
-
-{ #category : 'accessing' }
-ClyCommand >> defaultMenuIconName [
-	"For compatibility it delegates actual logic to class side. But it should be just
-		^nil
-	Not really nice to return nil. But it is already expected by many tools.
-	So it is easy to allow nil.
-	When users want to define real icon instead of standard named icon
-	they should override another instance side method #defaultMenuIcon
-	which should return desired Form instance"
-	^self class defaultMenuIconName
-]
-
-{ #category : 'accessing' }
-ClyCommand >> defaultMenuItemName [
-	"For compatibility default instance side method delegates to class side.
-	But normally it should just return
-		self class name"
-
-	^self class defaultMenuItemName
 ]
 
 { #category : 'accessing' }
@@ -207,6 +174,18 @@ ClyCommand >> icon [
 	^ self defaultMenuIcon
 ]
 
+{ #category : 'accessing' }
+ClyCommand >> iconName [
+	"For compatibility it delegates actual logic to class side. But it should be just
+		^nil
+	Not really nice to return nil. But it is already expected by many tools.
+	So it is easy to allow nil.
+	When users want to define real icon instead of standard named icon
+	they should override another instance side method #defaultMenuIcon
+	which should return desired Form instance"
+	^self class iconName
+]
+
 { #category : 'initialization' }
 ClyCommand >> initialize [
 	super initialize.
@@ -245,8 +224,7 @@ ClyCommand >> morphicUIManager [
 
 { #category : 'accessing' }
 ClyCommand >> name [
-
-	^ self defaultMenuItemName
+	^ self class name
 ]
 
 { #category : 'accessing' }

@@ -26,11 +26,6 @@ ClyOpenContextMenuCommand >> createContextMenu [
 	^self activationStrategy buildContextMenuFor: self context tool inContext: self context
 ]
 
-{ #category : 'accessing' }
-ClyOpenContextMenuCommand >> defaultMenuItemName [
-	^'Open self context menu'
-]
-
 { #category : 'execution' }
 ClyOpenContextMenuCommand >> execute [
 
@@ -60,7 +55,7 @@ ClyOpenContextMenuCommand >> fillContextMenu: aMenu using: aCommandActivator [
 
 { #category : 'accessing' }
 ClyOpenContextMenuCommand >> name [
-	^ basicName
+	^ 'Open self context menu'
 ]
 
 { #category : 'context menu' }

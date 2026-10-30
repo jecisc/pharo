@@ -14,17 +14,6 @@ Class {
 }
 
 { #category : 'accessing' }
-SycAbstractVariableCommand >> defaultMenuIconName [
-	^ #smallAdd
-]
-
-{ #category : 'accessing' }
-SycAbstractVariableCommand >> defaultMenuItemName [
-
-	^'Abstract accessors'
-]
-
-{ #category : 'accessing' }
 SycAbstractVariableCommand >> description [
     ^ 'Replace direct accesses to an instance variable with calls to its getter or setter. Missing accessor methods will be generated automatically.'
 ]
@@ -35,10 +24,21 @@ SycAbstractVariableCommand >> executeRefactoring [
 	^ ((ReAbstractInstanceVariableDriver newApplication: self application) scopes: refactoringScopes name: variables first name class: selectedClass name) runRefactoring
 ]
 
+{ #category : 'accessing' }
+SycAbstractVariableCommand >> iconName [
+	^ #smallAdd
+]
+
 { #category : 'testing' }
 SycAbstractVariableCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserVariableContext
+]
+
+{ #category : 'accessing' }
+SycAbstractVariableCommand >> name [
+
+	^'Abstract accessors'
 ]
 
 { #category : 'accessing' }

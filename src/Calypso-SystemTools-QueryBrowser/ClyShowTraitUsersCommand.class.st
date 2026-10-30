@@ -24,11 +24,6 @@ ClyShowTraitUsersCommand >> browser: anObject [
 	browser := anObject
 ]
 
-{ #category : 'accessing' }
-ClyShowTraitUsersCommand >> defaultMenuItemName [
-	^'Show trait users'
-]
-
 { #category : 'execution' }
 ClyShowTraitUsersCommand >> executeRefactoring [
 
@@ -45,6 +40,11 @@ ClyShowTraitUsersCommand >> isAvailableInMenuOf: aToolContext [
 ClyShowTraitUsersCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowTraitUsersCommand >> name [
+	^'Show trait users'
 ]
 
 { #category : 'accessing' }

@@ -8,19 +8,14 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'accessing' }
-SycBrowseClassCommand >> defaultMenuIconName [
-	^#browse
-]
-
-{ #category : 'accessing' }
-SycBrowseClassCommand >> defaultMenuItemName [
-	^'Browse'
-]
-
 { #category : 'execution' }
 SycBrowseClassCommand >> executeRefactoring [
 	targetClass browse
+]
+
+{ #category : 'accessing' }
+SycBrowseClassCommand >> iconName [
+	^#browse
 ]
 
 { #category : 'testing' }
@@ -33,6 +28,11 @@ SycBrowseClassCommand >> isAvailableInMenuOf: aToolContext [
 SycBrowseClassCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+SycBrowseClassCommand >> name [
+	^'Browse'
 ]
 
 { #category : 'accessing' }

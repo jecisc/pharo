@@ -27,14 +27,6 @@ SycDeprecateMessageCommand class >> canBeExecutedInContext: aToolContext [
 SycDeprecateMessageCommand >> applyCommandResult [
 ]
 
-{ #category : 'accessing' }
-SycDeprecateMessageCommand >> defaultMenuItemName [
-	"This is not really good since this is the job of the driver to invoke the refactoring 
-	but we are transitionning"
-	
-	^ RBDeprecateMethodTransformation menuItemString
-]
-
 { #category : 'execution' }
 SycDeprecateMessageCommand >> executeRefactoring [
 
@@ -42,6 +34,14 @@ SycDeprecateMessageCommand >> executeRefactoring [
 		 deprecateMethod: originalMessage selector
 		 in: originalMessage methodClass
 		 scopes: refactoringScopes) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycDeprecateMessageCommand >> name [
+	"This is not really good since this is the job of the driver to invoke the refactoring 
+	but we are transitionning"
+	
+	^ RBDeprecateMethodTransformation menuItemString
 ]
 
 { #category : 'accessing' }

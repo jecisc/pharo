@@ -24,16 +24,6 @@ SycShowMethodVersionCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'accessing' }
-SycShowMethodVersionCommand >> defaultMenuIconName [
-	^#history
-]
-
-{ #category : 'accessing' }
-SycShowMethodVersionCommand >> defaultMenuItemName [
-	^'Versions'
-]
-
-{ #category : 'accessing' }
 SycShowMethodVersionCommand >> description [
 
 	^ 'Show local method version.'
@@ -46,9 +36,19 @@ SycShowMethodVersionCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+SycShowMethodVersionCommand >> iconName [
+	^#history
+]
+
+{ #category : 'accessing' }
 SycShowMethodVersionCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+SycShowMethodVersionCommand >> name [
+	^'Versions'
 ]
 
 { #category : 'accessing' }

@@ -18,16 +18,6 @@ SycInspectVariableValueCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'accessing' }
-SycInspectVariableValueCommand >> defaultMenuIconName [
-	^#inspect
-]
-
-{ #category : 'accessing' }
-SycInspectVariableValueCommand >> defaultMenuItemName [
-	^'Inspect value'
-]
-
-{ #category : 'accessing' }
 SycInspectVariableValueCommand >> description [
 
 	^ 'Inspect variable value'
@@ -43,6 +33,16 @@ SycInspectVariableValueCommand >> executeRefactoring [
 SycInspectVariableValueCommand >> fullBrowserOrder [
 
 	^ 1000
+]
+
+{ #category : 'accessing' }
+SycInspectVariableValueCommand >> iconName [
+	^#inspect
+]
+
+{ #category : 'accessing' }
+SycInspectVariableValueCommand >> name [
+	^'Inspect value'
 ]
 
 { #category : 'accessing' }

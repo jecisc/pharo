@@ -32,16 +32,6 @@ SycRenameArgOrTempCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
-SycRenameArgOrTempCommand >> defaultMenuIconName [
-	^ #edit
-]
-
-{ #category : 'accessing' }
-SycRenameArgOrTempCommand >> defaultMenuItemName [
-	^' (Old refactor) rename temp'
-]
-
-{ #category : 'accessing' }
 SycRenameArgOrTempCommand >> description [
 
 	^ 'Renames temp variable in given method.'
@@ -55,6 +45,16 @@ SycRenameArgOrTempCommand >> executeRefactoring [
 		   method: self method;
 		   scopes: refactoringScopes;
 		   yourself) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycRenameArgOrTempCommand >> iconName [
+	^ #edit
+]
+
+{ #category : 'accessing' }
+SycRenameArgOrTempCommand >> name [
+	^' (Old refactor) rename temp'
 ]
 
 { #category : 'accessing' }

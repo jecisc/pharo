@@ -43,13 +43,13 @@ SycOpenExtraInMethodGroupMenuCommand >> cmCommandClass [
 ]
 
 { #category : 'accessing' }
-SycOpenExtraInMethodGroupMenuCommand >> defaultMenuIconName [
+SycOpenExtraInMethodGroupMenuCommand >> iconName [
 
 	^ #smallRedo
 ]
 
 { #category : 'accessing' }
-SycOpenExtraInMethodGroupMenuCommand >> defaultMenuItemName [
+SycOpenExtraInMethodGroupMenuCommand >> name [
 
 	^ 'Extras'
 ]

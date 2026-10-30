@@ -40,7 +40,7 @@ ClyCommand >> createTableCellButtonWith: anIcon using: aCommandActivator [
 		target: aCommandActivator;
 		actionSelector: #executeCommand;
 		color: Color transparent;
-		helpText: self defaultMenuItemName;
+		helpText: self name;
 		borderWidth: 0;
 		labelGraphic: anIcon;
 		extent: anIcon extent
@@ -79,7 +79,7 @@ ClyCommand >> decorateToolbarItem: aBrowserToolbarItem [
 
 { #category : '*Calypso-Browser' }
 ClyCommand >> defaultToolbarItemName [
-	^self defaultMenuItemName
+	^self name
 ]
 
 { #category : '*Calypso-Browser' }

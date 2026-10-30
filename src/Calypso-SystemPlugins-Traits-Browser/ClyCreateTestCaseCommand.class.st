@@ -19,16 +19,6 @@ ClyCreateTestCaseCommand class >> canBeExecutedInContext: aBrowserContext [
 	^aBrowserContext isPackageSelected
 ]
 
-{ #category : 'accessing' }
-ClyCreateTestCaseCommand >> defaultMenuIconName [
-	^#testGreen
-]
-
-{ #category : 'accessing' }
-ClyCreateTestCaseCommand >> defaultMenuItemName [
-	^'New test class'
-]
-
 { #category : 'execution' }
 ClyCreateTestCaseCommand >> executeRefactoring [
 
@@ -40,10 +30,20 @@ ClyCreateTestCaseCommand >> executeRefactoring [
 	resultClass ifNotNil: [ self browser selectClass: resultClass ]
 ]
 
+{ #category : 'accessing' }
+ClyCreateTestCaseCommand >> iconName [
+	^#testGreen
+]
+
 { #category : 'testing' }
 ClyCreateTestCaseCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyCreateTestCaseCommand >> name [
+	^'New test class'
 ]
 
 { #category : 'accessing' }

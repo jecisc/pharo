@@ -43,13 +43,13 @@ SycOpenExtraInPackageMenuCommand >> cmCommandClass [
 ]
 
 { #category : 'accessing' }
-SycOpenExtraInPackageMenuCommand >> defaultMenuIconName [
+SycOpenExtraInPackageMenuCommand >> iconName [
 
 	^ #smallRedo
 ]
 
 { #category : 'accessing' }
-SycOpenExtraInPackageMenuCommand >> defaultMenuItemName [
+SycOpenExtraInPackageMenuCommand >> name [
 
 	^ 'Extras'
 ]

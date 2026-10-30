@@ -32,12 +32,6 @@ ClyMoveMethodGroupsToPackageCommand class >> fullBrowserDragAndDropActivation [
 		toDropIn: Package asCalypsoItemContext
 ]
 
-{ #category : 'accessing' }
-ClyMoveMethodGroupsToPackageCommand >> defaultMenuItemName [
-
-	^'Convert to extension'
-]
-
 { #category : 'execution' }
 ClyMoveMethodGroupsToPackageCommand >> executeRefactoring [
 
@@ -46,6 +40,12 @@ ClyMoveMethodGroupsToPackageCommand >> executeRefactoring [
 			repackagingCommand := SycMoveMethodsToPackageCommand for: group methods to: package.
 			repackagingCommand execute.
 			group removeWithMethods ]
+]
+
+{ #category : 'accessing' }
+ClyMoveMethodGroupsToPackageCommand >> name [
+
+	^'Convert to extension'
 ]
 
 { #category : 'accessing' }

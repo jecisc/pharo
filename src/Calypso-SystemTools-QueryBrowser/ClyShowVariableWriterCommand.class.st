@@ -27,11 +27,6 @@ ClyShowVariableWriterCommand class >> fullBrowserShortcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyShowVariableWriterCommand >> defaultMenuItemName [
-	^'Writers'
-]
-
-{ #category : 'accessing' }
 ClyShowVariableWriterCommand >> description [
 
 	^ 'Show all variable writers.'
@@ -47,6 +42,11 @@ ClyShowVariableWriterCommand >> executeRefactoring [
 ClyShowVariableWriterCommand >> fullBrowserOrder [
 
 	^ 2001
+]
+
+{ #category : 'accessing' }
+ClyShowVariableWriterCommand >> name [
+	^'Writers'
 ]
 
 { #category : 'accessing' }

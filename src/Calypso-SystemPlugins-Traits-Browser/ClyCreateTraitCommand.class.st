@@ -28,16 +28,6 @@ ClyCreateTraitCommand class >> canBeExecutedInContext: aBrowserContext [
 	^aBrowserContext isPackageSelected
 ]
 
-{ #category : 'accessing' }
-ClyCreateTraitCommand >> defaultMenuIconName [
-	^#trait
-]
-
-{ #category : 'accessing' }
-ClyCreateTraitCommand >> defaultMenuItemName [
-	^'New trait'
-]
-
 { #category : 'execution' }
 ClyCreateTraitCommand >> executeRefactoring [
 
@@ -49,10 +39,20 @@ ClyCreateTraitCommand >> executeRefactoring [
 	resultTrait ifNotNil: [ self browser selectClass: resultTrait ]
 ]
 
+{ #category : 'accessing' }
+ClyCreateTraitCommand >> iconName [
+	^#trait
+]
+
 { #category : 'testing' }
 ClyCreateTraitCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyCreateTraitCommand >> name [
+	^'New trait'
 ]
 
 { #category : 'accessing' }

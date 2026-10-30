@@ -30,26 +30,26 @@ SycAddNewClassTagCommand >> applyCommandResult [
 	self context showPackage: package tag: tagName
 ]
 
-{ #category : 'accessing' }
-SycAddNewClassTagCommand >> defaultMenuIconName [
-	^#add
-]
-
-{ #category : 'accessing' }
-SycAddNewClassTagCommand >> defaultMenuItemName [
-	^'New tag'
-]
-
 { #category : 'execution' }
 SycAddNewClassTagCommand >> executeRefactoring [
 
 	package ensureTag: tagName
 ]
 
+{ #category : 'accessing' }
+SycAddNewClassTagCommand >> iconName [
+	^#add
+]
+
 { #category : 'testing' }
 SycAddNewClassTagCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ true
+]
+
+{ #category : 'accessing' }
+SycAddNewClassTagCommand >> name [
+	^'New tag'
 ]
 
 { #category : 'accessing' }

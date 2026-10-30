@@ -27,11 +27,6 @@ ClyShowVariableRefCommand class >> fullBrowserShortcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyShowVariableRefCommand >> defaultMenuItemName [
-	^'References'
-]
-
-{ #category : 'accessing' }
 ClyShowVariableRefCommand >> description [
 
 	^ 'Show all variable references.'
@@ -47,6 +42,11 @@ ClyShowVariableRefCommand >> executeRefactoring [
 ClyShowVariableRefCommand >> fullBrowserOrder [
 
 	^ 2000
+]
+
+{ #category : 'accessing' }
+ClyShowVariableRefCommand >> name [
+	^'References'
 ]
 
 { #category : 'accessing' }

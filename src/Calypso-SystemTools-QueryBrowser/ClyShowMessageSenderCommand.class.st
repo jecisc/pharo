@@ -61,16 +61,6 @@ ClyShowMessageSenderCommand >> browser: anObject [
 ]
 
 { #category : 'accessing' }
-ClyShowMessageSenderCommand >> defaultMenuIconName [
-	^ #smallFind
-]
-
-{ #category : 'accessing' }
-ClyShowMessageSenderCommand >> defaultMenuItemName [
-	^'Senders'
-]
-
-{ #category : 'accessing' }
 ClyShowMessageSenderCommand >> description [
 
 	^ 'Show all message senders.'
@@ -83,9 +73,19 @@ ClyShowMessageSenderCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+ClyShowMessageSenderCommand >> iconName [
+	^ #smallFind
+]
+
+{ #category : 'accessing' }
 ClyShowMessageSenderCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowMessageSenderCommand >> name [
+	^'Senders'
 ]
 
 { #category : 'accessing' }

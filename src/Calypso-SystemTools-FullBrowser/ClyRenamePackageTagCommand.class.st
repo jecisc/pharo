@@ -41,11 +41,6 @@ ClyRenamePackageTagCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
-ClyRenamePackageTagCommand >> defaultMenuItemName [
-	^'Rename'
-]
-
-{ #category : 'accessing' }
 ClyRenamePackageTagCommand >> description [ 
 
 ^'Renames class tag of the package'
@@ -61,6 +56,11 @@ ClyRenamePackageTagCommand >> executeRefactoring [
 ClyRenamePackageTagCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassGroupContext
+]
+
+{ #category : 'accessing' }
+ClyRenamePackageTagCommand >> name [
+	^'Rename'
 ]
 
 { #category : 'accessing' }

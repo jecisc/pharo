@@ -9,11 +9,6 @@ Class {
 	#tag : 'Commands-Packages'
 }
 
-{ #category : 'accessing' }
-ClySwitchToScopedModeCommand >> defaultMenuItemName [
-	^'Set up scope'
-]
-
 { #category : 'execution' }
 ClySwitchToScopedModeCommand >> executeRefactoring [
 
@@ -24,6 +19,11 @@ ClySwitchToScopedModeCommand >> executeRefactoring [
 ClySwitchToScopedModeCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserPackageContext
+]
+
+{ #category : 'accessing' }
+ClySwitchToScopedModeCommand >> name [
+	^'Set up scope'
 ]
 
 { #category : 'accessing' }

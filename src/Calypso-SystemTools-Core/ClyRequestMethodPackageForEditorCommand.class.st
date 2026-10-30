@@ -23,11 +23,6 @@ ClyRequestMethodPackageForEditorCommand class >> methodEditorShorcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyRequestMethodPackageForEditorCommand >> defaultMenuItemName [
-	^'Select method package'
-]
-
-{ #category : 'accessing' }
 ClyRequestMethodPackageForEditorCommand >> description [ 
 
 ^'Requests package to be used as editing method package.'
@@ -38,6 +33,11 @@ ClyRequestMethodPackageForEditorCommand >> executeRefactoring [
 	| packageEditor |
 	packageEditor := methodEditor protocolAndPackageEditor.
 	packageEditor requestChangeBy: [ packageEditor requestPackage]
+]
+
+{ #category : 'accessing' }
+ClyRequestMethodPackageForEditorCommand >> name [
+	^'Select method package'
 ]
 
 { #category : 'accessing' }

@@ -8,18 +8,6 @@ Class {
 	#package : 'SystemCommands-VariableCommands'
 }
 
-{ #category : 'accessing' }
-SycGenerateVariableAccessorCommand >> defaultMenuIconName [
-	^ #smallAdd
-]
-
-{ #category : 'accessing' }
-SycGenerateVariableAccessorCommand >> defaultMenuItemName [
-	"Make sure that the user knows that this is a transformation by adding (T) in front of the menu item name."
-
-	^ self refactoringClass menuItemString
-]
-
 { #category : 'execution' }
 SycGenerateVariableAccessorCommand >> executeRefactoring [
 
@@ -34,6 +22,18 @@ SycGenerateVariableAccessorCommand >> executeRefactoring [
 SycGenerateVariableAccessorCommand >> fullBrowserOrder [
 
 	^ 1000
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorCommand >> iconName [
+	^ #smallAdd
+]
+
+{ #category : 'accessing' }
+SycGenerateVariableAccessorCommand >> name [
+	"Make sure that the user knows that this is a transformation by adding (T) in front of the menu item name."
+
+	^ self refactoringClass menuItemString
 ]
 
 { #category : 'accessing' }

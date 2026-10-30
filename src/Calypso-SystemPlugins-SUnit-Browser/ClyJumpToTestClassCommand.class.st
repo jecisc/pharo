@@ -33,16 +33,6 @@ ClyJumpToTestClassCommand class >> fullBrowserShortcutActivation [
 	^ ClyShortcutActivation by: $g meta, $j meta for: ClyFullBrowserClassContext
 ]
 
-{ #category : 'accessing' }
-ClyJumpToTestClassCommand >> defaultMenuIconName [
-	^#jump
-]
-
-{ #category : 'accessing' }
-ClyJumpToTestClassCommand >> defaultMenuItemName [
-	^ 'Jump to test class'
-]
-
 { #category : 'execution' }
 ClyJumpToTestClassCommand >> executeRefactoring [
 
@@ -53,10 +43,20 @@ ClyJumpToTestClassCommand >> executeRefactoring [
 		do: [ :ex | self inform: 'Cannot generate test class for ' , ex baseClass printString , '.' ]
 ]
 
+{ #category : 'accessing' }
+ClyJumpToTestClassCommand >> iconName [
+	^#jump
+]
+
 { #category : 'testing' }
 ClyJumpToTestClassCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+ClyJumpToTestClassCommand >> name [
+	^ 'Jump to test class'
 ]
 
 { #category : 'accessing' }

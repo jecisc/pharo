@@ -41,11 +41,6 @@ ClyRenameProtocolCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
-ClyRenameProtocolCommand >> defaultMenuItemName [
-	^'Rename'
-]
-
-{ #category : 'accessing' }
 ClyRenameProtocolCommand >> description [ 
 
 ^'Renames method protocol.'
@@ -70,6 +65,11 @@ ClyRenameProtocolCommand >> methodGroup [
 { #category : 'accessing' }
 ClyRenameProtocolCommand >> methodGroup: anObject [
 	methodGroup := anObject
+]
+
+{ #category : 'accessing' }
+ClyRenameProtocolCommand >> name [
+	^'Rename'
 ]
 
 { #category : 'accessing' }

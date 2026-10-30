@@ -31,16 +31,16 @@ ClyConvertMethodGroupToProtocolCommand >> applyCommandResult [
 	self context showProtocol: protocol
 ]
 
-{ #category : 'accessing' }
-ClyConvertMethodGroupToProtocolCommand >> defaultMenuItemName [
-
-	^ 'Convert to protocol'
-]
-
 { #category : 'execution' }
 ClyConvertMethodGroupToProtocolCommand >> executeRefactoring [
 
 	methodGroups do: [ :methodGroup | methodGroup categorizeMethodsIn: protocol ]
+]
+
+{ #category : 'accessing' }
+ClyConvertMethodGroupToProtocolCommand >> name [
+
+	^ 'Convert to protocol'
 ]
 
 { #category : 'accessing' }

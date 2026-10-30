@@ -36,7 +36,7 @@ ClyActivatorMenuItem >> addToMenuPresenter: aSpMenuPresenter [
 				icon: self icon;
 				action: [ self executeCommand ];
 				enabled: self isActive;
-				description: self command class defaultHelp.
+				description: self command class name.
 				self getShortcutTipForMenuItem ifNotNil: [ :shortcut | anItem shortcut: shortcut ] ]
 ]
 

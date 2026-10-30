@@ -39,16 +39,6 @@ SycAddNewPackageCommand >> applyCommandResult [
 ]
 
 { #category : 'accessing' }
-SycAddNewPackageCommand >> defaultMenuIconName [
-	^#add
-]
-
-{ #category : 'accessing' }
-SycAddNewPackageCommand >> defaultMenuItemName [
-	^'New package'
-]
-
-{ #category : 'accessing' }
 SycAddNewPackageCommand >> description [
 
 	^ 'Adds a new package into the system.'
@@ -60,6 +50,16 @@ SycAddNewPackageCommand >> executeRefactoring [
 	resultPackage := [ systemEnvironment createPackageNamed: packageName ]
 		                 on: PackageConflictError
 		                 do: [ systemEnvironment packageNamed: packageName ]
+]
+
+{ #category : 'accessing' }
+SycAddNewPackageCommand >> iconName [
+	^#add
+]
+
+{ #category : 'accessing' }
+SycAddNewPackageCommand >> name [
+	^'New package'
 ]
 
 { #category : 'accessing' }

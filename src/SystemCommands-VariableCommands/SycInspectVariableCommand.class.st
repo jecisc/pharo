@@ -10,17 +10,6 @@ Class {
 }
 
 { #category : 'accessing' }
-SycInspectVariableCommand >> defaultMenuIconName [
-
-	^ #inspect
-]
-
-{ #category : 'accessing' }
-SycInspectVariableCommand >> defaultMenuItemName [
-	^'Inspect variable'
-]
-
-{ #category : 'accessing' }
 SycInspectVariableCommand >> description [
 
 	^ 'Inspect variable'
@@ -36,6 +25,12 @@ SycInspectVariableCommand >> executeRefactoring [
 SycInspectVariableCommand >> icon [
 
 	^ self iconNamed: #inspect
+]
+
+{ #category : 'accessing' }
+SycInspectVariableCommand >> iconName [
+
+	^ #inspect
 ]
 
 { #category : 'testing' }

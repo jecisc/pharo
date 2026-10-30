@@ -10,11 +10,6 @@ Class {
 	#tag : 'Commands-MethodGroups'
 }
 
-{ #category : 'accessing' }
-ClyInvertMethodVisibilityHierarchyCommand >> defaultMenuItemName [
-	^'Invert hierarchy'
-]
-
 { #category : 'execution' }
 ClyInvertMethodVisibilityHierarchyCommand >> executeRefactoring [
 

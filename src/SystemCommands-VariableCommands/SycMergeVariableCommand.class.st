@@ -17,13 +17,13 @@ SycMergeVariableCommand class >> canBeExecutedInContext: aToolContext [
 	^aToolContext isVariableSelected and: [ aToolContext isGlobalVariableSelected not ]
 ]
 
-{ #category : 'accessing' }
-SycMergeVariableCommand class >> defaultMenuIconName [
-	^ #merge
-]
-
 { #category : 'activation' }
 SycMergeVariableCommand class >> fullBrowserShortcutActivation [
+]
+
+{ #category : 'accessing' }
+SycMergeVariableCommand class >> iconName [
+	^ #merge
 ]
 
 { #category : 'activation' }
@@ -45,11 +45,6 @@ SycMergeVariableCommand >> classRefactoring [
 	^ RBMergeInstanceVariableIntoAnother
 ]
 
-{ #category : 'accessing' }
-SycMergeVariableCommand >> defaultMenuItemName [
-	^'Merge into another'
-]
-
 { #category : 'execution' }
 SycMergeVariableCommand >> executeRefactoring [
 
@@ -63,6 +58,11 @@ SycMergeVariableCommand >> executeRefactoring [
 SycMergeVariableCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserVariableContext
+]
+
+{ #category : 'accessing' }
+SycMergeVariableCommand >> name [
+	^'Merge into another'
 ]
 
 { #category : 'accessing' }

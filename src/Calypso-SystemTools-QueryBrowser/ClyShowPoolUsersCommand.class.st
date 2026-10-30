@@ -24,12 +24,6 @@ ClyShowPoolUsersCommand >> browser: anObject [
 	browser := anObject
 ]
 
-{ #category : 'accessing' }
-ClyShowPoolUsersCommand >> defaultMenuItemName [
-
-	^ 'Show pool users'
-]
-
 { #category : 'execution' }
 ClyShowPoolUsersCommand >> executeRefactoring [
 
@@ -46,6 +40,12 @@ ClyShowPoolUsersCommand >> isAvailableInMenuOf: aToolContext [
 ClyShowPoolUsersCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowPoolUsersCommand >> name [
+
+	^ 'Show pool users'
 ]
 
 { #category : 'accessing' }

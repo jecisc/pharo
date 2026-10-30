@@ -24,16 +24,6 @@ ClyShowGroupsInMethodBrowserCommand class >> fullBrowserDoubleClickMenuActivatio
 		priority: 10000
 ]
 
-{ #category : 'accessing' }
-ClyShowGroupsInMethodBrowserCommand >> defaultMenuIconName [
-	^#browse
-]
-
-{ #category : 'accessing' }
-ClyShowGroupsInMethodBrowserCommand >> defaultMenuItemName [
-	^'Show in method browser'
-]
-
 { #category : 'execution' }
 ClyShowGroupsInMethodBrowserCommand >> executeRefactoring [
 
@@ -41,9 +31,19 @@ ClyShowGroupsInMethodBrowserCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+ClyShowGroupsInMethodBrowserCommand >> iconName [
+	^#browse
+]
+
+{ #category : 'accessing' }
 ClyShowGroupsInMethodBrowserCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowGroupsInMethodBrowserCommand >> name [
+	^'Show in method browser'
 ]
 
 { #category : 'accessing' }

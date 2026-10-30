@@ -50,6 +50,11 @@ ClyToolbarBuilder >> buildInContext: aToolContext [
 			entries add: activation menuGroup -> (activation newActivatorFor: aToolContext) ]
 ]
 
+{ #category : 'accessing' }
+ClyToolbarBuilder >> entries [
+	^ entries
+]
+
 { #category : 'initialization' }
 ClyToolbarBuilder >> initialize [
 	super initialize.

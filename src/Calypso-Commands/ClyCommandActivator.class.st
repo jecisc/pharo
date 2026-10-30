@@ -110,7 +110,7 @@ ClyCommandActivator >> getShortcutTipForMenuItem [
 
 { #category : 'spec2 compatibility' }
 ClyCommandActivator >> help [
-	^ self command class defaultHelp
+	^ self command class name
 ]
 
 { #category : 'testing' }

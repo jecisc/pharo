@@ -27,11 +27,6 @@ SycRunTestCommand >> asRefactorings [
 ]
 
 { #category : 'accessing' }
-SycRunTestCommand >> defaultMenuItemName [
-	^ 'Run test'
-]
-
-{ #category : 'accessing' }
 SycRunTestCommand >> description [
 
 	^ 'Runs test.'
@@ -51,6 +46,11 @@ SycRunTestCommand >> executeRefactoring [
 		testResult := concreteClass debug: selector.
 		testResult updateResultsInHistory.
 		GrowlMorph showTestResult: testResult with: selector ]
+]
+
+{ #category : 'accessing' }
+SycRunTestCommand >> name [
+	^ 'Run test'
 ]
 
 { #category : 'accessing' }

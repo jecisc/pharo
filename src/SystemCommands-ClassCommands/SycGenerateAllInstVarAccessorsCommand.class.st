@@ -23,19 +23,14 @@ SycGenerateAllInstVarAccessorsCommand >> asRefactorings [
 ]
 
 { #category : 'accessing' }
-SycGenerateAllInstVarAccessorsCommand >> defaultMenuIconName [
-	^ #smallAdd
-]
-
-{ #category : 'accessing' }
-SycGenerateAllInstVarAccessorsCommand >> defaultMenuItemName [
-	^'Generate accessors'
-]
-
-{ #category : 'accessing' }
 SycGenerateAllInstVarAccessorsCommand >> fullBrowserOrder [
 
 	^ 2.1
+]
+
+{ #category : 'accessing' }
+SycGenerateAllInstVarAccessorsCommand >> iconName [
+	^ #smallAdd
 ]
 
 { #category : 'testing' }
@@ -47,6 +42,11 @@ SycGenerateAllInstVarAccessorsCommand >> isAvailableInMenuOf: aToolContext [
 { #category : 'testing' }
 SycGenerateAllInstVarAccessorsCommand >> isComplexRefactoring [
 	^true
+]
+
+{ #category : 'accessing' }
+SycGenerateAllInstVarAccessorsCommand >> name [
+	^'Generate accessors'
 ]
 
 { #category : 'accessing' }

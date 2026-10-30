@@ -54,16 +54,6 @@ SycOpenSourceCodeMenuCommand >> createContextMenu [
 ]
 
 { #category : 'accessing' }
-SycOpenSourceCodeMenuCommand >> defaultMenuIconName [
-	^#smallAuthoringTools
-]
-
-{ #category : 'accessing' }
-SycOpenSourceCodeMenuCommand >> defaultMenuItemName [
-	^'Source code'
-]
-
-{ #category : 'accessing' }
 SycOpenSourceCodeMenuCommand >> description [
 
 	^ 'Opens special source code menu.'
@@ -76,6 +66,16 @@ SycOpenSourceCodeMenuCommand >> execute [
 		self context showSourceNode].
 
 	super execute
+]
+
+{ #category : 'accessing' }
+SycOpenSourceCodeMenuCommand >> iconName [
+	^#smallAuthoringTools
+]
+
+{ #category : 'accessing' }
+SycOpenSourceCodeMenuCommand >> name [
+	^'Source code'
 ]
 
 { #category : 'context menu' }

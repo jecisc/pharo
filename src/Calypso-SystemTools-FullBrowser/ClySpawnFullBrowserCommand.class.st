@@ -38,16 +38,6 @@ ClySpawnFullBrowserCommand class >> fullBrowserDoubleClickMenuActivation [
 ]
 
 { #category : 'accessing' }
-ClySpawnFullBrowserCommand >> defaultMenuIconName [
-	^#browse
-]
-
-{ #category : 'accessing' }
-ClySpawnFullBrowserCommand >> defaultMenuItemName [
-	^'Browse'
-]
-
-{ #category : 'accessing' }
 ClySpawnFullBrowserCommand >> description [
 
 	^ 'Spawn full browser from current browser state.'
@@ -60,9 +50,19 @@ ClySpawnFullBrowserCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+ClySpawnFullBrowserCommand >> iconName [
+	^#browse
+]
+
+{ #category : 'accessing' }
 ClySpawnFullBrowserCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClySpawnFullBrowserCommand >> name [
+	^'Browse'
 ]
 
 { #category : 'accessing' }

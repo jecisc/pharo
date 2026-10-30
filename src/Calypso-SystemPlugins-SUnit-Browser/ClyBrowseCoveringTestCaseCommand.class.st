@@ -19,11 +19,6 @@ ClyBrowseCoveringTestCaseCommand class >> canBeExecutedInContext: aBrowserContex
 	^ aBrowserContext lastSelectedItem hasProperty: ClyTestedClassProperty
 ]
 
-{ #category : 'accessing' }
-ClyBrowseCoveringTestCaseCommand >> defaultMenuItemName [
-	^ 'Browse test class'
-]
-
 { #category : 'execution' }
 ClyBrowseCoveringTestCaseCommand >> executeRefactoring [
 
@@ -42,6 +37,11 @@ ClyBrowseCoveringTestCaseCommand >> isAvailableInMenuOf: aToolContext [
 ClyBrowseCoveringTestCaseCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyBrowseCoveringTestCaseCommand >> name [
+	^ 'Browse test class'
 ]
 
 { #category : 'accessing' }

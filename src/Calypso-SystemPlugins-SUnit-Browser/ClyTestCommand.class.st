@@ -25,7 +25,7 @@ ClyTestCommand >> applyCommandResult [
 ]
 
 { #category : 'context menu support' }
-ClyTestCommand >> defaultMenuIconName [
+ClyTestCommand >> iconName [
 
 	^self testResult iconName
 ]

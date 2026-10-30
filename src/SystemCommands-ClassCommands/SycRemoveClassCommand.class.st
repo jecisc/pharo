@@ -8,26 +8,26 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'accessing' }
-SycRemoveClassCommand >> defaultMenuIconName [
-	^#remove
-]
-
-{ #category : 'accessing' }
-SycRemoveClassCommand >> defaultMenuItemName [
-	^'(R) Remove'
-]
-
 { #category : 'execution' }
 SycRemoveClassCommand >> executeRefactoring [
 
 	^ ((ReRemoveClassDriver newApplication: self application) scopes: self context refactoringScopes classes: classes) runRefactoring
 ]
 
+{ #category : 'accessing' }
+SycRemoveClassCommand >> iconName [
+	^#remove
+]
+
 { #category : 'testing' }
 SycRemoveClassCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserClassContext
+]
+
+{ #category : 'accessing' }
+SycRemoveClassCommand >> name [
+	^'(R) Remove'
 ]
 
 { #category : 'accessing' }

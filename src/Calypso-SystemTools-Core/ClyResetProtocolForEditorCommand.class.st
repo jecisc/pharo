@@ -17,12 +17,6 @@ ClyResetProtocolForEditorCommand class >> methodEditorShorcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyResetProtocolForEditorCommand >> defaultMenuItemName [
-
-	^ 'Unclassify method'
-]
-
-{ #category : 'accessing' }
 ClyResetProtocolForEditorCommand >> description [
 
 	^ 'Unclasifies a method.'
@@ -32,6 +26,12 @@ ClyResetProtocolForEditorCommand >> description [
 ClyResetProtocolForEditorCommand >> executeRefactoring [
 
 	methodEditor protocolAndPackageEditor resetProtocolAndPackage
+]
+
+{ #category : 'accessing' }
+ClyResetProtocolForEditorCommand >> name [
+
+	^ 'Unclassify method'
 ]
 
 { #category : 'accessing' }

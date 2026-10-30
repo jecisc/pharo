@@ -14,14 +14,8 @@ SycRenameVariableCommand class >> canBeExecutedInContext: aToolContext [
 ]
 
 { #category : 'accessing' }
-SycRenameVariableCommand class >> defaultMenuIconName [
+SycRenameVariableCommand class >> iconName [
 	^ #edit
-]
-
-{ #category : 'accessing' }
-SycRenameVariableCommand >> defaultMenuItemName [
-
-	^ 'Rename'
 ]
 
 { #category : 'accessing' }
@@ -50,6 +44,12 @@ SycRenameVariableCommand >> executeRefactoring [
 SycRenameVariableCommand >> fullBrowserOrder [
 
 	^ 1
+]
+
+{ #category : 'accessing' }
+SycRenameVariableCommand >> name [
+
+	^ 'Rename'
 ]
 
 { #category : 'accessing' }

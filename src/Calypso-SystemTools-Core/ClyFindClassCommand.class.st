@@ -14,20 +14,15 @@ Class {
 	#tag : 'Commands-Classes'
 }
 
-{ #category : 'accessing' }
-ClyFindClassCommand >> defaultMenuIconName [
-	^#smallFind
-]
-
-{ #category : 'accessing' }
-ClyFindClassCommand >> defaultMenuItemName [
-	^'Find class'
-]
-
 { #category : 'execution' }
 ClyFindClassCommand >> executeRefactoring [
 
 	self browser selectClass: class
+]
+
+{ #category : 'accessing' }
+ClyFindClassCommand >> iconName [
+	^#smallFind
 ]
 
 { #category : 'testing' }
@@ -40,6 +35,11 @@ ClyFindClassCommand >> isAvailableInMenuOf: aToolContext [
 ClyFindClassCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyFindClassCommand >> name [
+	^'Find class'
 ]
 
 { #category : 'accessing' }

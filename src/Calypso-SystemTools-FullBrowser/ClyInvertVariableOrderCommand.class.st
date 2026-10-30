@@ -10,11 +10,6 @@ Class {
 	#tag : 'Commands-MethodGroups'
 }
 
-{ #category : 'accessing' }
-ClyInvertVariableOrderCommand >> defaultMenuItemName [
-	^'Invert hierarchy'
-]
-
 { #category : 'execution' }
 ClyInvertVariableOrderCommand >> executeRefactoring [
 

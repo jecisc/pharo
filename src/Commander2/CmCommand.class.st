@@ -35,6 +35,11 @@ CmCommand >> basicDescription [
 	^ basicDescription
 ]
 
+{ #category : 'accessing' }
+CmCommand >> basicName [
+	^ basicName
+]
+
 { #category : 'testing' }
 CmCommand >> canBeExecuted [
 	"See my super class comment for this method.

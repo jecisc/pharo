@@ -43,16 +43,6 @@ ClyShowMessageImplementorCommand class >> sourceCodeShortcutActivation [
 ]
 
 { #category : 'accessing' }
-ClyShowMessageImplementorCommand >> defaultMenuIconName [
-	^ #smallFind
-]
-
-{ #category : 'accessing' }
-ClyShowMessageImplementorCommand >> defaultMenuItemName [
-	^'Implementors'
-]
-
-{ #category : 'accessing' }
 ClyShowMessageImplementorCommand >> description [
 
 	^ 'Show all message implementors.'
@@ -65,9 +55,19 @@ ClyShowMessageImplementorCommand >> executeRefactoring [
 ]
 
 { #category : 'accessing' }
+ClyShowMessageImplementorCommand >> iconName [
+	^ #smallFind
+]
+
+{ #category : 'accessing' }
 ClyShowMessageImplementorCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowMessageImplementorCommand >> name [
+	^'Implementors'
 ]
 
 { #category : 'accessing' }

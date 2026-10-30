@@ -8,26 +8,26 @@ Class {
 	#package : 'SystemCommands-ClassCommands'
 }
 
-{ #category : 'accessing' }
-SycRemoveEmptyMethodTagsCommand >> defaultMenuIconName [
-	^#delete
-]
-
-{ #category : 'accessing' }
-SycRemoveEmptyMethodTagsCommand >> defaultMenuItemName [
-	^'Remove empty protocols'
-]
-
 { #category : 'execution' }
 SycRemoveEmptyMethodTagsCommand >> executeRefactoring [
 
 	classes do: [ :class | class removeEmptyProtocols ]
 ]
 
+{ #category : 'accessing' }
+SycRemoveEmptyMethodTagsCommand >> iconName [
+	^#delete
+]
+
 { #category : 'testing' }
 SycRemoveEmptyMethodTagsCommand >> isAvailableInMenuOf: aToolContext [
 
 	^ aToolContext isFullBrowserMethodGroupContext
+]
+
+{ #category : 'accessing' }
+SycRemoveEmptyMethodTagsCommand >> name [
+	^'Remove empty protocols'
 ]
 
 { #category : 'accessing' }

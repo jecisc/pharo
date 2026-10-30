@@ -8,11 +8,6 @@ Class {
 	#package : 'Calypso-SystemPlugins-Critic-Browser'
 }
 
-{ #category : 'activation' }
-ClyOpenCriticBrowserCommand >> defaultMenuItemName [
-	^'Browse critiques'
-]
-
 { #category : 'execution' }
 ClyOpenCriticBrowserCommand >> executeRefactoring [
 
@@ -25,6 +20,11 @@ ClyOpenCriticBrowserCommand >> executeRefactoring [
 ClyOpenCriticBrowserCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'activation' }
+ClyOpenCriticBrowserCommand >> name [
+	^'Browse critiques'
 ]
 
 { #category : 'accessing' }

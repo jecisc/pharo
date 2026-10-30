@@ -19,16 +19,6 @@ Class {
 }
 
 { #category : 'accessing' }
-SycRenamePackageCommand >> defaultMenuIconName [
-	^ #edit
-]
-
-{ #category : 'accessing' }
-SycRenamePackageCommand >> defaultMenuItemName [
-	^'Rename'
-]
-
-{ #category : 'accessing' }
 SycRenamePackageCommand >> description [
 
 	^ 'Rename package'
@@ -38,6 +28,16 @@ SycRenamePackageCommand >> description [
 SycRenamePackageCommand >> executeRefactoring [
 
 	^ ((ReRenamePackageDriver newApplication: self application) scopes: refactoringScopes packageName: package name) runRefactoring
+]
+
+{ #category : 'accessing' }
+SycRenamePackageCommand >> iconName [
+	^ #edit
+]
+
+{ #category : 'accessing' }
+SycRenamePackageCommand >> name [
+	^'Rename'
 ]
 
 { #category : 'accessing' }

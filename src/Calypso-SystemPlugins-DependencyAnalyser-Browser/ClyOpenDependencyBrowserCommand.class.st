@@ -8,11 +8,6 @@ Class {
 	#package : 'Calypso-SystemPlugins-DependencyAnalyser-Browser'
 }
 
-{ #category : 'accessing' }
-ClyOpenDependencyBrowserCommand >> defaultMenuItemName [
-	^'Browse dependencies'
-]
-
 { #category : 'execution' }
 ClyOpenDependencyBrowserCommand >> executeRefactoring [
 
@@ -23,6 +18,11 @@ ClyOpenDependencyBrowserCommand >> executeRefactoring [
 ClyOpenDependencyBrowserCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyOpenDependencyBrowserCommand >> name [
+	^'Browse dependencies'
 ]
 
 { #category : 'accessing' }

@@ -65,11 +65,6 @@ ClyShowClassRefCommand >> browser: anObject [
 	browser := anObject
 ]
 
-{ #category : 'accessing' }
-ClyShowClassRefCommand >> defaultMenuItemName [
-	^'Class refs.'
-]
-
 { #category : 'execution' }
 ClyShowClassRefCommand >> executeRefactoring [
 
@@ -86,6 +81,11 @@ ClyShowClassRefCommand >> isAvailableInMenuOf: aToolContext [
 ClyShowClassRefCommand >> menuGroup [
 
 	^ ClyQueryMenuGroup
+]
+
+{ #category : 'accessing' }
+ClyShowClassRefCommand >> name [
+	^'Class refs.'
 ]
 
 { #category : 'accessing' }

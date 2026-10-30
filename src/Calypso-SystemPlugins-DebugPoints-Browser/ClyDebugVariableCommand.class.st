@@ -46,18 +46,6 @@ ClyDebugVariableCommand >> debugPointClass [
 	^ self class debugPointClass
 ]
 
-{ #category : 'accessing' }
-ClyDebugVariableCommand >> defaultMenuIconName [
-
-	^ #smallDebug
-]
-
-{ #category : 'accessing' }
-ClyDebugVariableCommand >> defaultMenuItemName [
-
-	^ 'Add debug point:'
-]
-
 { #category : 'private execution' }
 ClyDebugVariableCommand >> executeFor: aVariable [
 
@@ -72,6 +60,18 @@ ClyDebugVariableCommand >> executeFor: aVariable [
 ClyDebugVariableCommand >> executeRefactoring [
 
 	variables do: [ :var | self executeFor: var ]
+]
+
+{ #category : 'accessing' }
+ClyDebugVariableCommand >> iconName [
+
+	^ #smallDebug
+]
+
+{ #category : 'accessing' }
+ClyDebugVariableCommand >> name [
+
+	^ 'Add debug point:'
 ]
 
 { #category : 'execution' }
