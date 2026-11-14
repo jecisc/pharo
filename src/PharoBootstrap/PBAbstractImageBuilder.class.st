@@ -559,7 +559,7 @@ PBAbstractImageBuilder >> freeForwarders [
 			(newHeap isForwarded: o)
 				ifTrue: [ numForwarders := numForwarders + 1 ]
 				ifFalse: [ 0 to: (newHeap numPointerSlotsOf: o) - 1 do: [ :i | self assert: (newHeap isOopForwarded: (newHeap fetchPointer: i ofObject: o)) not ] ] ].
-	('freeing ' , numForwarders printString , ' forwarders') traceNewLine.
+	('freeing ' , numForwarders printString , ' forwarders') traceCr.
 	newHeap allObjectsDo: [ :o |
 			(newHeap isForwarded: o) ifTrue: [
 					numFreed := numFreed + 1.
@@ -965,9 +965,9 @@ PBAbstractImageBuilder >> reportSizes [
 	newHeap := espellBackend objectMemory.
 	finalHeapSize := newHeap endOfMemory - newHeap scavenger eden limit - newHeap totalFreeListBytes.
 
-	'Done.' traceNewLine.
-	('Initial heap size: ' , newHeapSize asStringWithCommas) traceNewLine.
-	('Final new heap size: ' , finalHeapSize asStringWithCommas) traceNewLine
+	'Done.' traceCr.
+	('Initial heap size: ' , newHeapSize asStringWithCommas) traceCr.
+	('Final new heap size: ' , finalHeapSize asStringWithCommas) traceCr
 ]
 
 { #category : 'accessing' }
@@ -1037,5 +1037,5 @@ PBAbstractImageBuilder >> writeSnapshot: imageFileName ofTransformedImage: spurH
 	sim bereaveAllMarriedContextsForSnapshotFlushingExternalPrimitivesIf: true.
 	sim imageName: imageFileName.
 	sim writeImageFileIO.
-	'Done!' traceNewLine
+	'Done!' traceCr
 ]
